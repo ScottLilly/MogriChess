@@ -1,15 +1,16 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 
 namespace MogriChess.Models
 {
     public class Board : INotifyPropertyChanged
     {
-        public const string COLOR_DARK = "#ADADAD";
-        public const string COLOR_LIGHT = "#DDDDDD";
+        public const string SQUARE_COLOR_DARK = "#ADADAD";
+        public const string SQUARE_COLOR_LIGHT = "#DDDDDD";
 
-        private string _currentSquareColor = COLOR_DARK;
+        private string _currentSquareColor = SQUARE_COLOR_DARK;
 
         public ObservableCollection<Square> Squares { get; } =
             new ObservableCollection<Square>();
@@ -25,7 +26,7 @@ namespace MogriChess.Models
         {
             for (int rank = 1; rank <= 8; rank++)
             {
-                _currentSquareColor = rank % 2 == 0 ? COLOR_LIGHT : COLOR_DARK;
+                _currentSquareColor = rank % 2 == 0 ? SQUARE_COLOR_LIGHT : SQUARE_COLOR_DARK;
 
                 for (int file = 1; file <= 8; file++)
                 {
@@ -39,7 +40,7 @@ namespace MogriChess.Models
             Color currentSquareColor = ColorTranslator.FromHtml(_currentSquareColor);
 
             // Switch to next color
-            _currentSquareColor = _currentSquareColor == COLOR_LIGHT ? COLOR_DARK : COLOR_LIGHT;
+            _currentSquareColor = _currentSquareColor == SQUARE_COLOR_LIGHT ? SQUARE_COLOR_DARK : SQUARE_COLOR_LIGHT;
 
             return currentSquareColor;
         }

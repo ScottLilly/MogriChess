@@ -21,6 +21,8 @@ namespace MogriChess.Models
         public int SquaresLeft { get; private set; }
         public int SquaresForwardLeft { get; private set; }
 
+        public bool IsKing => _pieceType.Equals(Enums.PieceType.King);
+
         public Piece(Enums.PlayerColor color, Enums.PieceType type,
             int squaresForward, int squaresForwardRight,
             int squaresRight, int squaresBackRight,

@@ -8,7 +8,7 @@ namespace MogriChess.Models
         public int Rank { get; }
         public int File { get; }
         public Color SquareColor { get; }
-        public Piece Piece { get; }
+        public Piece Piece { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -17,6 +17,13 @@ namespace MogriChess.Models
             Rank = rank;
             File = file;
             SquareColor = squareColor;
+        }
+
+        public void PlacePiece(Piece piece)
+        {
+            Piece = piece;
+
+            // TODO: handle captures
         }
     }
 }
