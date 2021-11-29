@@ -9,7 +9,7 @@ namespace MogriChess.Models
         public const string COLOR_DARK = "#ADADAD";
         public const string COLOR_LIGHT = "#DDDDDD";
 
-        private string _currentColor = COLOR_DARK;
+        private string _currentSquareColor = COLOR_DARK;
 
         public ObservableCollection<Square> Squares { get; } =
             new ObservableCollection<Square>();
@@ -18,25 +18,30 @@ namespace MogriChess.Models
 
         public Board()
         {
+            PopulateBoardWithSquares();
+        }
+
+        private void PopulateBoardWithSquares()
+        {
             for (int rank = 1; rank <= 8; rank++)
             {
-                _currentColor = rank % 2 == 0 ? COLOR_LIGHT : COLOR_DARK;
+                _currentSquareColor = rank % 2 == 0 ? COLOR_LIGHT : COLOR_DARK;
 
                 for (int file = 1; file <= 8; file++)
                 {
-                    Squares.Add(new Square(rank, file, GetCurrentColor()));
+                    Squares.Add(new Square(rank, file, GetCurrentSquareColor()));
                 }
             }
         }
 
-        private Color GetCurrentColor()
+        private Color GetCurrentSquareColor()
         {
-            Color currentColor = ColorTranslator.FromHtml(_currentColor);
+            Color currentSquareColor = ColorTranslator.FromHtml(_currentSquareColor);
 
             // Switch to next color
-            _currentColor = _currentColor == COLOR_LIGHT ? COLOR_DARK : COLOR_LIGHT;
+            _currentSquareColor = _currentSquareColor == COLOR_LIGHT ? COLOR_DARK : COLOR_LIGHT;
 
-            return currentColor;
+            return currentSquareColor;
         }
     }
 }
