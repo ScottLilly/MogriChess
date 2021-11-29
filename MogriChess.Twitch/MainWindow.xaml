@@ -10,7 +10,15 @@
         Title="MogriChess" 
         WindowStartupLocation="CenterScreen"
         FontSize="11pt"
-        Height="1020" Width="1220">
+        MinWidth="950"
+        MinHeight="768"
+        Width="950"
+        Height="768">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="LightBrush" Color="#DDDDDD"/>
+        <SolidColorBrush x:Key="DarkBrush" Color="#ADADAD"/>
+    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -46,6 +54,86 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="125"/>
             </Grid.ColumnDefinitions>
+
+            <!-- Game Board -->
+            <Viewbox Grid.Row="0" Grid.Column="0"
+                     HorizontalAlignment="Left"
+                     Stretch="Uniform">
+                <UniformGrid Rows="8" Columns="8">
+                    <!-- LightStartingRank -->
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <!-- DarkStartingRank -->
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <!-- LightStartingRank -->
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <!-- DarkStartingRank -->
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <!-- LightStartingRank -->
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <!-- DarkStartingRank -->
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <!-- LightStartingRank -->
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <!-- DarkStartingRank -->
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
+                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
+                </UniformGrid>
+            </Viewbox>
 
         </Grid>
 

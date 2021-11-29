@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using MogriChess.Models;
 
 namespace MogriChess.ViewModels
 {
@@ -6,5 +7,6 @@ namespace MogriChess.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public Board Board { get; } = new Board();
     }
 }
