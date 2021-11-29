@@ -6,6 +6,7 @@ namespace MogriChess.Models
     public class Piece : INotifyPropertyChanged
     {
         private readonly Enums.PieceType _pieceType;
+        private readonly bool _hasReceivedPawnPromotion;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
