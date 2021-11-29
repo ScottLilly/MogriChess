@@ -3,7 +3,6 @@ using System.Linq;
 using MogriChess.ViewModels;
 using MogriChess.Models;
 
-
 using Xunit;
 
 namespace Test.MogriChess.ViewModels
