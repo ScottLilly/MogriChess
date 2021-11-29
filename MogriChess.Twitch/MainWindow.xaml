@@ -7,9 +7,45 @@
         mc:Ignorable="d"
         Title="MogriChess" 
         WindowStartupLocation="CenterScreen"
+        FontSize="11pt"
         Height="1020" Width="1220">
 
-    <Grid Margin="10,10,10,10">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.Row="0" Grid.Column="0"
+              FontSize="11pt">
+            <MenuItem Header="File">
+                <MenuItem Header="Start New Game"
+                          Click="StartNewGame_OnClick"/>
+                <Separator/>
+                <MenuItem Header="Exit"
+                          Click="Exit_OnClick"/>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="Help"/>
+                <Separator/>
+                <MenuItem Header="About"/>
+            </MenuItem>
+        </Menu>
+
+        <Grid Grid.Row="1" Grid.Column="0"
+              Margin="10,10,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="125"/>
+            </Grid.ColumnDefinitions>
+
+        </Grid>
 
     </Grid>
 

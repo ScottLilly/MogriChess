@@ -8,5 +8,14 @@ namespace MogriChess.Twitch
         {
             InitializeComponent();
         }
+
+        private void StartNewGame_OnClick(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void Exit_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
