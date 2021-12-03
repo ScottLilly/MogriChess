@@ -3,22 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MogriChess.Twitch.CustomControls"
              xmlns:models="clr-namespace:MogriChess.Models;assembly=MogriChess.Models"
              d:DataContext="{d:DesignInstance models:Square}"
              Background="Transparent"
              mc:Ignorable="d">
 
-    <Canvas Width="80" Height="80">
+    <Canvas Width="80" Height="80" RenderTransformOrigin="0.5, 0.5" >
+        <!-- Points dark pieces so forward is down -->
+        <Canvas.RenderTransform>
+            <RotateTransform Angle="{Binding Piece.TransformAngle}"/>
+        </Canvas.RenderTransform>
+
+        <!-- Main circle shape -->
         <Ellipse Canvas.Top="25"
                  Canvas.Left="25"
                  Width="30" Height="30"
-                 Fill="{Binding Piece.UiColor}"
-                 RenderTransformOrigin="0.5, 0.5">
-            <Ellipse.RenderTransform>
-                <RotateTransform Angle="{Binding Piece.TransformAngle}"/>
-            </Ellipse.RenderTransform>
+                 Fill="{Binding Piece.UiColor}">
         </Ellipse>
+
+        <!-- Center circle color, only alternated for Kings -->
         <Ellipse Canvas.Top="32"
                  Canvas.Left="32"
                  Width="16" Height="16"

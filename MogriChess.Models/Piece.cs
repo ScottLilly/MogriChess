@@ -6,7 +6,6 @@ namespace MogriChess.Models
     public class Piece : INotifyPropertyChanged
     {
         private readonly Enums.PieceType _pieceType;
-        private readonly bool _hasReceivedPawnPromotion;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -57,6 +56,17 @@ namespace MogriChess.Models
                 capturedPiece.SquaresRight, capturedPiece.SquaresBackRight,
                 capturedPiece.SquaresBack, capturedPiece.SquaresBackLeft,
                 capturedPiece.SquaresLeft, capturedPiece.SquaresForwardLeft);
+        }
+
+        public void Promote()
+        {
+            if (_pieceType != Enums.PieceType.Pawn)
+            {
+                return;
+            }
+
+            // Pawns that reach opponent's back rank gain ability to move one square in all directions
+            AddMovementAbilities(1, 1, 1, 1, 1, 1, 1, 1);
         }
 
         private void AddMovementAbilities(int squaresForward, int squaresForwardRight,
