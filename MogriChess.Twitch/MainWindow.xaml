@@ -5,20 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MogriChess.Twitch"
         xmlns:viewModels="clr-namespace:MogriChess.ViewModels;assembly=MogriChess.ViewModels"
+        xmlns:models="clr-namespace:MogriChess.Models;assembly=MogriChess.Models"
         d:DataContext="{d:DesignInstance viewModels:Game}"
         mc:Ignorable="d"
         Title="MogriChess" 
         WindowStartupLocation="CenterScreen"
         FontSize="11pt"
         MinWidth="950"
-        MinHeight="768"
         Width="950"
-        Height="768">
-
-    <Window.Resources>
-        <SolidColorBrush x:Key="LightBrush" Color="#DDDDDD"/>
-        <SolidColorBrush x:Key="DarkBrush" Color="#ADADAD"/>
-    </Window.Resources>
+        Height="Auto">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -48,7 +43,7 @@
         <Grid Grid.Row="1" Grid.Column="0"
               Margin="10,10,10,10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -56,84 +51,61 @@
             </Grid.ColumnDefinitions>
 
             <!-- Game Board -->
-            <Viewbox Grid.Row="0" Grid.Column="0"
-                     HorizontalAlignment="Left"
-                     Stretch="Uniform">
-                <UniformGrid Rows="8" Columns="8">
-                    <!-- LightStartingRank -->
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <!-- DarkStartingRank -->
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <!-- LightStartingRank -->
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <!-- DarkStartingRank -->
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <!-- LightStartingRank -->
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <!-- DarkStartingRank -->
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <!-- LightStartingRank -->
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <!-- DarkStartingRank -->
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource DarkBrush}}"/>
-                    <Label Background="{Binding Source={StaticResource LightBrush}}"/>
-                </UniformGrid>
-            </Viewbox>
+            <Canvas Grid.Row="0" Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Width="640"
+                    Height="640">
+
+                <ItemsControl ItemsSource="{Binding Board.Squares}">
+
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="ContentPresenter">
+                            <Setter Property="Grid.Row" Value="{Binding UiGridRow}" />
+                            <Setter Property="Grid.Column" Value="{Binding UiGridColumn}" />
+                            <Setter Property="Width" Value="80"/>
+                            <Setter Property="Height" Value="80"/>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                        Background="{Binding SquareColor}">
+                                <Label Content="{Binding FileAsLetter}"/>
+                                <Label Content="{Binding Rank}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Canvas>
 
         </Grid>
 

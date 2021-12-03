@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Drawing;
 
 namespace MogriChess.Models
 {
@@ -7,12 +6,16 @@ namespace MogriChess.Models
     {
         public int Rank { get; }
         public int File { get; }
-        public Color SquareColor { get; }
+        public string SquareColor { get; }
         public Piece Piece { get; private set; }
+
+        public int UiGridRow => 8 - Rank;
+        public int UiGridColumn => File - 1;
+        public string FileAsLetter => "ABCDEFGH".Substring(File - 1, 1);
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Square(int rank, int file, Color squareColor)
+        public Square(int rank, int file, string squareColor)
         {
             Rank = rank;
             File = file;

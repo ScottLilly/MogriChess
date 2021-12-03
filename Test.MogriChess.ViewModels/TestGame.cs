@@ -1,4 +1,3 @@
-using System.Drawing;
 using System.Linq;
 using MogriChess.ViewModels;
 using MogriChess.Models;
@@ -20,12 +19,12 @@ namespace Test.MogriChess.ViewModels
             
             // Check board squares
             Assert.Equal(64, game.Board.Squares.Count);
-            Assert.Equal(32, game.Board.Squares.Count(s => s.SquareColor.Equals(ColorTranslator.FromHtml(Board.SQUARE_COLOR_LIGHT))));
-            Assert.Equal(32, game.Board.Squares.Count(s => s.SquareColor.Equals(ColorTranslator.FromHtml(Board.SQUARE_COLOR_DARK))));
-            Assert.Equal(ColorTranslator.FromHtml(Board.SQUARE_COLOR_DARK), game.Board.Squares.First(s => s.Rank.Equals(1) && s.File.Equals(1)).SquareColor);
-            Assert.Equal(ColorTranslator.FromHtml(Board.SQUARE_COLOR_LIGHT), game.Board.Squares.First(s => s.Rank.Equals(1) && s.File.Equals(2)).SquareColor);
-            Assert.Equal(ColorTranslator.FromHtml(Board.SQUARE_COLOR_LIGHT), game.Board.Squares.First(s => s.Rank.Equals(8) && s.File.Equals(1)).SquareColor);
-            Assert.Equal(ColorTranslator.FromHtml(Board.SQUARE_COLOR_DARK), game.Board.Squares.First(s => s.Rank.Equals(8) && s.File.Equals(2)).SquareColor);
+            Assert.Equal(32, game.Board.Squares.Count(s => s.SquareColor.Equals(Board.SQUARE_COLOR_LIGHT)));
+            Assert.Equal(32, game.Board.Squares.Count(s => s.SquareColor.Equals(Board.SQUARE_COLOR_DARK)));
+            Assert.Equal(Board.SQUARE_COLOR_DARK, game.Board.Squares.First(s => s.Rank.Equals(1) && s.File.Equals(1)).SquareColor);
+            Assert.Equal(Board.SQUARE_COLOR_LIGHT, game.Board.Squares.First(s => s.Rank.Equals(1) && s.File.Equals(2)).SquareColor);
+            Assert.Equal(Board.SQUARE_COLOR_LIGHT, game.Board.Squares.First(s => s.Rank.Equals(8) && s.File.Equals(1)).SquareColor);
+            Assert.Equal(Board.SQUARE_COLOR_DARK, game.Board.Squares.First(s => s.Rank.Equals(8) && s.File.Equals(2)).SquareColor);
 
             // Check pieces
             Assert.Equal(16, game.Board.Squares.Count(s => s.Piece?.Color == Enums.PlayerColor.Light));

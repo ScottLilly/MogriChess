@@ -1,7 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
 
 namespace MogriChess.Models
 {
@@ -35,12 +33,13 @@ namespace MogriChess.Models
             }
         }
 
-        private Color GetCurrentSquareColor()
+        private string GetCurrentSquareColor()
         {
-            Color currentSquareColor = ColorTranslator.FromHtml(_currentSquareColor);
+            string currentSquareColor = _currentSquareColor;
 
             // Switch to next color
-            _currentSquareColor = _currentSquareColor == SQUARE_COLOR_LIGHT ? SQUARE_COLOR_DARK : SQUARE_COLOR_LIGHT;
+            _currentSquareColor = 
+                _currentSquareColor == SQUARE_COLOR_LIGHT ? SQUARE_COLOR_DARK : SQUARE_COLOR_LIGHT;
 
             return currentSquareColor;
         }

@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Linq;
 using MogriChess.Models;
 using MogriChess.Services;
 
