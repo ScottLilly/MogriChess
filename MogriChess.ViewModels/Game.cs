@@ -9,7 +9,7 @@ namespace MogriChess.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Board Board { get; }
-        
+
         public Game()
         {
             Board = BoardFactory.GetNewGameBoard();

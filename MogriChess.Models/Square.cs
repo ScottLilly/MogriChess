@@ -4,14 +4,15 @@ namespace MogriChess.Models
 {
     public class Square : INotifyPropertyChanged
     {
+        private ColorScheme _colorScheme;
+
         public int Rank { get; }
         public int File { get; }
-        public ColorScheme ColorScheme { get; }
         public Enums.ColorType ColorType { get; }
         public Piece Piece { get; private set; }
 
         public string SquareColor =>
-            ColorType == Enums.ColorType.Light ? ColorScheme.LightColor : ColorScheme.DarkColor;
+            ColorType == Enums.ColorType.Light ? _colorScheme.LightColor : _colorScheme.DarkColor;
 
         public int UiGridRow => 8 - Rank;
         public int UiGridColumn => File - 1;
@@ -23,7 +24,7 @@ namespace MogriChess.Models
         {
             Rank = rank;
             File = file;
-            ColorScheme = colorScheme;
+            _colorScheme = colorScheme;
             ColorType = color;
         }
 
