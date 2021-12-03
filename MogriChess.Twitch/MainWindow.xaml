@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:MogriChess.Twitch"
         xmlns:viewModels="clr-namespace:MogriChess.ViewModels;assembly=MogriChess.ViewModels"
         xmlns:models="clr-namespace:MogriChess.Models;assembly=MogriChess.Models"
+        xmlns:customControls="clr-namespace:MogriChess.Twitch.CustomControls"
         d:DataContext="{d:DesignInstance viewModels:Game}"
         mc:Ignorable="d"
         Title="MogriChess" 
@@ -14,6 +15,10 @@
         MinWidth="950"
         Width="950"
         Height="Auto">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type models:Piece}"/>
+    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -97,11 +102,9 @@
 
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal"
-                                        Background="{Binding SquareColor}">
-                                <Label Content="{Binding FileAsLetter}"/>
-                                <Label Content="{Binding Rank}"/>
-                            </StackPanel>
+                            <Canvas Background="{Binding SquareColor}">
+                                <customControls:PieceControl/>
+                            </Canvas>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

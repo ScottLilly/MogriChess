@@ -23,6 +23,12 @@ namespace MogriChess.Models
 
         public bool IsKing => _pieceType.Equals(Enums.PieceType.King);
 
+        public string UiColor => Color == Enums.PlayerColor.Light ? "#FFFFFF" : "#000000";
+        public string KingHighlightUiColor =>
+            IsKing ? Color == Enums.PlayerColor.Light ? "#000000" : "#FFFFFF" : UiColor;
+
+        public int TransformAngle => Color == Enums.PlayerColor.Light ? 0 : 180;
+
         public Piece(Enums.PlayerColor color, Enums.PieceType type,
             int squaresForward, int squaresForwardRight,
             int squaresRight, int squaresBackRight,
