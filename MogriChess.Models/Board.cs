@@ -5,18 +5,21 @@ namespace MogriChess.Models
 {
     public class Board : INotifyPropertyChanged
     {
-        public const string SQUARE_COLOR_DARK = "#ADADAD";
-        public const string SQUARE_COLOR_LIGHT = "#DDDDDD";
+        private Enums.ColorType _squareColorType;
 
-        private string _currentSquareColor = SQUARE_COLOR_DARK;
+        public ColorScheme BoardColorScheme { get; }
+        public ColorScheme PieceColorScheme { get; }
 
         public ObservableCollection<Square> Squares { get; } =
             new ObservableCollection<Square>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Board()
+        public Board(ColorScheme boardColorScheme, ColorScheme piecesColorScheme)
         {
+            BoardColorScheme = boardColorScheme;
+            PieceColorScheme = piecesColorScheme;
+
             PopulateBoardWithSquares();
         }
 
@@ -24,24 +27,25 @@ namespace MogriChess.Models
         {
             for (int rank = 1; rank <= 8; rank++)
             {
-                _currentSquareColor = rank % 2 == 0 ? SQUARE_COLOR_LIGHT : SQUARE_COLOR_DARK;
+                _squareColorType = rank % 2 == 0 ? Enums.ColorType.Light : Enums.ColorType.Dark;
 
                 for (int file = 1; file <= 8; file++)
                 {
-                    Squares.Add(new Square(rank, file, GetCurrentSquareColor()));
+                    Squares.Add(new Square(rank, file, BoardColorScheme, GetCurrentSquareColor()));
                 }
             }
         }
 
-        private string GetCurrentSquareColor()
+        private Enums.ColorType GetCurrentSquareColor()
         {
-            string currentSquareColor = _currentSquareColor;
+            Enums.ColorType currentSquareColorType = _squareColorType;
 
             // Switch to next color
-            _currentSquareColor = 
-                _currentSquareColor == SQUARE_COLOR_LIGHT ? SQUARE_COLOR_DARK : SQUARE_COLOR_LIGHT;
+            _squareColorType =
+                _squareColorType ==
+                Enums.ColorType.Light ? Enums.ColorType.Dark : Enums.ColorType.Light;
 
-            return currentSquareColor;
+            return currentSquareColorType;
         }
     }
 }

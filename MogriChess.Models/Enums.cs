@@ -2,7 +2,7 @@
 {
     public class Enums
     {
-        public enum PlayerColor
+        public enum ColorType
         {
             Light,
             Dark

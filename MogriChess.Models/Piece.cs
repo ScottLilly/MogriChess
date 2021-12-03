@@ -5,11 +5,12 @@ namespace MogriChess.Models
 {
     public class Piece : INotifyPropertyChanged
     {
+        private ColorScheme _colorScheme;
         private readonly Enums.PieceType _pieceType;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Enums.PlayerColor Color { get; }
+        public Enums.ColorType ColorType { get; }
 
         public int SquaresForward { get; private set; }
         public int SquaresForwardRight { get; private set; }
@@ -22,19 +23,22 @@ namespace MogriChess.Models
 
         public bool IsKing => _pieceType.Equals(Enums.PieceType.King);
 
-        public string UiColor => Color == Enums.PlayerColor.Light ? "#FFFFFF" : "#000000";
+        public string UiColor => ColorType == Enums.ColorType.Light ? _colorScheme.LightColor : _colorScheme.DarkColor;
         public string KingHighlightUiColor =>
-            IsKing ? Color == Enums.PlayerColor.Light ? "#000000" : "#FFFFFF" : UiColor;
+            IsKing ? ColorType == Enums.ColorType.Light ? _colorScheme.DarkColor : _colorScheme.LightColor : UiColor;
 
-        public int TransformAngle => Color == Enums.PlayerColor.Light ? 0 : 180;
+        public int TransformAngle => ColorType == Enums.ColorType.Light ? 0 : 180;
 
-        public Piece(Enums.PlayerColor color, Enums.PieceType type,
+        public Piece(ColorScheme colorScheme, Enums.ColorType colorType,
+            Enums.PieceType type,
             int squaresForward, int squaresForwardRight,
             int squaresRight, int squaresBackRight,
             int squaresBack, int squaresBackLeft,
             int squaresLeft, int squaresForwardLeft)
         {
-            Color = color;
+            _colorScheme = colorScheme;
+
+            ColorType = colorType;
 
             _pieceType = type;
 

@@ -6,42 +6,42 @@ namespace MogriChess.Services
 {
     public static class PieceFactory
     {
-        public static Piece GetBishop(Enums.PlayerColor color)
+        public static Piece GetBishop(ColorScheme colorScheme, Enums.ColorType color)
         {
-            return new Piece(color, Enums.PieceType.Other,
+            return new Piece(colorScheme, color, Enums.PieceType.Other,
                 0, Constants.UnlimitedMoves,
                 0, Constants.UnlimitedMoves,
                 0, Constants.UnlimitedMoves,
                 0, Constants.UnlimitedMoves);
         }
 
-        public static Piece GetKing(Enums.PlayerColor color)
+        public static Piece GetKing(ColorScheme colorScheme, Enums.ColorType color)
         {
-            return new Piece(color, Enums.PieceType.King, 1, 1, 1, 1, 1, 1, 1, 1);
+            return new Piece(colorScheme, color, Enums.PieceType.King, 1, 1, 1, 1, 1, 1, 1, 1);
         }
 
-        public static Piece GetKnight(Enums.PlayerColor color)
+        public static Piece GetKnight(ColorScheme colorScheme, Enums.ColorType color)
         {
-            return new Piece(color, Enums.PieceType.Other, 2, 2, 2, 2, 2, 2, 2, 2);
+            return new Piece(colorScheme, color, Enums.PieceType.Other, 2, 2, 2, 2, 2, 2, 2, 2);
         }
 
-        public static Piece GetPawn(Enums.PlayerColor color)
+        public static Piece GetPawn(ColorScheme colorScheme, Enums.ColorType color)
         {
-            return new Piece(color, Enums.PieceType.Pawn, 1, 1, 0, 0, 0, 0, 0, 1);
+            return new Piece(colorScheme, color, Enums.PieceType.Pawn, 1, 1, 0, 0, 0, 0, 0, 1);
         }
 
-        public static Piece GetQueen(Enums.PlayerColor color)
+        public static Piece GetQueen(ColorScheme colorScheme, Enums.ColorType color)
         {
-            return new Piece(color, Enums.PieceType.Other,
+            return new Piece(colorScheme, color, Enums.PieceType.Other,
                 Constants.UnlimitedMoves, Constants.UnlimitedMoves,
                 Constants.UnlimitedMoves, Constants.UnlimitedMoves,
                 Constants.UnlimitedMoves, Constants.UnlimitedMoves,
                 Constants.UnlimitedMoves, Constants.UnlimitedMoves);
         }
 
-        public static Piece GetRook(Enums.PlayerColor color)
+        public static Piece GetRook(ColorScheme colorScheme, Enums.ColorType color)
         {
-            return new Piece(color, Enums.PieceType.Other,
+            return new Piece(colorScheme, color, Enums.PieceType.Other,
                 Constants.UnlimitedMoves, 0,
                 Constants.UnlimitedMoves, 0,
                 Constants.UnlimitedMoves, 0,
