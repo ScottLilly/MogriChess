@@ -9,7 +9,7 @@ namespace Test.MogriChess.ViewModels
     public class TestGame
     {
         [Fact]
-        public void Test1()
+        public void Test_InstantiateGame()
         {
             Game game = new Game();
 
