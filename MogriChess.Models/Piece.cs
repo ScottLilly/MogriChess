@@ -29,6 +29,10 @@ namespace MogriChess.Models
 
         public int TransformAngle => ColorType == Enums.ColorType.Light ? 0 : 180;
 
+        public bool ForwardOne => SquaresForward is 1 or 2;
+        public bool ForwardTwo => SquaresForward == 2;
+        public bool ForwardInfinite => SquaresForward > 2;
+
         public Piece(ColorScheme colorScheme, Enums.ColorType colorType,
             Enums.PieceType type,
             int squaresForward, int squaresForwardRight,

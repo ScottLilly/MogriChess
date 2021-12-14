@@ -14,7 +14,7 @@
         FontSize="11pt"
         MinWidth="950"
         Width="950"
-        Height="Auto">
+        Height="800">
 
     <Window.Resources>
         <Style TargetType="{x:Type models:Piece}"/>
@@ -59,8 +59,8 @@
             <Canvas Grid.Row="0" Grid.Column="0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Width="640"
-                    Height="640">
+                    Width="720"
+                    Height="720">
 
                 <ItemsControl ItemsSource="{Binding Board.Squares}">
 
@@ -95,8 +95,8 @@
                         <Style TargetType="ContentPresenter">
                             <Setter Property="Grid.Row" Value="{Binding UiGridRow}" />
                             <Setter Property="Grid.Column" Value="{Binding UiGridColumn}" />
-                            <Setter Property="Width" Value="80"/>
-                            <Setter Property="Height" Value="80"/>
+                            <Setter Property="Width" Value="90"/>
+                            <Setter Property="Height" Value="90"/>
                         </Style>
                     </ItemsControl.ItemContainerStyle>
 

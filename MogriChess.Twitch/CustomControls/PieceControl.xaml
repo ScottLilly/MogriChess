@@ -8,24 +8,44 @@
              Background="Transparent"
              mc:Ignorable="d">
 
-    <Canvas Width="80" Height="80" RenderTransformOrigin="0.5, 0.5" >
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrue"/>
+    </UserControl.Resources>
+
+    <Canvas Width="90" Height="90" RenderTransformOrigin="0.5, 0.5" >
         <!-- Points dark pieces so forward is down -->
         <Canvas.RenderTransform>
             <RotateTransform Angle="{Binding Piece.TransformAngle}"/>
         </Canvas.RenderTransform>
 
         <!-- Main circle shape -->
-        <Ellipse Canvas.Top="25"
-                 Canvas.Left="25"
+        <Ellipse Canvas.Top="30"
+                 Canvas.Left="30"
                  Width="30" Height="30"
-                 Fill="{Binding Piece.UiColor}">
-        </Ellipse>
+                 Fill="{Binding Piece.UiColor}"/>
 
         <!-- Center circle color, only alternated for Kings -->
-        <Ellipse Canvas.Top="32"
-                 Canvas.Left="32"
+        <Ellipse Canvas.Top="37"
+                 Canvas.Left="37"
                  Width="16" Height="16"
                  Fill="{Binding Piece.KingHighlightUiColor}"/>
+
+        <!-- Forward indicator -->
+        <Ellipse Canvas.Top="18"
+                 Canvas.Left="40"
+                 Width="10" Height="10"
+                 Visibility="{Binding Piece.ForwardOne, Converter={StaticResource VisibleIfTrue}}"
+                 Fill="{Binding Piece.UiColor}"/>
+        <Ellipse Canvas.Top="6"
+                 Canvas.Left="40"
+                 Width="10" Height="10"
+                 Visibility="{Binding Piece.ForwardTwo, Converter={StaticResource VisibleIfTrue}}"
+                 Fill="{Binding Piece.UiColor}"/>
+        <Rectangle Canvas.Top="6"
+                   Canvas.Left="41"
+                   Width="8" Height="22"
+                   Visibility="{Binding Piece.ForwardInfinite, Converter={StaticResource VisibleIfTrue}}"
+                   Fill="{Binding Piece.UiColor}"/>
     </Canvas>
 
 </UserControl>
