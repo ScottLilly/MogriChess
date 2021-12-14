@@ -31,21 +31,178 @@
                  Fill="{Binding Piece.KingHighlightUiColor}"/>
 
         <!-- Forward indicator -->
-        <Ellipse Canvas.Top="18"
-                 Canvas.Left="40"
-                 Width="10" Height="10"
-                 Visibility="{Binding Piece.ForwardOne, Converter={StaticResource VisibleIfTrue}}"
-                 Fill="{Binding Piece.UiColor}"/>
-        <Ellipse Canvas.Top="6"
-                 Canvas.Left="40"
-                 Width="10" Height="10"
-                 Visibility="{Binding Piece.ForwardTwo, Converter={StaticResource VisibleIfTrue}}"
-                 Fill="{Binding Piece.UiColor}"/>
-        <Rectangle Canvas.Top="6"
-                   Canvas.Left="41"
-                   Width="8" Height="22"
-                   Visibility="{Binding Piece.ForwardInfinite, Converter={StaticResource VisibleIfTrue}}"
-                   Fill="{Binding Piece.UiColor}"/>
+        <Canvas Width="90" Height="90" RenderTransformOrigin="0.5, 0.5">
+            <Ellipse Canvas.Top="18"
+                     Canvas.Left="40"
+                     Width="10" Height="10"
+                     Visibility="{Binding Piece.ForwardOne, Converter={StaticResource VisibleIfTrue}}"
+                     Fill="{Binding Piece.UiColor}"/>
+            <Ellipse Canvas.Top="6"
+                     Canvas.Left="40"
+                     Width="10" Height="10"
+                     Visibility="{Binding Piece.ForwardTwo, Converter={StaticResource VisibleIfTrue}}"
+                     Fill="{Binding Piece.UiColor}"/>
+            <Rectangle Canvas.Top="6"
+                       Canvas.Left="41"
+                       Width="8" Height="22"
+                       Visibility="{Binding Piece.ForwardInfinite, Converter={StaticResource VisibleIfTrue}}"
+                       Fill="{Binding Piece.UiColor}"/>
+        </Canvas>
+
+        <!-- ForwardRight indicator -->
+        <Canvas Width="90" Height="90" RenderTransformOrigin="0.5, 0.5">
+            <Canvas.RenderTransform>
+                <RotateTransform Angle="45"/>
+            </Canvas.RenderTransform>
+            <Ellipse Canvas.Top="18"
+                     Canvas.Left="40"
+                     Width="10" Height="10"
+                     Visibility="{Binding Piece.ForwardRightOne, Converter={StaticResource VisibleIfTrue}}"
+                     Fill="{Binding Piece.UiColor}"/>
+            <Ellipse Canvas.Top="6"
+                     Canvas.Left="40"
+                     Width="10" Height="10"
+                     Visibility="{Binding Piece.ForwardRightTwo, Converter={StaticResource VisibleIfTrue}}"
+                     Fill="{Binding Piece.UiColor}"/>
+            <Rectangle Canvas.Top="6"
+                       Canvas.Left="41"
+                       Width="8" Height="22"
+                       Visibility="{Binding Piece.ForwardRightInfinite, Converter={StaticResource VisibleIfTrue}}"
+                       Fill="{Binding Piece.UiColor}"/>
+        </Canvas>
+
+        <!-- Right indicator -->
+        <Canvas Width="90" Height="90" RenderTransformOrigin="0.5, 0.5">
+            <Canvas.RenderTransform>
+                <RotateTransform Angle="90"/>
+            </Canvas.RenderTransform>
+            <Ellipse Canvas.Top="18"
+                     Canvas.Left="40"
+                     Width="10" Height="10"
+                     Visibility="{Binding Piece.RightOne, Converter={StaticResource VisibleIfTrue}}"
+                     Fill="{Binding Piece.UiColor}"/>
+            <Ellipse Canvas.Top="6"
+                     Canvas.Left="40"
+                     Width="10" Height="10"
+                     Visibility="{Binding Piece.RightTwo, Converter={StaticResource VisibleIfTrue}}"
+                     Fill="{Binding Piece.UiColor}"/>
+            <Rectangle Canvas.Top="6"
+                       Canvas.Left="41"
+                       Width="8" Height="22"
+                       Visibility="{Binding Piece.RightInfinite, Converter={StaticResource VisibleIfTrue}}"
+                       Fill="{Binding Piece.UiColor}"/>
+        </Canvas>
+
+        <!-- BackRight indicator -->
+        <Canvas Width="90" Height="90" RenderTransformOrigin="0.5, 0.5">
+            <Canvas.RenderTransform>
+                <RotateTransform Angle="135"/>
+            </Canvas.RenderTransform>
+            <Ellipse Canvas.Top="18"
+                     Canvas.Left="40"
+                     Width="10" Height="10"
+                     Visibility="{Binding Piece.BackRightOne, Converter={StaticResource VisibleIfTrue}}"
+                     Fill="{Binding Piece.UiColor}"/>
+            <Ellipse Canvas.Top="6"
+                     Canvas.Left="40"
+                     Width="10" Height="10"
+                     Visibility="{Binding Piece.BackRightTwo, Converter={StaticResource VisibleIfTrue}}"
+                     Fill="{Binding Piece.UiColor}"/>
+            <Rectangle Canvas.Top="6"
+                       Canvas.Left="41"
+                       Width="8" Height="22"
+                       Visibility="{Binding Piece.BackRightInfinite, Converter={StaticResource VisibleIfTrue}}"
+                       Fill="{Binding Piece.UiColor}"/>
+        </Canvas>
+
+        <!-- Back indicator -->
+        <Canvas Width="90" Height="90" RenderTransformOrigin="0.5, 0.5">
+            <Canvas.RenderTransform>
+                <RotateTransform Angle="180"/>
+            </Canvas.RenderTransform>
+            <Ellipse Canvas.Top="18"
+                     Canvas.Left="40"
+                     Width="10" Height="10"
+                     Visibility="{Binding Piece.BackOne, Converter={StaticResource VisibleIfTrue}}"
+                     Fill="{Binding Piece.UiColor}"/>
+            <Ellipse Canvas.Top="6"
+                     Canvas.Left="40"
+                     Width="10" Height="10"
+                     Visibility="{Binding Piece.BackTwo, Converter={StaticResource VisibleIfTrue}}"
+                     Fill="{Binding Piece.UiColor}"/>
+            <Rectangle Canvas.Top="6"
+                       Canvas.Left="41"
+                       Width="8" Height="22"
+                       Visibility="{Binding Piece.BackInfinite, Converter={StaticResource VisibleIfTrue}}"
+                       Fill="{Binding Piece.UiColor}"/>
+        </Canvas>
+
+        <!-- BackLeft indicator -->
+        <Canvas Width="90" Height="90" RenderTransformOrigin="0.5, 0.5">
+            <Canvas.RenderTransform>
+                <RotateTransform Angle="225"/>
+            </Canvas.RenderTransform>
+            <Ellipse Canvas.Top="18"
+                     Canvas.Left="40"
+                     Width="10" Height="10"
+                     Visibility="{Binding Piece.BackLeftOne, Converter={StaticResource VisibleIfTrue}}"
+                     Fill="{Binding Piece.UiColor}"/>
+            <Ellipse Canvas.Top="6"
+                     Canvas.Left="40"
+                     Width="10" Height="10"
+                     Visibility="{Binding Piece.BackLeftTwo, Converter={StaticResource VisibleIfTrue}}"
+                     Fill="{Binding Piece.UiColor}"/>
+            <Rectangle Canvas.Top="6"
+                       Canvas.Left="41"
+                       Width="8" Height="22"
+                       Visibility="{Binding Piece.BackLeftInfinite, Converter={StaticResource VisibleIfTrue}}"
+                       Fill="{Binding Piece.UiColor}"/>
+        </Canvas>
+
+        <!-- Left indicator -->
+        <Canvas Width="90" Height="90" RenderTransformOrigin="0.5, 0.5">
+            <Canvas.RenderTransform>
+                <RotateTransform Angle="270"/>
+            </Canvas.RenderTransform>
+            <Ellipse Canvas.Top="18"
+                     Canvas.Left="40"
+                     Width="10" Height="10"
+                     Visibility="{Binding Piece.LeftOne, Converter={StaticResource VisibleIfTrue}}"
+                     Fill="{Binding Piece.UiColor}"/>
+            <Ellipse Canvas.Top="6"
+                     Canvas.Left="40"
+                     Width="10" Height="10"
+                     Visibility="{Binding Piece.LeftTwo, Converter={StaticResource VisibleIfTrue}}"
+                     Fill="{Binding Piece.UiColor}"/>
+            <Rectangle Canvas.Top="6"
+                       Canvas.Left="41"
+                       Width="8" Height="22"
+                       Visibility="{Binding Piece.LeftInfinite, Converter={StaticResource VisibleIfTrue}}"
+                       Fill="{Binding Piece.UiColor}"/>
+        </Canvas>
+
+        <!-- ForwardLeft indicator -->
+        <Canvas Width="90" Height="90" RenderTransformOrigin="0.5, 0.5">
+            <Canvas.RenderTransform>
+                <RotateTransform Angle="315"/>
+            </Canvas.RenderTransform>
+            <Ellipse Canvas.Top="18"
+                     Canvas.Left="40"
+                     Width="10" Height="10"
+                     Visibility="{Binding Piece.ForwardLeftOne, Converter={StaticResource VisibleIfTrue}}"
+                     Fill="{Binding Piece.UiColor}"/>
+            <Ellipse Canvas.Top="6"
+                     Canvas.Left="40"
+                     Width="10" Height="10"
+                     Visibility="{Binding Piece.ForwardLeftTwo, Converter={StaticResource VisibleIfTrue}}"
+                     Fill="{Binding Piece.UiColor}"/>
+            <Rectangle Canvas.Top="6"
+                       Canvas.Left="41"
+                       Width="8" Height="22"
+                       Visibility="{Binding Piece.ForwardLeftInfinite, Converter={StaticResource VisibleIfTrue}}"
+                       Fill="{Binding Piece.UiColor}"/>
+        </Canvas>
+
     </Canvas>
 
 </UserControl>

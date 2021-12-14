@@ -33,6 +33,34 @@ namespace MogriChess.Models
         public bool ForwardTwo => SquaresForward == 2;
         public bool ForwardInfinite => SquaresForward > 2;
 
+        public bool ForwardRightOne => SquaresForwardRight is 1 or 2;
+        public bool ForwardRightTwo => SquaresForwardRight == 2;
+        public bool ForwardRightInfinite => SquaresForwardRight > 2;
+
+        public bool RightOne => SquaresRight is 1 or 2;
+        public bool RightTwo => SquaresRight == 2;
+        public bool RightInfinite => SquaresRight > 2;
+
+        public bool BackRightOne => SquaresBackRight is 1 or 2;
+        public bool BackRightTwo => SquaresBackRight == 2;
+        public bool BackRightInfinite => SquaresBackRight > 2;
+
+        public bool BackOne => SquaresBack is 1 or 2;
+        public bool BackTwo => SquaresBack == 2;
+        public bool BackInfinite => SquaresBack > 2;
+
+        public bool BackLeftOne => SquaresBackLeft is 1 or 2;
+        public bool BackLeftTwo => SquaresBackLeft == 2;
+        public bool BackLeftInfinite => SquaresBackLeft > 2;
+
+        public bool LeftOne => SquaresLeft is 1 or 2;
+        public bool LeftTwo => SquaresLeft == 2;
+        public bool LeftInfinite => SquaresLeft > 2;
+
+        public bool ForwardLeftOne => SquaresForwardLeft is 1 or 2;
+        public bool ForwardLeftTwo => SquaresForwardLeft == 2;
+        public bool ForwardLeftInfinite => SquaresForwardLeft > 2;
+
         public Piece(ColorScheme colorScheme, Enums.ColorType colorType,
             Enums.PieceType type,
             int squaresForward, int squaresForwardRight,
