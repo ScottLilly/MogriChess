@@ -1,15 +1,15 @@
-﻿using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MogriChess.Models;
-using MogriChess.Services;
-using MogriChess.Twitch.CustomControls;
+using MogriChess.ViewModels;
 
 namespace MogriChess.Twitch
 {
     public partial class MainWindow : Window
     {
+        private PlaySession CurrentSession => DataContext as PlaySession;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -17,7 +17,7 @@ namespace MogriChess.Twitch
 
         private void StartNewGame_OnClick(object sender, RoutedEventArgs e)
         {
-            DataContext = GameFactory.GetNewGame();
+            DataContext = new PlaySession();
         }
 
         private void Exit_OnClick(object sender, RoutedEventArgs e)
@@ -34,11 +34,11 @@ namespace MogriChess.Twitch
 
             Square square = selectedSquare.DataContext as Square;
 
-            Piece piece = square.Piece;
+            Piece piece = square?.Piece;
 
             if (piece != null)
             {
-                ;
+                CurrentSession.CurrentGame.SelectPiece(piece);
             }
         }
     }

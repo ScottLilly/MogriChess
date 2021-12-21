@@ -9,7 +9,9 @@ namespace MogriChess.Models
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Board Board { get; }
-        public Enums.ColorType CurrentPlayerColor { get; } = Enums.ColorType.Light;
+        public Enums.ColorType CurrentPlayerColor { get; private set; } = 
+            Enums.ColorType.Light;
+        public Piece SelectedPiece { get; private set; }
 
         public Game(Board board)
         {
@@ -19,6 +21,21 @@ namespace MogriChess.Models
         public Piece PieceAt(int rank, int file)
         {
             return SquareAt(rank, file).Piece;
+        }
+
+        public void SelectPiece(Piece piece)
+        {
+            if (piece.ColorType != CurrentPlayerColor)
+            {
+                return;
+            }
+
+            SelectedPiece = piece;
+
+            CurrentPlayerColor = 
+                CurrentPlayerColor == Enums.ColorType.Light
+                    ? Enums.ColorType.Dark 
+                    : Enums.ColorType.Light;
         }
 
         private Square SquareAt(int rank, int file)

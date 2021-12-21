@@ -8,7 +8,7 @@ namespace MogriChess.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Game CurrentGame { get; private set; }
+        public Game CurrentGame { get; }
 
         public PlaySession()
         {
