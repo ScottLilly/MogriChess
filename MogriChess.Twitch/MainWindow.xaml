@@ -102,7 +102,7 @@
 
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Canvas Background="{Binding SquareColor}">
+                            <Canvas Background="{Binding SquareColor}" MouseLeftButtonUp="ClickedOnSquare_OnMouseLeftButtonUp">
                                 <customControls:PieceControl/>
                             </Canvas>
                         </DataTemplate>

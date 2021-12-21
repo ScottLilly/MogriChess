@@ -9,6 +9,7 @@ namespace MogriChess.Models
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Board Board { get; }
+        public Enums.ColorType CurrentPlayerColor { get; } = Enums.ColorType.Light;
 
         public Game(Board board)
         {
