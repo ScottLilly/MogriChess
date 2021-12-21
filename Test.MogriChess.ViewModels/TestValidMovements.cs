@@ -1,4 +1,6 @@
-﻿using MogriChess.ViewModels;
+﻿using MogriChess.Models;
+using MogriChess.Services;
+using MogriChess.ViewModels;
 
 using Xunit;
 
@@ -10,7 +12,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ValidMoveForRank_1()
         {
             // Light major pieces are blocked at game start
-            Game game = new Game();
+            Game game = GameFactory.GetNewGame();
 
             Assert.Empty(game.ValidDestinationsForPieceAt(1, 1));
             Assert.Empty(game.ValidDestinationsForPieceAt(1, 2));
@@ -27,7 +29,7 @@ namespace Test.MogriChess.ViewModels
         [Fact]
         public void Test_ValidMovesForPiece_A2()
         {
-            Game game = new Game();
+            Game game = GameFactory.GetNewGame();
 
             var validDestinations = game.ValidDestinationsForPieceAt(2, 1);
 
@@ -39,7 +41,7 @@ namespace Test.MogriChess.ViewModels
         [Fact]
         public void Test_ValidMovesForPiece_B2()
         {
-            Game game = new Game();
+            Game game = GameFactory.GetNewGame();
 
             var validDestinations = game.ValidDestinationsForPieceAt(2, 2);
 
@@ -52,7 +54,7 @@ namespace Test.MogriChess.ViewModels
         [Fact]
         public void Test_ValidMovesForPiece_C2()
         {
-            Game game = new Game();
+            Game game = GameFactory.GetNewGame();
 
             var validDestinations = game.ValidDestinationsForPieceAt(2, 3);
 
@@ -65,7 +67,7 @@ namespace Test.MogriChess.ViewModels
         [Fact]
         public void Test_ValidMovesForPiece_D2()
         {
-            Game game = new Game();
+            Game game = GameFactory.GetNewGame();
 
             var validDestinations = game.ValidDestinationsForPieceAt(2, 4);
 
@@ -78,7 +80,7 @@ namespace Test.MogriChess.ViewModels
         [Fact]
         public void Test_ValidMovesForPiece_E2()
         {
-            Game game = new Game();
+            Game game = GameFactory.GetNewGame();
 
             var validDestinations = game.ValidDestinationsForPieceAt(2, 5);
 
@@ -91,7 +93,7 @@ namespace Test.MogriChess.ViewModels
         [Fact]
         public void Test_ValidMovesForPiece_F2()
         {
-            Game game = new Game();
+            Game game = GameFactory.GetNewGame();
 
             var validDestinations = game.ValidDestinationsForPieceAt(2, 6);
 
@@ -104,7 +106,7 @@ namespace Test.MogriChess.ViewModels
         [Fact]
         public void Test_ValidMovesForPiece_G2()
         {
-            Game game = new Game();
+            Game game = GameFactory.GetNewGame();
 
             var validDestinations = game.ValidDestinationsForPieceAt(2, 7);
 
@@ -117,7 +119,7 @@ namespace Test.MogriChess.ViewModels
         [Fact]
         public void Test_ValidMovesForPiece_H2()
         {
-            Game game = new Game();
+            Game game = GameFactory.GetNewGame();
 
             var validDestinations = game.ValidDestinationsForPieceAt(2, 8);
 
@@ -133,7 +135,7 @@ namespace Test.MogriChess.ViewModels
         [Fact]
         public void Test_ValidMovesForPiece_A7()
         {
-            Game game = new Game();
+            Game game = GameFactory.GetNewGame();
 
             var validDestinations = game.ValidDestinationsForPieceAt(7, 1);
 
@@ -145,7 +147,7 @@ namespace Test.MogriChess.ViewModels
         [Fact]
         public void Test_ValidMovesForPiece_B7()
         {
-            Game game = new Game();
+            Game game = GameFactory.GetNewGame();
 
             var validDestinations = game.ValidDestinationsForPieceAt(7, 2);
 
@@ -158,7 +160,7 @@ namespace Test.MogriChess.ViewModels
         [Fact]
         public void Test_ValidMovesForPiece_C7()
         {
-            Game game = new Game();
+            Game game = GameFactory.GetNewGame();
 
             var validDestinations = game.ValidDestinationsForPieceAt(7, 3);
 
@@ -171,7 +173,7 @@ namespace Test.MogriChess.ViewModels
         [Fact]
         public void Test_ValidMovesForPiece_D7()
         {
-            Game game = new Game();
+            Game game = GameFactory.GetNewGame();
 
             var validDestinations = game.ValidDestinationsForPieceAt(7, 4);
 
@@ -184,7 +186,7 @@ namespace Test.MogriChess.ViewModels
         [Fact]
         public void Test_ValidMovesForPiece_E7()
         {
-            Game game = new Game();
+            Game game = GameFactory.GetNewGame();
 
             var validDestinations = game.ValidDestinationsForPieceAt(7, 5);
 
@@ -197,7 +199,7 @@ namespace Test.MogriChess.ViewModels
         [Fact]
         public void Test_ValidMovesForPiece_F7()
         {
-            Game game = new Game();
+            Game game = GameFactory.GetNewGame();
 
             var validDestinations = game.ValidDestinationsForPieceAt(7, 6);
 
@@ -210,7 +212,7 @@ namespace Test.MogriChess.ViewModels
         [Fact]
         public void Test_ValidMovesForPiece_G7()
         {
-            Game game = new Game();
+            Game game = GameFactory.GetNewGame();
 
             var validDestinations = game.ValidDestinationsForPieceAt(7, 7);
 
@@ -223,7 +225,7 @@ namespace Test.MogriChess.ViewModels
         [Fact]
         public void Test_ValidMovesForPiece_H7()
         {
-            Game game = new Game();
+            Game game = GameFactory.GetNewGame();
 
             var validDestinations = game.ValidDestinationsForPieceAt(7, 8);
 
@@ -238,7 +240,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ValidMoveForRank_8()
         {
             // Dark major pieces are blocked at game start
-            Game game = new Game();
+            Game game = GameFactory.GetNewGame();
 
             Assert.Empty(game.ValidDestinationsForPieceAt(8, 1));
             Assert.Empty(game.ValidDestinationsForPieceAt(8, 2));

@@ -7,7 +7,7 @@
         xmlns:viewModels="clr-namespace:MogriChess.ViewModels;assembly=MogriChess.ViewModels"
         xmlns:models="clr-namespace:MogriChess.Models;assembly=MogriChess.Models"
         xmlns:customControls="clr-namespace:MogriChess.Twitch.CustomControls"
-        d:DataContext="{d:DesignInstance viewModels:Game}"
+        d:DataContext="{d:DesignInstance models:Game}"
         mc:Ignorable="d"
         Title="MogriChess" 
         WindowStartupLocation="CenterScreen"

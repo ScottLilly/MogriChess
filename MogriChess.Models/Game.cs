@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using MogriChess.Models;
-using MogriChess.Services;
 
-namespace MogriChess.ViewModels
+namespace MogriChess.Models
 {
     public class Game : INotifyPropertyChanged
     {
@@ -12,9 +10,9 @@ namespace MogriChess.ViewModels
 
         public Board Board { get; }
 
-        public Game()
+        public Game(Board board)
         {
-            Board = BoardFactory.GetNewGameBoard();
+            Board = board;
         }
 
         public Piece PieceAt(int rank, int file)

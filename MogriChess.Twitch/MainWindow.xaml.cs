@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using MogriChess.ViewModels;
+using MogriChess.Services;
 
 namespace MogriChess.Twitch
 {
@@ -12,7 +12,7 @@ namespace MogriChess.Twitch
 
         private void StartNewGame_OnClick(object sender, RoutedEventArgs e)
         {
-            DataContext = new Game();
+            DataContext = GameFactory.GetNewGame();
         }
 
         private void Exit_OnClick(object sender, RoutedEventArgs e)
