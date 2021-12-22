@@ -34,12 +34,7 @@ namespace MogriChess.Twitch
 
             Square square = selectedSquare.DataContext as Square;
 
-            Piece piece = square?.Piece;
-
-            if (piece != null)
-            {
-                CurrentSession.CurrentGame.SelectPiece(piece);
-            }
+            CurrentSession.CurrentGame.SelectSquare(square);
         }
     }
 }

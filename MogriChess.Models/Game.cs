@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 
@@ -6,12 +7,36 @@ namespace MogriChess.Models
 {
     public class Game : INotifyPropertyChanged
     {
+        private Square _selectedSquare;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Board Board { get; }
-        public Enums.ColorType CurrentPlayerColor { get; private set; } = 
+        public Enums.ColorType CurrentPlayerColor { get; private set; } =
             Enums.ColorType.Light;
-        public Piece SelectedPiece { get; private set; }
+        public ObservableCollection<Move> ValidDestinationsForSelectedPiece { get; } =
+            new ObservableCollection<Move>();
+
+        private Square SelectedSquare
+        {
+            get => _selectedSquare;
+            set
+            {
+                _selectedSquare = value;
+
+                ValidDestinationsForSelectedPiece.Clear();
+
+                if (SelectedSquare != null)
+                {
+                    List<Move> validDestinations =
+                        ValidDestinationsForPieceAt(SelectedSquare.Rank, SelectedSquare.File);
+
+                    foreach (Move move in validDestinations)
+                    {
+                        ValidDestinationsForSelectedPiece.Add(move);
+                    }
+                }
+            }
+        }
 
         public Game(Board board)
         {
@@ -23,18 +48,69 @@ namespace MogriChess.Models
             return SquareAt(rank, file).Piece;
         }
 
-        public void SelectPiece(Piece piece)
+        public void SelectSquare(Square square)
         {
-            if (piece.ColorType != CurrentPlayerColor)
+            // No square is currently selected
+            if (SelectedSquare == null)
+            {
+                // No piece is on square, so return
+                if (square?.Piece == null)
+                {
+                    return;
+                }
+
+                // There is a piece on the square, and it's the current player's
+                if (square.Piece.ColorType == CurrentPlayerColor)
+                {
+                    SelectedSquare = square;
+                    SelectedSquare.IsSelected = true;
+                }
+
+                return;
+            }
+
+            // If the player selected the currently-selected square, de-select it.
+            if (SelectedSquare == square)
+            {
+                SelectedSquare = null;
+                square.IsSelected = false;
+
+                return;
+            }
+
+            // Check the destination square is a valid move
+            Move move =
+                ValidDestinationsForSelectedPiece.FirstOrDefault(d =>
+                    d.DestinationRank == square.Rank &&
+                    d.DestinationFile == square.File);
+
+            if (move == null)
             {
                 return;
             }
 
-            SelectedPiece = piece;
+            // Perform capture
+            if (square.Piece != null)
+            {
+                SelectedSquare.Piece.AddMovementAbilities(square.Piece);
+            }
 
-            CurrentPlayerColor = 
+            // Move piece to new square
+            square.PlacePiece(SelectedSquare.Piece);
+
+            // Clear out square the moving piece moved from
+            SelectedSquare.Piece = null;
+            SelectedSquare.IsSelected = false;
+            SelectedSquare = null;
+
+            EndCurrentPlayerTurn();
+        }
+
+        private void EndCurrentPlayerTurn()
+        {
+            CurrentPlayerColor =
                 CurrentPlayerColor == Enums.ColorType.Light
-                    ? Enums.ColorType.Dark 
+                    ? Enums.ColorType.Dark
                     : Enums.ColorType.Light;
         }
 

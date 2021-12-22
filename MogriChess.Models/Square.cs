@@ -9,10 +9,15 @@ namespace MogriChess.Models
         public int Rank { get; }
         public int File { get; }
         public Enums.ColorType ColorType { get; }
-        public Piece Piece { get; private set; }
+        public Piece Piece { get; set; }
+        public bool IsSelected { get; set; }
 
         public string SquareColor =>
-            ColorType == Enums.ColorType.Light ? _colorScheme.LightColor : _colorScheme.DarkColor;
+            IsSelected
+                ? "#3399FF"
+                : ColorType == Enums.ColorType.Light
+                    ? _colorScheme.LightColor
+                    : _colorScheme.DarkColor;
 
         public int UiGridRow => 8 - Rank;
         public int UiGridColumn => File - 1;

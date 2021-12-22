@@ -57,10 +57,8 @@
 
             <!-- Game Board -->
             <Canvas Grid.Row="0" Grid.Column="0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Width="720"
-                    Height="720">
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
 
                 <ItemsControl ItemsSource="{Binding CurrentGame.Board.Squares}">
 
@@ -102,7 +100,8 @@
 
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Canvas Background="{Binding SquareColor}" MouseLeftButtonUp="ClickedOnSquare_OnMouseLeftButtonUp">
+                            <Canvas Background="{Binding SquareColor}"
+                                    MouseLeftButtonUp="ClickedOnSquare_OnMouseLeftButtonUp">
                                 <customControls:PieceControl/>
                             </Canvas>
                         </DataTemplate>
