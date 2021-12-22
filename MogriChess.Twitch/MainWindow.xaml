@@ -12,8 +12,8 @@
         Title="MogriChess" 
         WindowStartupLocation="CenterScreen"
         FontSize="11pt"
-        MinWidth="950"
-        Width="950"
+        MinWidth="975"
+        Width="975"
         Height="800">
 
     <Window.Resources>
@@ -48,11 +48,11 @@
         <Grid Grid.Row="1" Grid.Column="0"
               Margin="10,10,10,10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="175"/>
+                <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
 
             <!-- Game Board -->
@@ -109,30 +109,56 @@
                 </ItemsControl>
             </Canvas>
 
-            <DataGrid Grid.Row="0" Grid.Column="1"
-                      ItemsSource="{Binding CurrentGame.MoveHistory}"
-                      CanUserAddRows="False"
-                      CanUserDeleteRows="False"
-                      CanUserReorderColumns="False"
-                      CanUserResizeColumns="False"
-                      CanUserResizeRows="False"
-                      CanUserSortColumns="False"
-                      HeadersVisibility="Column"
-                      IsReadOnly="True"
-                      HorizontalScrollBarVisibility="Auto"
-                      AutoGenerateColumns="False">
+            <Grid Grid.Row="0" Grid.Column="1"
+                  VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Player"
-                                        Binding="{Binding MovingPieceColor}"/>
-                    <DataGridTextColumn Header="Move"
-                                        Binding="{Binding Description}"/>
-                    <DataGridTextColumn Header=""
-                                        Width="*"
-                                        Binding="{Binding CapturingMove}"/>
-                </DataGrid.Columns>
+                <DataGrid Grid.Row="0" Grid.Column="0"
+                          Grid.ColumnSpan="2"
+                          x:Name="MoveHistoryDataGrid"
+                          ItemsSource="{Binding CurrentGame.MoveHistory}"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="False"
+                          CanUserReorderColumns="False"
+                          CanUserResizeColumns="False"
+                          CanUserResizeRows="False"
+                          CanUserSortColumns="False"
+                          HeadersVisibility="Column"
+                          IsReadOnly="True"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Top"
+                          HorizontalScrollBarVisibility="Auto"
+                          AutoGenerateColumns="False">
 
-            </DataGrid>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Player"
+                                            Binding="{Binding MovingPieceColor}"/>
+                        <DataGridTextColumn Header="Move"
+                                            Binding="{Binding MoveShorthand}"/>
+                        <DataGridTextColumn Header=""
+                                            Width="*"
+                                            Binding="{Binding MoveResult}"/>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+                <CheckBox Grid.Row="2" Grid.Column="0"
+                          VerticalAlignment="Center"/>
+
+                <Label Grid.Row="2" Grid.Column="1"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Content="Display valid moves"/>
+
+            </Grid>
 
         </Grid>
 

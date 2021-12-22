@@ -148,7 +148,7 @@ namespace MogriChess.Models
             return validMoves;
         }
 
-        private List<Move> ValidMovesInDirection(int squaresToCheck, int currentRank, int currentFile, 
+        private List<Move> ValidMovesInDirection(int squaresToCheck, int currentRank, int currentFile,
             int rankMultiplier, int fileMultiplier)
         {
             List<Move> validMoves = new List<Move>();

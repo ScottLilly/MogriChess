@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MogriChess.Models;
@@ -18,11 +19,8 @@ namespace MogriChess.Twitch
         private void StartNewGame_OnClick(object sender, RoutedEventArgs e)
         {
             DataContext = new PlaySession();
-        }
 
-        private void Exit_OnClick(object sender, RoutedEventArgs e)
-        {
-            Close();
+            CurrentSession.CurrentGame.MoveHistory.CollectionChanged += MoveHistory_CollectionChanged;
         }
 
         private void ClickedOnSquare_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -35,6 +33,17 @@ namespace MogriChess.Twitch
             Square square = selectedSquare.DataContext as Square;
 
             CurrentSession.CurrentGame.SelectSquare(square);
+        }
+
+        private void MoveHistory_CollectionChanged(object sender,
+            System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            MoveHistoryDataGrid.ScrollIntoView(CurrentSession.CurrentGame.MoveHistory.Last());
+        }
+
+        private void Exit_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

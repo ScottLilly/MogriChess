@@ -14,8 +14,10 @@
         public bool IsCapturingMove { get; set; }
         public bool IsWinningMove { get; set; }
 
-        public string Description => 
+        public string MoveShorthand =>
             $"{FromRank}{FromFileAsLetter}:{DestinationRank}{DestinationFileAsLetter}";
+        public string MoveResult =>
+            IsCapturingMove ? (IsWinningMove ? "Victory" : "Capture") : "";
 
         public Move(Square fromSquare, Square destinationSquare)
         {
@@ -23,9 +25,5 @@
             FromSquare = fromSquare;
             DestinationSquare = destinationSquare;
         }
-
-        public string ShorthandDescription => $"{FromFileAsLetter}{FromRank}:{DestinationFileAsLetter}{DestinationRank}";
-
-        public string CapturingMove => IsCapturingMove ? (IsWinningMove ? "Victory" : "Capture") : "";
     }
 }
