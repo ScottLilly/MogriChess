@@ -13,6 +13,8 @@ namespace MogriChess.Models
         public Board Board { get; }
         public Enums.ColorType CurrentPlayerColor { get; private set; } =
             Enums.ColorType.Light;
+        public ObservableCollection<Move> MoveHistory { get; } =
+            new ObservableCollection<Move>();
         public ObservableCollection<Move> ValidDestinationsForSelectedPiece { get; } =
             new ObservableCollection<Move>();
 
@@ -102,6 +104,8 @@ namespace MogriChess.Models
             SelectedSquare.Piece = null;
             SelectedSquare.IsSelected = false;
             SelectedSquare = null;
+
+            MoveHistory.Add(move);
 
             EndCurrentPlayerTurn();
         }

@@ -52,7 +52,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="125"/>
+                <ColumnDefinition Width="175"/>
             </Grid.ColumnDefinitions>
 
             <!-- Game Board -->
@@ -108,6 +108,31 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </Canvas>
+
+            <DataGrid Grid.Row="0" Grid.Column="1"
+                      ItemsSource="{Binding CurrentGame.MoveHistory}"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      CanUserReorderColumns="False"
+                      CanUserResizeColumns="False"
+                      CanUserResizeRows="False"
+                      CanUserSortColumns="False"
+                      HeadersVisibility="Column"
+                      IsReadOnly="True"
+                      HorizontalScrollBarVisibility="Auto"
+                      AutoGenerateColumns="False">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Player"
+                                        Binding="{Binding MovingPieceColor}"/>
+                    <DataGridTextColumn Header="Move"
+                                        Binding="{Binding Description}"/>
+                    <DataGridTextColumn Header=""
+                                        Width="*"
+                                        Binding="{Binding CapturingMove}"/>
+                </DataGrid.Columns>
+
+            </DataGrid>
 
         </Grid>
 

@@ -14,6 +14,9 @@
         public bool IsCapturingMove { get; set; }
         public bool IsWinningMove { get; set; }
 
+        public string Description => 
+            $"{FromRank}{FromFileAsLetter}:{DestinationRank}{DestinationFileAsLetter}";
+
         public Move(Square fromSquare, Square destinationSquare)
         {
             MovingPieceColor = fromSquare.Piece.ColorType;
