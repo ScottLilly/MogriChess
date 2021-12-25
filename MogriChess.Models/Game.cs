@@ -175,18 +175,26 @@ namespace MogriChess.Models
                     break;
                 }
 
+                Move move =
+                    new Move(SquareAt(currentRank, currentFile), SquareAt(destinationRank, destinationFile));
+
+                if (SelectedSquare.Piece.IsUnpromotedPawn &&
+                    ((SelectedSquare.Piece.ColorType == Enums.ColorType.Light && destinationRank == 8) ||
+                    (SelectedSquare.Piece.ColorType == Enums.ColorType.Dark && destinationRank == 1)))
+                {
+                    move.IsPromotingMove = true;
+                }
+
                 Piece pieceAtDestination = PieceAt(destinationRank, destinationFile);
 
                 if (pieceAtDestination == null)
                 {
                     // Square is empty
-                    validMoves.Add(new Move(SquareAt(currentRank, currentFile), SquareAt(destinationRank, destinationFile)));
+                    validMoves.Add(move);
                 }
                 else if (pieceAtDestination.ColorType != PieceAt(currentRank, currentFile).ColorType)
                 {
                     // Square is occupied by an opponent's piece
-                    Move move = new Move(SquareAt(currentRank, currentFile), SquareAt(destinationRank, destinationFile));
-
                     move.IsCapturingMove = true;
                     move.IsWinningMove = pieceAtDestination.IsKing;
 

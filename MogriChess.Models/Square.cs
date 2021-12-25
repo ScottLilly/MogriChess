@@ -51,7 +51,16 @@ namespace MogriChess.Models
         {
             Piece = piece;
 
-            // TODO: handle captures
+            if (!piece.IsPawn)
+            {
+                return;
+            }
+
+            if ((piece.ColorType == Enums.ColorType.Light && Rank == 8) ||
+                (piece.ColorType == Enums.ColorType.Dark && Rank == 1))
+            {
+                piece.Promote();
+            }
         }
     }
 }

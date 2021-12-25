@@ -13,11 +13,12 @@
         public string DestinationFileAsLetter => DestinationSquare.FileAsLetter;
         public bool IsCapturingMove { get; set; }
         public bool IsWinningMove { get; set; }
+        public bool IsPromotingMove { get; set; }
 
         public string MoveShorthand =>
             $"{FromFileAsLetter}{FromRank}:{DestinationFileAsLetter}{DestinationRank}";
         public string MoveResult =>
-            IsCapturingMove ? (IsWinningMove ? "Victory" : "Capture") : "";
+            IsCapturingMove ? (IsWinningMove ? "Victory" : "Capture") : IsPromotingMove ? "Promotion" : "";
 
         public Move(Square fromSquare, Square destinationSquare)
         {

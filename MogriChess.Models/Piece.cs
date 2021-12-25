@@ -7,6 +7,7 @@ namespace MogriChess.Models
     {
         private ColorScheme _colorScheme;
         private readonly Enums.PieceType _pieceType;
+        private bool _isPromoted;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -22,6 +23,8 @@ namespace MogriChess.Models
         public int SquaresForwardLeft { get; private set; }
 
         public bool IsKing => _pieceType.Equals(Enums.PieceType.King);
+        public bool IsPawn => _pieceType.Equals(Enums.PieceType.Pawn);
+        public bool IsUnpromotedPawn => IsPawn && !_isPromoted;
 
         public string UiColor => ColorType == Enums.ColorType.Light ? _colorScheme.LightColor : _colorScheme.DarkColor;
         public string KingHighlightUiColor =>
@@ -104,6 +107,8 @@ namespace MogriChess.Models
 
             // Pawns that reach opponent's back rank gain ability to move one square in all directions
             AddMovementAbilities(1, 1, 1, 1, 1, 1, 1, 1);
+
+            _isPromoted = true;
         }
 
         private void AddMovementAbilities(int squaresForward, int squaresForwardRight,
