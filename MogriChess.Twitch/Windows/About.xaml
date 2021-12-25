@@ -1,0 +1,69 @@
+﻿<Window x:Class="MogriChess.Twitch.Windows.About"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MogriChess.Twitch.Windows"
+        WindowStartupLocation="CenterOwner"
+        FontSize="11pt"
+        Title="About"
+        Height="250" Width="400">
+
+    <Grid Margin="10,10,10,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" 
+                   Grid.ColumnSpan="2" 
+                   Text="MogriChess"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" 
+                   Grid.ColumnSpan="2"
+                   Text="0.1.0.0"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" 
+                   Grid.ColumnSpan="2"
+                   Text="Copyright 2021, Scott Lilly"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" 
+                   Grid.ColumnSpan="2"
+                   Text="All Rights Reserved"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" 
+                   Text="Source code:"/>
+        <TextBlock Grid.Row="4" Grid.Column="1" >
+            <Hyperlink NavigateUri="https://github.com/ScottLilly/MogriChess"
+                       RequestNavigate="Hyperlink_OnRequestNavigate">
+                https://github.com/ScottLilly/MogriChess
+            </Hyperlink>
+        </TextBlock>
+
+        <TextBlock Grid.Row="5" Grid.Column="0" 
+                   Text="Support page:"/>
+        <TextBlock Grid.Row="5" Grid.Column="1" >
+            <Hyperlink NavigateUri="https://scottlilly.com"
+                       RequestNavigate="Hyperlink_OnRequestNavigate">
+                https://scottlilly.com
+            </Hyperlink>
+        </TextBlock>
+
+        <Button Grid.Row="7" Grid.Column="0"
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Right"
+                IsDefault="True"
+                Content="OK"
+                Width="75"
+                Click="OK_OnClick"/>
+
+    </Grid>
+
+</Window>

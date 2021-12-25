@@ -39,9 +39,11 @@
                           Click="Exit_OnClick"/>
             </MenuItem>
             <MenuItem Header="Help">
-                <MenuItem Header="Help"/>
+                <MenuItem Header="Help"
+                          Click="Help_OnClick"/>
                 <Separator/>
-                <MenuItem Header="About"/>
+                <MenuItem Header="About"
+                          Click="About_OnClick"/>
             </MenuItem>
         </Menu>
 
