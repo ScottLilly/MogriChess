@@ -152,7 +152,9 @@
                 </DataGrid>
 
                 <CheckBox Grid.Row="2" Grid.Column="0"
-                          VerticalAlignment="Center"/>
+                          VerticalAlignment="Center"
+                          IsChecked="{Binding CurrentGame.DisplayValidDestinations, 
+                                              UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Label Grid.Row="2" Grid.Column="1"
                        HorizontalAlignment="Left"

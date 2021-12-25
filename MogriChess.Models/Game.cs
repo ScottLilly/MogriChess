@@ -17,6 +17,7 @@ namespace MogriChess.Models
             new ObservableCollection<Move>();
         public ObservableCollection<Move> ValidDestinationsForSelectedPiece { get; } =
             new ObservableCollection<Move>();
+        public bool DisplayValidDestinations { get; set; }
 
         private Square SelectedSquare
         {
@@ -27,6 +28,11 @@ namespace MogriChess.Models
 
                 ValidDestinationsForSelectedPiece.Clear();
 
+                foreach (Square square in Board.Squares)
+                {
+                    square.IsValidDestination = false;
+                }
+
                 if (SelectedSquare != null)
                 {
                     List<Move> validDestinations =
@@ -35,6 +41,11 @@ namespace MogriChess.Models
                     foreach (Move move in validDestinations)
                     {
                         ValidDestinationsForSelectedPiece.Add(move);
+
+                        if (DisplayValidDestinations)
+                        {
+                            SquareAt(move.DestinationRank, move.DestinationFile).IsValidDestination = true;
+                        }
                     }
                 }
             }
@@ -180,6 +191,8 @@ namespace MogriChess.Models
                     move.IsWinningMove = pieceAtDestination.IsKing;
 
                     validMoves.Add(move);
+
+                    break;
                 }
                 else if (pieceAtDestination.ColorType == PieceAt(currentRank, currentFile).ColorType)
                 {
