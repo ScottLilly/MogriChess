@@ -22,6 +22,7 @@ namespace MogriChess.Models
         public int UiGridRow => 8 - Rank;
         public int UiGridColumn => File - 1;
         public string FileAsLetter => "abcdefgh".Substring(File - 1, 1);
+        public string SquareShorthand => $"{FileAsLetter}{Rank}";
 
         public event PropertyChangedEventHandler PropertyChanged;
 

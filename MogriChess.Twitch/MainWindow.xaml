@@ -109,6 +109,7 @@
                 </ItemsControl>
             </Canvas>
 
+            <!-- Movement History -->
             <Grid Grid.Row="0" Grid.Column="1"
                   VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
