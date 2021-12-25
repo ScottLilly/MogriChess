@@ -15,7 +15,7 @@
         public bool IsWinningMove { get; set; }
 
         public string MoveShorthand =>
-            $"{FromRank}{FromFileAsLetter}:{DestinationRank}{DestinationFileAsLetter}";
+            $"{FromFileAsLetter}{FromRank}:{DestinationFileAsLetter}{DestinationRank}";
         public string MoveResult =>
             IsCapturingMove ? (IsWinningMove ? "Victory" : "Capture") : "";
 
