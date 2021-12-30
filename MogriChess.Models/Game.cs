@@ -30,10 +30,7 @@ namespace MogriChess.Models
 
                 ValidDestinationsForSelectedPiece.Clear();
 
-                foreach (Square square in Board.Squares)
-                {
-                    square.IsValidDestination = false;
-                }
+                Board.ClearValidDestinations();
 
                 if (SelectedSquare != null)
                 {
@@ -46,7 +43,7 @@ namespace MogriChess.Models
 
                         if (DisplayValidDestinations)
                         {
-                            SquareAt(move.DestinationRank, move.DestinationFile).IsValidDestination = true;
+                            Board.SquareAt(move.DestinationRank, move.DestinationFile).IsValidDestination = true;
                         }
                     }
                 }
@@ -56,11 +53,6 @@ namespace MogriChess.Models
         public Game(Board board)
         {
             Board = board;
-        }
-
-        public Piece PieceAt(int rank, int file)
-        {
-            return SquareAt(rank, file).Piece;
         }
 
         public void SelectSquare(Square square)
@@ -133,11 +125,6 @@ namespace MogriChess.Models
                     : Enums.ColorType.Light;
         }
 
-        private Square SquareAt(int rank, int file)
-        {
-            return Board.Squares.First(s => s.Rank.Equals(rank) && s.File.Equals(file));
-        }
-
         private void DetermineIfMovePutsOpponentInCheckOrCheckMate(Move move)
         {
             var nextMoves = ValidMovesForPieceAt(move.DestinationRank, move.DestinationFile);
@@ -153,7 +140,7 @@ namespace MogriChess.Models
 
         public List<Move> ValidMovesForPieceAt(int rank, int file)
         {
-            Piece piece = PieceAt(rank, file);
+            Piece piece = Board.PieceAt(rank, file);
 
             List<Move> validMoves = new List<Move>();
 
@@ -179,7 +166,7 @@ namespace MogriChess.Models
         private List<Move> ValidMovesInDirection(int squaresToCheck, int currentRank, int currentFile,
             int rankMultiplier, int fileMultiplier)
         {
-            var currentPiece = PieceAt(currentRank, currentFile);
+            var currentPiece = Board.PieceAt(currentRank, currentFile);
             List<Move> validMoves = new List<Move>();
 
             for (int i = 1; i <= squaresToCheck; i++)
@@ -194,7 +181,7 @@ namespace MogriChess.Models
                 }
 
                 Move move =
-                    new Move(SquareAt(currentRank, currentFile), SquareAt(destinationRank, destinationFile));
+                    new Move(Board.SquareAt(currentRank, currentFile), Board.SquareAt(destinationRank, destinationFile));
 
                 // Un-promoted pawn reached opponent's back rank, and needs to be promoted.
                 if (currentPiece.IsUnpromotedPawn &&
@@ -204,7 +191,7 @@ namespace MogriChess.Models
                     move.IsPromotingMove = true;
                 }
 
-                Piece pieceAtDestination = PieceAt(destinationRank, destinationFile);
+                Piece pieceAtDestination = Board.PieceAt(destinationRank, destinationFile);
 
                 if (pieceAtDestination == null)
                 {

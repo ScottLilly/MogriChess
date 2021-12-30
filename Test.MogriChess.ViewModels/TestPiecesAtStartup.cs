@@ -22,7 +22,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(1, FILE_A);
+            var piece = game.Board.PieceAt(1, FILE_A);
 
             Assert.NotNull(piece);
 
@@ -44,7 +44,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(1, FILE_B);
+            var piece = game.Board.PieceAt(1, FILE_B);
 
             Assert.NotNull(piece);
 
@@ -66,7 +66,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(1, FILE_C);
+            var piece = game.Board.PieceAt(1, FILE_C);
 
             Assert.NotNull(piece);
 
@@ -88,7 +88,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(1, FILE_D);
+            var piece = game.Board.PieceAt(1, FILE_D);
 
             Assert.NotNull(piece);
 
@@ -110,7 +110,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(1, FILE_E);
+            var piece = game.Board.PieceAt(1, FILE_E);
 
             Assert.NotNull(piece);
 
@@ -132,7 +132,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(1, FILE_F);
+            var piece = game.Board.PieceAt(1, FILE_F);
 
             Assert.NotNull(piece);
 
@@ -154,7 +154,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(1, FILE_G);
+            var piece = game.Board.PieceAt(1, FILE_G);
 
             Assert.NotNull(piece);
 
@@ -176,7 +176,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(1, FILE_H);
+            var piece = game.Board.PieceAt(1, FILE_H);
 
             Assert.NotNull(piece);
 
@@ -202,7 +202,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(2, FILE_A);
+            var piece = game.Board.PieceAt(2, FILE_A);
 
             Assert.NotNull(piece);
 
@@ -224,7 +224,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(2, FILE_B);
+            var piece = game.Board.PieceAt(2, FILE_B);
 
             Assert.NotNull(piece);
 
@@ -246,7 +246,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(2, FILE_C);
+            var piece = game.Board.PieceAt(2, FILE_C);
 
             Assert.NotNull(piece);
 
@@ -268,7 +268,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(2, FILE_D);
+            var piece = game.Board.PieceAt(2, FILE_D);
 
             Assert.NotNull(piece);
 
@@ -290,7 +290,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(2, FILE_E);
+            var piece = game.Board.PieceAt(2, FILE_E);
 
             Assert.NotNull(piece);
 
@@ -312,7 +312,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(2, FILE_F);
+            var piece = game.Board.PieceAt(2, FILE_F);
 
             Assert.NotNull(piece);
 
@@ -334,7 +334,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(2, FILE_G);
+            var piece = game.Board.PieceAt(2, FILE_G);
 
             Assert.NotNull(piece);
 
@@ -356,7 +356,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(2, FILE_H);
+            var piece = game.Board.PieceAt(2, FILE_H);
 
             Assert.NotNull(piece);
 
@@ -382,14 +382,14 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            Assert.Null(game.PieceAt(3, FILE_A));
-            Assert.Null(game.PieceAt(3, FILE_B));
-            Assert.Null(game.PieceAt(3, FILE_C));
-            Assert.Null(game.PieceAt(3, FILE_D));
-            Assert.Null(game.PieceAt(3, FILE_E));
-            Assert.Null(game.PieceAt(3, FILE_F));
-            Assert.Null(game.PieceAt(3, FILE_G));
-            Assert.Null(game.PieceAt(3, FILE_H));
+            Assert.Null(game.Board.PieceAt(3, FILE_A));
+            Assert.Null(game.Board.PieceAt(3, FILE_B));
+            Assert.Null(game.Board.PieceAt(3, FILE_C));
+            Assert.Null(game.Board.PieceAt(3, FILE_D));
+            Assert.Null(game.Board.PieceAt(3, FILE_E));
+            Assert.Null(game.Board.PieceAt(3, FILE_F));
+            Assert.Null(game.Board.PieceAt(3, FILE_G));
+            Assert.Null(game.Board.PieceAt(3, FILE_H));
         }
 
         [Fact]
@@ -397,14 +397,14 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            Assert.Null(game.PieceAt(4, FILE_A));
-            Assert.Null(game.PieceAt(4, FILE_B));
-            Assert.Null(game.PieceAt(4, FILE_C));
-            Assert.Null(game.PieceAt(4, FILE_D));
-            Assert.Null(game.PieceAt(4, FILE_E));
-            Assert.Null(game.PieceAt(4, FILE_F));
-            Assert.Null(game.PieceAt(4, FILE_G));
-            Assert.Null(game.PieceAt(4, FILE_H));
+            Assert.Null(game.Board.PieceAt(4, FILE_A));
+            Assert.Null(game.Board.PieceAt(4, FILE_B));
+            Assert.Null(game.Board.PieceAt(4, FILE_C));
+            Assert.Null(game.Board.PieceAt(4, FILE_D));
+            Assert.Null(game.Board.PieceAt(4, FILE_E));
+            Assert.Null(game.Board.PieceAt(4, FILE_F));
+            Assert.Null(game.Board.PieceAt(4, FILE_G));
+            Assert.Null(game.Board.PieceAt(4, FILE_H));
         }
 
         [Fact]
@@ -412,14 +412,14 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            Assert.Null(game.PieceAt(5, FILE_A));
-            Assert.Null(game.PieceAt(5, FILE_B));
-            Assert.Null(game.PieceAt(5, FILE_C));
-            Assert.Null(game.PieceAt(5, FILE_D));
-            Assert.Null(game.PieceAt(5, FILE_E));
-            Assert.Null(game.PieceAt(5, FILE_F));
-            Assert.Null(game.PieceAt(5, FILE_G));
-            Assert.Null(game.PieceAt(5, FILE_H));
+            Assert.Null(game.Board.PieceAt(5, FILE_A));
+            Assert.Null(game.Board.PieceAt(5, FILE_B));
+            Assert.Null(game.Board.PieceAt(5, FILE_C));
+            Assert.Null(game.Board.PieceAt(5, FILE_D));
+            Assert.Null(game.Board.PieceAt(5, FILE_E));
+            Assert.Null(game.Board.PieceAt(5, FILE_F));
+            Assert.Null(game.Board.PieceAt(5, FILE_G));
+            Assert.Null(game.Board.PieceAt(5, FILE_H));
         }
 
         [Fact]
@@ -427,14 +427,14 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            Assert.Null(game.PieceAt(6, FILE_A));
-            Assert.Null(game.PieceAt(6, FILE_B));
-            Assert.Null(game.PieceAt(6, FILE_C));
-            Assert.Null(game.PieceAt(6, FILE_D));
-            Assert.Null(game.PieceAt(6, FILE_E));
-            Assert.Null(game.PieceAt(6, FILE_F));
-            Assert.Null(game.PieceAt(6, FILE_G));
-            Assert.Null(game.PieceAt(6, FILE_H));
+            Assert.Null(game.Board.PieceAt(6, FILE_A));
+            Assert.Null(game.Board.PieceAt(6, FILE_B));
+            Assert.Null(game.Board.PieceAt(6, FILE_C));
+            Assert.Null(game.Board.PieceAt(6, FILE_D));
+            Assert.Null(game.Board.PieceAt(6, FILE_E));
+            Assert.Null(game.Board.PieceAt(6, FILE_F));
+            Assert.Null(game.Board.PieceAt(6, FILE_G));
+            Assert.Null(game.Board.PieceAt(6, FILE_H));
         }
 
         #endregion
@@ -446,7 +446,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(7, FILE_A);
+            var piece = game.Board.PieceAt(7, FILE_A);
 
             Assert.NotNull(piece);
 
@@ -468,7 +468,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(7, FILE_B);
+            var piece = game.Board.PieceAt(7, FILE_B);
 
             Assert.NotNull(piece);
 
@@ -490,7 +490,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(7, FILE_C);
+            var piece = game.Board.PieceAt(7, FILE_C);
 
             Assert.NotNull(piece);
 
@@ -512,7 +512,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(7, FILE_D);
+            var piece = game.Board.PieceAt(7, FILE_D);
 
             Assert.NotNull(piece);
 
@@ -534,7 +534,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(7, FILE_E);
+            var piece = game.Board.PieceAt(7, FILE_E);
 
             Assert.NotNull(piece);
 
@@ -556,7 +556,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(7, FILE_F);
+            var piece = game.Board.PieceAt(7, FILE_F);
 
             Assert.NotNull(piece);
 
@@ -578,7 +578,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(7, FILE_G);
+            var piece = game.Board.PieceAt(7, FILE_G);
 
             Assert.NotNull(piece);
 
@@ -600,7 +600,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(7, FILE_H);
+            var piece = game.Board.PieceAt(7, FILE_H);
 
             Assert.NotNull(piece);
 
@@ -626,7 +626,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(8, FILE_A);
+            var piece = game.Board.PieceAt(8, FILE_A);
 
             Assert.NotNull(piece);
 
@@ -648,7 +648,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(8, FILE_B);
+            var piece = game.Board.PieceAt(8, FILE_B);
 
             Assert.NotNull(piece);
 
@@ -670,7 +670,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(8, FILE_C);
+            var piece = game.Board.PieceAt(8, FILE_C);
 
             Assert.NotNull(piece);
 
@@ -692,7 +692,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(8, FILE_D);
+            var piece = game.Board.PieceAt(8, FILE_D);
 
             Assert.NotNull(piece);
 
@@ -714,7 +714,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(8, FILE_E);
+            var piece = game.Board.PieceAt(8, FILE_E);
 
             Assert.NotNull(piece);
 
@@ -736,7 +736,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(8, FILE_F);
+            var piece = game.Board.PieceAt(8, FILE_F);
 
             Assert.NotNull(piece);
 
@@ -758,7 +758,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(8, FILE_G);
+            var piece = game.Board.PieceAt(8, FILE_G);
 
             Assert.NotNull(piece);
 
@@ -780,7 +780,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var piece = game.PieceAt(8, FILE_H);
+            var piece = game.Board.PieceAt(8, FILE_H);
 
             Assert.NotNull(piece);
 

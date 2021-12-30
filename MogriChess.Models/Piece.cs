@@ -31,7 +31,6 @@ namespace MogriChess.Models
             IsKing ? ColorType == Enums.ColorType.Light ? _colorScheme.DarkColor : _colorScheme.LightColor : UiColor;
 
         public int TransformAngle => ColorType == Enums.ColorType.Light ? 0 : 180;
-        public int ShorthandTransformAngle => -TransformAngle;
 
         public bool ForwardOne => SquaresForward is 1 or 2;
         public bool ForwardTwo => SquaresForward == 2;

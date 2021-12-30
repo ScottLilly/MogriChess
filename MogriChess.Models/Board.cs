@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 
 namespace MogriChess.Models
 {
@@ -21,6 +22,24 @@ namespace MogriChess.Models
             PieceColorScheme = piecesColorScheme;
 
             PopulateBoardWithSquares();
+        }
+
+        internal void ClearValidDestinations()
+        {
+            foreach (Square square in Squares)
+            {
+                square.IsValidDestination = false;
+            }
+        }
+
+        internal Square SquareAt(int rank, int file)
+        {
+            return Squares.First(s => s.Rank.Equals(rank) && s.File.Equals(file));
+        }
+
+        public Piece PieceAt(int rank, int file)
+        {
+            return SquareAt(rank, file).Piece;
         }
 
         private void PopulateBoardWithSquares()
