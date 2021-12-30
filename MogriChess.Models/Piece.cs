@@ -26,11 +26,18 @@ namespace MogriChess.Models
         public bool IsPawn => _pieceType.Equals(Enums.PieceType.Pawn);
         public bool IsUnpromotedPawn => IsPawn && !_isPromoted;
 
-        public string UiColor => ColorType == Enums.ColorType.Light ? _colorScheme.LightColor : _colorScheme.DarkColor;
-        public string KingHighlightUiColor =>
-            IsKing ? ColorType == Enums.ColorType.Light ? _colorScheme.DarkColor : _colorScheme.LightColor : UiColor;
-
-        public int TransformAngle => ColorType == Enums.ColorType.Light ? 0 : 180;
+        public string UiColor =>
+            ColorType == Enums.ColorType.Light
+                ? _colorScheme.LightColor
+                : _colorScheme.DarkColor;
+        public string KingIndicatorUiColor =>
+            IsKing
+                ? ColorType == Enums.ColorType.Light
+                    ? _colorScheme.DarkColor
+                    : _colorScheme.LightColor
+                : UiColor;
+        public int PieceColorTransformAngle =>
+            ColorType == Enums.ColorType.Light ? 0 : 180;
 
         public bool ForwardOne => SquaresForward is 1 or 2;
         public bool ForwardTwo => SquaresForward == 2;

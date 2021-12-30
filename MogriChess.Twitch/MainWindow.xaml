@@ -155,7 +155,7 @@
 
                                 <!-- Draw piece. Use ZIndex of 99 to put it on top of all other square decorations -->
                                 <Canvas ZIndex="99">
-                                    <customControls:PieceControl/>
+                                    <customControls:SquareControl/>
                                 </Canvas>
 
                             </Canvas>
