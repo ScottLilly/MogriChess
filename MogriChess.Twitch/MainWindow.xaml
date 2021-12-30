@@ -104,11 +104,47 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Canvas Background="{Binding SquareColor}"
-                                    MouseLeftButtonUp="ClickedOnSquare_OnMouseLeftButtonUp">
-                                <customControls:PieceControl/>
+                                        ZIndex="1"
+                                        MouseLeftButtonUp="ClickedOnSquare_OnMouseLeftButtonUp">
 
-                                <!-- Square shorthand label -->
+                                <!-- Highlight square if it's the currently-selected square -->
                                 <Canvas Width="90" Height="90"
+                                        ZIndex="2"
+                                        Opacity=".30">
+                                    <Canvas.Style>
+                                        <Style>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                                    <Setter Property="Canvas.Background" Value="#0066DD"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsSelected}" Value="False">
+                                                    <Setter Property="Canvas.Background" Value="Transparent"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Canvas.Style>
+                                </Canvas>
+
+                                <!-- Highlight square if it's a valid destination -->
+                                <Canvas Width="90" Height="90"
+                                        ZIndex="3"
+                                        Opacity=".30">
+                                    <Canvas.Style>
+                                        <Style>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsValidDestination}" Value="True">
+                                                    <Setter Property="Canvas.Background" Value="#66DD33"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsValidDestination}" Value="False">
+                                                    <Setter Property="Canvas.Background" Value="Transparent"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Canvas.Style>
+                                </Canvas>
+
+                                <!-- Square's rank and file shorthand label -->
+                                <Canvas ZIndex="4"
                                         Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
                                                              AncestorType={x:Type Window}},
                                                              Path=DataContext.CurrentGame.DisplayRankFileLabel,
@@ -116,6 +152,12 @@
                                                              Converter={StaticResource VisibleIfTrue}}">
                                     <Label Content="{Binding SquareShorthand}"/>
                                 </Canvas>
+
+                                <!-- Draw piece. Use ZIndex of 99 to put it on top of all other square decorations -->
+                                <Canvas ZIndex="99">
+                                    <customControls:PieceControl/>
+                                </Canvas>
+
                             </Canvas>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

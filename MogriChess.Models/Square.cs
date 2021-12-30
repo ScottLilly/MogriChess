@@ -13,13 +13,10 @@ namespace MogriChess.Models
         public bool IsSelected { get; set; }
         public bool IsValidDestination { get; set; }
 
-        public string SquareColor => IsSelected
-            ? ColorType == Enums.ColorType.Light ? "#3399FF" : "#0066DD"
-            : IsValidDestination
-                ? ColorType == Enums.ColorType.Light ? "#99FF66" : "#66DD33"
-                : ColorType == Enums.ColorType.Light
-                    ? _colorScheme.LightColor
-                    : _colorScheme.DarkColor;
+        public string SquareColor =>
+            ColorType == Enums.ColorType.Light
+                ? _colorScheme.LightColor
+                : _colorScheme.DarkColor;
 
         public int UiGridRow => 8 - Rank;
         public int UiGridColumn => File - 1;
