@@ -11,14 +11,19 @@
         public int DestinationRank => DestinationSquare.Rank;
         public int DestinationFile => DestinationSquare.File;
         public string DestinationFileAsLetter => DestinationSquare.FileAsLetter;
+        public bool IsCheckmateMove { get; set; }
+        public bool IsCheckMove { get; set; }
         public bool IsCapturingMove { get; set; }
-        public bool IsWinningMove { get; set; }
         public bool IsPromotingMove { get; set; }
 
         public string MoveShorthand =>
             $"{FromFileAsLetter}{FromRank}:{DestinationFileAsLetter}{DestinationRank}";
+
         public string MoveResult =>
-            IsCapturingMove ? (IsWinningMove ? "Victory" : "Capture") : IsPromotingMove ? "Promotion" : "";
+            IsCheckmateMove ? "Checkmate" :
+            IsCheckMove ? "Check" :
+            IsCapturingMove ? "Capture" :
+            IsPromotingMove ? "Promotion" : "";
 
         public Move(Square fromSquare, Square destinationSquare)
         {

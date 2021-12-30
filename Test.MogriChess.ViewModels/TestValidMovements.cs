@@ -14,14 +14,14 @@ namespace Test.MogriChess.ViewModels
             // Light major pieces are blocked at game start
             Game game = GameFactory.GetNewGame();
 
-            Assert.Empty(game.ValidDestinationsForPieceAt(1, 1));
-            Assert.Empty(game.ValidDestinationsForPieceAt(1, 2));
-            Assert.Empty(game.ValidDestinationsForPieceAt(1, 3));
-            Assert.Empty(game.ValidDestinationsForPieceAt(1, 4));
-            Assert.Empty(game.ValidDestinationsForPieceAt(1, 5));
-            Assert.Empty(game.ValidDestinationsForPieceAt(1, 6));
-            Assert.Empty(game.ValidDestinationsForPieceAt(1, 7));
-            Assert.Empty(game.ValidDestinationsForPieceAt(1, 8));
+            Assert.Empty(game.ValidMovesForPieceAt(1, 1));
+            Assert.Empty(game.ValidMovesForPieceAt(1, 2));
+            Assert.Empty(game.ValidMovesForPieceAt(1, 3));
+            Assert.Empty(game.ValidMovesForPieceAt(1, 4));
+            Assert.Empty(game.ValidMovesForPieceAt(1, 5));
+            Assert.Empty(game.ValidMovesForPieceAt(1, 6));
+            Assert.Empty(game.ValidMovesForPieceAt(1, 7));
+            Assert.Empty(game.ValidMovesForPieceAt(1, 8));
         }
 
         #region Light pawns
@@ -31,7 +31,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var validDestinations = game.ValidDestinationsForPieceAt(2, 1);
+            var validDestinations = game.ValidMovesForPieceAt(2, 1);
 
             Assert.Equal(2, validDestinations.Count);
             Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(1)));
@@ -43,7 +43,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var validDestinations = game.ValidDestinationsForPieceAt(2, 2);
+            var validDestinations = game.ValidMovesForPieceAt(2, 2);
 
             Assert.Equal(3, validDestinations.Count);
             Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(1)));
@@ -56,7 +56,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var validDestinations = game.ValidDestinationsForPieceAt(2, 3);
+            var validDestinations = game.ValidMovesForPieceAt(2, 3);
 
             Assert.Equal(3, validDestinations.Count);
             Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(2)));
@@ -69,7 +69,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var validDestinations = game.ValidDestinationsForPieceAt(2, 4);
+            var validDestinations = game.ValidMovesForPieceAt(2, 4);
 
             Assert.Equal(3, validDestinations.Count);
             Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(3)));
@@ -82,7 +82,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var validDestinations = game.ValidDestinationsForPieceAt(2, 5);
+            var validDestinations = game.ValidMovesForPieceAt(2, 5);
 
             Assert.Equal(3, validDestinations.Count);
             Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(4)));
@@ -95,7 +95,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var validDestinations = game.ValidDestinationsForPieceAt(2, 6);
+            var validDestinations = game.ValidMovesForPieceAt(2, 6);
 
             Assert.Equal(3, validDestinations.Count);
             Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(5)));
@@ -108,7 +108,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var validDestinations = game.ValidDestinationsForPieceAt(2, 7);
+            var validDestinations = game.ValidMovesForPieceAt(2, 7);
 
             Assert.Equal(3, validDestinations.Count);
             Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(6)));
@@ -121,7 +121,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var validDestinations = game.ValidDestinationsForPieceAt(2, 8);
+            var validDestinations = game.ValidMovesForPieceAt(2, 8);
 
             Assert.Equal(2, validDestinations.Count);
             Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(7)));
@@ -137,7 +137,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var validDestinations = game.ValidDestinationsForPieceAt(7, 1);
+            var validDestinations = game.ValidMovesForPieceAt(7, 1);
 
             Assert.Equal(2, validDestinations.Count);
             Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(1)));
@@ -149,7 +149,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var validDestinations = game.ValidDestinationsForPieceAt(7, 2);
+            var validDestinations = game.ValidMovesForPieceAt(7, 2);
 
             Assert.Equal(3, validDestinations.Count);
             Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(1)));
@@ -162,7 +162,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var validDestinations = game.ValidDestinationsForPieceAt(7, 3);
+            var validDestinations = game.ValidMovesForPieceAt(7, 3);
 
             Assert.Equal(3, validDestinations.Count);
             Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(2)));
@@ -175,7 +175,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var validDestinations = game.ValidDestinationsForPieceAt(7, 4);
+            var validDestinations = game.ValidMovesForPieceAt(7, 4);
 
             Assert.Equal(3, validDestinations.Count);
             Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(3)));
@@ -188,7 +188,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var validDestinations = game.ValidDestinationsForPieceAt(7, 5);
+            var validDestinations = game.ValidMovesForPieceAt(7, 5);
 
             Assert.Equal(3, validDestinations.Count);
             Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(4)));
@@ -201,7 +201,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var validDestinations = game.ValidDestinationsForPieceAt(7, 6);
+            var validDestinations = game.ValidMovesForPieceAt(7, 6);
 
             Assert.Equal(3, validDestinations.Count);
             Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(5)));
@@ -214,7 +214,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var validDestinations = game.ValidDestinationsForPieceAt(7, 7);
+            var validDestinations = game.ValidMovesForPieceAt(7, 7);
 
             Assert.Equal(3, validDestinations.Count);
             Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(6)));
@@ -227,7 +227,7 @@ namespace Test.MogriChess.ViewModels
         {
             Game game = GameFactory.GetNewGame();
 
-            var validDestinations = game.ValidDestinationsForPieceAt(7, 8);
+            var validDestinations = game.ValidMovesForPieceAt(7, 8);
 
             Assert.Equal(2, validDestinations.Count);
             Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(7)));
@@ -242,14 +242,14 @@ namespace Test.MogriChess.ViewModels
             // Dark major pieces are blocked at game start
             Game game = GameFactory.GetNewGame();
 
-            Assert.Empty(game.ValidDestinationsForPieceAt(8, 1));
-            Assert.Empty(game.ValidDestinationsForPieceAt(8, 2));
-            Assert.Empty(game.ValidDestinationsForPieceAt(8, 3));
-            Assert.Empty(game.ValidDestinationsForPieceAt(8, 4));
-            Assert.Empty(game.ValidDestinationsForPieceAt(8, 5));
-            Assert.Empty(game.ValidDestinationsForPieceAt(8, 6));
-            Assert.Empty(game.ValidDestinationsForPieceAt(8, 7));
-            Assert.Empty(game.ValidDestinationsForPieceAt(8, 8));
+            Assert.Empty(game.ValidMovesForPieceAt(8, 1));
+            Assert.Empty(game.ValidMovesForPieceAt(8, 2));
+            Assert.Empty(game.ValidMovesForPieceAt(8, 3));
+            Assert.Empty(game.ValidMovesForPieceAt(8, 4));
+            Assert.Empty(game.ValidMovesForPieceAt(8, 5));
+            Assert.Empty(game.ValidMovesForPieceAt(8, 6));
+            Assert.Empty(game.ValidMovesForPieceAt(8, 7));
+            Assert.Empty(game.ValidMovesForPieceAt(8, 8));
         }
     }
 }
