@@ -103,7 +103,7 @@ namespace MogriChess.Models
             }
 
             // Move piece to new square
-            square.PlacePiece(SelectedSquare.Piece);
+            Board.PlacePieceOnSquare(SelectedSquare.Piece, square);
 
             // Clear out square the moving piece moved from
             SelectedSquare.Piece = null;

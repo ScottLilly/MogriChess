@@ -35,21 +35,5 @@ namespace MogriChess.Models
             _colorScheme = colorScheme;
             ColorType = color;
         }
-
-        public void PlacePiece(Piece piece)
-        {
-            Piece = piece;
-
-            if (!piece.IsPawn)
-            {
-                return;
-            }
-
-            if ((piece.ColorType == Enums.ColorType.Light && Rank == 8) ||
-                (piece.ColorType == Enums.ColorType.Dark && Rank == 1))
-            {
-                piece.Promote();
-            }
-        }
     }
 }

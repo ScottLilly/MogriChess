@@ -24,6 +24,22 @@ namespace MogriChess.Models
             PopulateBoardWithSquares();
         }
 
+        public void PlacePieceOnSquare(Piece piece, Square square)
+        {
+            square.Piece = piece;
+
+            if (!piece.IsPawn)
+            {
+                return;
+            }
+
+            if ((piece.ColorType == Enums.ColorType.Light && square.Rank == 8) ||
+                (piece.ColorType == Enums.ColorType.Dark && square.Rank == 1))
+            {
+                piece.Promote();
+            }
+        }
+
         internal void ClearValidDestinations()
         {
             foreach (Square square in Squares)
