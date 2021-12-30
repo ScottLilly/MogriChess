@@ -17,7 +17,9 @@ namespace MogriChess.Models
             new ObservableCollection<Move>();
         public ObservableCollection<Move> ValidDestinationsForSelectedPiece { get; } =
             new ObservableCollection<Move>();
-        public bool DisplayValidDestinations { get; set; }
+
+        public bool DisplayRankFileLabel { get; set; } = true;
+        public bool DisplayValidDestinations { get; set; } = true;
 
         private Square SelectedSquare
         {

@@ -18,6 +18,7 @@
 
     <Window.Resources>
         <Style TargetType="{x:Type models:Piece}"/>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrue"/>
     </Window.Resources>
 
     <Grid>
@@ -105,6 +106,16 @@
                             <Canvas Background="{Binding SquareColor}"
                                     MouseLeftButtonUp="ClickedOnSquare_OnMouseLeftButtonUp">
                                 <customControls:PieceControl/>
+
+                                <!-- Square shorthand label -->
+                                <Canvas Width="90" Height="90"
+                                        Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
+                                                             AncestorType={x:Type Window}},
+                                                             Path=DataContext.CurrentGame.DisplayRankFileLabel,
+                                                             UpdateSourceTrigger=PropertyChanged,
+                                                             Converter={StaticResource VisibleIfTrue}}">
+                                    <Label Content="{Binding SquareShorthand}"/>
+                                </Canvas>
                             </Canvas>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -117,6 +128,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -155,10 +167,20 @@
 
                 <CheckBox Grid.Row="2" Grid.Column="0"
                           VerticalAlignment="Center"
-                          IsChecked="{Binding CurrentGame.DisplayValidDestinations, 
+                          IsChecked="{Binding CurrentGame.DisplayRankFileLabel, 
                                               UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Label Grid.Row="2" Grid.Column="1"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Content="Display rank and file label"/>
+
+                <CheckBox Grid.Row="3" Grid.Column="0"
+                          VerticalAlignment="Center"
+                          IsChecked="{Binding CurrentGame.DisplayValidDestinations, 
+                                              UpdateSourceTrigger=PropertyChanged}"/>
+
+                <Label Grid.Row="3" Grid.Column="1"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        Content="Display valid moves"/>
