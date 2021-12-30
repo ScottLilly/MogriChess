@@ -6,6 +6,9 @@ namespace MogriChess.Models
     {
         private ColorScheme _colorScheme;
 
+        private string FileAsLetter =>
+            "abcdefgh".Substring(File - 1, 1);
+
         public int Rank { get; }
         public int File { get; }
         public Enums.ColorType ColorType { get; }
@@ -20,7 +23,6 @@ namespace MogriChess.Models
 
         public int UiGridRow => 8 - Rank;
         public int UiGridColumn => File - 1;
-        public string FileAsLetter => "abcdefgh".Substring(File - 1, 1);
         public string SquareShorthand => $"{FileAsLetter}{Rank}";
 
         public event PropertyChangedEventHandler PropertyChanged;
