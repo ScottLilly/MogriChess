@@ -13,14 +13,14 @@ namespace MogriChess.Models
 
         public Enums.ColorType ColorType { get; }
 
-        public int SquaresForward { get; private set; }
-        public int SquaresForwardRight { get; private set; }
-        public int SquaresRight { get; private set; }
-        public int SquaresBackRight { get; private set; }
-        public int SquaresBack { get; private set; }
-        public int SquaresBackLeft { get; private set; }
-        public int SquaresLeft { get; private set; }
-        public int SquaresForwardLeft { get; private set; }
+        public MovementIndicator Forward { get; } = new MovementIndicator();
+        public MovementIndicator ForwardRight { get; } = new MovementIndicator();
+        public MovementIndicator Right { get; } = new MovementIndicator();
+        public MovementIndicator BackRight { get; } = new MovementIndicator();
+        public MovementIndicator Back { get; } = new MovementIndicator();
+        public MovementIndicator BackLeft { get; } = new MovementIndicator();
+        public MovementIndicator Left { get; } = new MovementIndicator();
+        public MovementIndicator ForwardLeft { get; } = new MovementIndicator();
 
         public bool IsKing => _pieceType.Equals(Enums.PieceType.King);
         public bool IsPawn => _pieceType.Equals(Enums.PieceType.Pawn);
@@ -39,38 +39,6 @@ namespace MogriChess.Models
         public int PieceColorTransformAngle =>
             ColorType == Enums.ColorType.Light ? 0 : 180;
 
-        public bool ForwardOne => SquaresForward is 1 or 2;
-        public bool ForwardTwo => SquaresForward == 2;
-        public bool ForwardInfinite => SquaresForward > 2;
-
-        public bool ForwardRightOne => SquaresForwardRight is 1 or 2;
-        public bool ForwardRightTwo => SquaresForwardRight == 2;
-        public bool ForwardRightInfinite => SquaresForwardRight > 2;
-
-        public bool RightOne => SquaresRight is 1 or 2;
-        public bool RightTwo => SquaresRight == 2;
-        public bool RightInfinite => SquaresRight > 2;
-
-        public bool BackRightOne => SquaresBackRight is 1 or 2;
-        public bool BackRightTwo => SquaresBackRight == 2;
-        public bool BackRightInfinite => SquaresBackRight > 2;
-
-        public bool BackOne => SquaresBack is 1 or 2;
-        public bool BackTwo => SquaresBack == 2;
-        public bool BackInfinite => SquaresBack > 2;
-
-        public bool BackLeftOne => SquaresBackLeft is 1 or 2;
-        public bool BackLeftTwo => SquaresBackLeft == 2;
-        public bool BackLeftInfinite => SquaresBackLeft > 2;
-
-        public bool LeftOne => SquaresLeft is 1 or 2;
-        public bool LeftTwo => SquaresLeft == 2;
-        public bool LeftInfinite => SquaresLeft > 2;
-
-        public bool ForwardLeftOne => SquaresForwardLeft is 1 or 2;
-        public bool ForwardLeftTwo => SquaresForwardLeft == 2;
-        public bool ForwardLeftInfinite => SquaresForwardLeft > 2;
-
         public Piece(ColorScheme colorScheme, Enums.ColorType colorType,
             Enums.PieceType type,
             int squaresForward, int squaresForwardRight,
@@ -79,10 +47,9 @@ namespace MogriChess.Models
             int squaresLeft, int squaresForwardLeft)
         {
             _colorScheme = colorScheme;
+            _pieceType = type;
 
             ColorType = colorType;
-
-            _pieceType = type;
 
             AddMovementAbilities(squaresForward, squaresForwardRight,
                 squaresRight, squaresBackRight,
@@ -98,10 +65,10 @@ namespace MogriChess.Models
                 return;
             }
 
-            AddMovementAbilities(capturedPiece.SquaresForward, capturedPiece.SquaresForwardRight,
-                capturedPiece.SquaresRight, capturedPiece.SquaresBackRight,
-                capturedPiece.SquaresBack, capturedPiece.SquaresBackLeft,
-                capturedPiece.SquaresLeft, capturedPiece.SquaresForwardLeft);
+            AddMovementAbilities(capturedPiece.Forward.Squares, capturedPiece.ForwardRight.Squares,
+                capturedPiece.Right.Squares, capturedPiece.BackRight.Squares,
+                capturedPiece.Back.Squares, capturedPiece.BackLeft.Squares,
+                capturedPiece.Left.Squares, capturedPiece.ForwardLeft.Squares);
         }
 
         public void Promote()
@@ -122,14 +89,14 @@ namespace MogriChess.Models
             int squaresBack, int squaresBackLeft,
             int squaresLeft, int squaresForwardLeft)
         {
-            SquaresForward = Math.Max(SquaresForward, squaresForward);
-            SquaresForwardRight = Math.Max(SquaresForwardRight, squaresForwardRight);
-            SquaresRight = Math.Max(SquaresRight, squaresRight);
-            SquaresBackRight = Math.Max(SquaresBackRight, squaresBackRight);
-            SquaresBack = Math.Max(SquaresBack, squaresBack);
-            SquaresBackLeft = Math.Max(SquaresBackLeft, squaresBackLeft);
-            SquaresLeft = Math.Max(SquaresLeft, squaresLeft);
-            SquaresForwardLeft = Math.Max(SquaresForwardLeft, squaresForwardLeft);
+            Forward.Squares = Math.Max(Forward.Squares, squaresForward);
+            ForwardRight.Squares = Math.Max(ForwardRight.Squares, squaresForwardRight);
+            Right.Squares = Math.Max(Right.Squares, squaresRight);
+            BackRight.Squares = Math.Max(BackRight.Squares, squaresBackRight);
+            Back.Squares = Math.Max(Back.Squares, squaresBack);
+            BackLeft.Squares = Math.Max(BackLeft.Squares, squaresBackLeft);
+            Left.Squares = Math.Max(Left.Squares, squaresLeft);
+            ForwardLeft.Squares = Math.Max(ForwardLeft.Squares, squaresForwardLeft);
         }
     }
 }

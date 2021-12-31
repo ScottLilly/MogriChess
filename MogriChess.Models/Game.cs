@@ -151,14 +151,14 @@ namespace MogriChess.Models
             int fileLeftMultiplier = piece.ColorType == Enums.ColorType.Light ? -1 : 1;
             int fileRightMultiplier = piece.ColorType == Enums.ColorType.Light ? 1 : -1;
 
-            validMoves.AddRange(ValidMovesInDirection(piece.SquaresForward, rank, file, rankForwardMultiplier, 0));
-            validMoves.AddRange(ValidMovesInDirection(piece.SquaresForwardRight, rank, file, rankForwardMultiplier, fileRightMultiplier));
-            validMoves.AddRange(ValidMovesInDirection(piece.SquaresRight, rank, file, 0, fileRightMultiplier));
-            validMoves.AddRange(ValidMovesInDirection(piece.SquaresBackRight, rank, file, rankBackwardMultiplier, fileRightMultiplier));
-            validMoves.AddRange(ValidMovesInDirection(piece.SquaresBack, rank, file, rankBackwardMultiplier, 0));
-            validMoves.AddRange(ValidMovesInDirection(piece.SquaresBackLeft, rank, file, rankBackwardMultiplier, fileLeftMultiplier));
-            validMoves.AddRange(ValidMovesInDirection(piece.SquaresLeft, rank, file, 0, fileLeftMultiplier));
-            validMoves.AddRange(ValidMovesInDirection(piece.SquaresForwardLeft, rank, file, rankForwardMultiplier, fileLeftMultiplier));
+            validMoves.AddRange(ValidMovesInDirection(piece.Forward.Squares, rank, file, rankForwardMultiplier, 0));
+            validMoves.AddRange(ValidMovesInDirection(piece.ForwardRight.Squares, rank, file, rankForwardMultiplier, fileRightMultiplier));
+            validMoves.AddRange(ValidMovesInDirection(piece.Right.Squares, rank, file, 0, fileRightMultiplier));
+            validMoves.AddRange(ValidMovesInDirection(piece.BackRight.Squares, rank, file, rankBackwardMultiplier, fileRightMultiplier));
+            validMoves.AddRange(ValidMovesInDirection(piece.Back.Squares, rank, file, rankBackwardMultiplier, 0));
+            validMoves.AddRange(ValidMovesInDirection(piece.BackLeft.Squares, rank, file, rankBackwardMultiplier, fileLeftMultiplier));
+            validMoves.AddRange(ValidMovesInDirection(piece.Left.Squares, rank, file, 0, fileLeftMultiplier));
+            validMoves.AddRange(ValidMovesInDirection(piece.ForwardLeft.Squares, rank, file, rankForwardMultiplier, fileLeftMultiplier));
 
             return validMoves;
         }
