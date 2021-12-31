@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace MogriChess.Models
 {
@@ -14,21 +13,21 @@ namespace MogriChess.Models
         public Enums.ColorType ColorType { get; }
 
         public MovementIndicator Forward { get; } =
-            new MovementIndicator(Enums.Direction.Forward);
+            new MovementIndicator();
         public MovementIndicator ForwardRight { get; } =
-            new MovementIndicator(Enums.Direction.ForwardRight);
+            new MovementIndicator();
         public MovementIndicator Right { get; } =
-            new MovementIndicator(Enums.Direction.Right);
+            new MovementIndicator();
         public MovementIndicator BackRight { get; } =
-            new MovementIndicator(Enums.Direction.BackRight);
+            new MovementIndicator();
         public MovementIndicator Back { get; } =
-            new MovementIndicator(Enums.Direction.Back);
+            new MovementIndicator();
         public MovementIndicator BackLeft { get; } =
-            new MovementIndicator(Enums.Direction.BackLeft);
+            new MovementIndicator();
         public MovementIndicator Left { get; } =
-            new MovementIndicator(Enums.Direction.Left);
+            new MovementIndicator();
         public MovementIndicator ForwardLeft { get; } =
-            new MovementIndicator(Enums.Direction.ForwardLeft);
+            new MovementIndicator();
 
         public bool IsKing => _pieceType.Equals(Enums.PieceType.King);
         public bool IsPawn => _pieceType.Equals(Enums.PieceType.Pawn);
@@ -79,34 +78,53 @@ namespace MogriChess.Models
                 capturedPiece.Left.Squares, capturedPiece.ForwardLeft.Squares);
         }
 
-        public MovementIndicator MovementIndicatorForDirection(Enums.Direction direction)
+        public int MaxMovementSquaresForDirection(Enums.Direction direction)
         {
             return direction switch
             {
-                Enums.Direction.Forward => Forward,
-                Enums.Direction.ForwardRight => ForwardRight,
-                Enums.Direction.Right => Right,
-                Enums.Direction.BackRight => BackRight,
-                Enums.Direction.Back => Back,
-                Enums.Direction.BackLeft => BackLeft,
-                Enums.Direction.Left => Left,
-                Enums.Direction.ForwardLeft => ForwardLeft,
+                Enums.Direction.Forward => Forward.Squares,
+                Enums.Direction.ForwardRight => ForwardRight.Squares,
+                Enums.Direction.Right => Right.Squares,
+                Enums.Direction.BackRight => BackRight.Squares,
+                Enums.Direction.Back => Back.Squares,
+                Enums.Direction.BackLeft => BackLeft.Squares,
+                Enums.Direction.Left => Left.Squares,
+                Enums.Direction.ForwardLeft => ForwardLeft.Squares,
                 _ => throw new InvalidEnumArgumentException(
-                    "Invalid enum passed to MovementIndicatorForDirection() function")
+                    "Invalid enum passed to MaxMovementSquaresForDirection() function")
             };
+        }
+
+        public (int rankMultiplier, int fileMultiplier) MovementMultipliersForDirection(Enums.Direction direction)
+        {
+            (int rm, int fm) multipliers = direction switch
+            {
+                Enums.Direction.Forward => (1, 0),
+                Enums.Direction.ForwardRight => (1, 1),
+                Enums.Direction.Right => (0, 1),
+                Enums.Direction.BackRight => (-1, 1),
+                Enums.Direction.Back => (-1, 0),
+                Enums.Direction.BackLeft => (-1, -1),
+                Enums.Direction.Left => (0, -1),
+                Enums.Direction.ForwardLeft => (1, -1),
+                _ => throw new InvalidEnumArgumentException(
+                    "Invalid direction parameter sent to MovementMultipliersForDirection")
+            };
+
+            return ColorType == Enums.ColorType.Light
+                ? multipliers
+                : (-multipliers.rm, -multipliers.fm);
         }
 
         public void Promote()
         {
-            if (_pieceType != Enums.PieceType.Pawn)
-            {
-                return;
-            }
-
             // Pawns that reach opponent's back rank gain ability to move one square in all directions
-            AddMovementAbilities(1, 1, 1, 1, 1, 1, 1, 1);
+            if (_pieceType == Enums.PieceType.Pawn)
+            {
+                AddMovementAbilities(1, 1, 1, 1, 1, 1, 1, 1);
 
-            _isPromoted = true;
+                _isPromoted = true;
+            }
         }
 
         private void AddMovementAbilities(int squaresForward, int squaresForwardRight,
@@ -114,14 +132,14 @@ namespace MogriChess.Models
             int squaresBack, int squaresBackLeft,
             int squaresLeft, int squaresForwardLeft)
         {
-            Forward.Squares = Math.Max(Forward.Squares, squaresForward);
-            ForwardRight.Squares = Math.Max(ForwardRight.Squares, squaresForwardRight);
-            Right.Squares = Math.Max(Right.Squares, squaresRight);
-            BackRight.Squares = Math.Max(BackRight.Squares, squaresBackRight);
-            Back.Squares = Math.Max(Back.Squares, squaresBack);
-            BackLeft.Squares = Math.Max(BackLeft.Squares, squaresBackLeft);
-            Left.Squares = Math.Max(Left.Squares, squaresLeft);
-            ForwardLeft.Squares = Math.Max(ForwardLeft.Squares, squaresForwardLeft);
+            Forward.MergeMovementAbility(squaresForward);
+            ForwardRight.MergeMovementAbility(squaresForwardRight);
+            Right.MergeMovementAbility(squaresRight);
+            BackRight.MergeMovementAbility(squaresBackRight);
+            Back.MergeMovementAbility(squaresBack);
+            BackLeft.MergeMovementAbility(squaresBackLeft);
+            Left.MergeMovementAbility(squaresLeft);
+            ForwardLeft.MergeMovementAbility(squaresForwardLeft);
         }
     }
 }

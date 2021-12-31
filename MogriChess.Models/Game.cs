@@ -8,18 +8,11 @@ namespace MogriChess.Models
     public class Game : INotifyPropertyChanged
     {
         private Square _selectedSquare;
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        public Board Board { get; }
-        public Enums.ColorType CurrentPlayerColor { get; private set; } =
+        #region Private properties
+
+        private Enums.ColorType CurrentPlayerColor { get; set; } =
             Enums.ColorType.Light;
-        public ObservableCollection<Move> MoveHistory { get; } =
-            new ObservableCollection<Move>();
-        public ObservableCollection<Move> ValidDestinationsForSelectedPiece { get; } =
-            new ObservableCollection<Move>();
-
-        public bool DisplayRankFileLabel { get; set; } = true;
-        public bool DisplayValidDestinations { get; set; } = true;
 
         private Square SelectedSquare
         {
@@ -49,6 +42,19 @@ namespace MogriChess.Models
                 }
             }
         }
+
+        private ObservableCollection<Move> ValidDestinationsForSelectedPiece { get; } =
+            new ObservableCollection<Move>();
+
+        #endregion
+
+        public Board Board { get; }
+        public ObservableCollection<Move> MoveHistory { get; } =
+            new ObservableCollection<Move>();
+        public bool DisplayRankFileLabel { get; set; } = true;
+        public bool DisplayValidDestinations { get; set; } = true;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Game(Board board)
         {
@@ -141,32 +147,22 @@ namespace MogriChess.Models
         public List<Move> ValidMovesForPieceAt(int rank, int file)
         {
             Square startingSquare = Board.SquareAt(rank, file);
-            Piece movingPiece = startingSquare.Piece;
 
             List<Move> validMoves = new List<Move>();
 
-            // Need to handle different directions.
-            // Dark pieces face "down", while light pieces face "up".
-            int rankForwardMultiplier = movingPiece.ColorType == Enums.ColorType.Light ? 1 : -1;
-            int rankBackwardMultiplier = movingPiece.ColorType == Enums.ColorType.Light ? -1 : 1;
-            int fileLeftMultiplier = movingPiece.ColorType == Enums.ColorType.Light ? -1 : 1;
-            int fileRightMultiplier = movingPiece.ColorType == Enums.ColorType.Light ? 1 : -1;
-
-            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.Forward, rankForwardMultiplier, 0));
-            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.ForwardRight, rankForwardMultiplier, fileRightMultiplier));
-            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.Right, 0, fileRightMultiplier));
-            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.BackRight, rankBackwardMultiplier, fileRightMultiplier));
-            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.Back, rankBackwardMultiplier, 0));
-            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.BackLeft, rankBackwardMultiplier, fileLeftMultiplier));
-            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.Left, 0, fileLeftMultiplier));
-            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.ForwardLeft, rankForwardMultiplier, fileLeftMultiplier));
+            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.Forward));
+            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.ForwardRight));
+            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.Right));
+            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.BackRight));
+            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.Back));
+            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.BackLeft));
+            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.Left));
+            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.ForwardLeft));
 
             return validMoves;
         }
 
-        private List<Move> ValidMovesInDirection(Square startingSquare,
-            Enums.Direction direction,
-            int rankMultiplier, int fileMultiplier)
+        private List<Move> ValidMovesInDirection(Square startingSquare, Enums.Direction direction)
         {
             List<Move> validMoves = new List<Move>();
 
@@ -177,10 +173,12 @@ namespace MogriChess.Models
                 return validMoves;
             }
 
-            var movementIndicatorForDirection = 
-                movingPiece.MovementIndicatorForDirection(direction);
+            int maxMovementSquareForDirection = 
+                movingPiece.MaxMovementSquaresForDirection(direction);
+            (int rankMultiplier, int fileMultiplier) =
+                movingPiece.MovementMultipliersForDirection(direction);
 
-            for (int i = 1; i <= movementIndicatorForDirection.Squares; i++)
+            for (int i = 1; i <= maxMovementSquareForDirection; i++)
             {
                 int destinationRank = startingSquare.Rank + (i * rankMultiplier);
                 int destinationFile = startingSquare.File + (i * fileMultiplier);
