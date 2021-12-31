@@ -140,39 +140,50 @@ namespace MogriChess.Models
 
         public List<Move> ValidMovesForPieceAt(int rank, int file)
         {
-            Piece piece = Board.PieceAt(rank, file);
+            Square startingSquare = Board.SquareAt(rank, file);
+            Piece movingPiece = startingSquare.Piece;
 
             List<Move> validMoves = new List<Move>();
 
             // Need to handle different directions.
             // Dark pieces face "down", while light pieces face "up".
-            int rankForwardMultiplier = piece.ColorType == Enums.ColorType.Light ? 1 : -1;
-            int rankBackwardMultiplier = piece.ColorType == Enums.ColorType.Light ? -1 : 1;
-            int fileLeftMultiplier = piece.ColorType == Enums.ColorType.Light ? -1 : 1;
-            int fileRightMultiplier = piece.ColorType == Enums.ColorType.Light ? 1 : -1;
+            int rankForwardMultiplier = movingPiece.ColorType == Enums.ColorType.Light ? 1 : -1;
+            int rankBackwardMultiplier = movingPiece.ColorType == Enums.ColorType.Light ? -1 : 1;
+            int fileLeftMultiplier = movingPiece.ColorType == Enums.ColorType.Light ? -1 : 1;
+            int fileRightMultiplier = movingPiece.ColorType == Enums.ColorType.Light ? 1 : -1;
 
-            validMoves.AddRange(ValidMovesInDirection(piece.Forward.Squares, rank, file, rankForwardMultiplier, 0));
-            validMoves.AddRange(ValidMovesInDirection(piece.ForwardRight.Squares, rank, file, rankForwardMultiplier, fileRightMultiplier));
-            validMoves.AddRange(ValidMovesInDirection(piece.Right.Squares, rank, file, 0, fileRightMultiplier));
-            validMoves.AddRange(ValidMovesInDirection(piece.BackRight.Squares, rank, file, rankBackwardMultiplier, fileRightMultiplier));
-            validMoves.AddRange(ValidMovesInDirection(piece.Back.Squares, rank, file, rankBackwardMultiplier, 0));
-            validMoves.AddRange(ValidMovesInDirection(piece.BackLeft.Squares, rank, file, rankBackwardMultiplier, fileLeftMultiplier));
-            validMoves.AddRange(ValidMovesInDirection(piece.Left.Squares, rank, file, 0, fileLeftMultiplier));
-            validMoves.AddRange(ValidMovesInDirection(piece.ForwardLeft.Squares, rank, file, rankForwardMultiplier, fileLeftMultiplier));
+            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.Forward, rankForwardMultiplier, 0));
+            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.ForwardRight, rankForwardMultiplier, fileRightMultiplier));
+            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.Right, 0, fileRightMultiplier));
+            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.BackRight, rankBackwardMultiplier, fileRightMultiplier));
+            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.Back, rankBackwardMultiplier, 0));
+            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.BackLeft, rankBackwardMultiplier, fileLeftMultiplier));
+            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.Left, 0, fileLeftMultiplier));
+            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.ForwardLeft, rankForwardMultiplier, fileLeftMultiplier));
 
             return validMoves;
         }
 
-        private List<Move> ValidMovesInDirection(int squaresToCheck, int currentRank, int currentFile,
+        private List<Move> ValidMovesInDirection(Square startingSquare,
+            Enums.Direction direction,
             int rankMultiplier, int fileMultiplier)
         {
-            var currentPiece = Board.PieceAt(currentRank, currentFile);
             List<Move> validMoves = new List<Move>();
 
-            for (int i = 1; i <= squaresToCheck; i++)
+            Piece movingPiece = startingSquare.Piece;
+
+            if (movingPiece == null)
             {
-                int destinationRank = currentRank + (i * rankMultiplier);
-                int destinationFile = currentFile + (i * fileMultiplier);
+                return validMoves;
+            }
+
+            var movementIndicatorForDirection = 
+                movingPiece.MovementIndicatorForDirection(direction);
+
+            for (int i = 1; i <= movementIndicatorForDirection.Squares; i++)
+            {
+                int destinationRank = startingSquare.Rank + (i * rankMultiplier);
+                int destinationFile = startingSquare.File + (i * fileMultiplier);
 
                 // Off board, stop checking
                 if (destinationRank is < 1 or > 8 || destinationFile is < 1 or > 8)
@@ -180,35 +191,35 @@ namespace MogriChess.Models
                     break;
                 }
 
-                Move move =
-                    new Move(Board.SquareAt(currentRank, currentFile), Board.SquareAt(destinationRank, destinationFile));
+                Square destinationSquare = Board.SquareAt(destinationRank, destinationFile);
+                Move potentialMove = new Move(startingSquare, destinationSquare);
 
                 // Un-promoted pawn reached opponent's back rank, and needs to be promoted.
-                if (currentPiece.IsUnpromotedPawn &&
-                    ((currentPiece.ColorType == Enums.ColorType.Light && destinationRank == 8) ||
-                    (currentPiece.ColorType == Enums.ColorType.Dark && destinationRank == 1)))
+                if (movingPiece.IsUnpromotedPawn &&
+                    ((movingPiece.ColorType == Enums.ColorType.Light && destinationRank == 8) ||
+                     (movingPiece.ColorType == Enums.ColorType.Dark && destinationRank == 1)))
                 {
-                    move.IsPromotingMove = true;
+                    potentialMove.IsPromotingMove = true;
                 }
 
-                Piece pieceAtDestination = Board.PieceAt(destinationRank, destinationFile);
+                Piece pieceAtDestination = destinationSquare.Piece;
 
                 if (pieceAtDestination == null)
                 {
                     // Square is empty
-                    validMoves.Add(move);
+                    validMoves.Add(potentialMove);
                 }
-                else if (pieceAtDestination.ColorType != currentPiece.ColorType)
+                else if (pieceAtDestination.ColorType != movingPiece.ColorType)
                 {
                     // Square is occupied by an opponent's piece
-                    move.IsCapturingMove = true;
-                    move.IsCheckMove = pieceAtDestination.IsKing;
+                    potentialMove.IsCapturingMove = true;
+                    potentialMove.IsCheckMove = pieceAtDestination.IsKing;
 
-                    validMoves.Add(move);
+                    validMoves.Add(potentialMove);
 
                     break;
                 }
-                else if (pieceAtDestination.ColorType == currentPiece.ColorType)
+                else if (pieceAtDestination.ColorType == movingPiece.ColorType)
                 {
                     // Square is occupied by a player's piece
                     break;

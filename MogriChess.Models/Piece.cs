@@ -13,14 +13,22 @@ namespace MogriChess.Models
 
         public Enums.ColorType ColorType { get; }
 
-        public MovementIndicator Forward { get; } = new MovementIndicator();
-        public MovementIndicator ForwardRight { get; } = new MovementIndicator();
-        public MovementIndicator Right { get; } = new MovementIndicator();
-        public MovementIndicator BackRight { get; } = new MovementIndicator();
-        public MovementIndicator Back { get; } = new MovementIndicator();
-        public MovementIndicator BackLeft { get; } = new MovementIndicator();
-        public MovementIndicator Left { get; } = new MovementIndicator();
-        public MovementIndicator ForwardLeft { get; } = new MovementIndicator();
+        public MovementIndicator Forward { get; } =
+            new MovementIndicator(Enums.Direction.Forward);
+        public MovementIndicator ForwardRight { get; } =
+            new MovementIndicator(Enums.Direction.ForwardRight);
+        public MovementIndicator Right { get; } =
+            new MovementIndicator(Enums.Direction.Right);
+        public MovementIndicator BackRight { get; } =
+            new MovementIndicator(Enums.Direction.BackRight);
+        public MovementIndicator Back { get; } =
+            new MovementIndicator(Enums.Direction.Back);
+        public MovementIndicator BackLeft { get; } =
+            new MovementIndicator(Enums.Direction.BackLeft);
+        public MovementIndicator Left { get; } =
+            new MovementIndicator(Enums.Direction.Left);
+        public MovementIndicator ForwardLeft { get; } =
+            new MovementIndicator(Enums.Direction.ForwardLeft);
 
         public bool IsKing => _pieceType.Equals(Enums.PieceType.King);
         public bool IsPawn => _pieceType.Equals(Enums.PieceType.Pawn);
@@ -69,6 +77,23 @@ namespace MogriChess.Models
                 capturedPiece.Right.Squares, capturedPiece.BackRight.Squares,
                 capturedPiece.Back.Squares, capturedPiece.BackLeft.Squares,
                 capturedPiece.Left.Squares, capturedPiece.ForwardLeft.Squares);
+        }
+
+        public MovementIndicator MovementIndicatorForDirection(Enums.Direction direction)
+        {
+            return direction switch
+            {
+                Enums.Direction.Forward => Forward,
+                Enums.Direction.ForwardRight => ForwardRight,
+                Enums.Direction.Right => Right,
+                Enums.Direction.BackRight => BackRight,
+                Enums.Direction.Back => Back,
+                Enums.Direction.BackLeft => BackLeft,
+                Enums.Direction.Left => Left,
+                Enums.Direction.ForwardLeft => ForwardLeft,
+                _ => throw new InvalidEnumArgumentException(
+                    "Invalid enum passed to MovementIndicatorForDirection() function")
+            };
         }
 
         public void Promote()
