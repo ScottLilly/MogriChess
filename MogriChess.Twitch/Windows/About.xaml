@@ -48,11 +48,11 @@
         </TextBlock>
 
         <TextBlock Grid.Row="5" Grid.Column="0" 
-                   Text="Support page:"/>
+                   Text="Website:"/>
         <TextBlock Grid.Row="5" Grid.Column="1" >
-            <Hyperlink NavigateUri="https://scottlilly.com"
+            <Hyperlink NavigateUri="https://mogrichess.com/"
                        RequestNavigate="Hyperlink_OnRequestNavigate">
-                https://scottlilly.com
+                https://mogrichess.com/
             </Hyperlink>
         </TextBlock>
 
