@@ -10,7 +10,7 @@
         public int DestinationFile => DestinationSquare.File;
 
         public bool IsCheckmateMove { get; set; }
-        public bool IsCheckMove { get; set; }
+        public bool CanCaptureKing { get; set; }
         public bool IsCapturingMove { get; set; }
         public bool IsPromotingMove { get; set; }
 
@@ -19,7 +19,7 @@
 
         public string MoveResult =>
             IsCheckmateMove ? "Checkmate" :
-            IsCheckMove ? "Check" :
+            CanCaptureKing ? "Check" :
             IsCapturingMove ? "Capture" :
             IsPromotingMove ? "Promotion" : "";
 

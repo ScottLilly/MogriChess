@@ -111,12 +111,20 @@ namespace MogriChess.Models
             // Move piece to new square
             Board.PlacePieceOnSquare(SelectedSquare.Piece, square);
 
+            bool opponentIsInCheck =
+                IsPlayerInCheck(SelectedSquare.Piece.ColorType.OpponentColorType());
+
+            if (opponentIsInCheck)
+            {
+                move.CanCaptureKing = true;
+
+                // TODO: See if they are in checkmate
+            }
+
             // Clear out square the moving piece moved from
             SelectedSquare.Piece = null;
             SelectedSquare.IsSelected = false;
             SelectedSquare = null;
-
-            DetermineIfMovePutsOpponentInCheckOrCheckMate(move);
 
             MoveHistory.Add(move);
 
@@ -125,23 +133,23 @@ namespace MogriChess.Models
 
         private void EndCurrentPlayerTurn()
         {
-            CurrentPlayerColor =
-                CurrentPlayerColor == Enums.ColorType.Light
-                    ? Enums.ColorType.Dark
-                    : Enums.ColorType.Light;
+            CurrentPlayerColor = CurrentPlayerColor.OpponentColorType();
         }
 
-        private void DetermineIfMovePutsOpponentInCheckOrCheckMate(Move move)
+        private bool IsPlayerInCheck(Enums.ColorType playerColor)
         {
-            var nextMoves = ValidMovesForPieceAt(move.DestinationRank, move.DestinationFile);
+            Enums.ColorType attackingPlayerColor = playerColor.OpponentColorType();
 
-            if (nextMoves.Any(m => m.IsCapturingMove && m.DestinationSquare.Piece.IsKing))
+            foreach (Square square in Board.Squares.Where(s => s.Piece != null &&
+                                                               s.Piece.ColorType == attackingPlayerColor))
             {
-                move.IsCheckMove = true;
-
-                // TODO: See if King can be taken out of check
-                // Use to determine if opponent is in checkmate
+                if (ValidMovesForPieceAt(square.Rank, square.File).Any(m => m.CanCaptureKing))
+                {
+                    return true;
+                }
             }
+
+            return false;
         }
 
         public List<Move> ValidMovesForPieceAt(int rank, int file)
@@ -211,7 +219,7 @@ namespace MogriChess.Models
                 {
                     // Square is occupied by an opponent's piece
                     potentialMove.IsCapturingMove = true;
-                    potentialMove.IsCheckMove = pieceAtDestination.IsKing;
+                    potentialMove.CanCaptureKing = pieceAtDestination.IsKing;
 
                     validMoves.Add(potentialMove);
 
