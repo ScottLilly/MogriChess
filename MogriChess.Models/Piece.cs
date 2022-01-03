@@ -127,6 +127,15 @@ namespace MogriChess.Models
             }
         }
 
+        public Piece Clone()
+        {
+            return new Piece(_colorScheme, ColorType, _pieceType,
+                Forward.Squares, ForwardRight.Squares,
+                Right.Squares, BackRight.Squares,
+                Back.Squares, BackLeft.Squares,
+                Left.Squares, ForwardLeft.Squares);
+        }
+
         private void AddMovementAbilities(int squaresForward, int squaresForwardRight,
             int squaresRight, int squaresBackRight,
             int squaresBack, int squaresBackLeft,

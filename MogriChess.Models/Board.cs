@@ -24,17 +24,23 @@ namespace MogriChess.Models
             PopulateBoardWithSquares();
         }
 
-        public void PlacePieceOnSquare(Piece piece, Square square)
+        public void PlacePieceOnSquare(Piece piece, Square destinationSquare)
         {
-            square.Piece = piece;
+            // Perform capture
+            if (destinationSquare.Piece != null)
+            {
+                piece.AddMovementAbilities(destinationSquare.Piece);
+            }
+
+            destinationSquare.Piece = piece;
 
             if (!piece.IsPawn)
             {
                 return;
             }
 
-            if ((piece.ColorType == Enums.ColorType.Light && square.Rank == 8) ||
-                (piece.ColorType == Enums.ColorType.Dark && square.Rank == 1))
+            if ((piece.ColorType == Enums.ColorType.Light && destinationSquare.Rank == 8) ||
+                (piece.ColorType == Enums.ColorType.Dark && destinationSquare.Rank == 1))
             {
                 piece.Promote();
             }

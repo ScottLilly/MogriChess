@@ -102,29 +102,61 @@ namespace MogriChess.Models
                 return;
             }
 
-            // Perform capture
-            if (square.Piece != null)
-            {
-                SelectedSquare.Piece.AddMovementAbilities(square.Piece);
-            }
-
             // Move piece to new square
             Board.PlacePieceOnSquare(SelectedSquare.Piece, square);
 
-            bool opponentIsInCheck =
-                IsPlayerInCheck(SelectedSquare.Piece.ColorType.OpponentColorType());
-
-            if (opponentIsInCheck)
-            {
-                move.CanCaptureKing = true;
-
-                // TODO: See if they are in checkmate
-            }
+            var movingPieceColorType = SelectedSquare.Piece.ColorType;
+            var opponentColorType = movingPieceColorType.OpponentColorType();
 
             // Clear out square the moving piece moved from
             SelectedSquare.Piece = null;
             SelectedSquare.IsSelected = false;
             SelectedSquare = null;
+
+            bool opponentIsInCheck =
+                KingCanBeCaptured(opponentColorType);
+
+            if (opponentIsInCheck)
+            {
+                move.PutsOpponentInCheck = true;
+
+                bool opponentCanEscape = false;
+
+                // TODO: See if they are in checkmate
+                foreach (var opponentSquare in Board.Squares.Where(s => s.Piece != null &&
+                                                                        s.Piece.ColorType == opponentColorType))
+                {
+                    foreach (Move potentialMove in ValidMovesForPieceAt(opponentSquare.Rank, opponentSquare.File))
+                    {
+                        // Clone pieces pre-move
+                        var originalMovingPiece = potentialMove.FromSquare.Piece.Clone();
+                        var destinationPiece = potentialMove.DestinationSquare.Piece?.Clone();
+
+                        // Make the move
+                        Board.PlacePieceOnSquare(potentialMove.FromSquare.Piece, potentialMove.DestinationSquare);
+
+                        // Check if King is is still in check
+                        bool stillInCheck = KingCanBeCaptured(opponentColorType);
+
+                        // If not, return (after reverting move)
+                        potentialMove.FromSquare.Piece = originalMovingPiece;
+                        potentialMove.DestinationSquare.Piece = destinationPiece;
+
+                        if (!stillInCheck)
+                        {
+                            opponentCanEscape = true;
+                            break;
+                        }
+                    }
+
+                    if (opponentCanEscape)
+                    {
+                        break;
+                    }
+                }
+
+                move.IsCheckmateMove = !opponentCanEscape;
+            }
 
             MoveHistory.Add(move);
 
@@ -136,14 +168,14 @@ namespace MogriChess.Models
             CurrentPlayerColor = CurrentPlayerColor.OpponentColorType();
         }
 
-        private bool IsPlayerInCheck(Enums.ColorType playerColor)
+        private bool KingCanBeCaptured(Enums.ColorType playerColor)
         {
             Enums.ColorType attackingPlayerColor = playerColor.OpponentColorType();
 
             foreach (Square square in Board.Squares.Where(s => s.Piece != null &&
                                                                s.Piece.ColorType == attackingPlayerColor))
             {
-                if (ValidMovesForPieceAt(square.Rank, square.File).Any(m => m.CanCaptureKing))
+                if (ValidMovesForPieceAt(square.Rank, square.File).Any(m => m.PutsOpponentInCheck))
                 {
                     return true;
                 }
@@ -181,7 +213,7 @@ namespace MogriChess.Models
                 return validMoves;
             }
 
-            int maxMovementSquareForDirection = 
+            int maxMovementSquareForDirection =
                 movingPiece.MaxMovementSquaresForDirection(direction);
             (int rankMultiplier, int fileMultiplier) =
                 movingPiece.MovementMultipliersForDirection(direction);
@@ -219,7 +251,7 @@ namespace MogriChess.Models
                 {
                     // Square is occupied by an opponent's piece
                     potentialMove.IsCapturingMove = true;
-                    potentialMove.CanCaptureKing = pieceAtDestination.IsKing;
+                    potentialMove.PutsOpponentInCheck = pieceAtDestination.IsKing;
 
                     validMoves.Add(potentialMove);
 
