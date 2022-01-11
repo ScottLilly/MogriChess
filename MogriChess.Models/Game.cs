@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -54,6 +55,7 @@ namespace MogriChess.Models
         public bool DisplayRankFileLabel { get; set; } = true;
         public bool DisplayValidDestinations { get; set; } = true;
 
+        public event EventHandler OnCheckmate;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Game(Board board)
@@ -75,6 +77,11 @@ namespace MogriChess.Models
                 // There is a piece on the square, and it's the current player's
                 if (square.Piece.ColorType == CurrentPlayerColor)
                 {
+                    // TODO: If last move put player into check,
+                    // only allow selecting pieces that can make moves to get the king out of check
+
+
+
                     SelectedSquare = square;
                     SelectedSquare.IsSelected = true;
                 }
@@ -116,6 +123,7 @@ namespace MogriChess.Models
             bool opponentIsInCheck =
                 KingCanBeCaptured(opponentColorType);
 
+            // Determine if opponent is in checkmate
             if (opponentIsInCheck)
             {
                 move.PutsOpponentInCheck = true;
@@ -161,6 +169,16 @@ namespace MogriChess.Models
             MoveHistory.Add(move);
 
             EndCurrentPlayerTurn();
+
+            if (move.IsCheckmateMove)
+            {
+                HandleCheckmate();
+            }
+        }
+
+        private void HandleCheckmate()
+        {
+            OnCheckmate?.Invoke(this, EventArgs.Empty);
         }
 
         private void EndCurrentPlayerTurn()

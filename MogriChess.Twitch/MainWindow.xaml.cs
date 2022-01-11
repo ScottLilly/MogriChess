@@ -13,6 +13,7 @@ namespace MogriChess.Twitch
     public partial class MainWindow : Window
     {
         private readonly IServiceProvider _serviceProvider;
+        private bool _canPlay = false;
 
         private PlaySession CurrentSession => DataContext as PlaySession;
 
@@ -27,11 +28,24 @@ namespace MogriChess.Twitch
         {
             DataContext = new PlaySession();
 
+            _canPlay = true;
+
             CurrentSession.CurrentGame.MoveHistory.CollectionChanged += MoveHistory_CollectionChanged;
+            CurrentSession.GameOver += OnGameOver;
+        }
+
+        private void OnGameOver(object? sender, EventArgs e)
+        {
+            _canPlay = false;
         }
 
         private void ClickedOnSquare_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            if (!_canPlay)
+            {
+                return;
+            }
+
             if (sender is not Canvas selectedSquare)
             {
                 return;
