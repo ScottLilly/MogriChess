@@ -31,7 +31,8 @@ namespace MogriChess.Models
                     List<Move> validDestinations =
                         ValidMovesForPieceAt(SelectedSquare.Rank, SelectedSquare.File);
 
-                    foreach (Move move in validDestinations)
+                    foreach (Move move in validDestinations.Where(m => 
+                                 !PutsMovingPlayerIntoCheckOrCheckmate(m)))
                     {
                         ValidDestinationsForSelectedPiece.Add(move);
 
@@ -130,24 +131,24 @@ namespace MogriChess.Models
 
                 bool opponentCanEscape = false;
 
-                // TODO: See if they are in checkmate
+                // See if they are in checkmate
                 foreach (var opponentSquare in Board.Squares.Where(s => s.Piece != null &&
                                                                         s.Piece.ColorType == opponentColorType))
                 {
                     foreach (Move potentialMove in ValidMovesForPieceAt(opponentSquare.Rank, opponentSquare.File))
                     {
                         // Clone pieces pre-move
-                        var originalMovingPiece = potentialMove.FromSquare.Piece.Clone();
+                        var originalMovingPiece = potentialMove.OriginationSquare.Piece.Clone();
                         var destinationPiece = potentialMove.DestinationSquare.Piece?.Clone();
 
                         // Make the move
-                        Board.PlacePieceOnSquare(potentialMove.FromSquare.Piece, potentialMove.DestinationSquare);
+                        Board.PlacePieceOnSquare(potentialMove.OriginationSquare.Piece, potentialMove.DestinationSquare);
 
-                        // Check if King is is still in check
+                        // Check if King is still in check
                         bool stillInCheck = KingCanBeCaptured(opponentColorType);
 
                         // If not, return (after reverting move)
-                        potentialMove.FromSquare.Piece = originalMovingPiece;
+                        potentialMove.OriginationSquare.Piece = originalMovingPiece;
                         potentialMove.DestinationSquare.Piece = destinationPiece;
 
                         if (!stillInCheck)
@@ -190,8 +191,11 @@ namespace MogriChess.Models
         {
             Enums.ColorType attackingPlayerColor = playerColor.OpponentColorType();
 
-            foreach (Square square in Board.Squares.Where(s => s.Piece != null &&
-                                                               s.Piece.ColorType == attackingPlayerColor))
+            IEnumerable<Square> squares =
+                Board.Squares.Where(s => s.Piece != null &&
+                                         s.Piece.ColorType == attackingPlayerColor);
+
+            foreach (Square square in squares)
             {
                 if (ValidMovesForPieceAt(square.Rank, square.File).Any(m => m.PutsOpponentInCheck))
                 {
@@ -283,6 +287,30 @@ namespace MogriChess.Models
             }
 
             return validMoves;
+        }
+
+        private bool PutsMovingPlayerIntoCheckOrCheckmate(Move move)
+        {
+            Piece originatingMovePiece = move.OriginationSquare.Piece.Clone();
+
+            Piece movingPiece = move.OriginationSquare.Piece.Clone();
+            Piece destinationPiece = move.DestinationSquare.Piece?.Clone();
+
+            // Simulate the move
+            move.OriginationSquare.Piece = null;
+            Board.PlacePieceOnSquare(movingPiece, move.DestinationSquare);
+
+            // Check if moving player's king can be captured
+            bool putsMovingPlayerIntoCheckOrCheckmate =
+                KingCanBeCaptured(movingPiece.ColorType);
+
+            // Undo the simulated move
+            Board.SquareAt(move.OriginationSquare.Rank, move.OriginationSquare.File).Piece =
+                originatingMovePiece;
+            Board.SquareAt(move.DestinationRank, move.DestinationFile).Piece =
+                destinationPiece;
+
+            return putsMovingPlayerIntoCheckOrCheckmate;
         }
     }
 }
