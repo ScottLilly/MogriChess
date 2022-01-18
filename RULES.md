@@ -1,7 +1,7 @@
 MogriChess is similar to traditional chess. The biggest difference is that when one piece captures another in MogriChess, the capturing piece adds the movement capabilities of the captured piece.
 
 ### Pieces
-- The king is identifed by the small inner circle that's in the opponent's color
+- The king is identified by the small inner circle that's in the opponent's color
 - Movement ability is displayed by the symbols surrounding the piece's main circle (in the eight possible directions)
   -  No symbol = no movement ability in that direction
   -  One circle = can move on square in that direction
