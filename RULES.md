@@ -15,10 +15,11 @@ MogriChess is similar to traditional chess. The biggest difference is that when 
 - If a pawn reaches its opponent's back rank, it adds the ability to move one square in any direction
   - If it can already move two, or infinite, squares in that direction, it retains the larger movement capability
 - Kings do not gain any additional movement capabilities if they capture a piece
-- If a player's king is in check, there next move must get the king out of check
-- Checkmate wins the game
+- If a player's king is in check, their next move must get the king out of check
+- Checkmate wins/ends the game
 
 ### Differences from traditional chess
 - Pieces cannot "jump" over pieces (like a knight does in traditional chess)
+- Pawns do not have the option to move two squares forward on their first move
 - There is no *en passant* move
 - There is no castling
