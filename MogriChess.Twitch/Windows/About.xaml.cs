@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Navigation;
 
-namespace MogriChess.Twitch.Windows
+namespace MogriChess.WPF.Windows
 {
     public partial class About : Window
     {

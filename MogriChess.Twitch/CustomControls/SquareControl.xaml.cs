@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace MogriChess.Twitch.CustomControls
+namespace MogriChess.WPF.CustomControls
 {
     public partial class SquareControl : UserControl
     {

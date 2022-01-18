@@ -5,10 +5,10 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using MogriChess.Models;
-using MogriChess.Twitch.Windows;
 using MogriChess.ViewModels;
+using MogriChess.WPF.Windows;
 
-namespace MogriChess.Twitch
+namespace MogriChess.WPF
 {
     public partial class MainWindow : Window
     {

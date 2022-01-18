@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace MogriChess.Twitch.Windows
+namespace MogriChess.WPF.Windows
 {
     public partial class Help : Window
     {

@@ -3,9 +3,9 @@ using System.IO;
 using System.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MogriChess.Twitch.Windows;
+using MogriChess.WPF.Windows;
 
-namespace MogriChess.Twitch
+namespace MogriChess.WPF
 {
     public partial class App : Application
     {
