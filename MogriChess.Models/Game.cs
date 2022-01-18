@@ -12,7 +12,7 @@ namespace MogriChess.Models
 
         #region Private properties
 
-        private Enums.ColorType CurrentPlayerColor { get; set; } =
+        public Enums.ColorType CurrentPlayerColor { get; set; } =
             Enums.ColorType.Light;
 
         private Square SelectedSquare
@@ -56,6 +56,10 @@ namespace MogriChess.Models
         public bool DisplayRankFileLabel { get; set; } = true;
         public bool DisplayValidDestinations { get; set; } = true;
 
+        public BotPlayer LightPlayerBot { get; set; }
+        public BotPlayer DarkPlayerBot { get; set; }
+
+        public event EventHandler OnMoveCompleted; 
         public event EventHandler OnCheckmate;
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -78,11 +82,6 @@ namespace MogriChess.Models
                 // There is a piece on the square, and it's the current player's
                 if (square.Piece.ColorType == CurrentPlayerColor)
                 {
-                    // TODO: If last move put player into check,
-                    // only allow selecting pieces that can make moves to get the king out of check
-
-
-
                     SelectedSquare = square;
                     SelectedSquare.IsSelected = true;
                 }
@@ -177,6 +176,23 @@ namespace MogriChess.Models
             }
         }
 
+        public void MakeBotMove(BotPlayer botPlayer)
+        {
+            List<Move> potentialMoves = new List<Move>();
+
+            foreach (Square square in
+                     Board.Squares.Where(s =>
+                         s.Piece?.ColorType.Equals(botPlayer.ColorType) ?? false))
+            {
+                potentialMoves.AddRange(ValidMovesForPieceAt(square.Rank, square.File));
+            }
+
+            var bestMove = botPlayer.FindBestMove(potentialMoves);
+
+            SelectSquare(bestMove.OriginationSquare);
+            SelectSquare(bestMove.DestinationSquare);
+        }
+
         private void HandleCheckmate()
         {
             OnCheckmate?.Invoke(this, EventArgs.Empty);
@@ -185,6 +201,7 @@ namespace MogriChess.Models
         private void EndCurrentPlayerTurn()
         {
             CurrentPlayerColor = CurrentPlayerColor.OpponentColorType();
+            OnMoveCompleted?.Invoke(this, EventArgs.Empty);
         }
 
         private bool KingCanBeCaptured(Enums.ColorType playerColor)

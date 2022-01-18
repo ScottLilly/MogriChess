@@ -16,7 +16,25 @@ namespace MogriChess.ViewModels
         {
             CurrentGame = GameFactory.GetNewGame();
 
+            CurrentGame.OnMoveCompleted += CurrentGame_OnMoveCompleted;
             CurrentGame.OnCheckmate += CurrentGame_OnCheckmate;
+
+            CurrentGame.DarkPlayerBot = new BotPlayer(Enums.ColorType.Dark);
+        }
+
+        private void CurrentGame_OnMoveCompleted(object sender, EventArgs e)
+        {
+            if (CurrentGame.CurrentPlayerColor == Enums.ColorType.Dark &&
+                CurrentGame.DarkPlayerBot != null)
+            {
+                CurrentGame.MakeBotMove(CurrentGame.DarkPlayerBot);
+            }
+
+            if (CurrentGame.CurrentPlayerColor == Enums.ColorType.Light &&
+                CurrentGame.LightPlayerBot != null)
+            {
+                CurrentGame.MakeBotMove(CurrentGame.LightPlayerBot);
+            }
         }
 
         private void CurrentGame_OnCheckmate(object sender, EventArgs e)
