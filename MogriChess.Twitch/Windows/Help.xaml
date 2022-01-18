@@ -7,18 +7,110 @@
         FontSize="11pt"
         WindowStartupLocation="CenterOwner"
         Title="Help"
-        Height="500" Width="600">
+        Height="600" Width="750">
 
     <Grid Margin="10,10,10,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="7"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Button Grid.Row="1" Grid.Column="0"
+        <RichTextBox Grid.Row="0" Grid.Column="0"
+                     VerticalScrollBarVisibility="Auto">
+            <FlowDocument>
+                <Paragraph>
+                    MogriChess is similar to traditional chess.
+                </Paragraph>
+                <Paragraph>
+                    The biggest difference is that when one piece captures another in MogriChess, the capturing piece adds the movement capabilities of the captured piece.
+                </Paragraph>
+
+                <Paragraph>
+                    <Bold>Pieces</Bold>
+                </Paragraph>
+                <List>
+                    <ListItem>
+                        <Paragraph>The king is identified by the small inner circle that's in the opponent's color</Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph>Movement ability is displayed by the symbols surrounding the piece's main circle (in the eight possible directions)</Paragraph>
+                        <List>
+                            <ListItem>
+                                <Paragraph>No symbol = no movement ability in that direction</Paragraph>
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph>One circle = can move on square in that direction</Paragraph>
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph>Two circles = can move one or two squares in that direction</Paragraph>
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph>Rectangle = can move one to infinite squares in that direction</Paragraph>
+                            </ListItem>
+                        </List>
+                    </ListItem>
+                </List>
+
+                <Paragraph>
+                    <Bold>Basic rules</Bold>
+                </Paragraph>
+                <List>
+                    <ListItem>
+                        <Paragraph>Light player moves first</Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph>When a piece captures another piece, the capturing piece adds the movement capabilities of the captured piece</Paragraph>
+                        <List>
+                            <ListItem>
+                                <Paragraph>For each direction, the capturing pieces ends up with the maximum movement capability between itself and the captured piece</Paragraph>
+                            </ListItem>
+                        </List>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph>If a pawn reaches its opponent's back rank, it adds the ability to move one square in any direction</Paragraph>
+                        <List>
+                            <ListItem>
+                                <Paragraph>If it can already move two, or infinite, squares in that direction, it retains the larger movement capability</Paragraph>
+                            </ListItem>
+                        </List>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph>Kings do not gain any additional movement capabilities if they capture a piece</Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph>If a player's king is in check, their next move must get the king out of check</Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph>Checkmate wins/ends the game</Paragraph>
+                    </ListItem>
+                </List>
+
+                <Paragraph>
+                    <Bold>Differences from traditional chess</Bold>
+                </Paragraph>
+                <List>
+                    <ListItem>
+                        <Paragraph>Pieces cannot "jump" over pieces (like a knight does in traditional chess)</Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph>Pawns do not have the option to move two squares forward on their first move</Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph>There is no <Italic>en passant</Italic> move</Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph>There is no castling</Paragraph>
+                    </ListItem>
+                </List>
+
+            </FlowDocument>
+        </RichTextBox>
+
+        <Button Grid.Row="2" Grid.Column="0"
                 HorizontalAlignment="Right"
                 IsDefault="True"
                 Content="OK"
