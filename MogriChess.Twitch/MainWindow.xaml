@@ -34,11 +34,15 @@
             <MenuItem Header="File">
                 <MenuItem Header="Start New Game"
                           Click="StartNewGame_OnClick"/>
-                <MenuItem Header="Write Current GameState to Disk"
-                          Click="WriteCurrentGameState_OnClick"/>
                 <Separator/>
                 <MenuItem Header="Exit"
                           Click="Exit_OnClick"/>
+            </MenuItem>
+            <MenuItem Header="Utilities">
+                <MenuItem Header="Write Current GameState to Disk"
+                          Click="WriteCurrentGameState_OnClick"/>
+                <MenuItem Header="Write Move History to Disk"
+                          Click="WriteMoveHistory_OnClick"/>
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="Help"

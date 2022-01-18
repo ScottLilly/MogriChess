@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using MogriChess.Models;
 using MogriChess.Services;
+using Newtonsoft.Json;
 
 namespace MogriChess.ViewModels
 {
@@ -25,6 +26,11 @@ namespace MogriChess.ViewModels
         public string GetSerializedGameState()
         {
             return BoardStateService.GetSerializedGameState(CurrentGame);
+        }
+
+        public string GetSerializedMoveHistory()
+        {
+            return JsonConvert.SerializeObject(CurrentGame.MoveHistory, Formatting.Indented);
         }
 
         private void CurrentGame_OnMoveCompleted(object sender, EventArgs e)

@@ -24,9 +24,16 @@ namespace MogriChess.WPF
             InitializeComponent();
 
             _serviceProvider = serviceProvider;
+
+            StartGame();
         }
 
         private void StartNewGame_OnClick(object sender, RoutedEventArgs e)
+        {
+            StartGame();
+        }
+
+        private void StartGame()
         {
             DataContext = new PlaySession();
 
@@ -91,6 +98,17 @@ namespace MogriChess.WPF
             if (dialog.ShowDialog() == true)
             {
                 File.WriteAllText(dialog.FileName, CurrentSession.GetSerializedGameState());
+            }
+        }
+
+        private void WriteMoveHistory_OnClick(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "JSON data (*.json)|*.json";
+
+            if (dialog.ShowDialog() == true)
+            {
+                File.WriteAllText(dialog.FileName, CurrentSession.GetSerializedMoveHistory());
             }
         }
     }
