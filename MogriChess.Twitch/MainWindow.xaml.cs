@@ -1,9 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Win32;
 using MogriChess.Models;
 using MogriChess.ViewModels;
 using MogriChess.WPF.Windows;
@@ -79,6 +81,17 @@ namespace MogriChess.WPF
             About about = _serviceProvider.GetRequiredService<About>();
             about.Owner = this;
             about.ShowDialog();
+        }
+
+        private void WriteCurrentGameState_OnClick(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "JSON data (*.json)|*.json";
+
+            if (dialog.ShowDialog() == true)
+            {
+                File.WriteAllText(dialog.FileName, CurrentSession.GetSerializedGameState());
+            }
         }
     }
 }

@@ -19,7 +19,12 @@ namespace MogriChess.ViewModels
             CurrentGame.OnMoveCompleted += CurrentGame_OnMoveCompleted;
             CurrentGame.OnCheckmate += CurrentGame_OnCheckmate;
 
-            CurrentGame.DarkPlayerBot = new BotPlayer(Enums.ColorType.Dark);
+            //CurrentGame.DarkPlayerBot = new BotPlayer(Enums.ColorType.Dark);
+        }
+
+        public string GetSerializedGameState()
+        {
+            return BoardStateService.GetSerializedGameState(CurrentGame);
         }
 
         private void CurrentGame_OnMoveCompleted(object sender, EventArgs e)
