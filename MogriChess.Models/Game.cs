@@ -142,6 +142,7 @@ namespace MogriChess.Models
 
                         // Make the move
                         Board.PlacePieceOnSquare(potentialMove.OriginationSquare.Piece, potentialMove.DestinationSquare);
+                        potentialMove.OriginationSquare.Piece = null;
 
                         // Check if King is still in check
                         bool stillInCheck = KingCanBeCaptured(opponentColorType);
@@ -208,11 +209,11 @@ namespace MogriChess.Models
         {
             Enums.ColorType attackingPlayerColor = playerColor.OpponentColorType();
 
-            IEnumerable<Square> squares =
+            IEnumerable<Square> squaresWithOpponentPiece =
                 Board.Squares.Where(s => s.Piece != null &&
                                          s.Piece.ColorType == attackingPlayerColor);
 
-            foreach (Square square in squares)
+            foreach (Square square in squaresWithOpponentPiece)
             {
                 if (ValidMovesForPieceAt(square.Rank, square.File).Any(m => m.PutsOpponentInCheck))
                 {

@@ -1,0 +1,1101 @@
+[
+  {
+    "MovingPieceColor": 0,
+    "OriginationSquare": {
+      "UiGridRow": 6,
+      "UiGridColumn": 7,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "h2",
+      "Piece": null,
+      "Rank": 2,
+      "File": 8,
+      "ColorType": 1
+    },
+    "DestinationSquare": {
+      "UiGridRow": 5,
+      "UiGridColumn": 7,
+      "SquareColor": "#DDDDDD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "h3",
+      "Piece": {
+        "PieceColorTransformAngle": 0,
+        "UiColor": "#FFFFFF",
+        "KingIndicatorUiColor": "#FFFFFF",
+        "Forward": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "ForwardRight": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 0
+        },
+        "Right": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "BackRight": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 0
+        },
+        "Back": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "BackLeft": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 0
+        },
+        "Left": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "ForwardLeft": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 0
+        },
+        "ColorType": 0,
+        "IsKing": false,
+        "IsPawn": false,
+        "IsUnpromotedPawn": false
+      },
+      "Rank": 3,
+      "File": 8,
+      "ColorType": 0
+    },
+    "DestinationRank": 3,
+    "DestinationFile": 8,
+    "IsCheckmateMove": false,
+    "PutsOpponentInCheck": false,
+    "IsCapturingMove": false,
+    "IsPromotingMove": false,
+    "MoveShorthand": "h2:h3",
+    "MoveResult": ""
+  },
+  {
+    "MovingPieceColor": 1,
+    "OriginationSquare": {
+      "UiGridRow": 1,
+      "UiGridColumn": 6,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "g7",
+      "Piece": null,
+      "Rank": 7,
+      "File": 7,
+      "ColorType": 1
+    },
+    "DestinationSquare": {
+      "UiGridRow": 2,
+      "UiGridColumn": 6,
+      "SquareColor": "#DDDDDD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "g6",
+      "Piece": null,
+      "Rank": 6,
+      "File": 7,
+      "ColorType": 0
+    },
+    "DestinationRank": 6,
+    "DestinationFile": 7,
+    "IsCheckmateMove": false,
+    "PutsOpponentInCheck": false,
+    "IsCapturingMove": false,
+    "IsPromotingMove": false,
+    "MoveShorthand": "g7:g6",
+    "MoveResult": ""
+  },
+  {
+    "MovingPieceColor": 0,
+    "OriginationSquare": {
+      "UiGridRow": 5,
+      "UiGridColumn": 7,
+      "SquareColor": "#DDDDDD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "h3",
+      "Piece": {
+        "PieceColorTransformAngle": 0,
+        "UiColor": "#FFFFFF",
+        "KingIndicatorUiColor": "#FFFFFF",
+        "Forward": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "ForwardRight": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 0
+        },
+        "Right": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "BackRight": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 0
+        },
+        "Back": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "BackLeft": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 0
+        },
+        "Left": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "ForwardLeft": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 0
+        },
+        "ColorType": 0,
+        "IsKing": false,
+        "IsPawn": false,
+        "IsUnpromotedPawn": false
+      },
+      "Rank": 3,
+      "File": 8,
+      "ColorType": 0
+    },
+    "DestinationSquare": {
+      "UiGridRow": 4,
+      "UiGridColumn": 7,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "h4",
+      "Piece": null,
+      "Rank": 4,
+      "File": 8,
+      "ColorType": 1
+    },
+    "DestinationRank": 4,
+    "DestinationFile": 8,
+    "IsCheckmateMove": false,
+    "PutsOpponentInCheck": false,
+    "IsCapturingMove": false,
+    "IsPromotingMove": false,
+    "MoveShorthand": "h3:h4",
+    "MoveResult": ""
+  },
+  {
+    "MovingPieceColor": 1,
+    "OriginationSquare": {
+      "UiGridRow": 1,
+      "UiGridColumn": 5,
+      "SquareColor": "#DDDDDD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "f7",
+      "Piece": {
+        "PieceColorTransformAngle": 180,
+        "UiColor": "#000000",
+        "KingIndicatorUiColor": "#FFFFFF",
+        "Forward": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "ForwardRight": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "Right": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "BackRight": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "Back": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "BackLeft": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "Left": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "ForwardLeft": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "ColorType": 1,
+        "IsKing": true,
+        "IsPawn": false,
+        "IsUnpromotedPawn": false
+      },
+      "Rank": 7,
+      "File": 6,
+      "ColorType": 0
+    },
+    "DestinationSquare": {
+      "UiGridRow": 2,
+      "UiGridColumn": 5,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "f6",
+      "Piece": null,
+      "Rank": 6,
+      "File": 6,
+      "ColorType": 1
+    },
+    "DestinationRank": 6,
+    "DestinationFile": 6,
+    "IsCheckmateMove": false,
+    "PutsOpponentInCheck": false,
+    "IsCapturingMove": false,
+    "IsPromotingMove": false,
+    "MoveShorthand": "f7:f6",
+    "MoveResult": ""
+  },
+  {
+    "MovingPieceColor": 0,
+    "OriginationSquare": {
+      "UiGridRow": 7,
+      "UiGridColumn": 7,
+      "SquareColor": "#DDDDDD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "h1",
+      "Piece": null,
+      "Rank": 1,
+      "File": 8,
+      "ColorType": 0
+    },
+    "DestinationSquare": {
+      "UiGridRow": 5,
+      "UiGridColumn": 7,
+      "SquareColor": "#DDDDDD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "h3",
+      "Piece": {
+        "PieceColorTransformAngle": 0,
+        "UiColor": "#FFFFFF",
+        "KingIndicatorUiColor": "#FFFFFF",
+        "Forward": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "ForwardRight": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 0
+        },
+        "Right": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "BackRight": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 0
+        },
+        "Back": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "BackLeft": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 0
+        },
+        "Left": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "ForwardLeft": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 0
+        },
+        "ColorType": 0,
+        "IsKing": false,
+        "IsPawn": false,
+        "IsUnpromotedPawn": false
+      },
+      "Rank": 3,
+      "File": 8,
+      "ColorType": 0
+    },
+    "DestinationRank": 3,
+    "DestinationFile": 8,
+    "IsCheckmateMove": false,
+    "PutsOpponentInCheck": false,
+    "IsCapturingMove": false,
+    "IsPromotingMove": false,
+    "MoveShorthand": "h1:h3",
+    "MoveResult": ""
+  },
+  {
+    "MovingPieceColor": 1,
+    "OriginationSquare": {
+      "UiGridRow": 2,
+      "UiGridColumn": 6,
+      "SquareColor": "#DDDDDD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "g6",
+      "Piece": null,
+      "Rank": 6,
+      "File": 7,
+      "ColorType": 0
+    },
+    "DestinationSquare": {
+      "UiGridRow": 3,
+      "UiGridColumn": 6,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "g5",
+      "Piece": null,
+      "Rank": 5,
+      "File": 7,
+      "ColorType": 1
+    },
+    "DestinationRank": 5,
+    "DestinationFile": 7,
+    "IsCheckmateMove": false,
+    "PutsOpponentInCheck": false,
+    "IsCapturingMove": false,
+    "IsPromotingMove": false,
+    "MoveShorthand": "g6:g5",
+    "MoveResult": ""
+  },
+  {
+    "MovingPieceColor": 0,
+    "OriginationSquare": {
+      "UiGridRow": 4,
+      "UiGridColumn": 7,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "h4",
+      "Piece": null,
+      "Rank": 4,
+      "File": 8,
+      "ColorType": 1
+    },
+    "DestinationSquare": {
+      "UiGridRow": 3,
+      "UiGridColumn": 6,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "g5",
+      "Piece": null,
+      "Rank": 5,
+      "File": 7,
+      "ColorType": 1
+    },
+    "DestinationRank": 5,
+    "DestinationFile": 7,
+    "IsCheckmateMove": false,
+    "PutsOpponentInCheck": false,
+    "IsCapturingMove": true,
+    "IsPromotingMove": false,
+    "MoveShorthand": "h4:g5",
+    "MoveResult": "Capture"
+  },
+  {
+    "MovingPieceColor": 1,
+    "OriginationSquare": {
+      "UiGridRow": 1,
+      "UiGridColumn": 2,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "c7",
+      "Piece": null,
+      "Rank": 7,
+      "File": 3,
+      "ColorType": 1
+    },
+    "DestinationSquare": {
+      "UiGridRow": 2,
+      "UiGridColumn": 2,
+      "SquareColor": "#DDDDDD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "c6",
+      "Piece": null,
+      "Rank": 6,
+      "File": 3,
+      "ColorType": 0
+    },
+    "DestinationRank": 6,
+    "DestinationFile": 3,
+    "IsCheckmateMove": false,
+    "PutsOpponentInCheck": false,
+    "IsCapturingMove": false,
+    "IsPromotingMove": false,
+    "MoveShorthand": "c7:c6",
+    "MoveResult": ""
+  },
+  {
+    "MovingPieceColor": 0,
+    "OriginationSquare": {
+      "UiGridRow": 3,
+      "UiGridColumn": 6,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "g5",
+      "Piece": null,
+      "Rank": 5,
+      "File": 7,
+      "ColorType": 1
+    },
+    "DestinationSquare": {
+      "UiGridRow": 2,
+      "UiGridColumn": 5,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "f6",
+      "Piece": null,
+      "Rank": 6,
+      "File": 6,
+      "ColorType": 1
+    },
+    "DestinationRank": 6,
+    "DestinationFile": 6,
+    "IsCheckmateMove": false,
+    "PutsOpponentInCheck": false,
+    "IsCapturingMove": true,
+    "IsPromotingMove": false,
+    "MoveShorthand": "g5:f6",
+    "MoveResult": "Capture"
+  },
+  {
+    "MovingPieceColor": 1,
+    "OriginationSquare": {
+      "UiGridRow": 2,
+      "UiGridColumn": 2,
+      "SquareColor": "#DDDDDD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "c6",
+      "Piece": null,
+      "Rank": 6,
+      "File": 3,
+      "ColorType": 0
+    },
+    "DestinationSquare": {
+      "UiGridRow": 3,
+      "UiGridColumn": 2,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "c5",
+      "Piece": {
+        "PieceColorTransformAngle": 180,
+        "UiColor": "#000000",
+        "KingIndicatorUiColor": "#000000",
+        "Forward": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "ForwardRight": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "Right": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 0
+        },
+        "BackRight": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 0
+        },
+        "Back": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 0
+        },
+        "BackLeft": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 0
+        },
+        "Left": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 0
+        },
+        "ForwardLeft": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "ColorType": 1,
+        "IsKing": false,
+        "IsPawn": true,
+        "IsUnpromotedPawn": true
+      },
+      "Rank": 5,
+      "File": 3,
+      "ColorType": 1
+    },
+    "DestinationRank": 5,
+    "DestinationFile": 3,
+    "IsCheckmateMove": false,
+    "PutsOpponentInCheck": false,
+    "IsCapturingMove": false,
+    "IsPromotingMove": false,
+    "MoveShorthand": "c6:c5",
+    "MoveResult": ""
+  },
+  {
+    "MovingPieceColor": 0,
+    "OriginationSquare": {
+      "UiGridRow": 2,
+      "UiGridColumn": 5,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "f6",
+      "Piece": null,
+      "Rank": 6,
+      "File": 6,
+      "ColorType": 1
+    },
+    "DestinationSquare": {
+      "UiGridRow": 1,
+      "UiGridColumn": 4,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "e7",
+      "Piece": null,
+      "Rank": 7,
+      "File": 5,
+      "ColorType": 1
+    },
+    "DestinationRank": 7,
+    "DestinationFile": 5,
+    "IsCheckmateMove": false,
+    "PutsOpponentInCheck": true,
+    "IsCapturingMove": true,
+    "IsPromotingMove": false,
+    "MoveShorthand": "f6:e7",
+    "MoveResult": "Check"
+  },
+  {
+    "MovingPieceColor": 1,
+    "OriginationSquare": {
+      "UiGridRow": 0,
+      "UiGridColumn": 4,
+      "SquareColor": "#DDDDDD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "e8",
+      "Piece": null,
+      "Rank": 8,
+      "File": 5,
+      "ColorType": 0
+    },
+    "DestinationSquare": {
+      "UiGridRow": 1,
+      "UiGridColumn": 5,
+      "SquareColor": "#DDDDDD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "f7",
+      "Piece": {
+        "PieceColorTransformAngle": 180,
+        "UiColor": "#000000",
+        "KingIndicatorUiColor": "#FFFFFF",
+        "Forward": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "ForwardRight": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "Right": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "BackRight": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "Back": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "BackLeft": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "Left": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "ForwardLeft": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "ColorType": 1,
+        "IsKing": true,
+        "IsPawn": false,
+        "IsUnpromotedPawn": false
+      },
+      "Rank": 7,
+      "File": 6,
+      "ColorType": 0
+    },
+    "DestinationRank": 7,
+    "DestinationFile": 6,
+    "IsCheckmateMove": false,
+    "PutsOpponentInCheck": false,
+    "IsCapturingMove": false,
+    "IsPromotingMove": false,
+    "MoveShorthand": "e8:f7",
+    "MoveResult": ""
+  },
+  {
+    "MovingPieceColor": 0,
+    "OriginationSquare": {
+      "UiGridRow": 1,
+      "UiGridColumn": 4,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "e7",
+      "Piece": null,
+      "Rank": 7,
+      "File": 5,
+      "ColorType": 1
+    },
+    "DestinationSquare": {
+      "UiGridRow": 0,
+      "UiGridColumn": 3,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "d8",
+      "Piece": null,
+      "Rank": 8,
+      "File": 4,
+      "ColorType": 1
+    },
+    "DestinationRank": 8,
+    "DestinationFile": 4,
+    "IsCheckmateMove": false,
+    "PutsOpponentInCheck": false,
+    "IsCapturingMove": true,
+    "IsPromotingMove": true,
+    "MoveShorthand": "e7:d8",
+    "MoveResult": "Capture"
+  },
+  {
+    "MovingPieceColor": 1,
+    "OriginationSquare": {
+      "UiGridRow": 1,
+      "UiGridColumn": 5,
+      "SquareColor": "#DDDDDD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "f7",
+      "Piece": {
+        "PieceColorTransformAngle": 180,
+        "UiColor": "#000000",
+        "KingIndicatorUiColor": "#FFFFFF",
+        "Forward": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "ForwardRight": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "Right": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "BackRight": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "Back": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "BackLeft": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "Left": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "ForwardLeft": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "ColorType": 1,
+        "IsKing": true,
+        "IsPawn": false,
+        "IsUnpromotedPawn": false
+      },
+      "Rank": 7,
+      "File": 6,
+      "ColorType": 0
+    },
+    "DestinationSquare": {
+      "UiGridRow": 1,
+      "UiGridColumn": 6,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "g7",
+      "Piece": null,
+      "Rank": 7,
+      "File": 7,
+      "ColorType": 1
+    },
+    "DestinationRank": 7,
+    "DestinationFile": 7,
+    "IsCheckmateMove": false,
+    "PutsOpponentInCheck": false,
+    "IsCapturingMove": false,
+    "IsPromotingMove": false,
+    "MoveShorthand": "f7:g7",
+    "MoveResult": ""
+  },
+  {
+    "MovingPieceColor": 0,
+    "OriginationSquare": {
+      "UiGridRow": 0,
+      "UiGridColumn": 3,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "d8",
+      "Piece": null,
+      "Rank": 8,
+      "File": 4,
+      "ColorType": 1
+    },
+    "DestinationSquare": {
+      "UiGridRow": 3,
+      "UiGridColumn": 6,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "g5",
+      "Piece": null,
+      "Rank": 5,
+      "File": 7,
+      "ColorType": 1
+    },
+    "DestinationRank": 5,
+    "DestinationFile": 7,
+    "IsCheckmateMove": false,
+    "PutsOpponentInCheck": true,
+    "IsCapturingMove": false,
+    "IsPromotingMove": false,
+    "MoveShorthand": "d8:g5",
+    "MoveResult": "Check"
+  },
+  {
+    "MovingPieceColor": 1,
+    "OriginationSquare": {
+      "UiGridRow": 1,
+      "UiGridColumn": 6,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "g7",
+      "Piece": null,
+      "Rank": 7,
+      "File": 7,
+      "ColorType": 1
+    },
+    "DestinationSquare": {
+      "UiGridRow": 1,
+      "UiGridColumn": 5,
+      "SquareColor": "#DDDDDD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "f7",
+      "Piece": {
+        "PieceColorTransformAngle": 180,
+        "UiColor": "#000000",
+        "KingIndicatorUiColor": "#FFFFFF",
+        "Forward": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "ForwardRight": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "Right": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "BackRight": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "Back": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "BackLeft": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "Left": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "ForwardLeft": {
+          "DrawOneSquareIndicator": true,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": false,
+          "Squares": 1
+        },
+        "ColorType": 1,
+        "IsKing": true,
+        "IsPawn": false,
+        "IsUnpromotedPawn": false
+      },
+      "Rank": 7,
+      "File": 6,
+      "ColorType": 0
+    },
+    "DestinationRank": 7,
+    "DestinationFile": 6,
+    "IsCheckmateMove": false,
+    "PutsOpponentInCheck": false,
+    "IsCapturingMove": false,
+    "IsPromotingMove": false,
+    "MoveShorthand": "g7:f7",
+    "MoveResult": ""
+  },
+  {
+    "MovingPieceColor": 0,
+    "OriginationSquare": {
+      "UiGridRow": 3,
+      "UiGridColumn": 6,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "g5",
+      "Piece": null,
+      "Rank": 5,
+      "File": 7,
+      "ColorType": 1
+    },
+    "DestinationSquare": {
+      "UiGridRow": 4,
+      "UiGridColumn": 5,
+      "SquareColor": "#ADADAD",
+      "IsSelected": false,
+      "IsValidDestination": false,
+      "SquareShorthand": "f4",
+      "Piece": {
+        "PieceColorTransformAngle": 0,
+        "UiColor": "#FFFFFF",
+        "KingIndicatorUiColor": "#FFFFFF",
+        "Forward": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "ForwardRight": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "Right": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "BackRight": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "Back": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "BackLeft": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "Left": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "ForwardLeft": {
+          "DrawOneSquareIndicator": false,
+          "DrawTwoSquaresIndicator": false,
+          "DrawInfiniteSquaresIndicator": true,
+          "Squares": 99
+        },
+        "ColorType": 0,
+        "IsKing": false,
+        "IsPawn": true,
+        "IsUnpromotedPawn": true
+      },
+      "Rank": 4,
+      "File": 6,
+      "ColorType": 1
+    },
+    "DestinationRank": 4,
+    "DestinationFile": 6,
+    "IsCheckmateMove": true,
+    "PutsOpponentInCheck": true,
+    "IsCapturingMove": false,
+    "IsPromotingMove": false,
+    "MoveShorthand": "g5:f4",
+    "MoveResult": "Checkmate"
+  }
+]
