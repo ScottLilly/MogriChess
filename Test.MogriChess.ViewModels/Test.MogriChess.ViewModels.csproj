@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="MoveHistories\BadCheck1_MoveHistory.json">
+    <None Update="MoveHistories\BadCheckmate_1_MoveHistory.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

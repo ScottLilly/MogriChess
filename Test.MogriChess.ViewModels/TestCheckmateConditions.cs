@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MogriChess.Models;
+using MogriChess.Models.DTOs;
 using MogriChess.Services;
 using Test.MogriChess.ViewModels.Utilities;
 using Xunit;
@@ -17,17 +18,17 @@ namespace Test.MogriChess.ViewModels
 
             Game game = GameFactory.GetNewGame();
 
-            List<string> moveNotations =
-                MoveHistoryParser.GetMovesFromFile(".\\MoveHistories\\BadCheck1_MoveHistory.json");
+            List<MoveHistoryDTO> moves =
+                TestFileParser.GetMoveHistoryFromFile(".\\MoveHistories\\BadCheckmate_1_MoveHistory.json");
 
-            foreach (string moveNotation in moveNotations)
+            foreach (MoveHistoryDTO move in moves)
             {
-                var squares = moveNotation.Split(":");
+                var squares = move.MoveShorthand.Split(":");
 
                 Square originationSquare =
-                    game.Board.Squares.First(s => s.SquareShorthand.Equals(squares[0]));
+                    game.Board.Squares.First(s => s.SquareShorthand.Equals(move.OriginationSquare));
                 Square destinationSquare =
-                    game.Board.Squares.First(s => s.SquareShorthand.Equals(squares[1]));
+                    game.Board.Squares.First(s => s.SquareShorthand.Equals(move.DestinationSquare));
 
                 game.SelectSquare(originationSquare);
                 game.SelectSquare(destinationSquare);

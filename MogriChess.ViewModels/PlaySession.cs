@@ -30,7 +30,7 @@ namespace MogriChess.ViewModels
 
         public string GetSerializedMoveHistory()
         {
-            return JsonConvert.SerializeObject(CurrentGame.MoveHistory, Formatting.Indented);
+            return BoardStateService.GetSerializedMoveHistory(CurrentGame);
         }
 
         private void CurrentGame_OnMoveCompleted(object sender, EventArgs e)
