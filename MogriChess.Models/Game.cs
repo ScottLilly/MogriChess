@@ -68,13 +68,15 @@ namespace MogriChess.Models
             Board = board;
         }
 
+        #region Public methods
+
         public void SelectSquare(Square square)
         {
             // No square is currently selected
             if (SelectedSquare == null)
             {
                 // No piece is on square, so return
-                if (square?.Piece == null)
+                if (square.IsEmpty)
                 {
                     return;
                 }
@@ -92,8 +94,7 @@ namespace MogriChess.Models
             // If the player selected the currently-selected square, de-select it.
             if (SelectedSquare == square)
             {
-                SelectedSquare = null;
-                square.IsSelected = false;
+                DeselectSelectedSquare();
 
                 return;
             }
@@ -115,9 +116,7 @@ namespace MogriChess.Models
             // Move piece to new square
             Board.MovePiece(SelectedSquare, square);
 
-            // Clear out square the moving piece moved from
-            SelectedSquare.IsSelected = false;
-            SelectedSquare = null;
+            DeselectSelectedSquare();
 
             bool opponentIsInCheck =
                 KingCanBeCaptured(opponentColorType);
@@ -174,6 +173,29 @@ namespace MogriChess.Models
             }
         }
 
+        public List<Move> ValidMovesForPieceAt(int rank, int file)
+        {
+            Square originationSquare = Board.SquareAt(rank, file);
+
+            List<Move> validMoves = new List<Move>();
+
+            if (originationSquare.Piece == null)
+            {
+                return validMoves;
+            }
+
+            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Forward));
+            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.ForwardRight));
+            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Right));
+            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.BackRight));
+            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Back));
+            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.BackLeft));
+            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Left));
+            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.ForwardLeft));
+
+            return validMoves;
+        }
+
         public void MakeBotMove(BotPlayer botPlayer)
         {
             List<Move> potentialMoves = new List<Move>();
@@ -189,6 +211,16 @@ namespace MogriChess.Models
 
             SelectSquare(bestMove.OriginationSquare);
             SelectSquare(bestMove.DestinationSquare);
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void DeselectSelectedSquare()
+        {
+            SelectedSquare.IsSelected = false;
+            SelectedSquare = null;
         }
 
         private void HandleCheckmate()
@@ -219,29 +251,6 @@ namespace MogriChess.Models
             }
 
             return false;
-        }
-
-        public List<Move> ValidMovesForPieceAt(int rank, int file)
-        {
-            Square originationSquare = Board.SquareAt(rank, file);
-
-            List<Move> validMoves = new List<Move>();
-
-            if (originationSquare.Piece == null)
-            {
-                return validMoves;
-            }
-
-            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Forward));
-            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.ForwardRight));
-            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Right));
-            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.BackRight));
-            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Back));
-            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.BackLeft));
-            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Left));
-            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.ForwardLeft));
-
-            return validMoves;
         }
 
         private List<Move> ValidMovesInDirection(Square originationSquare, Enums.Direction direction)
@@ -330,5 +339,7 @@ namespace MogriChess.Models
 
             return putsMovingPlayerIntoCheckOrCheckmate;
         }
+
+        #endregion
     }
 }
