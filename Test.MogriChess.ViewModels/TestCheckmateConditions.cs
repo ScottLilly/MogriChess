@@ -10,8 +10,11 @@ namespace Test.MogriChess.ViewModels
     public class TestCheckmateConditions
     {
         [Fact]
-        public void Test_Game1()
+        public void Test_IncorrectCheckmateReported_1()
         {
+            // Test fix for a reported false checkmate
+            // https://github.com/ScottLilly/MogriChess/issues/3
+
             Game game = GameFactory.GetNewGame();
 
             List<string> moveNotations =
