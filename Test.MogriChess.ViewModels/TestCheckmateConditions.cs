@@ -23,8 +23,6 @@ namespace Test.MogriChess.ViewModels
 
             foreach (MoveHistoryDTO move in moves)
             {
-                var squares = move.MoveShorthand.Split(":");
-
                 Square originationSquare =
                     game.Board.Squares.First(s => s.SquareShorthand.Equals(move.OriginationSquare));
                 Square destinationSquare =
