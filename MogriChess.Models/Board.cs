@@ -24,6 +24,12 @@ namespace MogriChess.Models
             PopulateBoardWithSquares();
         }
 
+        public void MovePiece(Square originationSquare, Square destinationSquare)
+        {
+            PlacePieceOnSquare(originationSquare.Piece, destinationSquare);
+            originationSquare.Piece = null;
+        }
+
         public void PlacePieceOnSquare(Piece piece, Square destinationSquare)
         {
             // Perform capture

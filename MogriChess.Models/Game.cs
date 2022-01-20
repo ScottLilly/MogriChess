@@ -109,14 +109,13 @@ namespace MogriChess.Models
                 return;
             }
 
-            // Move piece to new square
-            Board.PlacePieceOnSquare(SelectedSquare.Piece, square);
-
             var movingPieceColorType = SelectedSquare.Piece.ColorType;
             var opponentColorType = movingPieceColorType.OpponentColorType();
 
+            // Move piece to new square
+            Board.MovePiece(SelectedSquare, square);
+
             // Clear out square the moving piece moved from
-            SelectedSquare.Piece = null;
             SelectedSquare.IsSelected = false;
             SelectedSquare = null;
 
@@ -141,8 +140,7 @@ namespace MogriChess.Models
                         var destinationPiece = potentialMove.DestinationSquare.Piece?.Clone();
 
                         // Make the move
-                        Board.PlacePieceOnSquare(potentialMove.OriginationSquare.Piece, potentialMove.DestinationSquare);
-                        potentialMove.OriginationSquare.Piece = null;
+                        Board.MovePiece(potentialMove.OriginationSquare, potentialMove.DestinationSquare);
 
                         // Check if King is still in check
                         bool stillInCheck = KingCanBeCaptured(opponentColorType);
@@ -316,8 +314,7 @@ namespace MogriChess.Models
             Piece destinationPiece = move.DestinationSquare.Piece?.Clone();
 
             // Simulate the move
-            move.OriginationSquare.Piece = null;
-            Board.PlacePieceOnSquare(movingPiece, move.DestinationSquare);
+            Board.MovePiece(move.OriginationSquare, move.DestinationSquare);
 
             // Check if moving player's king can be captured
             bool putsMovingPlayerIntoCheckOrCheckmate =
