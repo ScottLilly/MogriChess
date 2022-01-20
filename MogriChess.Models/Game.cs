@@ -126,41 +126,7 @@ namespace MogriChess.Models
             {
                 move.PutsOpponentInCheck = true;
 
-                bool opponentCanEscape = false;
-
-                // See if they are in checkmate
-                foreach (var opponentSquare in Board.Squares.Where(s => s.Piece != null &&
-                                                                        s.Piece.ColorType == opponentColorType))
-                {
-                    foreach (Move potentialMove in ValidMovesForPieceAt(opponentSquare.Rank, opponentSquare.File))
-                    {
-                        // Clone pieces pre-move
-                        var originalMovingPiece = potentialMove.OriginationSquare.Piece.Clone();
-                        var destinationPiece = potentialMove.DestinationSquare.Piece?.Clone();
-
-                        // Make simulated move
-                        Board.MovePiece(potentialMove.OriginationSquare, potentialMove.DestinationSquare);
-
-                        bool stillInCheck = KingCanBeCaptured(opponentColorType);
-
-                        // Revert simulated move
-                        potentialMove.OriginationSquare.Piece = originalMovingPiece;
-                        potentialMove.DestinationSquare.Piece = destinationPiece;
-
-                        if (!stillInCheck)
-                        {
-                            opponentCanEscape = true;
-                            break;
-                        }
-                    }
-
-                    if (opponentCanEscape)
-                    {
-                        break;
-                    }
-                }
-
-                move.IsCheckmateMove = !opponentCanEscape;
+                move.IsCheckmateMove = OpponentIsInCheckmate(opponentColorType);
             }
 
             MoveHistory.Add(move);
@@ -171,6 +137,45 @@ namespace MogriChess.Models
             {
                 HandleCheckmate();
             }
+        }
+
+        private bool OpponentIsInCheckmate(Enums.ColorType opponentColorType)
+        {
+            bool isInCheckmate = true;
+
+            // See if they are in checkmate
+            foreach (var opponentSquare in Board.Squares.Where(s => s.Piece != null &&
+                                                                    s.Piece.ColorType == opponentColorType))
+            {
+                foreach (Move potentialMove in ValidMovesForPieceAt(opponentSquare.Rank, opponentSquare.File))
+                {
+                    // Clone pieces pre-move
+                    var originalMovingPiece = potentialMove.OriginationSquare.Piece.Clone();
+                    var destinationPiece = potentialMove.DestinationSquare.Piece?.Clone();
+
+                    // Make simulated move
+                    Board.MovePiece(potentialMove.OriginationSquare, potentialMove.DestinationSquare);
+
+                    bool stillInCheck = KingCanBeCaptured(opponentColorType);
+
+                    // Revert simulated move
+                    potentialMove.OriginationSquare.Piece = originalMovingPiece;
+                    potentialMove.DestinationSquare.Piece = destinationPiece;
+
+                    if (!stillInCheck)
+                    {
+                        isInCheckmate = false;
+                        break;
+                    }
+                }
+
+                if (!isInCheckmate)
+                {
+                    break;
+                }
+            }
+
+            return isInCheckmate;
         }
 
         public List<Move> ValidMovesForPieceAt(int rank, int file)
