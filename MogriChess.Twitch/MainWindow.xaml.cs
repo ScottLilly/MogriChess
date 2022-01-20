@@ -92,8 +92,12 @@ namespace MogriChess.WPF
 
         private void WriteCurrentGameState_OnClick(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "JSON data (*.json)|*.json";
+            SaveFileDialog dialog =
+                new SaveFileDialog
+                {
+                    Filter = "JSON data (*.json)|*.json"
+
+                };
 
             if (dialog.ShowDialog() == true)
             {
@@ -103,8 +107,11 @@ namespace MogriChess.WPF
 
         private void WriteMoveHistory_OnClick(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "JSON data (*.json)|*.json";
+            SaveFileDialog dialog =
+                new SaveFileDialog
+                {
+                    Filter = "JSON data (*.json)|*.json"
+                };
 
             if (dialog.ShowDialog() == true)
             {

@@ -1,6 +1,6 @@
 ﻿namespace MogriChess.Models
 {
-    public class Enums
+    public static class Enums
     {
         public enum ColorType
         {
