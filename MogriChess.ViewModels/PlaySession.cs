@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using MogriChess.Models;
 using MogriChess.Services;
-using Newtonsoft.Json;
 
 namespace MogriChess.ViewModels
 {

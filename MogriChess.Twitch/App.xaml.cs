@@ -2,8 +2,11 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Threading;
+using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MogriChess.Models.DTOs;
+using MogriChess.Services;
 using MogriChess.WPF.Windows;
 
 namespace MogriChess.WPF
@@ -33,6 +36,11 @@ namespace MogriChess.WPF
 
         private void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(AutoMapperProfile));
+
+            var serviceProvider = services.BuildServiceProvider();
+            BoardStateService.Configure(serviceProvider.GetService<IMapper>());
+
             services.AddSingleton(typeof(MainWindow));
             services.AddTransient(typeof(Help));
             services.AddTransient(typeof(About));

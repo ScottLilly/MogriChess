@@ -8,15 +8,11 @@ namespace MogriChess.Services
 {
     public static class BoardStateService
     {
-        private static readonly Mapper s_mapper;
+        private static IMapper s_mapper;
 
-        static BoardStateService()
+        public static void Configure(IMapper mapper)
         {
-            // Add mappings to DTO
-            s_mapper = new Mapper(new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Move, MoveHistoryDTO>();
-            }));
+            s_mapper = mapper;
         }
 
         public static string GetSerializedGameState(Game currentGame)
