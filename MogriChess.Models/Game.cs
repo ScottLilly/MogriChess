@@ -139,13 +139,12 @@ namespace MogriChess.Models
                         var originalMovingPiece = potentialMove.OriginationSquare.Piece.Clone();
                         var destinationPiece = potentialMove.DestinationSquare.Piece?.Clone();
 
-                        // Make the move
+                        // Make simulated move
                         Board.MovePiece(potentialMove.OriginationSquare, potentialMove.DestinationSquare);
 
-                        // Check if King is still in check
                         bool stillInCheck = KingCanBeCaptured(opponentColorType);
 
-                        // If not, return (after reverting move)
+                        // Revert simulated move
                         potentialMove.OriginationSquare.Piece = originalMovingPiece;
                         potentialMove.DestinationSquare.Piece = destinationPiece;
 
@@ -224,32 +223,32 @@ namespace MogriChess.Models
 
         public List<Move> ValidMovesForPieceAt(int rank, int file)
         {
-            Square startingSquare = Board.SquareAt(rank, file);
+            Square originationSquare = Board.SquareAt(rank, file);
 
             List<Move> validMoves = new List<Move>();
 
-            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.Forward));
-            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.ForwardRight));
-            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.Right));
-            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.BackRight));
-            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.Back));
-            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.BackLeft));
-            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.Left));
-            validMoves.AddRange(ValidMovesInDirection(startingSquare, Enums.Direction.ForwardLeft));
+            if (originationSquare.Piece == null)
+            {
+                return validMoves;
+            }
+
+            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Forward));
+            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.ForwardRight));
+            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Right));
+            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.BackRight));
+            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Back));
+            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.BackLeft));
+            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Left));
+            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.ForwardLeft));
 
             return validMoves;
         }
 
-        private List<Move> ValidMovesInDirection(Square startingSquare, Enums.Direction direction)
+        private List<Move> ValidMovesInDirection(Square originationSquare, Enums.Direction direction)
         {
             List<Move> validMoves = new List<Move>();
 
-            Piece movingPiece = startingSquare.Piece;
-
-            if (movingPiece == null)
-            {
-                return validMoves;
-            }
+            Piece movingPiece = originationSquare.Piece;
 
             int maxMovementSquareForDirection =
                 movingPiece.MaxMovementSquaresForDirection(direction);
@@ -258,8 +257,8 @@ namespace MogriChess.Models
 
             for (int i = 1; i <= maxMovementSquareForDirection; i++)
             {
-                int destinationRank = startingSquare.Rank + (i * rankMultiplier);
-                int destinationFile = startingSquare.File + (i * fileMultiplier);
+                int destinationRank = originationSquare.Rank + (i * rankMultiplier);
+                int destinationFile = originationSquare.File + (i * fileMultiplier);
 
                 // Off board, stop checking
                 if (destinationRank is < 1 or > Constants.NumberOfRanks ||
@@ -269,41 +268,44 @@ namespace MogriChess.Models
                 }
 
                 Square destinationSquare = Board.SquareAt(destinationRank, destinationFile);
-                Move potentialMove = new Move(startingSquare, destinationSquare);
+                Move potentialMove = new Move(originationSquare, destinationSquare);
 
                 // Un-promoted pawn reached opponent's back rank, and needs to be promoted.
-                if (movingPiece.IsUnpromotedPawn &&
-                    ((movingPiece.ColorType == Enums.ColorType.Light && destinationRank == Constants.BackRankDark) ||
-                     (movingPiece.ColorType == Enums.ColorType.Dark && destinationRank == Constants.BackRankLight)))
-                {
-                    potentialMove.IsPromotingMove = true;
-                }
+                potentialMove.IsPromotingMove =
+                    IsPawnPromotionMove(potentialMove);
 
-                Piece pieceAtDestination = destinationSquare.Piece;
+                Piece destinationPiece = destinationSquare.Piece;
 
-                if (pieceAtDestination == null)
+                if (destinationSquare.IsEmpty)
                 {
-                    // Square is empty
                     validMoves.Add(potentialMove);
                 }
-                else if (pieceAtDestination.ColorType != movingPiece.ColorType)
+                else
                 {
-                    // Square is occupied by an opponent's piece
-                    potentialMove.IsCapturingMove = true;
-                    potentialMove.PutsOpponentInCheck = pieceAtDestination.IsKing;
+                    if (destinationSquare.Piece.ColorType != movingPiece.ColorType)
+                    {
+                        // Square is occupied by an opponent's piece
+                        potentialMove.IsCapturingMove = true;
+                        potentialMove.PutsOpponentInCheck = destinationPiece.IsKing;
 
-                    validMoves.Add(potentialMove);
+                        validMoves.Add(potentialMove);
+                    }
 
-                    break;
-                }
-                else if (pieceAtDestination.ColorType == movingPiece.ColorType)
-                {
-                    // Square is occupied by a player's piece
                     break;
                 }
             }
 
             return validMoves;
+        }
+
+        private static bool IsPawnPromotionMove(Move potentialMove)
+        {
+            Piece piece = potentialMove.OriginationSquare.Piece;
+            int destinationRank = potentialMove.DestinationRank;
+
+            return piece.IsUnpromotedPawn &&
+                   (piece.ColorType == Enums.ColorType.Light && destinationRank == Constants.BackRankDark ||
+                    piece.ColorType == Enums.ColorType.Dark && destinationRank == Constants.BackRankLight);
         }
 
         private bool PutsMovingPlayerIntoCheckOrCheckmate(Move move)
@@ -320,7 +322,7 @@ namespace MogriChess.Models
             bool putsMovingPlayerIntoCheckOrCheckmate =
                 KingCanBeCaptured(movingPiece.ColorType);
 
-            // Undo the simulated move
+            // Revert the simulated move
             Board.SquareAt(move.OriginationSquare.Rank, move.OriginationSquare.File).Piece =
                 originatingMovePiece;
             Board.SquareAt(move.DestinationRank, move.DestinationFile).Piece =

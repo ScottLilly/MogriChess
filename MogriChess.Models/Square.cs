@@ -23,7 +23,9 @@ namespace MogriChess.Models
 
         public int UiGridRow => Constants.NumberOfRanks - Rank;
         public int UiGridColumn => File - 1;
+        
         public string SquareShorthand => $"{FileAsLetter}{Rank}";
+        public bool IsEmpty => Piece == null;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
