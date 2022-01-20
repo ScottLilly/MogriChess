@@ -1,4 +1,5 @@
-﻿using MogriChess.Models;
+﻿using System.Collections.Generic;
+using MogriChess.Models;
 
 namespace MogriChess.Services
 {
@@ -9,38 +10,54 @@ namespace MogriChess.Services
             ColorScheme boardColorScheme = new ColorScheme("#DDDDDD", "#ADADAD");
             ColorScheme piecesColorScheme = new ColorScheme("#FFFFFF", "#000000");
 
-            Board board = new Board(boardColorScheme, piecesColorScheme);
+            var piecePlacements =
+                GetStartingPiecePlacements(piecesColorScheme);
 
-            PopulatePieces(board, piecesColorScheme, Enums.ColorType.Light);
-            PopulatePieces(board, piecesColorScheme, Enums.ColorType.Dark);
-
-            return board;
+            return new Board(boardColorScheme, piecesColorScheme, piecePlacements);
         }
 
-        private static void PopulatePieces(Board board, ColorScheme colorScheme, Enums.ColorType colorType)
+        private static List<PiecePlacement> GetStartingPiecePlacements(ColorScheme colorScheme)
         {
-            int pawnRow = colorType == Enums.ColorType.Light ? Constants.PawnRankLight : Constants.PawnRankDark;
-            int majorPieceRow = colorType == Enums.ColorType.Light ? Constants.BackRankLight : Constants.BackRankDark;
+            List<PiecePlacement> placements =
+                new List<PiecePlacement>();
 
-            // Add major pieces
-            board.PlacePieceOnSquare(PieceFactory.GetRook(colorScheme, colorType), board.SquareAt(majorPieceRow, 1));
-            board.PlacePieceOnSquare(PieceFactory.GetKnight(colorScheme, colorType), board.SquareAt(majorPieceRow, 2));
-            board.PlacePieceOnSquare(PieceFactory.GetBishop(colorScheme, colorType), board.SquareAt(majorPieceRow, 3));
-            board.PlacePieceOnSquare(PieceFactory.GetQueen(colorScheme, colorType), board.SquareAt(majorPieceRow, 4));
-            board.PlacePieceOnSquare(PieceFactory.GetKing(colorScheme, colorType), board.SquareAt(majorPieceRow, 5));
-            board.PlacePieceOnSquare(PieceFactory.GetBishop(colorScheme, colorType), board.SquareAt(majorPieceRow, 6));
-            board.PlacePieceOnSquare(PieceFactory.GetKnight(colorScheme, colorType), board.SquareAt(majorPieceRow, 7));
-            board.PlacePieceOnSquare(PieceFactory.GetRook(colorScheme, colorType), board.SquareAt(majorPieceRow, 8));
+            placements.Add(new PiecePlacement(Constants.BackRankLight, 1, PieceFactory.GetRook(colorScheme, Enums.ColorType.Light)));
+            placements.Add(new PiecePlacement(Constants.BackRankLight, 2, PieceFactory.GetKnight(colorScheme, Enums.ColorType.Light)));
+            placements.Add(new PiecePlacement(Constants.BackRankLight, 3, PieceFactory.GetBishop(colorScheme, Enums.ColorType.Light)));
+            placements.Add(new PiecePlacement(Constants.BackRankLight, 4, PieceFactory.GetQueen(colorScheme, Enums.ColorType.Light)));
+            placements.Add(new PiecePlacement(Constants.BackRankLight, 5, PieceFactory.GetKing(colorScheme, Enums.ColorType.Light)));
+            placements.Add(new PiecePlacement(Constants.BackRankLight, 6, PieceFactory.GetBishop(colorScheme, Enums.ColorType.Light)));
+            placements.Add(new PiecePlacement(Constants.BackRankLight, 7, PieceFactory.GetKnight(colorScheme, Enums.ColorType.Light)));
+            placements.Add(new PiecePlacement(Constants.BackRankLight, 8, PieceFactory.GetRook(colorScheme, Enums.ColorType.Light)));
 
-            // Add pawns
-            board.PlacePieceOnSquare(PieceFactory.GetPawn(colorScheme, colorType), board.SquareAt(pawnRow, 1));
-            board.PlacePieceOnSquare(PieceFactory.GetPawn(colorScheme, colorType), board.SquareAt(pawnRow, 2));
-            board.PlacePieceOnSquare(PieceFactory.GetPawn(colorScheme, colorType), board.SquareAt(pawnRow, 3));
-            board.PlacePieceOnSquare(PieceFactory.GetPawn(colorScheme, colorType), board.SquareAt(pawnRow, 4));
-            board.PlacePieceOnSquare(PieceFactory.GetPawn(colorScheme, colorType), board.SquareAt(pawnRow, 5));
-            board.PlacePieceOnSquare(PieceFactory.GetPawn(colorScheme, colorType), board.SquareAt(pawnRow, 6));
-            board.PlacePieceOnSquare(PieceFactory.GetPawn(colorScheme, colorType), board.SquareAt(pawnRow, 7));
-            board.PlacePieceOnSquare(PieceFactory.GetPawn(colorScheme, colorType), board.SquareAt(pawnRow, 8));
+            placements.Add(new PiecePlacement(Constants.PawnRankLight, 1, PieceFactory.GetPawn(colorScheme, Enums.ColorType.Light)));
+            placements.Add(new PiecePlacement(Constants.PawnRankLight, 2, PieceFactory.GetPawn(colorScheme, Enums.ColorType.Light)));
+            placements.Add(new PiecePlacement(Constants.PawnRankLight, 3, PieceFactory.GetPawn(colorScheme, Enums.ColorType.Light)));
+            placements.Add(new PiecePlacement(Constants.PawnRankLight, 4, PieceFactory.GetPawn(colorScheme, Enums.ColorType.Light)));
+            placements.Add(new PiecePlacement(Constants.PawnRankLight, 5, PieceFactory.GetPawn(colorScheme, Enums.ColorType.Light)));
+            placements.Add(new PiecePlacement(Constants.PawnRankLight, 6, PieceFactory.GetPawn(colorScheme, Enums.ColorType.Light)));
+            placements.Add(new PiecePlacement(Constants.PawnRankLight, 7, PieceFactory.GetPawn(colorScheme, Enums.ColorType.Light)));
+            placements.Add(new PiecePlacement(Constants.PawnRankLight, 8, PieceFactory.GetPawn(colorScheme, Enums.ColorType.Light)));
+
+            placements.Add(new PiecePlacement(Constants.BackRankDark, 1, PieceFactory.GetRook(colorScheme, Enums.ColorType.Dark)));
+            placements.Add(new PiecePlacement(Constants.BackRankDark, 2, PieceFactory.GetKnight(colorScheme, Enums.ColorType.Dark)));
+            placements.Add(new PiecePlacement(Constants.BackRankDark, 3, PieceFactory.GetBishop(colorScheme, Enums.ColorType.Dark)));
+            placements.Add(new PiecePlacement(Constants.BackRankDark, 4, PieceFactory.GetQueen(colorScheme, Enums.ColorType.Dark)));
+            placements.Add(new PiecePlacement(Constants.BackRankDark, 5, PieceFactory.GetKing(colorScheme, Enums.ColorType.Dark)));
+            placements.Add(new PiecePlacement(Constants.BackRankDark, 6, PieceFactory.GetBishop(colorScheme, Enums.ColorType.Dark)));
+            placements.Add(new PiecePlacement(Constants.BackRankDark, 7, PieceFactory.GetKnight(colorScheme, Enums.ColorType.Dark)));
+            placements.Add(new PiecePlacement(Constants.BackRankDark, 8, PieceFactory.GetRook(colorScheme, Enums.ColorType.Dark)));
+
+            placements.Add(new PiecePlacement(Constants.PawnRankDark, 1, PieceFactory.GetPawn(colorScheme, Enums.ColorType.Dark)));
+            placements.Add(new PiecePlacement(Constants.PawnRankDark, 2, PieceFactory.GetPawn(colorScheme, Enums.ColorType.Dark)));
+            placements.Add(new PiecePlacement(Constants.PawnRankDark, 3, PieceFactory.GetPawn(colorScheme, Enums.ColorType.Dark)));
+            placements.Add(new PiecePlacement(Constants.PawnRankDark, 4, PieceFactory.GetPawn(colorScheme, Enums.ColorType.Dark)));
+            placements.Add(new PiecePlacement(Constants.PawnRankDark, 5, PieceFactory.GetPawn(colorScheme, Enums.ColorType.Dark)));
+            placements.Add(new PiecePlacement(Constants.PawnRankDark, 6, PieceFactory.GetPawn(colorScheme, Enums.ColorType.Dark)));
+            placements.Add(new PiecePlacement(Constants.PawnRankDark, 7, PieceFactory.GetPawn(colorScheme, Enums.ColorType.Dark)));
+            placements.Add(new PiecePlacement(Constants.PawnRankDark, 8, PieceFactory.GetPawn(colorScheme, Enums.ColorType.Dark)));
+
+            return placements;
         }
     }
 }
