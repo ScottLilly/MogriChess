@@ -19,8 +19,8 @@ namespace MogriChess.Services
 
         private static void PopulatePieces(Board board, ColorScheme colorScheme, Enums.ColorType colorType)
         {
-            int pawnRow = colorType == Enums.ColorType.Light ? 2 : 7;
-            int majorPieceRow = colorType == Enums.ColorType.Light ? 1 : 8;
+            int pawnRow = colorType == Enums.ColorType.Light ? Constants.PawnRankLight : Constants.PawnRankDark;
+            int majorPieceRow = colorType == Enums.ColorType.Light ? Constants.BackRankLight : Constants.BackRankDark;
 
             // Add major pieces
             board.PlacePieceOnSquare(PieceFactory.GetRook(colorScheme, colorType), board.SquareAt(majorPieceRow, 1));

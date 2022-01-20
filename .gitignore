@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /NDependOut
 *.ndproj
+/NDependOut1

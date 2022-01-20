@@ -29,13 +29,13 @@ namespace Test.MogriChess.ViewModels
             Assert.True(piece.ColorType == Enums.ColorType.Light);
             Assert.False(piece.IsKing);
 
-            Assert.Equal(99, piece.Forward.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Forward.Squares);
             Assert.Equal(0, piece.ForwardRight.Squares);
-            Assert.Equal(99, piece.Right.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Right.Squares);
             Assert.Equal(0, piece.BackRight.Squares);
-            Assert.Equal(99, piece.Back.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Back.Squares);
             Assert.Equal(0, piece.BackLeft.Squares);
-            Assert.Equal(99, piece.Left.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Left.Squares);
             Assert.Equal(0, piece.ForwardLeft.Squares);
         }
 
@@ -74,13 +74,13 @@ namespace Test.MogriChess.ViewModels
             Assert.False(piece.IsKing);
 
             Assert.Equal(0, piece.Forward.Squares);
-            Assert.Equal(99, piece.ForwardRight.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.ForwardRight.Squares);
             Assert.Equal(0, piece.Right.Squares);
-            Assert.Equal(99, piece.BackRight.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.BackRight.Squares);
             Assert.Equal(0, piece.Back.Squares);
-            Assert.Equal(99, piece.BackLeft.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.BackLeft.Squares);
             Assert.Equal(0, piece.Left.Squares);
-            Assert.Equal(99, piece.ForwardLeft.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.ForwardLeft.Squares);
         }
 
         [Fact]
@@ -95,14 +95,14 @@ namespace Test.MogriChess.ViewModels
             Assert.True(piece.ColorType == Enums.ColorType.Light);
             Assert.False(piece.IsKing);
 
-            Assert.Equal(99, piece.Forward.Squares);
-            Assert.Equal(99, piece.ForwardRight.Squares);
-            Assert.Equal(99, piece.Right.Squares);
-            Assert.Equal(99, piece.BackRight.Squares);
-            Assert.Equal(99, piece.Back.Squares);
-            Assert.Equal(99, piece.BackLeft.Squares);
-            Assert.Equal(99, piece.Left.Squares);
-            Assert.Equal(99, piece.ForwardLeft.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Forward.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.ForwardRight.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Right.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.BackRight.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Back.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.BackLeft.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Left.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.ForwardLeft.Squares);
         }
 
         [Fact]
@@ -140,13 +140,13 @@ namespace Test.MogriChess.ViewModels
             Assert.False(piece.IsKing);
 
             Assert.Equal(0, piece.Forward.Squares);
-            Assert.Equal(99, piece.ForwardRight.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.ForwardRight.Squares);
             Assert.Equal(0, piece.Right.Squares);
-            Assert.Equal(99, piece.BackRight.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.BackRight.Squares);
             Assert.Equal(0, piece.Back.Squares);
-            Assert.Equal(99, piece.BackLeft.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.BackLeft.Squares);
             Assert.Equal(0, piece.Left.Squares);
-            Assert.Equal(99, piece.ForwardLeft.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.ForwardLeft.Squares);
         }
 
         [Fact]
@@ -183,13 +183,13 @@ namespace Test.MogriChess.ViewModels
             Assert.True(piece.ColorType == Enums.ColorType.Light);
             Assert.False(piece.IsKing);
 
-            Assert.Equal(99, piece.Forward.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Forward.Squares);
             Assert.Equal(0, piece.ForwardRight.Squares);
-            Assert.Equal(99, piece.Right.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Right.Squares);
             Assert.Equal(0, piece.BackRight.Squares);
-            Assert.Equal(99, piece.Back.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Back.Squares);
             Assert.Equal(0, piece.BackLeft.Squares);
-            Assert.Equal(99, piece.Left.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Left.Squares);
             Assert.Equal(0, piece.ForwardLeft.Squares);
         }
 
@@ -633,13 +633,13 @@ namespace Test.MogriChess.ViewModels
             Assert.True(piece.ColorType == Enums.ColorType.Dark);
             Assert.False(piece.IsKing);
 
-            Assert.Equal(99, piece.Forward.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Forward.Squares);
             Assert.Equal(0, piece.ForwardRight.Squares);
-            Assert.Equal(99, piece.Right.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Right.Squares);
             Assert.Equal(0, piece.BackRight.Squares);
-            Assert.Equal(99, piece.Back.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Back.Squares);
             Assert.Equal(0, piece.BackLeft.Squares);
-            Assert.Equal(99, piece.Left.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Left.Squares);
             Assert.Equal(0, piece.ForwardLeft.Squares);
         }
 
@@ -678,13 +678,13 @@ namespace Test.MogriChess.ViewModels
             Assert.False(piece.IsKing);
 
             Assert.Equal(0, piece.Forward.Squares);
-            Assert.Equal(99, piece.ForwardRight.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.ForwardRight.Squares);
             Assert.Equal(0, piece.Right.Squares);
-            Assert.Equal(99, piece.BackRight.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.BackRight.Squares);
             Assert.Equal(0, piece.Back.Squares);
-            Assert.Equal(99, piece.BackLeft.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.BackLeft.Squares);
             Assert.Equal(0, piece.Left.Squares);
-            Assert.Equal(99, piece.ForwardLeft.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.ForwardLeft.Squares);
         }
 
         [Fact]
@@ -699,14 +699,14 @@ namespace Test.MogriChess.ViewModels
             Assert.True(piece.ColorType == Enums.ColorType.Dark);
             Assert.False(piece.IsKing);
 
-            Assert.Equal(99, piece.Forward.Squares);
-            Assert.Equal(99, piece.ForwardRight.Squares);
-            Assert.Equal(99, piece.Right.Squares);
-            Assert.Equal(99, piece.BackRight.Squares);
-            Assert.Equal(99, piece.Back.Squares);
-            Assert.Equal(99, piece.BackLeft.Squares);
-            Assert.Equal(99, piece.Left.Squares);
-            Assert.Equal(99, piece.ForwardLeft.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Forward.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.ForwardRight.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Right.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.BackRight.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Back.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.BackLeft.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Left.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.ForwardLeft.Squares);
         }
 
         [Fact]
@@ -744,13 +744,13 @@ namespace Test.MogriChess.ViewModels
             Assert.False(piece.IsKing);
 
             Assert.Equal(0, piece.Forward.Squares);
-            Assert.Equal(99, piece.ForwardRight.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.ForwardRight.Squares);
             Assert.Equal(0, piece.Right.Squares);
-            Assert.Equal(99, piece.BackRight.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.BackRight.Squares);
             Assert.Equal(0, piece.Back.Squares);
-            Assert.Equal(99, piece.BackLeft.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.BackLeft.Squares);
             Assert.Equal(0, piece.Left.Squares);
-            Assert.Equal(99, piece.ForwardLeft.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.ForwardLeft.Squares);
         }
 
         [Fact]
@@ -787,13 +787,13 @@ namespace Test.MogriChess.ViewModels
             Assert.True(piece.ColorType == Enums.ColorType.Dark);
             Assert.False(piece.IsKing);
 
-            Assert.Equal(99, piece.Forward.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Forward.Squares);
             Assert.Equal(0, piece.ForwardRight.Squares);
-            Assert.Equal(99, piece.Right.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Right.Squares);
             Assert.Equal(0, piece.BackRight.Squares);
-            Assert.Equal(99, piece.Back.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Back.Squares);
             Assert.Equal(0, piece.BackLeft.Squares);
-            Assert.Equal(99, piece.Left.Squares);
+            Assert.Equal(Constants.UnlimitedMoves, piece.Left.Squares);
             Assert.Equal(0, piece.ForwardLeft.Squares);
         }
 

@@ -13,10 +13,6 @@ namespace MogriChess.Models
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public MovementIndicator()
-        {
-        }
-
         public void MergeMovementAbility(int squares)
         {
             Squares = Math.Max(Squares, squares);

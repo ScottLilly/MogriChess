@@ -12,7 +12,7 @@ namespace MogriChess.Models
 
         #region Private properties
 
-        public Enums.ColorType CurrentPlayerColor { get; set; } =
+        public Enums.ColorType CurrentPlayerColor { get; private set; } =
             Enums.ColorType.Light;
 
         private Square SelectedSquare
@@ -264,7 +264,8 @@ namespace MogriChess.Models
                 int destinationFile = startingSquare.File + (i * fileMultiplier);
 
                 // Off board, stop checking
-                if (destinationRank is < 1 or > 8 || destinationFile is < 1 or > 8)
+                if (destinationRank is < 1 or > Constants.NumberOfRanks ||
+                    destinationFile is < 1 or > Constants.NumberOfFiles)
                 {
                     break;
                 }
@@ -274,8 +275,8 @@ namespace MogriChess.Models
 
                 // Un-promoted pawn reached opponent's back rank, and needs to be promoted.
                 if (movingPiece.IsUnpromotedPawn &&
-                    ((movingPiece.ColorType == Enums.ColorType.Light && destinationRank == 8) ||
-                     (movingPiece.ColorType == Enums.ColorType.Dark && destinationRank == 1)))
+                    ((movingPiece.ColorType == Enums.ColorType.Light && destinationRank == Constants.BackRankDark) ||
+                     (movingPiece.ColorType == Enums.ColorType.Dark && destinationRank == Constants.BackRankLight)))
                 {
                     potentialMove.IsPromotingMove = true;
                 }

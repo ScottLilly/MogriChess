@@ -21,7 +21,7 @@ namespace MogriChess.Models
                 ? _colorScheme.LightColor
                 : _colorScheme.DarkColor;
 
-        public int UiGridRow => 8 - Rank;
+        public int UiGridRow => Constants.NumberOfRanks - Rank;
         public int UiGridColumn => File - 1;
         public string SquareShorthand => $"{FileAsLetter}{Rank}";
 

@@ -15,7 +15,7 @@ namespace MogriChess.WPF
     public partial class MainWindow : Window
     {
         private readonly IServiceProvider _serviceProvider;
-        private bool _canPlay = false;
+        private bool _canPlay;
 
         private PlaySession CurrentSession => DataContext as PlaySession;
 
@@ -43,7 +43,7 @@ namespace MogriChess.WPF
             CurrentSession.GameOver += OnGameOver;
         }
 
-        private void OnGameOver(object? sender, EventArgs e)
+        private void OnGameOver(object sender, EventArgs e)
         {
             _canPlay = false;
         }

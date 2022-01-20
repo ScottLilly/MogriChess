@@ -39,8 +39,8 @@ namespace MogriChess.Models
                 return;
             }
 
-            if ((piece.ColorType == Enums.ColorType.Light && destinationSquare.Rank == 8) ||
-                (piece.ColorType == Enums.ColorType.Dark && destinationSquare.Rank == 1))
+            if ((piece.ColorType == Enums.ColorType.Light && destinationSquare.Rank == Constants.BackRankDark) ||
+                (piece.ColorType == Enums.ColorType.Dark && destinationSquare.Rank == Constants.BackRankLight))
             {
                 piece.Promote();
             }
@@ -66,11 +66,11 @@ namespace MogriChess.Models
 
         private void PopulateBoardWithSquares()
         {
-            for (int rank = 1; rank <= 8; rank++)
+            for (int rank = 1; rank <= Constants.NumberOfRanks; rank++)
             {
                 _squareColorType = rank % 2 == 0 ? Enums.ColorType.Light : Enums.ColorType.Dark;
 
-                for (int file = 1; file <= 8; file++)
+                for (int file = 1; file <= Constants.NumberOfFiles; file++)
                 {
                     Squares.Add(new Square(rank, file, BoardColorScheme, GetCurrentSquareColor()));
                 }
