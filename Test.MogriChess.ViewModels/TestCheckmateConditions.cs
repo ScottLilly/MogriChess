@@ -18,7 +18,7 @@ namespace Test.MogriChess.ViewModels
             // https://github.com/ScottLilly/MogriChess/issues/3
 
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             List<MoveHistoryDTO> moves =

@@ -12,7 +12,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_InstantiateGame()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             Assert.NotNull(game);

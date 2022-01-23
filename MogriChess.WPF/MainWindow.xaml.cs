@@ -32,25 +32,25 @@ namespace MogriChess.WPF
 
         private void LightHumanDarkBot_OnClick(object sender, RoutedEventArgs e)
         {
-
+            StartGame(Enums.PlayerType.Human, Enums.PlayerType.Bot);
         }
 
         private void LightBotDarkHuman_OnClick(object sender, RoutedEventArgs e)
         {
-
+            StartGame(Enums.PlayerType.Bot, Enums.PlayerType.Human);
         }
 
         private void LightHumanDarkHuman_OnClick(object sender, RoutedEventArgs e)
         {
-            StartGame();
+            StartGame(Enums.PlayerType.Human, Enums.PlayerType.Human);
         }
 
-        private void StartGame()
+        private void StartGame(Enums.PlayerType lightPlayer, Enums.PlayerType darkPlayer)
         {
             CurrentSession.CurrentGame.MoveHistory.CollectionChanged -= MoveHistory_CollectionChanged;
             CurrentSession.GameOver -= OnGameOver;
 
-            CurrentSession.SetBoardToStartingState();
+            CurrentSession.StartGame(lightPlayer, darkPlayer);
 
             CurrentSession.CurrentGame.MoveHistory.CollectionChanged += MoveHistory_CollectionChanged;
             CurrentSession.GameOver += OnGameOver;

@@ -22,7 +22,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_A1()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(1, FILE_A);
@@ -46,7 +46,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_B1()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(1, FILE_B);
@@ -70,7 +70,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_C1()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(1, FILE_C);
@@ -94,7 +94,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_D1()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(1, FILE_D);
@@ -118,7 +118,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_E1()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(1, FILE_E);
@@ -142,7 +142,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_F1()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(1, FILE_F);
@@ -166,7 +166,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_G1()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(1, FILE_G);
@@ -190,7 +190,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_H1()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(1, FILE_H);
@@ -218,7 +218,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_A2()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(2, FILE_A);
@@ -242,7 +242,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_B2()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(2, FILE_B);
@@ -266,7 +266,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_C2()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(2, FILE_C);
@@ -290,7 +290,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_D2()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(2, FILE_D);
@@ -314,7 +314,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_E2()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(2, FILE_E);
@@ -338,7 +338,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_F2()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(2, FILE_F);
@@ -362,7 +362,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_G2()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(2, FILE_G);
@@ -386,7 +386,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_H2()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(2, FILE_H);
@@ -414,7 +414,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPieces_Rank_3()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             Assert.Null(game.Board.PieceAt(3, FILE_A));
@@ -431,7 +431,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPieces_Rank_4()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             Assert.Null(game.Board.PieceAt(4, FILE_A));
@@ -448,7 +448,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPieces_Rank_5()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             Assert.Null(game.Board.PieceAt(5, FILE_A));
@@ -465,7 +465,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPieces_Rank_6()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             Assert.Null(game.Board.PieceAt(6, FILE_A));
@@ -486,7 +486,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_A7()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(7, FILE_A);
@@ -510,7 +510,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_B7()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(7, FILE_B);
@@ -534,7 +534,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_C7()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(7, FILE_C);
@@ -558,7 +558,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_D7()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(7, FILE_D);
@@ -582,7 +582,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_E7()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(7, FILE_E);
@@ -606,7 +606,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_F7()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(7, FILE_F);
@@ -630,7 +630,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_G7()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(7, FILE_G);
@@ -654,7 +654,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_H7()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(7, FILE_H);
@@ -682,7 +682,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_A8()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(8, FILE_A);
@@ -706,7 +706,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_B8()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(8, FILE_B);
@@ -730,7 +730,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_C8()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(8, FILE_C);
@@ -754,7 +754,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_D8()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(8, FILE_D);
@@ -778,7 +778,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_E8()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(8, FILE_E);
@@ -802,7 +802,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_F8()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(8, FILE_F);
@@ -826,7 +826,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_G8()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(8, FILE_G);
@@ -850,7 +850,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ExpectedPiece_H8()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var piece = game.Board.PieceAt(8, FILE_H);

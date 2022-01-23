@@ -27,5 +27,11 @@
             ForwardLeft = 315
         }
 
+        public enum PlayerType
+        {
+            Human,
+            Bot
+        }
+
     }
 }

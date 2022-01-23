@@ -12,7 +12,7 @@ namespace Test.MogriChess.ViewModels
         {
             // Light major pieces are blocked at game start
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             Assert.Empty(game.ValidMovesForPieceAt(1, 1));
@@ -31,7 +31,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ValidMovesForPiece_A2()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var validDestinations = game.ValidMovesForPieceAt(2, 1);
@@ -45,7 +45,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ValidMovesForPiece_B2()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var validDestinations = game.ValidMovesForPieceAt(2, 2);
@@ -60,7 +60,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ValidMovesForPiece_C2()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var validDestinations = game.ValidMovesForPieceAt(2, 3);
@@ -75,7 +75,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ValidMovesForPiece_D2()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var validDestinations = game.ValidMovesForPieceAt(2, 4);
@@ -90,7 +90,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ValidMovesForPiece_E2()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var validDestinations = game.ValidMovesForPieceAt(2, 5);
@@ -105,7 +105,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ValidMovesForPiece_F2()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var validDestinations = game.ValidMovesForPieceAt(2, 6);
@@ -120,7 +120,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ValidMovesForPiece_G2()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var validDestinations = game.ValidMovesForPieceAt(2, 7);
@@ -135,7 +135,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ValidMovesForPiece_H2()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var validDestinations = game.ValidMovesForPieceAt(2, 8);
@@ -153,7 +153,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ValidMovesForPiece_A7()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var validDestinations = game.ValidMovesForPieceAt(7, 1);
@@ -167,7 +167,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ValidMovesForPiece_B7()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var validDestinations = game.ValidMovesForPieceAt(7, 2);
@@ -182,7 +182,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ValidMovesForPiece_C7()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var validDestinations = game.ValidMovesForPieceAt(7, 3);
@@ -197,7 +197,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ValidMovesForPiece_D7()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var validDestinations = game.ValidMovesForPieceAt(7, 4);
@@ -212,7 +212,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ValidMovesForPiece_E7()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var validDestinations = game.ValidMovesForPieceAt(7, 5);
@@ -227,7 +227,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ValidMovesForPiece_F7()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var validDestinations = game.ValidMovesForPieceAt(7, 6);
@@ -242,7 +242,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ValidMovesForPiece_G7()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var validDestinations = game.ValidMovesForPieceAt(7, 7);
@@ -257,7 +257,7 @@ namespace Test.MogriChess.ViewModels
         public void Test_ValidMovesForPiece_H7()
         {
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             var validDestinations = game.ValidMovesForPieceAt(7, 8);
@@ -274,7 +274,7 @@ namespace Test.MogriChess.ViewModels
         {
             // Dark major pieces are blocked at game start
             PlaySession session = new PlaySession();
-            session.SetBoardToStartingState();
+            session.StartGame();
             Game game = session.CurrentGame;
 
             Assert.Empty(game.ValidMovesForPieceAt(8, 1));
