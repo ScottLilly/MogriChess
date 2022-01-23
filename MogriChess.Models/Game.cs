@@ -155,20 +155,7 @@ namespace MogriChess.Models
             {
                 foreach (Move potentialMove in ValidMovesForPieceAt(opponentSquare.Rank, opponentSquare.File))
                 {
-                    // Clone pieces pre-move
-                    var originalMovingPiece = potentialMove.OriginationSquare.Piece.Clone();
-                    var destinationPiece = potentialMove.DestinationSquare.Piece?.Clone();
-
-                    // Make simulated move
-                    Board.MovePiece(potentialMove.OriginationSquare, potentialMove.DestinationSquare);
-
-                    bool stillInCheck = KingCanBeCaptured(opponentColorType);
-
-                    // Revert simulated move
-                    potentialMove.OriginationSquare.Piece = originalMovingPiece;
-                    potentialMove.DestinationSquare.Piece = destinationPiece;
-
-                    if (!stillInCheck)
+                    if (MoveGetsKingOutOfCheck(opponentColorType, potentialMove))
                     {
                         isInCheckmate = false;
                         break;
@@ -226,21 +213,10 @@ namespace MogriChess.Models
             {
                 foreach (Move potentialMove in potentialMoves)
                 {
-                    // Clone pieces pre-move
-                    var originalMovingPiece = potentialMove.OriginationSquare.Piece.Clone();
-                    var destinationPiece = potentialMove.DestinationSquare.Piece?.Clone();
-
-                    // Make simulated move
-                    Board.MovePiece(potentialMove.OriginationSquare, potentialMove.DestinationSquare);
-
-                    if (!KingCanBeCaptured(botPlayer.ColorType))
+                    if (MoveGetsKingOutOfCheck(botPlayer.ColorType, potentialMove))
                     {
                         validMoves.Add(potentialMove);
                     }
-
-                    // Revert simulated move
-                    potentialMove.OriginationSquare.Piece = originalMovingPiece;
-                    potentialMove.DestinationSquare.Piece = destinationPiece;
                 }
             }
             else
@@ -262,6 +238,24 @@ namespace MogriChess.Models
         {
             SelectedSquare.IsSelected = false;
             SelectedSquare = null;
+        }
+
+        private bool MoveGetsKingOutOfCheck(Enums.ColorType kingColor, Move potentialMove)
+        {
+            // Clone pieces pre-move
+            var originalMovingPiece = potentialMove.OriginationSquare.Piece.Clone();
+            var destinationPiece = potentialMove.DestinationSquare.Piece?.Clone();
+
+            // Make simulated move
+            Board.MovePiece(potentialMove.OriginationSquare, potentialMove.DestinationSquare);
+
+            bool stillInCheck = KingCanBeCaptured(kingColor);
+
+            // Revert simulated move
+            potentialMove.OriginationSquare.Piece = originalMovingPiece;
+            potentialMove.DestinationSquare.Piece = destinationPiece;
+
+            return !stillInCheck;
         }
 
         private void HandleCheckmate()
