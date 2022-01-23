@@ -109,8 +109,8 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Canvas Background="{Binding SquareColor}"
-                                        ZIndex="1"
-                                        MouseLeftButtonUp="ClickedOnSquare_OnMouseLeftButtonUp">
+                                    ZIndex="1"
+                                    MouseLeftButtonUp="ClickedOnSquare_OnMouseLeftButtonUp">
 
                                 <!-- Highlight square if it's the currently-selected square -->
                                 <Canvas Width="90" Height="90"
