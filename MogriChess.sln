@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31829.152
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MogriChess.WPF", "MogriChess.Twitch\MogriChess.WPF.csproj", "{15AAC2C3-CFA9-4715-9AF2-98E524AD9384}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MogriChess.WPF", "MogriChess.WPF\MogriChess.WPF.csproj", "{15AAC2C3-CFA9-4715-9AF2-98E524AD9384}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MogriChess.Models", "MogriChess.Models\MogriChess.Models.csproj", "{E87EA4C2-1BBD-4365-8DF7-B3FE59398886}"
 EndProject
