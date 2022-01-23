@@ -25,6 +25,10 @@ namespace MogriChess.WPF
 
             _serviceProvider = serviceProvider;
 
+            DataContext = new PlaySession();
+
+            _canPlay = true;
+
             StartGame();
         }
 
@@ -35,9 +39,10 @@ namespace MogriChess.WPF
 
         private void StartGame()
         {
-            DataContext = new PlaySession();
+            CurrentSession.CurrentGame.MoveHistory.CollectionChanged -= MoveHistory_CollectionChanged;
+            CurrentSession.GameOver -= OnGameOver;
 
-            _canPlay = true;
+            CurrentSession.ResetBoardToStartingState();
 
             CurrentSession.CurrentGame.MoveHistory.CollectionChanged += MoveHistory_CollectionChanged;
             CurrentSession.GameOver += OnGameOver;

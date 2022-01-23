@@ -31,6 +31,20 @@ namespace MogriChess.Models
             }
         }
 
+        public void ResetBoard(List<PiecePlacement> piecePlacements)
+        {
+            // Clear out old pieces
+            foreach (Square square in Squares)
+            {
+                square.Piece = null;
+            }
+
+            foreach (PiecePlacement placement in piecePlacements)
+            {
+                PlacePieceOnSquare(placement.Piece, SquareAt(placement.Rank, placement.File));
+            }
+        }
+
         public Piece PieceAt(int rank, int file)
         {
             return SquareAt(rank, file).Piece;

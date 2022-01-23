@@ -22,6 +22,11 @@ namespace MogriChess.ViewModels
             //CurrentGame.DarkPlayerBot = new BotPlayer(Enums.ColorType.Dark);
         }
 
+        public void ResetBoardToStartingState()
+        {
+            BoardFactory.PopulateBoardWithStartingPieces(CurrentGame.Board);
+        }
+
         public string GetSerializedGameState()
         {
             return BoardStateService.GetSerializedGameState(CurrentGame);
