@@ -25,6 +25,7 @@ namespace MogriChess.ViewModels
         public void ResetBoardToStartingState()
         {
             BoardFactory.PopulateBoardWithStartingPieces(CurrentGame.Board);
+            CurrentGame.StartGame();
         }
 
         public string GetSerializedGameState()

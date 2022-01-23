@@ -17,21 +17,15 @@ namespace MogriChess.Models
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Board(ColorScheme boardColorScheme, ColorScheme piecesColorScheme,
-            List<PiecePlacement> piecePlacements)
+        public Board(ColorScheme boardColorScheme, ColorScheme piecesColorScheme)
         {
             BoardColorScheme = boardColorScheme;
             PieceColorScheme = piecesColorScheme;
 
             PopulateBoardWithSquares();
-
-            foreach (PiecePlacement placement in piecePlacements)
-            {
-                PlacePieceOnSquare(placement.Piece, SquareAt(placement.Rank, placement.File));
-            }
         }
 
-        public void ResetBoard(List<PiecePlacement> piecePlacements)
+        public void PlaceStartingPieces(List<PiecePlacement> piecePlacements)
         {
             // Clear out old pieces
             foreach (Square square in Squares)

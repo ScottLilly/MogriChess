@@ -70,6 +70,12 @@ namespace MogriChess.Models
 
         #region Public methods
 
+        public void StartGame()
+        {
+            MoveHistory.Clear();
+            CurrentPlayerColor = Enums.ColorType.Light;
+        }
+
         public void SelectSquare(Square square)
         {
             // No square is currently selected

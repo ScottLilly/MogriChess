@@ -32,8 +32,16 @@
         <Menu Grid.Row="0" Grid.Column="0"
               FontSize="11pt">
             <MenuItem Header="File">
-                <MenuItem Header="Start New Game"
-                          Click="StartNewGame_OnClick"/>
+                <MenuItem Header="Start New Game...">
+                    <MenuItem Header="Light=Human Dark=Bot"
+                              Click="LightHumanDarkBot_OnClick"/>
+                    <MenuItem Header="Light=Bot Dark=Human"
+                              Click="LightBotDarkHuman_OnClick"/>
+                    <MenuItem Header="Human vs. Human"
+                              Click="LightHumanDarkHuman_OnClick"/>
+                    <MenuItem Header="Bot vs. Bot"
+                              IsEnabled="False"/>
+                </MenuItem>
                 <Separator/>
                 <MenuItem Header="Exit"
                           Click="Exit_OnClick"/>

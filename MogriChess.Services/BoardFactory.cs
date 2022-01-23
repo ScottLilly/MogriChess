@@ -10,16 +10,13 @@ namespace MogriChess.Services
             ColorScheme boardColorScheme = new ColorScheme("#DDDDDD", "#ADADAD");
             ColorScheme piecesColorScheme = new ColorScheme("#FFFFFF", "#000000");
 
-            var piecePlacements =
-                GetStartingPiecePlacements(piecesColorScheme);
-
-            return new Board(boardColorScheme, piecesColorScheme, piecePlacements);
+            return new Board(boardColorScheme, piecesColorScheme);
         }
 
         public static void PopulateBoardWithStartingPieces(Board board)
         {
             // Populate with starting pieces
-            board.ResetBoard(GetStartingPiecePlacements(board.PieceColorScheme));
+            board.PlaceStartingPieces(GetStartingPiecePlacements(board.PieceColorScheme));
         }
 
         private static List<PiecePlacement> GetStartingPiecePlacements(ColorScheme pieceColorScheme)

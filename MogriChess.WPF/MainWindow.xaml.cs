@@ -28,11 +28,19 @@ namespace MogriChess.WPF
             DataContext = new PlaySession();
 
             _canPlay = true;
-
-            StartGame();
         }
 
-        private void StartNewGame_OnClick(object sender, RoutedEventArgs e)
+        private void LightHumanDarkBot_OnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LightBotDarkHuman_OnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LightHumanDarkHuman_OnClick(object sender, RoutedEventArgs e)
         {
             StartGame();
         }
