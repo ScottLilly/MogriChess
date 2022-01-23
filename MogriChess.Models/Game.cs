@@ -196,6 +196,11 @@ namespace MogriChess.Models
 
         public void MakeBotMove(BotPlayer botPlayer)
         {
+            if (MoveHistory.Last().IsCheckmateMove)
+            {
+                return;
+            }
+
             List<Move> potentialMoves = new List<Move>();
 
             var squaresWithBotPlayerPieces =

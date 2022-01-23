@@ -54,6 +54,8 @@ namespace MogriChess.WPF
 
             CurrentSession.CurrentGame.MoveHistory.CollectionChanged += MoveHistory_CollectionChanged;
             CurrentSession.GameOver += OnGameOver;
+
+            _canPlay = true;
         }
 
         private void OnGameOver(object sender, EventArgs e)
