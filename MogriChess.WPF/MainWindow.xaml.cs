@@ -50,7 +50,7 @@ namespace MogriChess.WPF
             CurrentSession.CurrentGame.MoveHistory.CollectionChanged -= MoveHistory_CollectionChanged;
             CurrentSession.GameOver -= OnGameOver;
 
-            CurrentSession.ResetBoardToStartingState();
+            CurrentSession.SetBoardToStartingState();
 
             CurrentSession.CurrentGame.MoveHistory.CollectionChanged += MoveHistory_CollectionChanged;
             CurrentSession.GameOver += OnGameOver;

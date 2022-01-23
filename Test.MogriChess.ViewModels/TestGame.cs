@@ -1,6 +1,7 @@
 using System.Linq;
 using MogriChess.Models;
 using MogriChess.Services;
+using MogriChess.ViewModels;
 using Xunit;
 
 namespace Test.MogriChess.ViewModels
@@ -10,7 +11,9 @@ namespace Test.MogriChess.ViewModels
         [Fact]
         public void Test_InstantiateGame()
         {
-            Game game = GameFactory.GetNewGame();
+            PlaySession session = new PlaySession();
+            session.SetBoardToStartingState();
+            Game game = session.CurrentGame;
 
             Assert.NotNull(game);
             Assert.NotNull(game.Board);
