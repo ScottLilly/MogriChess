@@ -211,14 +211,44 @@ namespace MogriChess.Models
         {
             List<Move> potentialMoves = new List<Move>();
 
-            foreach (Square square in
-                     Board.Squares.Where(s =>
-                         s.Piece?.ColorType.Equals(botPlayer.ColorType) ?? false))
+            var squaresWithBotPlayerPieces =
+                Board.Squares
+                    .Where(s => s.Piece?.ColorType == botPlayer.ColorType);
+
+            foreach (Square square in squaresWithBotPlayerPieces)
             {
                 potentialMoves.AddRange(ValidMovesForPieceAt(square.Rank, square.File));
             }
 
-            var bestMove = botPlayer.FindBestMove(potentialMoves);
+            List<Move> validMoves = new List<Move>();
+
+            if (KingCanBeCaptured(botPlayer.ColorType))
+            {
+                foreach (Move potentialMove in potentialMoves)
+                {
+                    // Clone pieces pre-move
+                    var originalMovingPiece = potentialMove.OriginationSquare.Piece.Clone();
+                    var destinationPiece = potentialMove.DestinationSquare.Piece?.Clone();
+
+                    // Make simulated move
+                    Board.MovePiece(potentialMove.OriginationSquare, potentialMove.DestinationSquare);
+
+                    if (!KingCanBeCaptured(botPlayer.ColorType))
+                    {
+                        validMoves.Add(potentialMove);
+                    }
+
+                    // Revert simulated move
+                    potentialMove.OriginationSquare.Piece = originalMovingPiece;
+                    potentialMove.DestinationSquare.Piece = destinationPiece;
+                }
+            }
+            else
+            {
+                validMoves.AddRange(potentialMoves);
+            }
+
+            var bestMove = botPlayer.FindBestMove(validMoves);
 
             SelectSquare(bestMove.OriginationSquare);
             SelectSquare(bestMove.DestinationSquare);
