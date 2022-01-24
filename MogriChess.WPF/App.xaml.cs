@@ -5,6 +5,7 @@ using System.Windows.Threading;
 using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MogriChess.Core;
 using MogriChess.Models.DTOs;
 using MogriChess.Services;
 using MogriChess.WPF.Windows;
@@ -46,9 +47,16 @@ namespace MogriChess.WPF
             services.AddTransient(typeof(About));
         }
 
-        private void App_OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        private void App_OnDispatcherUnhandledException(object sender,
+            DispatcherUnhandledExceptionEventArgs e)
         {
-            // TODO: Put logging here
+            string exceptionMessageText =
+                $"An exception occurred: {e.Exception.Message}\r\n\r\nat: {e.Exception.StackTrace}";
+
+            LoggingService.Log(e.Exception);
+
+            // TODO: Create a Window to display the exception information.
+            MessageBox.Show(exceptionMessageText, "Unhandled Exception", MessageBoxButton.OK);
         }
     }
 }

@@ -15,4 +15,8 @@
     <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MogriChess.Core\MogriChess.Core.csproj" />
+  </ItemGroup>
+
 </Project>

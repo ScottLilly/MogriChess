@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MogriChess.Core\MogriChess.Core.csproj" />
     <ProjectReference Include="..\MogriChess.Models\MogriChess.Models.csproj" />
     <ProjectReference Include="..\MogriChess.Services\MogriChess.Services.csproj" />
   </ItemGroup>
