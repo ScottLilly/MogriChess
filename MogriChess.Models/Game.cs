@@ -30,7 +30,7 @@ namespace MogriChess.Models
                 if (SelectedSquare != null)
                 {
                     List<Move> validDestinations =
-                        ValidMovesForPieceAt(SelectedSquare.Rank, SelectedSquare.File);
+                        Board.ValidMovesForPieceAt(SelectedSquare.Rank, SelectedSquare.File);
 
                     foreach (Move move in validDestinations.Where(m => 
                                  !PutsMovingPlayerIntoCheckOrCheckmate(m)))
@@ -147,7 +147,7 @@ namespace MogriChess.Models
             DeselectSelectedSquare();
 
             bool opponentIsInCheck =
-                KingCanBeCaptured(opponentColorType);
+                Board.KingCanBeCaptured(opponentColorType);
 
             // Determine if opponent is in checkmate
             if (opponentIsInCheck)
@@ -167,55 +167,6 @@ namespace MogriChess.Models
             }
         }
 
-        private bool OpponentIsInCheckmate(Enums.ColorType opponentColorType)
-        {
-            bool isInCheckmate = true;
-
-            // See if they are in checkmate
-            foreach (var opponentSquare in Board.Squares.Where(s => s.Piece != null &&
-                                                                    s.Piece.ColorType == opponentColorType))
-            {
-                foreach (Move potentialMove in ValidMovesForPieceAt(opponentSquare.Rank, opponentSquare.File))
-                {
-                    if (MoveGetsKingOutOfCheck(opponentColorType, potentialMove))
-                    {
-                        isInCheckmate = false;
-                        break;
-                    }
-                }
-
-                if (!isInCheckmate)
-                {
-                    break;
-                }
-            }
-
-            return isInCheckmate;
-        }
-
-        public List<Move> ValidMovesForPieceAt(int rank, int file)
-        {
-            Square originationSquare = Board.SquareAt(rank, file);
-
-            List<Move> validMoves = new List<Move>();
-
-            if (originationSquare.Piece == null)
-            {
-                return validMoves;
-            }
-
-            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Forward));
-            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.ForwardRight));
-            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Right));
-            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.BackRight));
-            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Back));
-            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.BackLeft));
-            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Left));
-            validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.ForwardLeft));
-
-            return validMoves;
-        }
-
         public void MakeBotMove(BotPlayer botPlayer)
         {
             if (MoveHistory.Last().IsCheckmateMove)
@@ -223,35 +174,7 @@ namespace MogriChess.Models
                 return;
             }
 
-            List<Move> potentialMoves = new List<Move>();
-
-            var squaresWithBotPlayerPieces =
-                Board.Squares
-                    .Where(s => s.Piece?.ColorType == botPlayer.ColorType);
-
-            foreach (Square square in squaresWithBotPlayerPieces)
-            {
-                potentialMoves.AddRange(ValidMovesForPieceAt(square.Rank, square.File));
-            }
-
-            List<Move> validMoves = new List<Move>();
-
-            if (KingCanBeCaptured(botPlayer.ColorType))
-            {
-                foreach (Move potentialMove in potentialMoves)
-                {
-                    if (MoveGetsKingOutOfCheck(botPlayer.ColorType, potentialMove))
-                    {
-                        validMoves.Add(potentialMove);
-                    }
-                }
-            }
-            else
-            {
-                validMoves.AddRange(potentialMoves);
-            }
-
-            var bestMove = botPlayer.FindBestMove(validMoves);
+            Move bestMove = botPlayer.FindBestMove(Board);
 
             SelectSquare(bestMove.OriginationSquare);
             SelectSquare(bestMove.DestinationSquare);
@@ -267,24 +190,6 @@ namespace MogriChess.Models
             SelectedSquare = null;
         }
 
-        private bool MoveGetsKingOutOfCheck(Enums.ColorType kingColor, Move potentialMove)
-        {
-            // Clone pieces pre-move
-            var originalMovingPiece = potentialMove.OriginationSquare.Piece.Clone();
-            var destinationPiece = potentialMove.DestinationSquare.Piece?.Clone();
-
-            // Make simulated move
-            Board.MovePiece(potentialMove.OriginationSquare, potentialMove.DestinationSquare);
-
-            bool stillInCheck = KingCanBeCaptured(kingColor);
-
-            // Revert simulated move
-            potentialMove.OriginationSquare.Piece = originalMovingPiece;
-            potentialMove.DestinationSquare.Piece = destinationPiece;
-
-            return !stillInCheck;
-        }
-
         private void HandleCheckmate()
         {
             OnCheckmate?.Invoke(this, EventArgs.Empty);
@@ -294,89 +199,6 @@ namespace MogriChess.Models
         {
             CurrentPlayerColor = CurrentPlayerColor.OpponentColorType();
             OnMoveCompleted?.Invoke(this, EventArgs.Empty);
-        }
-
-        private bool KingCanBeCaptured(Enums.ColorType playerColor)
-        {
-            Enums.ColorType attackingPlayerColor = playerColor.OpponentColorType();
-
-            IEnumerable<Square> squaresWithOpponentPiece =
-                Board.Squares.Where(s => s.Piece != null &&
-                                         s.Piece.ColorType == attackingPlayerColor);
-
-            foreach (Square square in squaresWithOpponentPiece)
-            {
-                if (ValidMovesForPieceAt(square.Rank, square.File).Any(m => m.PutsOpponentInCheck))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private List<Move> ValidMovesInDirection(Square originationSquare, Enums.Direction direction)
-        {
-            List<Move> validMoves = new List<Move>();
-
-            Piece movingPiece = originationSquare.Piece;
-
-            int maxMovementSquareForDirection =
-                movingPiece.MaxMovementSquaresForDirection(direction);
-            (int rankMultiplier, int fileMultiplier) =
-                movingPiece.MovementMultipliersForDirection(direction);
-
-            for (int i = 1; i <= maxMovementSquareForDirection; i++)
-            {
-                int destinationRank = originationSquare.Rank + (i * rankMultiplier);
-                int destinationFile = originationSquare.File + (i * fileMultiplier);
-
-                // Off board, stop checking
-                if (destinationRank is < 1 or > Constants.NumberOfRanks ||
-                    destinationFile is < 1 or > Constants.NumberOfFiles)
-                {
-                    break;
-                }
-
-                Square destinationSquare = Board.SquareAt(destinationRank, destinationFile);
-                Move potentialMove = new Move(originationSquare, destinationSquare);
-
-                // Un-promoted pawn reached opponent's back rank, and needs to be promoted.
-                potentialMove.IsPromotingMove =
-                    IsPawnPromotionMove(potentialMove);
-
-                Piece destinationPiece = destinationSquare.Piece;
-
-                if (destinationSquare.IsEmpty)
-                {
-                    validMoves.Add(potentialMove);
-                }
-                else
-                {
-                    if (destinationSquare.Piece.ColorType != movingPiece.ColorType)
-                    {
-                        // Square is occupied by an opponent's piece
-                        potentialMove.IsCapturingMove = true;
-                        potentialMove.PutsOpponentInCheck = destinationPiece.IsKing;
-
-                        validMoves.Add(potentialMove);
-                    }
-
-                    break;
-                }
-            }
-
-            return validMoves;
-        }
-
-        private static bool IsPawnPromotionMove(Move potentialMove)
-        {
-            Piece piece = potentialMove.OriginationSquare.Piece;
-            int destinationRank = potentialMove.DestinationRank;
-
-            return piece.IsUnpromotedPawn &&
-                   (piece.ColorType == Enums.ColorType.Light && destinationRank == Constants.BackRankDark ||
-                    piece.ColorType == Enums.ColorType.Dark && destinationRank == Constants.BackRankLight);
         }
 
         private bool PutsMovingPlayerIntoCheckOrCheckmate(Move move)
@@ -391,7 +213,7 @@ namespace MogriChess.Models
 
             // Check if moving player's king can be captured
             bool putsMovingPlayerIntoCheckOrCheckmate =
-                KingCanBeCaptured(movingPiece.ColorType);
+                Board.KingCanBeCaptured(movingPiece.ColorType);
 
             // Revert the simulated move
             Board.SquareAt(move.OriginationSquare.Rank, move.OriginationSquare.File).Piece =
@@ -400,6 +222,32 @@ namespace MogriChess.Models
                 destinationPiece;
 
             return putsMovingPlayerIntoCheckOrCheckmate;
+        }
+
+        private bool OpponentIsInCheckmate(Enums.ColorType opponentColorType)
+        {
+            bool isInCheckmate = true;
+
+            // See if they are in checkmate
+            foreach (var opponentSquare in Board.Squares.Where(s => s.Piece != null &&
+                                                                    s.Piece.ColorType == opponentColorType))
+            {
+                foreach (Move potentialMove in Board.ValidMovesForPieceAt(opponentSquare.Rank, opponentSquare.File))
+                {
+                    if (Board.MoveGetsKingOutOfCheck(opponentColorType, potentialMove))
+                    {
+                        isInCheckmate = false;
+                        break;
+                    }
+                }
+
+                if (!isInCheckmate)
+                {
+                    break;
+                }
+            }
+
+            return isInCheckmate;
         }
 
         #endregion

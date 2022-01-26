@@ -12,10 +12,38 @@ namespace MogriChess.Models
             ColorType = colorType;
         }
 
-        public Move FindBestMove(List<Move> potentialMoves)
+        public Move FindBestMove(Board board)
         {
-            // TODO: Make this much more intelligent
-            return potentialMoves.First();
+            List<Move> potentialMoves = new List<Move>();
+
+            var squaresWithBotPlayerPieces =
+                board.Squares
+                    .Where(s => s.Piece?.ColorType == ColorType);
+
+            foreach (Square square in squaresWithBotPlayerPieces)
+            {
+                potentialMoves.AddRange(board.ValidMovesForPieceAt(square.Rank, square.File));
+            }
+
+            List<Move> validMoves = new List<Move>();
+
+            if (board.KingCanBeCaptured(ColorType))
+            {
+                foreach (Move potentialMove in potentialMoves)
+                {
+                    if (board.MoveGetsKingOutOfCheck(ColorType, potentialMove))
+                    {
+                        validMoves.Add(potentialMove);
+                    }
+                }
+            }
+            else
+            {
+                validMoves.AddRange(potentialMoves);
+            }
+
+            // TODO: Add code to decide best move
+            return validMoves.FirstOrDefault();
         }
     }
 }
