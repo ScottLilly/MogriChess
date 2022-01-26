@@ -25,12 +25,16 @@ namespace MogriChess.ViewModels
         {
             CurrentGame.LightPlayerBot =
                 lightPlayer == Enums.PlayerType.Bot
-                    ? new BotPlayer(Enums.ColorType.Light)
+                    ? new BotPlayer(Enums.ColorType.Light,
+                        new PieceValueCalculator(
+                            new PieceValueCalculatorGenome(1,2,5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5)))
                     : null;
 
             CurrentGame.DarkPlayerBot =
                 darkPlayer == Enums.PlayerType.Bot
-                    ? new BotPlayer(Enums.ColorType.Dark)
+                    ? new BotPlayer(Enums.ColorType.Dark,
+                        new PieceValueCalculator(
+                            new PieceValueCalculatorGenome(1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5)))
                     : null;
 
             BoardFactory.PopulateBoardWithStartingPieces(CurrentGame.Board);

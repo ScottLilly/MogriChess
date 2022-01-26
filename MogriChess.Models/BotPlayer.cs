@@ -5,11 +5,16 @@ namespace MogriChess.Models
 {
     public class BotPlayer
     {
+        private readonly PieceValueCalculator _pieceValueCalculator;
+
         public Enums.ColorType ColorType { get; }
 
-        public BotPlayer(Enums.ColorType colorType)
+        public BotPlayer(Enums.ColorType colorType,
+            PieceValueCalculator pieceValueCalculator)
         {
             ColorType = colorType;
+
+            _pieceValueCalculator = pieceValueCalculator;
         }
 
         public Move FindBestMove(Board board)
@@ -41,6 +46,13 @@ namespace MogriChess.Models
             {
                 validMoves.AddRange(potentialMoves);
             }
+
+            // Calculate current board points (bot and opponent)
+
+            // Check each move, calculating points after move
+
+            // Select highest point improvement
+            // Randomize, if multiple moves have equivalent point improvements
 
             // TODO: Add code to decide best move
             return validMoves.FirstOrDefault();
