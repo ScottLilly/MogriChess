@@ -23,7 +23,8 @@ namespace MogriChess.Models
 
             var squaresWithBotPlayerPieces =
                 board.Squares
-                    .Where(s => s.Piece?.ColorType == ColorType);
+                    .Where(s => s.Piece?.ColorType == ColorType)
+                    .ToList();
 
             foreach (Square square in squaresWithBotPlayerPieces)
             {
@@ -48,6 +49,17 @@ namespace MogriChess.Models
             }
 
             // Calculate current board points (bot and opponent)
+            int botPiecesValue =
+                squaresWithBotPlayerPieces.Select(s => s.Piece)
+                    .Sum(p => _pieceValueCalculator.CalculatePieceValue(p));
+
+            var opponentPieceSquares =
+                board.Squares
+                    .Where(s => s.Piece?.ColorType == ColorType.OpponentColorType())
+                    .ToList();
+            int opponentPiecesValue =
+                opponentPieceSquares.Select(s => s.Piece)
+                    .Sum(p => _pieceValueCalculator.CalculatePieceValue(p));
 
             // Check each move, calculating points after move
 
