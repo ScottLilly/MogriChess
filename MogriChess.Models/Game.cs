@@ -9,6 +9,7 @@ namespace MogriChess.Models
     public class Game : INotifyPropertyChanged
     {
         private Square _selectedSquare;
+        private bool _displayValidDestinations = true;
 
         #region Private properties
 
@@ -54,7 +55,20 @@ namespace MogriChess.Models
         public ObservableCollection<Move> MoveHistory { get; } =
             new ObservableCollection<Move>();
         public bool DisplayRankFileLabel { get; set; } = true;
-        public bool DisplayValidDestinations { get; set; } = true;
+
+        public bool DisplayValidDestinations
+        {
+            get => _displayValidDestinations;
+            set
+            {
+                _displayValidDestinations = value;
+
+                if (!_displayValidDestinations)
+                {
+                    Board.ClearValidDestinations();
+                }
+            }
+        }
 
         public BotPlayer LightPlayerBot { get; set; }
         public BotPlayer DarkPlayerBot { get; set; }
@@ -72,6 +86,14 @@ namespace MogriChess.Models
 
         public void StartGame()
         {
+            if (SelectedSquare != null)
+            {
+                SelectedSquare.IsSelected = false;
+                SelectedSquare = null;
+            }
+
+            Board.ClearValidDestinations();
+
             MoveHistory.Clear();
             CurrentPlayerColor = Enums.ColorType.Light;
         }
