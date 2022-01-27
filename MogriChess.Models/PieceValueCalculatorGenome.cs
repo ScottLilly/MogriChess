@@ -26,16 +26,17 @@
         public int ForwardLeftOne { get; }
         public int ForwardLeftTwo { get; }
         public int ForwardLeftInfinite { get; }
+        public int KingValue { get; }
 
-        public PieceValueCalculatorGenome(
-            int forwardOne, int forwardTwo, int forwardInfinite,
+        public PieceValueCalculatorGenome(int forwardOne, int forwardTwo, int forwardInfinite,
             int forwardRightOne, int forwardRightTwo, int forwardRightInfinite,
             int rightOne, int rightTwo, int rightInfinite,
             int backRightOne, int backRightTwo, int backRightInfinite,
             int backOne, int backTwo, int backInfinite,
             int backLeftOne, int backLeftTwo, int backLeftInfinite,
             int leftOne, int leftTwo, int leftInfinite,
-            int forwardLeftOne, int forwardLeftTwo, int forwardLeftInfinite)
+            int forwardLeftOne, int forwardLeftTwo, int forwardLeftInfinite,
+            int kingValue)
         {
             ForwardOne = forwardOne;
             ForwardTwo = forwardTwo;
@@ -68,6 +69,8 @@
             ForwardLeftOne = forwardLeftOne;
             ForwardLeftTwo = forwardLeftTwo;
             ForwardLeftInfinite = forwardLeftInfinite;
+
+            KingValue = kingValue;
         }
     }
 }

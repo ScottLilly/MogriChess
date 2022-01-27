@@ -11,6 +11,11 @@
 
         public int CalculatePieceValue(Piece piece)
         {
+            if (piece.IsKing)
+            {
+                return _genome.KingValue;
+            }
+
             return
                 CalcForDirection(piece.Forward.Squares, _genome.ForwardOne, _genome.ForwardTwo, _genome.ForwardInfinite) +
                 CalcForDirection(piece.ForwardRight.Squares, _genome.ForwardRightOne, _genome.ForwardRightTwo, _genome.ForwardRightInfinite) +
