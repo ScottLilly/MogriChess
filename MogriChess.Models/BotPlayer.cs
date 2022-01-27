@@ -48,10 +48,16 @@ namespace MogriChess.Models
                 validMoves.AddRange(potentialMoves);
             }
 
+            // If bot can put opponent in checkmate, do that
+            if (validMoves.Any(m => m.IsCheckmateMove))
+            {
+                return validMoves.First(m => m.IsCheckmateMove);
+            }
+
             // Calculate current board points (bot and opponent)
             int botPiecesValue =
-                squaresWithBotPlayerPieces.Select(s => s.Piece)
-                    .Sum(p => _pieceValueCalculator.CalculatePieceValue(p));
+            squaresWithBotPlayerPieces.Select(s => s.Piece)
+                .Sum(p => _pieceValueCalculator.CalculatePieceValue(p));
 
             var opponentPieceSquares =
                 board.Squares
