@@ -55,16 +55,12 @@ namespace MogriChess.Models
                 return validMoves.First(m => m.IsCheckmateMove);
             }
 
-            // Pre-move advantage
-            int botAdvantage = Advantage(board);
-
             // Check each move, calculating points after move
-            int bestMoveAdvantage = int.MinValue;
+            int currentBestMoveAdvantage = int.MinValue;
             List<Move> bestMoves = new List<Move>();
 
             foreach (Move move in validMoves.Where(m => m.IsCapturingMove))
             {
-                // Simulate move
                 // Clone pieces pre-move
                 var originalMovingPiece = move.OriginationSquare.Piece.Clone();
                 var destinationPiece = move.DestinationSquare.Piece?.Clone();
@@ -72,16 +68,17 @@ namespace MogriChess.Models
                 // Make simulated move
                 board.MovePiece(move.OriginationSquare, move.DestinationSquare);
 
-                // Post-move advantage
                 int postMoveAdvantage = Advantage(board);
 
-                if (postMoveAdvantage > bestMoveAdvantage)
+                // If this move is the best move (or tied with the best)
+                // Add it to the "bestMoves" list.
+                if (postMoveAdvantage > currentBestMoveAdvantage)
                 {
-                    bestMoveAdvantage = postMoveAdvantage;
+                    currentBestMoveAdvantage = postMoveAdvantage;
                     bestMoves.Clear();
                     bestMoves.Add(move);
                 }
-                else if(postMoveAdvantage == bestMoveAdvantage)
+                else if(postMoveAdvantage == currentBestMoveAdvantage)
                 {
                     bestMoves.Add(move);
                 }
@@ -92,12 +89,9 @@ namespace MogriChess.Models
             }
 
             // Select highest point improvement
-            if (bestMoves.Any())
-            {
-                return bestMoves.RandomElement();
-            }
-
-            return validMoves.RandomElement();
+            return bestMoves.Any()
+                ? bestMoves.RandomElement()
+                : validMoves.RandomElement();
         }
 
         private int PiecesValueFor(Board board, Enums.ColorType colorType)
