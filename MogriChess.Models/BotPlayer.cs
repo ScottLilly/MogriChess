@@ -6,15 +6,13 @@ namespace MogriChess.Models
 {
     public class BotPlayer
     {
+        private readonly Enums.ColorType _botColor;
         private readonly PieceValueCalculator _pieceValueCalculator;
 
-        public Enums.ColorType ColorType { get; }
-
-        public BotPlayer(Enums.ColorType colorType,
+        public BotPlayer(Enums.ColorType botColor,
             PieceValueCalculator pieceValueCalculator)
         {
-            ColorType = colorType;
-
+            _botColor = botColor;
             _pieceValueCalculator = pieceValueCalculator;
         }
 
@@ -24,7 +22,7 @@ namespace MogriChess.Models
 
             var squaresWithBotPlayerPieces =
                 board.Squares
-                    .Where(s => s.Piece?.ColorType == ColorType)
+                    .Where(s => s.Piece?.ColorType == _botColor)
                     .ToList();
 
             foreach (Square square in squaresWithBotPlayerPieces)
@@ -34,11 +32,11 @@ namespace MogriChess.Models
 
             List<Move> validMoves = new List<Move>();
 
-            if (board.KingCanBeCaptured(ColorType))
+            if (board.KingCanBeCaptured(_botColor))
             {
                 foreach (Move potentialMove in potentialMoves)
                 {
-                    if (board.MoveGetsKingOutOfCheck(ColorType, potentialMove))
+                    if (board.MoveGetsKingOutOfCheck(_botColor, potentialMove))
                     {
                         validMoves.Add(potentialMove);
                     }
@@ -104,8 +102,8 @@ namespace MogriChess.Models
 
         private int Advantage(Board board)
         {
-            return PiecesValueFor(board, ColorType) -
-                   PiecesValueFor(board, ColorType.OpponentColorType());
+            return PiecesValueFor(board, _botColor) -
+                   PiecesValueFor(board, _botColor.OpponentColorType());
         }
     }
 }
