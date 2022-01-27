@@ -52,7 +52,42 @@ namespace MogriChess.Models
             originationSquare.Piece = null;
         }
 
-        public List<Move> ValidMovesForPieceAt(int rank, int file)
+        public List<Move> ValidMovesForPlayerColor(Enums.ColorType playerColor)
+        {
+            var squaresWithPlayerColorPieces =
+                Squares
+                    .Where(s => s.Piece?.ColorType == playerColor)
+                    .ToList();
+
+            List<Move> potentialMoves = new List<Move>();
+
+            foreach (Square square in squaresWithPlayerColorPieces)
+            {
+                potentialMoves.AddRange(PotentialMovesForPieceAt(square.Rank, square.File));
+            }
+
+            // Only return moves that do not put moving player in check
+            List<Move> validMoves = new List<Move>();
+
+            if (KingCanBeCaptured(playerColor))
+            {
+                foreach (Move potentialMove in potentialMoves)
+                {
+                    if (MoveGetsKingOutOfCheck(playerColor, potentialMove))
+                    {
+                        validMoves.Add(potentialMove);
+                    }
+                }
+            }
+            else
+            {
+                validMoves.AddRange(potentialMoves);
+            }
+
+            return validMoves;
+        }
+
+        public List<Move> PotentialMovesForPieceAt(int rank, int file)
         {
             Square originationSquare = SquareAt(rank, file);
 
@@ -85,7 +120,7 @@ namespace MogriChess.Models
 
             foreach (Square square in squaresWithOpponentPiece)
             {
-                if (ValidMovesForPieceAt(square.Rank, square.File).Any(m => m.PutsOpponentInCheck))
+                if (PotentialMovesForPieceAt(square.Rank, square.File).Any(m => m.PutsOpponentInCheck))
                 {
                     return true;
                 }

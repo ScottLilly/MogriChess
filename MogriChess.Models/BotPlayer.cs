@@ -18,34 +18,7 @@ namespace MogriChess.Models
 
         public Move FindBestMove(Board board)
         {
-            List<Move> potentialMoves = new List<Move>();
-
-            var squaresWithBotPlayerPieces =
-                board.Squares
-                    .Where(s => s.Piece?.ColorType == _botColor)
-                    .ToList();
-
-            foreach (Square square in squaresWithBotPlayerPieces)
-            {
-                potentialMoves.AddRange(board.ValidMovesForPieceAt(square.Rank, square.File));
-            }
-
-            List<Move> validMoves = new List<Move>();
-
-            if (board.KingCanBeCaptured(_botColor))
-            {
-                foreach (Move potentialMove in potentialMoves)
-                {
-                    if (board.MoveGetsKingOutOfCheck(_botColor, potentialMove))
-                    {
-                        validMoves.Add(potentialMove);
-                    }
-                }
-            }
-            else
-            {
-                validMoves.AddRange(potentialMoves);
-            }
+            List<Move> validMoves = board.ValidMovesForPlayerColor(_botColor);
 
             // If bot can put opponent in checkmate, do that
             if (validMoves.Any(m => m.IsCheckmateMove))

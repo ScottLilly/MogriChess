@@ -30,7 +30,7 @@ namespace MogriChess.Models
                 if (SelectedSquare != null)
                 {
                     List<Move> validDestinations =
-                        Board.ValidMovesForPieceAt(SelectedSquare.Rank, SelectedSquare.File);
+                        Board.PotentialMovesForPieceAt(SelectedSquare.Rank, SelectedSquare.File);
 
                     foreach (Move move in validDestinations.Where(m => 
                                  !PutsMovingPlayerIntoCheckOrCheckmate(m)))
@@ -232,7 +232,7 @@ namespace MogriChess.Models
             foreach (var opponentSquare in Board.Squares.Where(s => s.Piece != null &&
                                                                     s.Piece.ColorType == opponentColorType))
             {
-                foreach (Move potentialMove in Board.ValidMovesForPieceAt(opponentSquare.Rank, opponentSquare.File))
+                foreach (Move potentialMove in Board.PotentialMovesForPieceAt(opponentSquare.Rank, opponentSquare.File))
                 {
                     if (Board.MoveGetsKingOutOfCheck(opponentColorType, potentialMove))
                     {
