@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using MogriChess.Core;
 
 namespace MogriChess.Models
 {
@@ -54,26 +55,63 @@ namespace MogriChess.Models
                 return validMoves.First(m => m.IsCheckmateMove);
             }
 
-            // Calculate current board points (bot and opponent)
-            int botPiecesValue =
-            squaresWithBotPlayerPieces.Select(s => s.Piece)
-                .Sum(p => _pieceValueCalculator.CalculatePieceValue(p));
-
-            var opponentPieceSquares =
-                board.Squares
-                    .Where(s => s.Piece?.ColorType == ColorType.OpponentColorType())
-                    .ToList();
-            int opponentPiecesValue =
-                opponentPieceSquares.Select(s => s.Piece)
-                    .Sum(p => _pieceValueCalculator.CalculatePieceValue(p));
+            // Pre-move advantage
+            int botAdvantage = Advantage(board);
 
             // Check each move, calculating points after move
+            int bestMoveAdvantage = int.MinValue;
+            List<Move> bestMoves = new List<Move>();
+
+            foreach (Move move in validMoves.Where(m => m.IsCapturingMove))
+            {
+                // Simulate move
+                // Clone pieces pre-move
+                var originalMovingPiece = move.OriginationSquare.Piece.Clone();
+                var destinationPiece = move.DestinationSquare.Piece?.Clone();
+
+                // Make simulated move
+                board.MovePiece(move.OriginationSquare, move.DestinationSquare);
+
+                // Post-move advantage
+                int postMoveAdvantage = Advantage(board);
+
+                if (postMoveAdvantage > bestMoveAdvantage)
+                {
+                    bestMoveAdvantage = postMoveAdvantage;
+                    bestMoves.Clear();
+                    bestMoves.Add(move);
+                }
+                else if(postMoveAdvantage == bestMoveAdvantage)
+                {
+                    bestMoves.Add(move);
+                }
+
+                // Revert simulated move
+                move.OriginationSquare.Piece = originalMovingPiece;
+                move.DestinationSquare.Piece = destinationPiece;
+            }
 
             // Select highest point improvement
-            // Randomize, if multiple moves have equivalent point improvements
+            if (bestMoves.Any())
+            {
+                return bestMoves.RandomElement();
+            }
 
-            // TODO: Add code to decide best move
-            return validMoves.FirstOrDefault();
+            return validMoves.RandomElement();
+        }
+
+        private int PiecesValueFor(Board board, Enums.ColorType colorType)
+        {
+            return
+                board.Squares
+                    .Where(s => s.Piece?.ColorType == colorType)
+                    .Sum(s => _pieceValueCalculator.CalculatePieceValue(s.Piece));
+        }
+
+        private int Advantage(Board board)
+        {
+            return PiecesValueFor(board, ColorType) -
+                   PiecesValueFor(board, ColorType.OpponentColorType());
         }
     }
 }
