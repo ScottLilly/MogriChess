@@ -64,7 +64,7 @@ namespace MogriChess.Models
                 squaresLeft, squaresForwardLeft);
         }
 
-        public void AddMovementAbilities(Piece capturedPiece)
+        public void CapturePiece(Piece capturedPiece)
         {
             // Kings do not acquire the movement abilities of pieces they capture
             if (_pieceType == Enums.PieceType.King)

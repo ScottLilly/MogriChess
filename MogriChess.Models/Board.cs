@@ -181,20 +181,15 @@ namespace MogriChess.Models
 
         private static void PlacePieceOnSquare(Piece piece, Square destinationSquare)
         {
-            // Perform capture
             if (destinationSquare.Piece != null)
             {
-                piece.AddMovementAbilities(destinationSquare.Piece);
+                piece.CapturePiece(destinationSquare.Piece);
             }
 
             destinationSquare.Piece = piece;
 
-            if (!piece.IsPawn)
-            {
-                return;
-            }
-
-            if ((piece.Color == Enums.Color.Light && destinationSquare.Rank == Constants.BackRankDark) ||
+            if (piece.IsUnpromotedPawn &&
+                (piece.Color == Enums.Color.Light && destinationSquare.Rank == Constants.BackRankDark) ||
                 (piece.Color == Enums.Color.Dark && destinationSquare.Rank == Constants.BackRankLight))
             {
                 piece.Promote();
