@@ -21,9 +21,9 @@ namespace MogriChess.Models
             List<Move> validMoves = board.ValidMovesForPlayerColor(_botColor);
 
             // If bot can put opponent in checkmate, do that
-            if (validMoves.Any(m => m.IsCheckmateMove))
+            if (validMoves.Any(m => m.PutsOpponentInCheckmate))
             {
-                return validMoves.First(m => m.IsCheckmateMove);
+                return validMoves.First(m => m.PutsOpponentInCheckmate);
             }
 
             // Check each move, calculating points after move

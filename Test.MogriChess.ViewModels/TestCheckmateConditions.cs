@@ -35,7 +35,7 @@ namespace Test.MogriChess.ViewModels
                 game.SelectSquare(destinationSquare);
             }
 
-            Assert.False(game.MoveHistory.Last().IsCheckmateMove);
+            Assert.False(game.MoveHistory.Last().PutsOpponentInCheckmate);
         }
     }
 }

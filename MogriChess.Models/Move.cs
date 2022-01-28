@@ -9,7 +9,7 @@
         public int DestinationRank => DestinationSquare.Rank;
         public int DestinationFile => DestinationSquare.File;
 
-        public bool IsCheckmateMove { get; set; }
+        public bool PutsOpponentInCheckmate { get; set; }
         public bool PutsOpponentInCheck { get; set; }
         public bool IsCapturingMove { get; set; }
         public bool IsPromotingMove { get; set; }
@@ -18,7 +18,7 @@
             $"{OriginationSquare.SquareShorthand}:{DestinationSquare.SquareShorthand}";
 
         public string MoveResult =>
-            IsCheckmateMove ? "Checkmate" :
+            PutsOpponentInCheckmate ? "Checkmate" :
             PutsOpponentInCheck ? "Check" :
             IsCapturingMove ? "Capture" :
             IsPromotingMove ? "Promotion" : "";

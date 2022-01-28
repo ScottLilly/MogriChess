@@ -100,26 +100,13 @@ namespace MogriChess.Models
 
         public bool KingCanBeCaptured(Enums.Color playerColor) =>
             SquaresWithPiecesOfColor(playerColor.OppositeColor())
-                .Any(square => PotentialMovesForPieceAt(square.Rank, square.File)
+                .Any(square => PotentialMovesForPieceAt(square)
                     .Any(m => m.PutsOpponentInCheck));
 
-        public bool MoveGetsKingOutOfCheck(Enums.Color kingColor, Move potentialMove)
-        {
-            // Clone pieces pre-move
-            var originalMovingPiece = potentialMove.OriginationSquare.Piece.Clone();
-            var destinationPiece = potentialMove.DestinationSquare.Piece?.Clone();
-
-            // Make simulated move
-            MovePiece(potentialMove.OriginationSquare, potentialMove.DestinationSquare);
-
-            bool stillInCheck = KingCanBeCaptured(kingColor);
-
-            // Revert simulated move
-            potentialMove.OriginationSquare.Piece = originalMovingPiece;
-            potentialMove.DestinationSquare.Piece = destinationPiece;
-
-            return !stillInCheck;
-        }
+        public bool PlayerIsInCheckmate(Enums.Color playerColor) =>
+            SquaresWithPiecesOfColor(playerColor)
+                .All(square => PotentialMovesForPieceAt(square)
+                    .None(move => MoveGetsKingOutOfCheck(playerColor, move)));
 
         #endregion
 
@@ -161,7 +148,7 @@ namespace MogriChess.Models
             }
         }
 
-        private List<Move> ValidMovesInDirection(Square originationSquare, Enums.Direction direction)
+        private IEnumerable<Move> ValidMovesInDirection(Square originationSquare, Enums.Direction direction)
         {
             List<Move> validMoves = new List<Move>();
 
@@ -214,13 +201,34 @@ namespace MogriChess.Models
             return validMoves;
         }
 
-        private static bool IsPawnPromotionMove(Piece movingPiece, Square destinationSquare) =>
-            movingPiece.IsUnpromotedPawn &&
-            (movingPiece.Color == Enums.Color.Light && destinationSquare.Rank == Constants.BackRankDark ||
-             movingPiece.Color == Enums.Color.Dark && destinationSquare.Rank == Constants.BackRankLight);
+        private bool MoveGetsKingOutOfCheck(Enums.Color kingColor, Move potentialMove)
+        {
+            // Clone pieces pre-move
+            var originalMovingPiece = potentialMove.OriginationSquare.Piece.Clone();
+            var destinationPiece = potentialMove.DestinationSquare.Piece?.Clone();
+
+            // Make simulated move
+            MovePiece(potentialMove.OriginationSquare, potentialMove.DestinationSquare);
+
+            bool stillInCheck = KingCanBeCaptured(kingColor);
+
+            // Revert simulated move
+            potentialMove.OriginationSquare.Piece = originalMovingPiece;
+            potentialMove.DestinationSquare.Piece = destinationPiece;
+
+            return !stillInCheck;
+        }
 
         private IEnumerable<Square> SquaresWithPiecesOfColor(Enums.Color color) =>
             Squares.Where(s => s.Piece?.Color == color);
+
+        private IEnumerable<Move> PotentialMovesForPieceAt(Square square) =>
+            PotentialMovesForPieceAt(square.Rank, square.File);
+
+        private static bool IsPawnPromotionMove(Piece movingPiece, Square destinationSquare) =>
+            movingPiece.IsUnpromotedPawn &&
+            ((movingPiece.Color == Enums.Color.Light && destinationSquare.Rank == Constants.BackRankDark) ||
+             (movingPiece.Color == Enums.Color.Dark && destinationSquare.Rank == Constants.BackRankLight));
 
         private void RemovePiecesFromAllSquares() =>
             Squares.ApplyToEach(s => s.Piece = null);

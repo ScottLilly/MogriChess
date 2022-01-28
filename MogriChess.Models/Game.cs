@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using MogriChess.Core;
 
 namespace MogriChess.Models
 {
@@ -109,7 +110,8 @@ namespace MogriChess.Models
                     return;
                 }
 
-                // There is a piece on the square, and it's the current player's
+                // The square contains a piece of the current player's color.
+                // So, it's a valid selection.
                 if (square.Piece.Color == CurrentPlayerColor)
                 {
                     SelectedSquare = square;
@@ -127,49 +129,13 @@ namespace MogriChess.Models
                 return;
             }
 
-            // Check the destination square is a valid move
-            Move move =
-                ValidDestinationsForSelectedPiece.FirstOrDefault(d =>
-                    d.DestinationRank == square.Rank &&
-                    d.DestinationFile == square.File);
-
-            if (move == null)
-            {
-                return;
-            }
-
-            var movingPieceColorType = SelectedSquare.Piece.Color;
-            var opponentColorType = movingPieceColorType.OppositeColor();
-
-            // Move piece to new square
-            Board.MovePiece(SelectedSquare, square);
-
-            DeselectSelectedSquare();
-
-            bool opponentIsInCheck =
-                Board.KingCanBeCaptured(opponentColorType);
-
-            // Determine if opponent is in checkmate
-            if (opponentIsInCheck)
-            {
-                move.PutsOpponentInCheck = true;
-
-                move.IsCheckmateMove = OpponentIsInCheckmate(opponentColorType);
-            }
-
-            MoveHistory.Add(move);
-
-            EndCurrentPlayerTurn();
-
-            if (move.IsCheckmateMove)
-            {
-                HandleCheckmate();
-            }
+            // Move the piece to the second selected square, if valid
+            MoveToSelectedSquare(square);
         }
 
         public void MakeBotMove(BotPlayer botPlayer)
         {
-            if (MoveHistory.Last().IsCheckmateMove)
+            if (MoveHistory.Last().PutsOpponentInCheckmate)
             {
                 return;
             }
@@ -183,6 +149,45 @@ namespace MogriChess.Models
         #endregion
 
         #region Private methods
+
+        private void MoveToSelectedSquare(Square square)
+        {
+            // Check the destination square is a valid move
+            Move move =
+                ValidDestinationsForSelectedPiece.FirstOrDefault(d =>
+                    d.DestinationRank == square.Rank &&
+                    d.DestinationFile == square.File);
+
+            if (move == null)
+            {
+                return;
+            }
+
+            Board.MovePiece(SelectedSquare, square);
+
+            DeselectSelectedSquare();
+
+            DetermineIfMovePutsOpponentInCheckOrCheckmate(move);
+
+            MoveHistory.Add(move);
+
+            EndCurrentPlayerTurn();
+
+            if (move.PutsOpponentInCheckmate)
+            {
+                HandleCheckmate();
+            }
+        }
+
+        private void DetermineIfMovePutsOpponentInCheckOrCheckmate(Move move)
+        {
+            if (Board.KingCanBeCaptured(move.MovingPieceColor.OppositeColor()))
+            {
+                move.PutsOpponentInCheck = true;
+                move.PutsOpponentInCheckmate =
+                    Board.PlayerIsInCheckmate(move.MovingPieceColor.OppositeColor());
+            }
+        }
 
         private void DeselectSelectedSquare()
         {
@@ -222,32 +227,6 @@ namespace MogriChess.Models
                 destinationPiece;
 
             return putsMovingPlayerIntoCheckOrCheckmate;
-        }
-
-        private bool OpponentIsInCheckmate(Enums.Color opponentColor)
-        {
-            bool isInCheckmate = true;
-
-            // See if they are in checkmate
-            foreach (var opponentSquare in Board.Squares.Where(s => s.Piece != null &&
-                                                                    s.Piece.Color == opponentColor))
-            {
-                foreach (Move potentialMove in Board.PotentialMovesForPieceAt(opponentSquare.Rank, opponentSquare.File))
-                {
-                    if (Board.MoveGetsKingOutOfCheck(opponentColor, potentialMove))
-                    {
-                        isInCheckmate = false;
-                        break;
-                    }
-                }
-
-                if (!isInCheckmate)
-                {
-                    break;
-                }
-            }
-
-            return isInCheckmate;
         }
 
         #endregion

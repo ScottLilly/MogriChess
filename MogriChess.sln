@@ -15,7 +15,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.MogriChess.ViewModels"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmark.MogriChess", "Benchmark.MogriChess\Benchmark.MogriChess.csproj", "{B8C8ED57-E0A8-44B8-ABE0-EFD49E94D807}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MogriChess.Core", "MogriChess.Core\MogriChess.Core.csproj", "{43B71D62-69CB-4D23-97E5-8498492A1CB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MogriChess.Core", "MogriChess.Core\MogriChess.Core.csproj", "{43B71D62-69CB-4D23-97E5-8498492A1CB9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5D5099C2-CF5C-4F29-A1E0-ECDCC22EFBA5}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
