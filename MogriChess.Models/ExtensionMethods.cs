@@ -2,11 +2,11 @@
 {
     internal static class ExtensionMethods
     {
-        internal static Enums.ColorType OpponentColorType(this Enums.ColorType colorType)
+        internal static Enums.Color OppositeColor(this Enums.Color color)
         {
-            return colorType == Enums.ColorType.Light
-                ? Enums.ColorType.Dark
-                : Enums.ColorType.Light;
+            return color == Enums.Color.Light
+                ? Enums.Color.Dark
+                : Enums.Color.Light;
         }
     }
 }

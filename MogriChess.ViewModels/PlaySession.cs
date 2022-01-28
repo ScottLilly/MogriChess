@@ -25,14 +25,14 @@ namespace MogriChess.ViewModels
         {
             CurrentGame.LightPlayerBot =
                 lightPlayer == Enums.PlayerType.Bot
-                    ? new BotPlayer(Enums.ColorType.Light,
+                    ? new BotPlayer(Enums.Color.Light,
                         new PieceValueCalculator(
                             new PieceValueCalculatorGenome(1,2,5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 999)))
                     : null;
 
             CurrentGame.DarkPlayerBot =
                 darkPlayer == Enums.PlayerType.Bot
-                    ? new BotPlayer(Enums.ColorType.Dark,
+                    ? new BotPlayer(Enums.Color.Dark,
                         new PieceValueCalculator(
                             new PieceValueCalculatorGenome(1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 999)))
                     : null;
@@ -53,13 +53,13 @@ namespace MogriChess.ViewModels
 
         private void CurrentGame_OnMoveCompleted(object sender, EventArgs e)
         {
-            if (CurrentGame.CurrentPlayerColor == Enums.ColorType.Dark &&
+            if (CurrentGame.CurrentPlayerColor == Enums.Color.Dark &&
                 CurrentGame.DarkPlayerBot != null)
             {
                 CurrentGame.MakeBotMove(CurrentGame.DarkPlayerBot);
             }
 
-            if (CurrentGame.CurrentPlayerColor == Enums.ColorType.Light &&
+            if (CurrentGame.CurrentPlayerColor == Enums.Color.Light &&
                 CurrentGame.LightPlayerBot != null)
             {
                 CurrentGame.MakeBotMove(CurrentGame.LightPlayerBot);

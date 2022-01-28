@@ -10,7 +10,7 @@ namespace MogriChess.Models
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Enums.ColorType ColorType { get; }
+        public Enums.Color Color { get; }
 
         public MovementIndicator Forward { get; } =
             new MovementIndicator();
@@ -34,19 +34,19 @@ namespace MogriChess.Models
         public bool IsUnpromotedPawn => IsPawn && !_isPromoted;
 
         public string UiColor =>
-            ColorType == Enums.ColorType.Light
+            Color == Enums.Color.Light
                 ? _colorScheme.LightColor
                 : _colorScheme.DarkColor;
         public string KingIndicatorUiColor =>
             IsKing
-                ? ColorType == Enums.ColorType.Light
+                ? Color == Enums.Color.Light
                     ? _colorScheme.DarkColor
                     : _colorScheme.LightColor
                 : UiColor;
         public int PieceColorTransformAngle =>
-            ColorType == Enums.ColorType.Light ? 0 : 180;
+            Color == Enums.Color.Light ? 0 : 180;
 
-        public Piece(ColorScheme colorScheme, Enums.ColorType colorType,
+        public Piece(ColorScheme colorScheme, Enums.Color color,
             Enums.PieceType type,
             int squaresForward, int squaresForwardRight,
             int squaresRight, int squaresBackRight,
@@ -56,7 +56,7 @@ namespace MogriChess.Models
             _colorScheme = colorScheme;
             _pieceType = type;
 
-            ColorType = colorType;
+            Color = color;
 
             AddMovementAbilities(squaresForward, squaresForwardRight,
                 squaresRight, squaresBackRight,
@@ -111,7 +111,7 @@ namespace MogriChess.Models
                     "Invalid direction parameter sent to MovementMultipliersForDirection")
             };
 
-            return ColorType == Enums.ColorType.Light
+            return Color == Enums.Color.Light
                 ? multipliers
                 : (-multipliers.rm, -multipliers.fm);
         }
@@ -129,7 +129,7 @@ namespace MogriChess.Models
 
         public Piece Clone()
         {
-            return new Piece(_colorScheme, ColorType, _pieceType,
+            return new Piece(_colorScheme, Color, _pieceType,
                 Forward.Squares, ForwardRight.Squares,
                 Right.Squares, BackRight.Squares,
                 Back.Squares, BackLeft.Squares,

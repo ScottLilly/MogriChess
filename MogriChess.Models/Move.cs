@@ -2,7 +2,7 @@
 {
     public class Move
     {
-        public Enums.ColorType MovingPieceColor { get; }
+        public Enums.Color MovingPieceColor { get; }
         public Square OriginationSquare { get; }
         public Square DestinationSquare { get; }
 
@@ -25,7 +25,7 @@
 
         public Move(Square originationSquare, Square destinationSquare)
         {
-            MovingPieceColor = originationSquare.Piece.ColorType;
+            MovingPieceColor = originationSquare.Piece.Color;
             OriginationSquare = originationSquare;
             DestinationSquare = destinationSquare;
         }

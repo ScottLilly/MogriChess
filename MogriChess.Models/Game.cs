@@ -13,8 +13,8 @@ namespace MogriChess.Models
 
         #region Private properties
 
-        public Enums.ColorType CurrentPlayerColor { get; private set; } =
-            Enums.ColorType.Light;
+        public Enums.Color CurrentPlayerColor { get; private set; } =
+            Enums.Color.Light;
 
         private Square SelectedSquare
         {
@@ -95,7 +95,7 @@ namespace MogriChess.Models
             Board.ClearValidDestinations();
 
             MoveHistory.Clear();
-            CurrentPlayerColor = Enums.ColorType.Light;
+            CurrentPlayerColor = Enums.Color.Light;
         }
 
         public void SelectSquare(Square square)
@@ -110,7 +110,7 @@ namespace MogriChess.Models
                 }
 
                 // There is a piece on the square, and it's the current player's
-                if (square.Piece.ColorType == CurrentPlayerColor)
+                if (square.Piece.Color == CurrentPlayerColor)
                 {
                     SelectedSquare = square;
                     SelectedSquare.IsSelected = true;
@@ -138,8 +138,8 @@ namespace MogriChess.Models
                 return;
             }
 
-            var movingPieceColorType = SelectedSquare.Piece.ColorType;
-            var opponentColorType = movingPieceColorType.OpponentColorType();
+            var movingPieceColorType = SelectedSquare.Piece.Color;
+            var opponentColorType = movingPieceColorType.OppositeColor();
 
             // Move piece to new square
             Board.MovePiece(SelectedSquare, square);
@@ -197,7 +197,7 @@ namespace MogriChess.Models
 
         private void EndCurrentPlayerTurn()
         {
-            CurrentPlayerColor = CurrentPlayerColor.OpponentColorType();
+            CurrentPlayerColor = CurrentPlayerColor.OppositeColor();
             OnMoveCompleted?.Invoke(this, EventArgs.Empty);
         }
 
@@ -213,7 +213,7 @@ namespace MogriChess.Models
 
             // Check if moving player's king can be captured
             bool putsMovingPlayerIntoCheckOrCheckmate =
-                Board.KingCanBeCaptured(movingPiece.ColorType);
+                Board.KingCanBeCaptured(movingPiece.Color);
 
             // Revert the simulated move
             Board.SquareAt(move.OriginationSquare.Rank, move.OriginationSquare.File).Piece =
@@ -224,17 +224,17 @@ namespace MogriChess.Models
             return putsMovingPlayerIntoCheckOrCheckmate;
         }
 
-        private bool OpponentIsInCheckmate(Enums.ColorType opponentColorType)
+        private bool OpponentIsInCheckmate(Enums.Color opponentColor)
         {
             bool isInCheckmate = true;
 
             // See if they are in checkmate
             foreach (var opponentSquare in Board.Squares.Where(s => s.Piece != null &&
-                                                                    s.Piece.ColorType == opponentColorType))
+                                                                    s.Piece.Color == opponentColor))
             {
                 foreach (Move potentialMove in Board.PotentialMovesForPieceAt(opponentSquare.Rank, opponentSquare.File))
                 {
-                    if (Board.MoveGetsKingOutOfCheck(opponentColorType, potentialMove))
+                    if (Board.MoveGetsKingOutOfCheck(opponentColor, potentialMove))
                     {
                         isInCheckmate = false;
                         break;

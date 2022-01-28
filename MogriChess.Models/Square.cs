@@ -11,13 +11,13 @@ namespace MogriChess.Models
 
         public int Rank { get; }
         public int File { get; }
-        public Enums.ColorType ColorType { get; }
+        public Enums.Color Color { get; }
         public Piece Piece { get; set; }
         public bool IsSelected { get; set; }
         public bool IsValidDestination { get; set; }
 
         public string SquareColor =>
-            ColorType == Enums.ColorType.Light
+            Color == Enums.Color.Light
                 ? _colorScheme.LightColor
                 : _colorScheme.DarkColor;
 
@@ -29,12 +29,12 @@ namespace MogriChess.Models
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Square(int rank, int file, ColorScheme colorScheme, Enums.ColorType color)
+        public Square(int rank, int file, ColorScheme colorScheme, Enums.Color color)
         {
             Rank = rank;
             File = file;
             _colorScheme = colorScheme;
-            ColorType = color;
+            Color = color;
         }
     }
 }

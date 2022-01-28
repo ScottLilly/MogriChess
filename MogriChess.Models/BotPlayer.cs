@@ -6,10 +6,10 @@ namespace MogriChess.Models
 {
     public class BotPlayer
     {
-        private readonly Enums.ColorType _botColor;
+        private readonly Enums.Color _botColor;
         private readonly PieceValueCalculator _pieceValueCalculator;
 
-        public BotPlayer(Enums.ColorType botColor,
+        public BotPlayer(Enums.Color botColor,
             PieceValueCalculator pieceValueCalculator)
         {
             _botColor = botColor;
@@ -65,18 +65,18 @@ namespace MogriChess.Models
                 : validMoves.RandomElement();
         }
 
-        private int PiecesValueFor(Board board, Enums.ColorType colorType)
+        private int PiecesValueFor(Board board, Enums.Color color)
         {
             return
                 board.Squares
-                    .Where(s => s.Piece?.ColorType == colorType)
+                    .Where(s => s.Piece?.Color == color)
                     .Sum(s => _pieceValueCalculator.CalculatePieceValue(s.Piece));
         }
 
         private int Advantage(Board board)
         {
             return PiecesValueFor(board, _botColor) -
-                   PiecesValueFor(board, _botColor.OpponentColorType());
+                   PiecesValueFor(board, _botColor.OppositeColor());
         }
     }
 }

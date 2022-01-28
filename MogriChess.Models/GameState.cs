@@ -4,7 +4,7 @@ namespace MogriChess.Models
 {
     public class GameState
     {
-        public Enums.ColorType CurrentPlayerColor { get; }
+        public Enums.Color CurrentPlayerColor { get; }
 
         public List<Square> Squares { get; } =
             new List<Square>();

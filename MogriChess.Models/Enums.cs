@@ -2,7 +2,7 @@
 {
     public static class Enums
     {
-        public enum ColorType
+        public enum Color
         {
             Light,
             Dark
