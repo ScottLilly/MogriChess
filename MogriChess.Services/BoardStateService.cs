@@ -18,7 +18,7 @@ public static class BoardStateService
     public static string GetSerializedGameState(Game currentGame)
     {
         return JsonConvert.SerializeObject(
-            new GameState(currentGame),
+            s_mapper.Map<GameStateDTO>(currentGame),
             Formatting.Indented);
     }
 
