@@ -116,7 +116,7 @@ namespace MogriChess.Models
 
             IEnumerable<Square> squaresWithOpponentPiece =
                 Squares.Where(s => s.Piece != null &&
-                                         s.Piece.ColorType == attackingPlayerColor);
+                                   s.Piece.ColorType == attackingPlayerColor);
 
             foreach (Square square in squaresWithOpponentPiece)
             {
