@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using MogriChess.Models.CustomEventArgs;
 
 namespace MogriChess.Models;
 
@@ -73,8 +74,8 @@ public class Game : INotifyPropertyChanged
     public BotPlayer LightPlayerBot { get; set; }
     public BotPlayer DarkPlayerBot { get; set; }
 
-    public event EventHandler OnMoveCompleted; 
-    public event EventHandler OnCheckmate;
+    public event EventHandler MoveCompleted;
+    public event EventHandler<GameEndedEventArgs> GameEnded;
     public event PropertyChangedEventHandler PropertyChanged;
 
     public Game(Board board)
@@ -196,13 +197,16 @@ public class Game : INotifyPropertyChanged
 
     private void HandleCheckmate()
     {
-        OnCheckmate?.Invoke(this, EventArgs.Empty);
+        GameEnded?.Invoke(this,
+            new GameEndedEventArgs(MoveHistory.Last().MovingPieceColor == Enums.Color.Light
+                ? GameEndedEventArgs.EndCondition.LightWonByCheckmate
+                : GameEndedEventArgs.EndCondition.DarkWonByCheckmate));
     }
 
     private void EndCurrentPlayerTurn()
     {
         CurrentPlayerColor = CurrentPlayerColor.OppositeColor();
-        OnMoveCompleted?.Invoke(this, EventArgs.Empty);
+        MoveCompleted?.Invoke(this, EventArgs.Empty);
     }
 
     private bool PutsMovingPlayerIntoCheckOrCheckmate(Move move) =>

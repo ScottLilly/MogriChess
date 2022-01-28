@@ -7,7 +7,6 @@ namespace MogriChess.ViewModels;
 
 public class PlaySession : INotifyPropertyChanged
 {
-    public event EventHandler GameOver;
     public event PropertyChangedEventHandler PropertyChanged;
 
     public Game CurrentGame { get; }
@@ -16,8 +15,7 @@ public class PlaySession : INotifyPropertyChanged
     {
         CurrentGame = GameFactory.GetNewGame();
 
-        CurrentGame.OnMoveCompleted += CurrentGame_OnMoveCompleted;
-        CurrentGame.OnCheckmate += CurrentGame_OnCheckmate;
+        CurrentGame.MoveCompleted += MoveCompletedHandler;
     }
 
     public void StartGame(Enums.PlayerType lightPlayer = Enums.PlayerType.Human,
@@ -51,7 +49,7 @@ public class PlaySession : INotifyPropertyChanged
         return BoardStateService.GetSerializedMoveHistory(CurrentGame);
     }
 
-    private void CurrentGame_OnMoveCompleted(object sender, EventArgs e)
+    private void MoveCompletedHandler(object sender, EventArgs e)
     {
         if (CurrentGame.CurrentPlayerColor == Enums.Color.Dark &&
             CurrentGame.DarkPlayerBot != null)
@@ -64,10 +62,5 @@ public class PlaySession : INotifyPropertyChanged
         {
             CurrentGame.MakeBotMove(CurrentGame.LightPlayerBot);
         }
-    }
-
-    private void CurrentGame_OnCheckmate(object sender, EventArgs e)
-    {
-        GameOver?.Invoke(this, EventArgs.Empty);
     }
 }

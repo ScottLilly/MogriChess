@@ -47,18 +47,18 @@ public partial class MainWindow : Window
 
     private void StartGame(Enums.PlayerType lightPlayer, Enums.PlayerType darkPlayer)
     {
-        CurrentSession.CurrentGame.MoveHistory.CollectionChanged -= MoveHistory_CollectionChanged;
-        CurrentSession.GameOver -= OnGameOver;
+        CurrentSession.CurrentGame.MoveHistory.CollectionChanged -= MoveHistoryChangedHandler;
+        CurrentSession.CurrentGame.GameEnded += GameEndedHandler;
 
         CurrentSession.StartGame(lightPlayer, darkPlayer);
 
-        CurrentSession.CurrentGame.MoveHistory.CollectionChanged += MoveHistory_CollectionChanged;
-        CurrentSession.GameOver += OnGameOver;
+        CurrentSession.CurrentGame.MoveHistory.CollectionChanged += MoveHistoryChangedHandler;
+        CurrentSession.CurrentGame.GameEnded += GameEndedHandler;
 
         _canPlay = true;
     }
 
-    private void OnGameOver(object sender, EventArgs e)
+    private void GameEndedHandler(object sender, Models.CustomEventArgs.GameEndedEventArgs e)
     {
         _canPlay = false;
     }
@@ -80,7 +80,7 @@ public partial class MainWindow : Window
         CurrentSession.CurrentGame.SelectSquare(square);
     }
 
-    private void MoveHistory_CollectionChanged(object sender,
+    private void MoveHistoryChangedHandler(object sender,
         System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
     {
         MoveHistoryDataGrid.ScrollIntoView(CurrentSession.CurrentGame.MoveHistory.Last());
