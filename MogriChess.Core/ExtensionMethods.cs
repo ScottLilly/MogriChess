@@ -33,9 +33,9 @@ namespace MogriChess.Core
             return !val.IsEven();
         }
 
-        public static void ApplyToEach<T>(this IEnumerable<T> list, Action<T> func)
+        public static void ApplyToEach<T>(this IEnumerable<T> elements, Action<T> func)
         {
-            foreach (T element in list)
+            foreach (T element in elements)
             {
                 func(element);
             }
