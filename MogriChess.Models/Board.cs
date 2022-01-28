@@ -99,7 +99,7 @@ namespace MogriChess.Models
             return validMoves;
         }
 
-        public bool GetSimulatedMoveResult(Move move, Func<bool> func)
+        public T GetSimulatedMoveResult<T>(Move move, Func<T> func)
         {
             // Clone pieces pre-move
             Piece originalMovingPiece = move.OriginationSquare.Piece.Clone();
@@ -109,7 +109,7 @@ namespace MogriChess.Models
             MovePiece(move.OriginationSquare, move.DestinationSquare);
 
             // Run passed-in function
-            bool result = func.Invoke();
+            T result = func.Invoke();
 
             // Revert simulated move
             move.OriginationSquare.Piece = originalMovingPiece;
@@ -134,6 +134,9 @@ namespace MogriChess.Models
 
         internal void ClearValidDestinations() =>
             Squares.ApplyToEach(s => s.IsValidDestination = false);
+
+        internal IEnumerable<Square> SquaresWithPiecesOfColor(Enums.Color color) =>
+            Squares.Where(s => s.Piece?.Color == color);
 
         internal Square SquareAt(int rank, int file) =>
             Squares.First(s => s.Rank.Equals(rank) && s.File.Equals(file));
@@ -226,9 +229,6 @@ namespace MogriChess.Models
             return GetSimulatedMoveResult(potentialMove,
                 () => !KingCanBeCaptured(kingColor));
         }
-
-        private IEnumerable<Square> SquaresWithPiecesOfColor(Enums.Color color) =>
-            Squares.Where(s => s.Piece?.Color == color);
 
         private IEnumerable<Move> PotentialMovesForPieceAt(Square square) =>
             PotentialMovesForPieceAt(square.Rank, square.File);

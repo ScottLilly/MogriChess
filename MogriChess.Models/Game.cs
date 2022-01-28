@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using MogriChess.Core;
 
 namespace MogriChess.Models
 {
@@ -152,7 +151,7 @@ namespace MogriChess.Models
 
         private void MoveToSelectedSquare(Square square)
         {
-            // Check the destination square is a valid move
+            // Check that the destination square is a valid move
             Move move =
                 ValidDestinationsForSelectedPiece.FirstOrDefault(d =>
                     d.DestinationRank == square.Rank &&
@@ -206,11 +205,9 @@ namespace MogriChess.Models
             OnMoveCompleted?.Invoke(this, EventArgs.Empty);
         }
 
-        private bool PutsMovingPlayerIntoCheckOrCheckmate(Move move)
-        {
-            return Board.GetSimulatedMoveResult(move,
+        private bool PutsMovingPlayerIntoCheckOrCheckmate(Move move) =>
+            Board.GetSimulatedMoveResult(move,
                 () => Board.KingCanBeCaptured(move.MovingPieceColor));
-        }
 
         #endregion
     }
