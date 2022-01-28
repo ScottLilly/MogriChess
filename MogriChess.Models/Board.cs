@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using MogriChess.Core;
 
 namespace MogriChess.Models
 {
@@ -170,16 +172,9 @@ namespace MogriChess.Models
         {
             for (int rank = 1; rank <= Constants.NumberOfRanks; rank++)
             {
-                Enums.Color squareColor =
-                    rank % 2 == 0
-                        ? Enums.Color.Light
-                        : Enums.Color.Dark;
-
                 for (int file = 1; file <= Constants.NumberOfFiles; file++)
                 {
-                    Squares.Add(new Square(rank, file, BoardColorScheme, squareColor));
-
-                    squareColor = squareColor.OppositeColor();
+                    Squares.Add(new Square(rank, file, BoardColorScheme));
                 }
             }
         }

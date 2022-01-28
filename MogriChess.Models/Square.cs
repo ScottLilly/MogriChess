@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using MogriChess.Core;
 
 namespace MogriChess.Models
 {
@@ -11,30 +12,31 @@ namespace MogriChess.Models
 
         public int Rank { get; }
         public int File { get; }
-        public Enums.Color Color { get; }
         public Piece Piece { get; set; }
         public bool IsSelected { get; set; }
         public bool IsValidDestination { get; set; }
 
+        public Enums.Color Color =>
+            (Rank + File).IsEven()
+                ? Enums.Color.Dark
+                : Enums.Color.Light;
         public string SquareColor =>
             Color == Enums.Color.Light
                 ? _colorScheme.LightColor
                 : _colorScheme.DarkColor;
-
         public int UiGridRow => Constants.NumberOfRanks - Rank;
         public int UiGridColumn => File - 1;
-        
         public string SquareShorthand => $"{FileAsLetter}{Rank}";
         public bool IsEmpty => Piece == null;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Square(int rank, int file, ColorScheme colorScheme, Enums.Color color)
+        public Square(int rank, int file, ColorScheme colorScheme)
         {
             Rank = rank;
             File = file;
+
             _colorScheme = colorScheme;
-            Color = color;
         }
     }
 }

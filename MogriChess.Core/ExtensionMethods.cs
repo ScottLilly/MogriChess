@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace MogriChess.Core
 {
@@ -22,6 +21,16 @@ namespace MogriChess.Core
             return func == null
                 ? !elements.Any()
                 : !elements.Any(func.Invoke);
+        }
+
+        public static bool IsEven(this int val)
+        {
+            return val % 2 == 0;
+        }
+
+        public static bool IsOdd(this int val)
+        {
+            return !val.IsEven();
         }
     }
 }
