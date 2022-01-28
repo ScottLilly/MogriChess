@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -96,6 +97,25 @@ namespace MogriChess.Models
             validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.ForwardLeft));
 
             return validMoves;
+        }
+
+        public bool GetSimulatedMoveResult(Move move, Func<bool> func)
+        {
+            // Clone pieces pre-move
+            Piece originalMovingPiece = move.OriginationSquare.Piece.Clone();
+            Piece destinationPiece = move.DestinationSquare.Piece?.Clone();
+
+            // Make simulated move
+            MovePiece(move.OriginationSquare, move.DestinationSquare);
+
+            // Run passed-in function
+            bool result = func.Invoke();
+
+            // Revert simulated move
+            move.OriginationSquare.Piece = originalMovingPiece;
+            move.DestinationSquare.Piece = destinationPiece;
+
+            return result;
         }
 
         public bool KingCanBeCaptured(Enums.Color playerColor) =>
@@ -203,20 +223,8 @@ namespace MogriChess.Models
 
         private bool MoveGetsKingOutOfCheck(Enums.Color kingColor, Move potentialMove)
         {
-            // Clone pieces pre-move
-            var originalMovingPiece = potentialMove.OriginationSquare.Piece.Clone();
-            var destinationPiece = potentialMove.DestinationSquare.Piece?.Clone();
-
-            // Make simulated move
-            MovePiece(potentialMove.OriginationSquare, potentialMove.DestinationSquare);
-
-            bool stillInCheck = KingCanBeCaptured(kingColor);
-
-            // Revert simulated move
-            potentialMove.OriginationSquare.Piece = originalMovingPiece;
-            potentialMove.DestinationSquare.Piece = destinationPiece;
-
-            return !stillInCheck;
+            return GetSimulatedMoveResult(potentialMove,
+                () => !KingCanBeCaptured(kingColor));
         }
 
         private IEnumerable<Square> SquaresWithPiecesOfColor(Enums.Color color) =>

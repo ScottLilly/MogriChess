@@ -208,25 +208,8 @@ namespace MogriChess.Models
 
         private bool PutsMovingPlayerIntoCheckOrCheckmate(Move move)
         {
-            Piece originatingMovePiece = move.OriginationSquare.Piece.Clone();
-
-            Piece movingPiece = move.OriginationSquare.Piece.Clone();
-            Piece destinationPiece = move.DestinationSquare.Piece?.Clone();
-
-            // Simulate the move
-            Board.MovePiece(move.OriginationSquare, move.DestinationSquare);
-
-            // Check if moving player's king can be captured
-            bool putsMovingPlayerIntoCheckOrCheckmate =
-                Board.KingCanBeCaptured(movingPiece.Color);
-
-            // Revert the simulated move
-            Board.SquareAt(move.OriginationSquare.Rank, move.OriginationSquare.File).Piece =
-                originatingMovePiece;
-            Board.SquareAt(move.DestinationRank, move.DestinationFile).Piece =
-                destinationPiece;
-
-            return putsMovingPlayerIntoCheckOrCheckmate;
+            return Board.GetSimulatedMoveResult(move,
+                () => Board.KingCanBeCaptured(move.MovingPieceColor));
         }
 
         #endregion
