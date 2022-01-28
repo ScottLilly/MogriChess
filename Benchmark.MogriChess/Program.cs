@@ -1,12 +1,11 @@
 ﻿using BenchmarkDotNet.Running;
 
-namespace Benchmark.MogriChess
+namespace Benchmark.MogriChess;
+
+internal static class Program
 {
-    internal static class Program
+    private static void Main(string[] args)
     {
-        private static void Main(string[] args)
-        {
-            BenchmarkRunner.Run<MemoryBenchmarker>();
-        }
+        BenchmarkRunner.Run<MemoryBenchmarker>();
     }
 }

@@ -1,14 +1,13 @@
-﻿namespace MogriChess.Models
-{
-    public class ColorScheme
-    {
-        public string LightColor { get; }
-        public string DarkColor { get; }
+﻿namespace MogriChess.Models;
 
-        public ColorScheme(string lightColor, string darkColor)
-        {
-            LightColor = lightColor;
-            DarkColor = darkColor;
-        }
+public class ColorScheme
+{
+    public string LightColor { get; }
+    public string DarkColor { get; }
+
+    public ColorScheme(string lightColor, string darkColor)
+    {
+        LightColor = lightColor;
+        DarkColor = darkColor;
     }
 }

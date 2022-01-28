@@ -3,15 +3,14 @@ using System.IO;
 using MogriChess.Models.DTOs;
 using Newtonsoft.Json;
 
-namespace Test.MogriChess.ViewModels.Utilities
-{
-    internal static class TestFileParser
-    {
-        internal static List<MoveHistoryDTO> GetMoveHistoryFromFile(string filename)
-        {
-            var jsonText = File.ReadAllText(filename);
+namespace Test.MogriChess.ViewModels.Utilities;
 
-            return JsonConvert.DeserializeObject<List<MoveHistoryDTO>>(jsonText);
-        }
+internal static class TestFileParser
+{
+    internal static List<MoveHistoryDTO> GetMoveHistoryFromFile(string filename)
+    {
+        var jsonText = File.ReadAllText(filename);
+
+        return JsonConvert.DeserializeObject<List<MoveHistoryDTO>>(jsonText);
     }
 }

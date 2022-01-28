@@ -1,12 +1,11 @@
 ﻿using System.Windows.Controls;
 
-namespace MogriChess.WPF.CustomControls
+namespace MogriChess.WPF.CustomControls;
+
+public partial class SquareControl : UserControl
 {
-    public partial class SquareControl : UserControl
+    public SquareControl()
     {
-        public SquareControl()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

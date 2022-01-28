@@ -2,29 +2,28 @@
 using System.Windows;
 using System.Windows.Navigation;
 
-namespace MogriChess.WPF.Windows
+namespace MogriChess.WPF.Windows;
+
+public partial class About : Window
 {
-    public partial class About : Window
+    public About()
     {
-        public About()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            ProcessStartInfo processStartInfo =
-                new(e.Uri.ToString())
-                {
-                    UseShellExecute = true
-                };
+    private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
+    {
+        ProcessStartInfo processStartInfo =
+            new(e.Uri.ToString())
+            {
+                UseShellExecute = true
+            };
 
-            Process.Start(processStartInfo);
-        }
+        Process.Start(processStartInfo);
+    }
 
-        private void OK_OnClick(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+    private void OK_OnClick(object sender, RoutedEventArgs e)
+    {
+        Close();
     }
 }

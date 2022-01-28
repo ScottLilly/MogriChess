@@ -1,12 +1,11 @@
 ﻿using MogriChess.Models;
 
-namespace MogriChess.Services
+namespace MogriChess.Services;
+
+public static class GameFactory
 {
-    public static class GameFactory
+    public static Game GetNewGame()
     {
-        public static Game GetNewGame()
-        {
-            return new Game(BoardFactory.GetNewGameBoard());
-        }
+        return new Game(BoardFactory.GetNewGameBoard());
     }
 }

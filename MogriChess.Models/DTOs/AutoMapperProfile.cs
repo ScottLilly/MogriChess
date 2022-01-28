@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
 
-namespace MogriChess.Models.DTOs
+namespace MogriChess.Models.DTOs;
+
+public class AutoMapperProfile : Profile
 {
-    public class AutoMapperProfile : Profile
+    public AutoMapperProfile()
     {
-        public AutoMapperProfile()
-        {
-            CreateMap<Move, MoveHistoryDTO>();
-        }
+        CreateMap<Move, MoveHistoryDTO>();
     }
 }
