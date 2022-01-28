@@ -32,5 +32,13 @@ namespace MogriChess.Core
         {
             return !val.IsEven();
         }
+
+        public static void ApplyToEach<T>(this IEnumerable<T> list, Action<T> func)
+        {
+            foreach (T element in list)
+            {
+                func(element);
+            }
+        }
     }
 }

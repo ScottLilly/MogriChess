@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -29,11 +28,7 @@ namespace MogriChess.Models
 
         public void PlaceStartingPieces(List<PiecePlacement> piecePlacements)
         {
-            // Clear out old pieces
-            foreach (Square square in Squares)
-            {
-                square.Piece = null;
-            }
+            RemovePiecesFromAllSquares();
 
             foreach (PiecePlacement placement in piecePlacements)
             {
@@ -41,10 +36,8 @@ namespace MogriChess.Models
             }
         }
 
-        public Piece PieceAt(int rank, int file)
-        {
-            return SquareAt(rank, file).Piece;
-        }
+        public Piece PieceAt(int rank, int file) =>
+            SquareAt(rank, file).Piece;
 
         public void MovePiece(Square originationSquare, Square destinationSquare)
         {
@@ -54,14 +47,9 @@ namespace MogriChess.Models
 
         public List<Move> ValidMovesForPlayerColor(Enums.Color playerColor)
         {
-            var squaresWithPlayerColorPieces =
-                Squares
-                    .Where(s => s.Piece?.Color == playerColor)
-                    .ToList();
-
             List<Move> potentialMoves = new List<Move>();
 
-            foreach (Square square in squaresWithPlayerColorPieces)
+            foreach (Square square in SquaresWithPiecesOfColor(playerColor))
             {
                 potentialMoves.AddRange(PotentialMovesForPieceAt(square.Rank, square.File));
             }
@@ -110,24 +98,10 @@ namespace MogriChess.Models
             return validMoves;
         }
 
-        public bool KingCanBeCaptured(Enums.Color playerColor)
-        {
-            Enums.Color attackingPlayerColor = playerColor.OppositeColor();
-
-            IEnumerable<Square> squaresWithOpponentPiece =
-                Squares.Where(s => s.Piece != null &&
-                                   s.Piece.Color == attackingPlayerColor);
-
-            foreach (Square square in squaresWithOpponentPiece)
-            {
-                if (PotentialMovesForPieceAt(square.Rank, square.File).Any(m => m.PutsOpponentInCheck))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
+        public bool KingCanBeCaptured(Enums.Color playerColor) =>
+            SquaresWithPiecesOfColor(playerColor.OppositeColor())
+                .Any(square => PotentialMovesForPieceAt(square.Rank, square.File)
+                    .Any(m => m.PutsOpponentInCheck));
 
         public bool MoveGetsKingOutOfCheck(Enums.Color kingColor, Move potentialMove)
         {
@@ -151,18 +125,11 @@ namespace MogriChess.Models
 
         #region Internal methods
 
-        internal void ClearValidDestinations()
-        {
-            foreach (Square square in Squares)
-            {
-                square.IsValidDestination = false;
-            }
-        }
+        internal void ClearValidDestinations() =>
+            Squares.ApplyToEach(s => s.IsValidDestination = false);
 
-        internal Square SquareAt(int rank, int file)
-        {
-            return Squares.First(s => s.Rank.Equals(rank) && s.File.Equals(file));
-        }
+        internal Square SquareAt(int rank, int file) =>
+            Squares.First(s => s.Rank.Equals(rank) && s.File.Equals(file));
 
         #endregion
 
@@ -188,9 +155,7 @@ namespace MogriChess.Models
 
             destinationSquare.Piece = piece;
 
-            if (piece.IsUnpromotedPawn &&
-                (piece.Color == Enums.Color.Light && destinationSquare.Rank == Constants.BackRankDark) ||
-                (piece.Color == Enums.Color.Dark && destinationSquare.Rank == Constants.BackRankLight))
+            if (IsPawnPromotionMove(piece, destinationSquare))
             {
                 piece.Promote();
             }
@@ -224,9 +189,7 @@ namespace MogriChess.Models
 
                 // Un-promoted pawn reached opponent's back rank, and needs to be promoted.
                 potentialMove.IsPromotingMove =
-                    IsPawnPromotionMove(potentialMove);
-
-                Piece destinationPiece = destinationSquare.Piece;
+                    IsPawnPromotionMove(movingPiece, destinationSquare);
 
                 if (destinationSquare.IsEmpty)
                 {
@@ -238,7 +201,8 @@ namespace MogriChess.Models
                     {
                         // Square is occupied by an opponent's piece
                         potentialMove.IsCapturingMove = true;
-                        potentialMove.PutsOpponentInCheck = destinationPiece.IsKing;
+                        potentialMove.PutsOpponentInCheck =
+                            destinationSquare.Piece.IsKing;
 
                         validMoves.Add(potentialMove);
                     }
@@ -250,15 +214,16 @@ namespace MogriChess.Models
             return validMoves;
         }
 
-        private static bool IsPawnPromotionMove(Move potentialMove)
-        {
-            Piece piece = potentialMove.OriginationSquare.Piece;
-            int destinationRank = potentialMove.DestinationRank;
+        private static bool IsPawnPromotionMove(Piece movingPiece, Square destinationSquare) =>
+            movingPiece.IsUnpromotedPawn &&
+            (movingPiece.Color == Enums.Color.Light && destinationSquare.Rank == Constants.BackRankDark ||
+             movingPiece.Color == Enums.Color.Dark && destinationSquare.Rank == Constants.BackRankLight);
 
-            return piece.IsUnpromotedPawn &&
-                   (piece.Color == Enums.Color.Light && destinationRank == Constants.BackRankDark ||
-                    piece.Color == Enums.Color.Dark && destinationRank == Constants.BackRankLight);
-        }
+        private IEnumerable<Square> SquaresWithPiecesOfColor(Enums.Color color) =>
+            Squares.Where(s => s.Piece?.Color == color);
+
+        private void RemovePiecesFromAllSquares() =>
+            Squares.ApplyToEach(s => s.Piece = null);
 
         #endregion
     }
