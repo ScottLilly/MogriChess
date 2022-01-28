@@ -37,9 +37,6 @@ namespace MogriChess.Models
             }
         }
 
-        public Piece PieceAt(int rank, int file) =>
-            SquareAt(rank, file).Piece;
-
         public void MovePiece(Square originationSquare, Square destinationSquare)
         {
             PlacePieceOnSquare(originationSquare.Piece, destinationSquare);
