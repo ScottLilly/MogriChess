@@ -6,7 +6,17 @@
         WindowStartupLocation="CenterOwner"
         FontSize="11pt"
         Title="About"
-        Height="250" Width="400">
+        Height="250" Width="425">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelFormatting" TargetType="TextBlock">
+                <Setter Property="Height" Value="22"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="0,0,10,0"/>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
 
     <Grid Margin="10,10,10,10">
         <Grid.RowDefinitions>
@@ -26,20 +36,26 @@
 
         <TextBlock Grid.Row="0" Grid.Column="0" 
                    Grid.ColumnSpan="2" 
+                   Style="{StaticResource LabelFormatting}"
                    Text="MogriChess"/>
         <TextBlock Grid.Row="1" Grid.Column="0" 
                    Grid.ColumnSpan="2"
-                   Text="0.1.0.0"/>
+                   Style="{StaticResource LabelFormatting}"
+                   x:Name="VersionNumber"/>
         <TextBlock Grid.Row="2" Grid.Column="0" 
                    Grid.ColumnSpan="2"
+                   Style="{StaticResource LabelFormatting}"
                    Text="Copyright 2021, Scott Lilly"/>
         <TextBlock Grid.Row="3" Grid.Column="0" 
                    Grid.ColumnSpan="2"
+                   Style="{StaticResource LabelFormatting}"
                    Text="All Rights Reserved"/>
 
         <TextBlock Grid.Row="4" Grid.Column="0" 
+                   Style="{StaticResource LabelFormatting}"
                    Text="Source code:"/>
-        <TextBlock Grid.Row="4" Grid.Column="1" >
+        <TextBlock Grid.Row="4" Grid.Column="1"
+                   Style="{StaticResource LabelFormatting}">
             <Hyperlink NavigateUri="https://github.com/ScottLilly/MogriChess"
                        RequestNavigate="Hyperlink_OnRequestNavigate">
                 https://github.com/ScottLilly/MogriChess
@@ -47,8 +63,10 @@
         </TextBlock>
 
         <TextBlock Grid.Row="5" Grid.Column="0" 
+                   Style="{StaticResource LabelFormatting}"
                    Text="Website:"/>
-        <TextBlock Grid.Row="5" Grid.Column="1" >
+        <TextBlock Grid.Row="5" Grid.Column="1"
+                   Style="{StaticResource LabelFormatting}">
             <Hyperlink NavigateUri="https://mogrichess.com/"
                        RequestNavigate="Hyperlink_OnRequestNavigate">
                 https://mogrichess.com/
