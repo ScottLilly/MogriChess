@@ -13,9 +13,23 @@
 	<TransformOnBuild>true</TransformOnBuild>
 	<OverwriteReadOnlyOutputFiles>true</OverwriteReadOnlyOutputFiles>
 	<TransformOutOfDateOnly>false</TransformOutOfDateOnly>
+	<StartupObject>MogriChess.WPF.App</StartupObject>
+	<ApplicationIcon>MogriChessIcon.ico</ApplicationIcon>
+	<PackageIcon>MogriChessIcon.png</PackageIcon>
+	<PackageProjectUrl>https://mogrichess.com/</PackageProjectUrl>
+	<Copyright>Scott Lilly</Copyright>
+	<Description>MogriChess</Description>
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="MogriChessIcon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\Scott\Desktop\MogriChessIcon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Include="VersionIncrementer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
