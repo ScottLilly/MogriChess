@@ -37,4 +37,42 @@ public class TestCheckmateConditions
 
         Assert.False(game.MoveHistory.Last().PutsOpponentInCheckmate);
     }
+
+    [Fact]
+    public void Test_IncorrectCheckmateReported_2()
+    {
+        Game game = new Game(new Board(null, null));
+
+        AddPiece(game, "a1", PieceFactory.GetRook(null, Enums.Color.Light));
+        AddPiece(game, "b1", PieceFactory.GetKnight(null, Enums.Color.Light));
+        AddPiece(game, "c1", PieceFactory.GetBishop(null, Enums.Color.Light));
+        AddPiece(game, "d1", PieceFactory.GetQueen(null, Enums.Color.Light));
+        AddPiece(game, "e1", PieceFactory.GetKing(null, Enums.Color.Light));
+        AddPiece(game, "f1", PieceFactory.GetBishop(null, Enums.Color.Light));
+        AddPiece(game, "g1", PieceFactory.GetKnight(null, Enums.Color.Light));
+
+        AddPiece(game, "a2", PieceFactory.GetPawn(null, Enums.Color.Light));
+        AddPiece(game, "b2", PieceFactory.GetPawn(null, Enums.Color.Light));
+        AddPiece(game, "c2", PieceFactory.GetPawn(null, Enums.Color.Light));
+        AddPiece(game, "d2", PieceFactory.GetPawn(null, Enums.Color.Light));
+        AddPiece(game, "e2", PieceFactory.GetPawn(null, Enums.Color.Light));
+        AddPiece(game, "f2", PieceFactory.GetPawn(null, Enums.Color.Light));
+        AddPiece(game, "g2", PieceFactory.GetPawn(null, Enums.Color.Light));
+
+        AddPiece(game, "b4", PieceFactory.GetQueen(null, Enums.Color.Light));
+        AddPiece(game, "f6", PieceFactory.GetPawn(null, Enums.Color.Light));
+
+        AddPiece(game, "f4", PieceFactory.GetKing(null, Enums.Color.Dark));
+        AddPiece(game, "g6", PieceFactory.GetPawn(null, Enums.Color.Dark));
+
+        Assert.True(game.Board.KingCanBeCaptured(Enums.Color.Dark));
+        Assert.False(game.Board.PlayerIsInCheckmate(Enums.Color.Dark));
+        Assert.False(game.Board.KingCanBeCaptured(Enums.Color.Light));
+    }
+
+    private static void AddPiece(Game game, string squareShorthand, Piece piece)
+    {
+        game.Board.Squares.First(s => s.SquareShorthand.Equals(squareShorthand))
+                .Piece = piece;
+    }
 }
