@@ -57,6 +57,8 @@ public class Board : INotifyPropertyChanged
 
         if (KingCanBeCaptured(playerColor))
         {
+            // If king is currently in check,
+            // only allow moves that get the king out of check
             foreach (Move potentialMove in potentialMoves)
             {
                 if (MoveGetsKingOutOfCheck(playerColor, potentialMove))
@@ -67,7 +69,10 @@ public class Board : INotifyPropertyChanged
         }
         else
         {
-            validMoves.AddRange(potentialMoves);
+            // King is not in check,
+            // only allow moves that do not put king in check
+            validMoves.AddRange(potentialMoves.Where(potentialMove =>
+                GetSimulatedMoveResult(potentialMove, () => KingCannotBeCaptured(playerColor))));
         }
 
         return validMoves;
@@ -115,6 +120,9 @@ public class Board : INotifyPropertyChanged
         return result;
     }
 
+    public bool KingCannotBeCaptured(Enums.Color playerColor) =>
+        !KingCanBeCaptured(playerColor);
+      
     public bool KingCanBeCaptured(Enums.Color playerColor) =>
         SquaresWithPiecesOfColor(playerColor.OppositeColor())
             .Any(square => PotentialMovesForPieceAt(square)
@@ -224,7 +232,7 @@ public class Board : INotifyPropertyChanged
     private bool MoveGetsKingOutOfCheck(Enums.Color kingColor, Move potentialMove)
     {
         return GetSimulatedMoveResult(potentialMove,
-            () => !KingCanBeCaptured(kingColor));
+            () => KingCannotBeCaptured(kingColor));
     }
 
     private IEnumerable<Move> PotentialMovesForPieceAt(Square square) =>
