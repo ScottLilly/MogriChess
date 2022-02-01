@@ -83,6 +83,7 @@ public partial class MainWindow : Window
     private void MoveHistoryChangedHandler(object sender,
         System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
     {
+        MoveHistoryDataGrid.UpdateLayout();
         MoveHistoryDataGrid.ScrollIntoView(CurrentSession.CurrentGame.MoveHistory.Last());
     }
 
