@@ -87,8 +87,7 @@ public class Board : INotifyPropertyChanged
 
     public List<Move> LegalMovesForPlayer(Enums.Color playerColor) =>
         SquaresWithPiecesOfColor(playerColor)
-            .SelectMany(square => PotentialMovesForPieceAt(square.Rank, square.File))
-            .Where(move => GetSimulatedMoveResult(move, () => KingCannotBeCaptured(playerColor)))
+            .SelectMany(square => LegalMovesForPieceAt(square.Rank, square.File))
             .ToList();
 
     public List<Move> LegalMovesForPieceAt(int rank, int file)
