@@ -29,17 +29,19 @@ public class Game : INotifyPropertyChanged
 
             Board.ClearValidDestinations();
 
-            if (SelectedSquare != null)
+            if (SelectedSquare == null)
             {
-                List<Move> legalMoves =
-                    Board.LegalMovesForPieceAt(SelectedSquare.Rank, SelectedSquare.File);
+                return;
+            }
 
-                legalMoves.ApplyToEach(lm => ValidDestinationsForSelectedPiece.Add(lm));
+            List<Move> legalMoves =
+                Board.LegalMovesForPieceAt(SelectedSquare.Rank, SelectedSquare.File);
 
-                if (DisplayValidDestinations)
-                {
-                    legalMoves.ApplyToEach(lm => lm.DestinationSquare.IsValidDestination = true);
-                }
+            legalMoves.ApplyToEach(lm => ValidDestinationsForSelectedPiece.Add(lm));
+
+            if (DisplayValidDestinations)
+            {
+                legalMoves.ApplyToEach(lm => lm.DestinationSquare.IsValidDestination = true);
             }
         }
     }

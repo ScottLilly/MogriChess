@@ -29,66 +29,13 @@ public class Board : INotifyPropertyChanged
 
     public void PlaceStartingPieces(List<PiecePlacement> piecePlacements)
     {
-        RemovePiecesFromAllSquares();
+        Squares.ApplyToEach(s => s.Piece = null);
 
         foreach (PiecePlacement placement in piecePlacements)
         {
             PlacePieceOnSquare(placement.Piece, SquareAt(placement.Rank, placement.File));
         }
     }
-
-    public void MovePiece(Square originationSquare, Square destinationSquare)
-    {
-        PlacePieceOnSquare(originationSquare.Piece, destinationSquare);
-        originationSquare.Piece = null;
-    }
-
-    public List<Move> PotentialMovesForPieceAt(int rank, int file)
-    {
-        Square originationSquare = SquareAt(rank, file);
-
-        List<Move> validMoves = new List<Move>();
-
-        if (originationSquare.Piece == null)
-        {
-            return validMoves;
-        }
-
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.Forward));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.ForwardRight));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.Right));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.BackRight));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.Back));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.BackLeft));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.Left));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.ForwardLeft));
-
-        return validMoves;
-    }
-
-    public T GetSimulatedMoveResult<T>(Move move, Func<T> func)
-    {
-        // Clone pieces pre-move
-        Piece originalMovingPiece = move.OriginationSquare.Piece.Clone();
-        Piece destinationPiece = move.DestinationSquare.Piece?.Clone();
-
-        // Make simulated move
-        MovePiece(move.OriginationSquare, move.DestinationSquare);
-
-        // Run passed-in function
-        T result = func.Invoke();
-
-        // Revert simulated move
-        move.OriginationSquare.Piece = originalMovingPiece;
-        move.DestinationSquare.Piece = destinationPiece;
-
-        return result;
-    }
-
-    public List<Move> LegalMovesForPlayer(Enums.Color playerColor) =>
-        SquaresWithPiecesOfColor(playerColor)
-            .SelectMany(square => LegalMovesForPieceAt(square.Rank, square.File))
-            .ToList();
 
     public List<Move> LegalMovesForPieceAt(int rank, int file)
     {
@@ -117,8 +64,35 @@ public class Board : INotifyPropertyChanged
     internal IEnumerable<Square> SquaresWithPiecesOfColor(Enums.Color color) =>
         Squares.Where(s => s.Piece?.Color == color);
 
-    internal Square SquareAt(int rank, int file) =>
-        Squares.First(s => s.Rank.Equals(rank) && s.File.Equals(file));
+    internal void MovePiece(Square originationSquare, Square destinationSquare)
+    {
+        PlacePieceOnSquare(originationSquare.Piece, destinationSquare);
+        originationSquare.Piece = null;
+    }
+
+    internal List<Move> LegalMovesForPlayer(Enums.Color playerColor) =>
+        SquaresWithPiecesOfColor(playerColor)
+            .SelectMany(square => LegalMovesForPieceAt(square.Rank, square.File))
+            .ToList();
+
+    internal T GetSimulatedMoveResult<T>(Move move, Func<T> func)
+    {
+        // Clone pieces pre-move
+        Piece originalMovingPiece = move.OriginationSquare.Piece.Clone();
+        Piece destinationPiece = move.DestinationSquare.Piece?.Clone();
+
+        // Make simulated move
+        MovePiece(move.OriginationSquare, move.DestinationSquare);
+
+        // Run passed-in function
+        T result = func.Invoke();
+
+        // Revert simulated move
+        move.OriginationSquare.Piece = originalMovingPiece;
+        move.DestinationSquare.Piece = destinationPiece;
+
+        return result;
+    }
 
     #endregion
 
@@ -150,7 +124,37 @@ public class Board : INotifyPropertyChanged
         }
     }
 
-    private IEnumerable<Move> PotentialMovesInDirection(Square originationSquare, Enums.Direction direction)
+    private Square SquareAt(int rank, int file) =>
+        Squares.First(s => s.Rank.Equals(rank) && s.File.Equals(file));
+
+    private IEnumerable<Move> PotentialMovesForPieceAt(Square square) =>
+        PotentialMovesForPieceAt(square.Rank, square.File);
+
+    private IEnumerable<Move> PotentialMovesForPieceAt(int rank, int file)
+    {
+        Square originationSquare = SquareAt(rank, file);
+
+        List<Move> validMoves = new List<Move>();
+
+        if (originationSquare.Piece == null)
+        {
+            return validMoves;
+        }
+
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.Forward));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.ForwardRight));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.Right));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.BackRight));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.Back));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.BackLeft));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.Left));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.ForwardLeft));
+
+        return validMoves;
+    }
+
+    private IEnumerable<Move> PotentialMovesInDirection(Square originationSquare,
+        Enums.Direction direction)
     {
         List<Move> potentialMoves = new List<Move>();
 
@@ -212,16 +216,10 @@ public class Board : INotifyPropertyChanged
             () => KingCannotBeCaptured(kingColor));
     }
 
-    private IEnumerable<Move> PotentialMovesForPieceAt(Square square) =>
-        PotentialMovesForPieceAt(square.Rank, square.File);
-
     private static bool IsPawnPromotionMove(Piece movingPiece, Square destinationSquare) =>
         movingPiece.IsUnpromotedPawn &&
         ((movingPiece.Color == Enums.Color.Light && destinationSquare.Rank == Constants.BackRankDark) ||
          (movingPiece.Color == Enums.Color.Dark && destinationSquare.Rank == Constants.BackRankLight));
-
-    private void RemovePiecesFromAllSquares() =>
-        Squares.ApplyToEach(s => s.Piece = null);
 
     #endregion
 }
