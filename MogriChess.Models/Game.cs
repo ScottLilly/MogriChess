@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using MogriChess.Core;
 using MogriChess.Models.CustomEventArgs;
 
@@ -109,13 +111,7 @@ public class Game : INotifyPropertyChanged
                 return;
             }
 
-            // The square contains a piece of the current player's color.
-            // So, it's a valid selection.
-            if (square.Piece.Color == CurrentPlayerColor)
-            {
-                SelectedSquare = square;
-                SelectedSquare.IsSelected = true;
-            }
+            SelectMoveOriginationSquare(square);
 
             return;
         }
@@ -132,7 +128,18 @@ public class Game : INotifyPropertyChanged
         MoveToSelectedSquare(square);
     }
 
-    public void MakeBotMove(BotPlayer botPlayer)
+    private void SelectMoveOriginationSquare(Square square)
+    {
+        // The square contains a piece of the current player's color.
+        // So, it's a valid selection.
+        if (square.Piece.Color == CurrentPlayerColor)
+        {
+            SelectedSquare = square;
+            SelectedSquare.IsSelected = true;
+        }
+    }
+
+    public async void MakeBotMove(BotPlayer botPlayer)
     {
         if (MoveHistory.Last().PutsOpponentInCheckmate)
         {
@@ -142,6 +149,18 @@ public class Game : INotifyPropertyChanged
         Move bestMove = botPlayer.FindBestMove(Board);
 
         SelectSquare(bestMove.OriginationSquare);
+
+        ValidDestinationsForSelectedPiece.ApplyToEach(d => d.DestinationSquare.IsValidDestination = false);
+        ValidDestinationsForSelectedPiece.Clear();
+
+        ValidDestinationsForSelectedPiece.Add(bestMove);
+        if (DisplayValidDestinations)
+        {
+            ValidDestinationsForSelectedPiece.ApplyToEach(d => d.DestinationSquare.IsValidDestination = true);
+        }
+
+        await Task.Delay(750);
+
         SelectSquare(bestMove.DestinationSquare);
     }
 
