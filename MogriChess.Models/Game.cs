@@ -150,13 +150,16 @@ public class Game : INotifyPropertyChanged
 
         SelectSquare(bestMove.OriginationSquare);
 
-        ValidDestinationsForSelectedPiece.ApplyToEach(d => d.DestinationSquare.IsValidDestination = false);
+        ValidDestinationsForSelectedPiece.ApplyToEach(d =>
+            d.DestinationSquare.IsValidDestination = false);
         ValidDestinationsForSelectedPiece.Clear();
 
         ValidDestinationsForSelectedPiece.Add(bestMove);
+
         if (DisplayValidDestinations)
         {
-            ValidDestinationsForSelectedPiece.ApplyToEach(d => d.DestinationSquare.IsValidDestination = true);
+            ValidDestinationsForSelectedPiece.ApplyToEach(d =>
+                d.DestinationSquare.IsValidDestination = true);
         }
 
         await Task.Delay(750);
