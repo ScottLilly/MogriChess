@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using MogriChess.Core;
 using MogriChess.Models.CustomEventArgs;
 
 namespace MogriChess.Models;
@@ -30,18 +31,14 @@ public class Game : INotifyPropertyChanged
 
             if (SelectedSquare != null)
             {
-                List<Move> validDestinations =
-                    Board.PotentialMovesForPieceAt(SelectedSquare.Rank, SelectedSquare.File);
+                List<Move> legalMoves =
+                    Board.LegalMovesForPieceAt(SelectedSquare.Rank, SelectedSquare.File);
 
-                foreach (Move move in validDestinations.Where(m => 
-                             !PutsMovingPlayerIntoCheckOrCheckmate(m)))
+                legalMoves.ApplyToEach(lm => ValidDestinationsForSelectedPiece.Add(lm));
+
+                if (DisplayValidDestinations)
                 {
-                    ValidDestinationsForSelectedPiece.Add(move);
-
-                    if (DisplayValidDestinations)
-                    {
-                        Board.SquareAt(move.DestinationRank, move.DestinationFile).IsValidDestination = true;
-                    }
+                    legalMoves.ApplyToEach(lm => lm.DestinationSquare.IsValidDestination = true);
                 }
             }
         }

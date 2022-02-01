@@ -96,9 +96,6 @@ public class Board : INotifyPropertyChanged
             .Where(m => GetSimulatedMoveResult(m, () => KingCannotBeCaptured(m.MovingPieceColor)))
             .ToList();
     }
-
-    public bool KingCannotBeCaptured(Enums.Color playerColor) =>
-        !KingCanBeCaptured(playerColor);
       
     public bool KingCanBeCaptured(Enums.Color playerColor) =>
         SquaresWithPiecesOfColor(playerColor.OppositeColor())
@@ -205,6 +202,9 @@ public class Board : INotifyPropertyChanged
 
         return potentialMoves;
     }
+
+    private bool KingCannotBeCaptured(Enums.Color playerColor) =>
+        !KingCanBeCaptured(playerColor);
 
     private bool MoveGetsKingOutOfCheck(Enums.Color kingColor, Move potentialMove)
     {
