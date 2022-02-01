@@ -43,41 +43,6 @@ public class Board : INotifyPropertyChanged
         originationSquare.Piece = null;
     }
 
-    public List<Move> ValidMovesForPlayerColor(Enums.Color playerColor)
-    {
-        List<Move> potentialMoves = new List<Move>();
-
-        foreach (Square square in SquaresWithPiecesOfColor(playerColor))
-        {
-            potentialMoves.AddRange(PotentialMovesForPieceAt(square.Rank, square.File));
-        }
-
-        // Only return moves that do not put moving player in check
-        List<Move> validMoves = new List<Move>();
-
-        if (KingCanBeCaptured(playerColor))
-        {
-            // If king is currently in check,
-            // only allow moves that get the king out of check
-            foreach (Move potentialMove in potentialMoves)
-            {
-                if (MoveGetsKingOutOfCheck(playerColor, potentialMove))
-                {
-                    validMoves.Add(potentialMove);
-                }
-            }
-        }
-        else
-        {
-            // King is not in check,
-            // only allow moves that do not put king in check
-            validMoves.AddRange(potentialMoves.Where(potentialMove =>
-                GetSimulatedMoveResult(potentialMove, () => KingCannotBeCaptured(playerColor))));
-        }
-
-        return validMoves;
-    }
-
     public List<Move> PotentialMovesForPieceAt(int rank, int file)
     {
         Square originationSquare = SquareAt(rank, file);
@@ -119,6 +84,12 @@ public class Board : INotifyPropertyChanged
 
         return result;
     }
+
+    public List<Move> LegalMovesForPlayer(Enums.Color playerColor) =>
+        SquaresWithPiecesOfColor(playerColor)
+            .SelectMany(square => PotentialMovesForPieceAt(square.Rank, square.File))
+            .Where(move => GetSimulatedMoveResult(move, () => KingCannotBeCaptured(playerColor)))
+            .ToList();
 
     public bool KingCannotBeCaptured(Enums.Color playerColor) =>
         !KingCanBeCaptured(playerColor);

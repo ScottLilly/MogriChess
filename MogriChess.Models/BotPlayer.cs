@@ -18,19 +18,19 @@ public class BotPlayer
 
     public Move FindBestMove(Board board)
     {
-        List<Move> validMoves = board.ValidMovesForPlayerColor(_botColor);
+        List<Move> legalMoves = board.LegalMovesForPlayer(_botColor);
 
         // If bot can put opponent in checkmate, do that
-        if (validMoves.Any(m => m.PutsOpponentInCheckmate))
+        if (legalMoves.Any(m => m.PutsOpponentInCheckmate))
         {
-            return validMoves.First(m => m.PutsOpponentInCheckmate);
+            return legalMoves.First(m => m.PutsOpponentInCheckmate);
         }
 
         int currentBestMoveAdvantage = int.MinValue;
         List<Move> bestMoves = new List<Move>();
 
         // Calculate piece values differences after each capturing move
-        foreach (Move move in validMoves.Where(m => m.IsCapturingMove))
+        foreach (Move move in legalMoves.Where(m => m.IsCapturingMove))
         {
             int postMoveAdvantage =
                 board.GetSimulatedMoveResult(move, () => Advantage(board));
@@ -52,7 +52,7 @@ public class BotPlayer
         // Select highest point improvement
         return bestMoves.Any()
             ? bestMoves.RandomElement()
-            : validMoves.RandomElement();
+            : legalMoves.RandomElement();
     }
 
     private int PiecesValueFor(Board board, Enums.Color color) =>
