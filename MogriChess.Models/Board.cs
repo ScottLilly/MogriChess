@@ -54,14 +54,14 @@ public class Board : INotifyPropertyChanged
             return validMoves;
         }
 
-        validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Forward));
-        validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.ForwardRight));
-        validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Right));
-        validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.BackRight));
-        validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Back));
-        validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.BackLeft));
-        validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.Left));
-        validMoves.AddRange(ValidMovesInDirection(originationSquare, Enums.Direction.ForwardLeft));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.Forward));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.ForwardRight));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.Right));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.BackRight));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.Back));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.BackLeft));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.Left));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.ForwardLeft));
 
         return validMoves;
     }
@@ -90,6 +90,13 @@ public class Board : INotifyPropertyChanged
             .SelectMany(square => PotentialMovesForPieceAt(square.Rank, square.File))
             .Where(move => GetSimulatedMoveResult(move, () => KingCannotBeCaptured(playerColor)))
             .ToList();
+
+    public List<Move> LegalMovesForPieceAt(int rank, int file)
+    {
+        return PotentialMovesForPieceAt(rank, file)
+            .Where(m => GetSimulatedMoveResult(m, () => KingCannotBeCaptured(m.MovingPieceColor)))
+            .ToList();
+    }
 
     public bool KingCannotBeCaptured(Enums.Color playerColor) =>
         !KingCanBeCaptured(playerColor);
@@ -147,9 +154,9 @@ public class Board : INotifyPropertyChanged
         }
     }
 
-    private IEnumerable<Move> ValidMovesInDirection(Square originationSquare, Enums.Direction direction)
+    private IEnumerable<Move> PotentialMovesInDirection(Square originationSquare, Enums.Direction direction)
     {
-        List<Move> validMoves = new List<Move>();
+        List<Move> potentialMoves = new List<Move>();
 
         Piece movingPiece = originationSquare.Piece;
 
@@ -179,7 +186,7 @@ public class Board : INotifyPropertyChanged
 
             if (destinationSquare.IsEmpty)
             {
-                validMoves.Add(potentialMove);
+                potentialMoves.Add(potentialMove);
             }
             else
             {
@@ -190,14 +197,14 @@ public class Board : INotifyPropertyChanged
                     potentialMove.PutsOpponentInCheck =
                         destinationSquare.Piece.IsKing;
 
-                    validMoves.Add(potentialMove);
+                    potentialMoves.Add(potentialMove);
                 }
 
                 break;
             }
         }
 
-        return validMoves;
+        return potentialMoves;
     }
 
     private bool MoveGetsKingOutOfCheck(Enums.Color kingColor, Move potentialMove)
