@@ -64,7 +64,12 @@ public class Game : INotifyPropertyChanged
         {
             _displayValidDestinations = value;
 
-            if (!_displayValidDestinations)
+            if (_displayValidDestinations)
+            {
+                ValidDestinationsForSelectedPiece
+                    .ApplyToEach(d => d.DestinationSquare.IsValidDestination = true);
+            }
+            else
             {
                 Board.ClearValidDestinations();
             }

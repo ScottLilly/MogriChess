@@ -134,4 +134,24 @@ public partial class MainWindow : Window
             File.WriteAllText(dialog.FileName, CurrentSession.GetSerializedMoveHistory());
         }
     }
+
+    private void DisplayRankAndFileLabels_OnChecked(object sender, RoutedEventArgs e)
+    {
+        CurrentSession.CurrentGame.DisplayRankFileLabel = true;
+    }
+
+    private void DisplayRankAndFileLabels_OnUnchecked(object sender, RoutedEventArgs e)
+    {
+        CurrentSession.CurrentGame.DisplayRankFileLabel = false;
+    }
+
+    private void DisplayValidMoves_OnChecked(object sender, RoutedEventArgs e)
+    {
+        CurrentSession.CurrentGame.DisplayValidDestinations = true;
+    }
+
+    private void DisplayValidMoves_OnUnchecked(object sender, RoutedEventArgs e)
+    {
+        CurrentSession.CurrentGame.DisplayValidDestinations = false;
+    }
 }
