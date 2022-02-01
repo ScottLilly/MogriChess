@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Navigation;
 
@@ -11,8 +10,8 @@ public partial class About : Window
     {
         InitializeComponent();
 
-        VersionNumber.Text = "Version: " +
-            FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion;
+        VersionNumber.Text =
+            $"Version: {FileVersionInfo.GetVersionInfo("MogriChess.WPF.exe").ProductVersion}";
     }
 
     private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
