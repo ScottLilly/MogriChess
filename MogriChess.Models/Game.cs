@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using MogriChess.Core;
 using MogriChess.Models.CustomEventArgs;
@@ -229,10 +228,6 @@ public class Game : INotifyPropertyChanged
         CurrentPlayerColor = CurrentPlayerColor.OppositeColor();
         MoveCompleted?.Invoke(this, EventArgs.Empty);
     }
-
-    private bool PutsMovingPlayerIntoCheckOrCheckmate(Move move) =>
-        Board.GetSimulatedMoveResult(move,
-            () => Board.KingCanBeCaptured(move.MovingPieceColor));
 
     #endregion
 }
