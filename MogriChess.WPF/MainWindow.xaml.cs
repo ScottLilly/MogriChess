@@ -28,6 +28,10 @@ public partial class MainWindow : Window
         DataContext = new PlaySession();
 
         _canPlay = true;
+
+#if DEBUG
+        BotVsBotMenuOption.Visibility = Visibility.Visible;
+#endif
     }
 
     private void LightHumanDarkBot_OnClick(object sender, RoutedEventArgs e)
