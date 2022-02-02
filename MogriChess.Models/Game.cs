@@ -63,6 +63,12 @@ public class Game : INotifyPropertyChanged
             List<Move> legalMoves =
                 Board.LegalMovesForPieceAt(SelectedSquare.Rank, SelectedSquare.File);
 
+            if (legalMoves.None())
+            {
+                HandleStalemate();
+                return;
+            }
+
             legalMoves.ApplyToEach(lm => ValidDestinationsForSelectedPiece.Add(lm));
 
             if (DisplayValidDestinations)
@@ -216,13 +222,14 @@ public class Game : INotifyPropertyChanged
         SelectedSquare = null;
     }
 
-    private void HandleCheckmate()
-    {
+    private void HandleCheckmate() =>
         GameEnded?.Invoke(this,
             new GameEndedEventArgs(MoveHistory.Last().MovingPieceColor == Enums.Color.Light
                 ? Enums.GameStatus.CheckmateByLight
                 : Enums.GameStatus.CheckmateByDark));
-    }
+
+    private void HandleStalemate() =>
+        GameEnded?.Invoke(this, new GameEndedEventArgs(Enums.GameStatus.Stalemate));
 
     private void EndCurrentPlayerTurn()
     {

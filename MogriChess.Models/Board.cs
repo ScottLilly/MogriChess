@@ -37,13 +37,11 @@ public class Board : INotifyPropertyChanged
         }
     }
 
-    public List<Move> LegalMovesForPieceAt(int rank, int file)
-    {
-        return PotentialMovesForPieceAt(rank, file)
+    public List<Move> LegalMovesForPieceAt(int rank, int file) =>
+        PotentialMovesForPieceAt(rank, file)
             .Where(m => GetSimulatedMoveResult(m, () => KingCannotBeCaptured(m.MovingPieceColor)))
             .ToList();
-    }
-      
+
     public bool KingCanBeCaptured(Enums.Color playerColor) =>
         SquaresWithPiecesOfColor(playerColor.OppositeColor())
             .Any(square => PotentialMovesForPieceAt(square)
