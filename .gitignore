@@ -364,3 +364,4 @@ FodyWeavers.xsd
 /NDependOut
 *.ndproj
 /NDependOut1
+MogriChess.WPF/VersionIncrementer.cs
