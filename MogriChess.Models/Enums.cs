@@ -33,4 +33,13 @@ public static class Enums
         Bot
     }
 
+    public enum GameStatus
+    {
+        NotReady,
+        Playing,
+        Stalemate,
+        CheckmateByLight,
+        CheckmateByDark
+    }
+
 }

@@ -52,7 +52,7 @@ public partial class MainWindow : Window
     private void StartGame(Enums.PlayerType lightPlayer, Enums.PlayerType darkPlayer)
     {
         CurrentSession.CurrentGame.MoveHistory.CollectionChanged -= MoveHistoryChangedHandler;
-        CurrentSession.CurrentGame.GameEnded += GameEndedHandler;
+        CurrentSession.CurrentGame.GameEnded -= GameEndedHandler;
 
         CurrentSession.StartGame(lightPlayer, darkPlayer);
 
@@ -64,7 +64,31 @@ public partial class MainWindow : Window
 
     private void GameEndedHandler(object sender, Models.CustomEventArgs.GameEndedEventArgs e)
     {
+        switch (e.GameEndStatus)
+        {
+            case Enums.GameStatus.CheckmateByLight:
+                DisplayGameEndMessage("Light player won");
+                break;
+            case Enums.GameStatus.CheckmateByDark:
+                DisplayGameEndMessage("Dark player won");
+                break;
+            case Enums.GameStatus.Stalemate:
+                DisplayGameEndMessage("Stalemate - tie");
+                break;
+            default:
+                DisplayGameEndMessage("Unexpected game ending");
+                break;
+        }
+
         _canPlay = false;
+    }
+
+    private void DisplayGameEndMessage(string message)
+    {
+        var messageBox = new OK("Game over", message);
+        messageBox.Owner = this;
+
+        messageBox.ShowDialog();
     }
 
     private void ClickedOnSquare_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)

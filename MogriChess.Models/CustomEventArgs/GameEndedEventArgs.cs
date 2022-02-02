@@ -1,18 +1,11 @@
-﻿namespace MogriChess.Models.CustomEventArgs
+﻿namespace MogriChess.Models.CustomEventArgs;
+
+public class GameEndedEventArgs
 {
-    public class GameEndedEventArgs
+    public Enums.GameStatus GameEndStatus { get; }
+
+    public GameEndedEventArgs(Enums.GameStatus endStatus)
     {
-        public enum EndCondition
-        {
-            LightWonByCheckmate,
-            DarkWonByCheckmate
-        }
-
-        public EndCondition GameEndCondition { get; }
-
-        public GameEndedEventArgs(EndCondition endCondition)
-        {
-            GameEndCondition = endCondition;
-        }
+        GameEndStatus = endStatus;
     }
 }

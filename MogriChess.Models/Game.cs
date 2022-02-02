@@ -14,10 +14,35 @@ public class Game : INotifyPropertyChanged
     private Square _selectedSquare;
     private bool _displayValidDestinations = true;
 
-    #region Private properties
-
     public Enums.Color CurrentPlayerColor { get; private set; } =
         Enums.Color.Light;
+
+    public Board Board { get; }
+    public ObservableCollection<Move> MoveHistory { get; } =
+        new ObservableCollection<Move>();
+    public bool DisplayRankFileLabel { get; set; } = true;
+
+    public bool DisplayValidDestinations
+    {
+        get => _displayValidDestinations;
+        set
+        {
+            _displayValidDestinations = value;
+
+            if (_displayValidDestinations)
+            {
+                ValidDestinationsForSelectedPiece
+                    .ApplyToEach(d => d.DestinationSquare.IsValidDestination = true);
+            }
+            else
+            {
+                Board.ClearValidDestinations();
+            }
+        }
+    }
+
+    public BotPlayer LightPlayerBot { get; set; }
+    public BotPlayer DarkPlayerBot { get; set; }
 
     private Square SelectedSquare
     {
@@ -49,35 +74,6 @@ public class Game : INotifyPropertyChanged
 
     private ObservableCollection<Move> ValidDestinationsForSelectedPiece { get; } =
         new ObservableCollection<Move>();
-
-    #endregion
-
-    public Board Board { get; }
-    public ObservableCollection<Move> MoveHistory { get; } =
-        new ObservableCollection<Move>();
-    public bool DisplayRankFileLabel { get; set; } = true;
-
-    public bool DisplayValidDestinations
-    {
-        get => _displayValidDestinations;
-        set
-        {
-            _displayValidDestinations = value;
-
-            if (_displayValidDestinations)
-            {
-                ValidDestinationsForSelectedPiece
-                    .ApplyToEach(d => d.DestinationSquare.IsValidDestination = true);
-            }
-            else
-            {
-                Board.ClearValidDestinations();
-            }
-        }
-    }
-
-    public BotPlayer LightPlayerBot { get; set; }
-    public BotPlayer DarkPlayerBot { get; set; }
 
     public event EventHandler MoveCompleted;
     public event EventHandler<GameEndedEventArgs> GameEnded;
@@ -224,8 +220,8 @@ public class Game : INotifyPropertyChanged
     {
         GameEnded?.Invoke(this,
             new GameEndedEventArgs(MoveHistory.Last().MovingPieceColor == Enums.Color.Light
-                ? GameEndedEventArgs.EndCondition.LightWonByCheckmate
-                : GameEndedEventArgs.EndCondition.DarkWonByCheckmate));
+                ? Enums.GameStatus.CheckmateByLight
+                : Enums.GameStatus.CheckmateByDark));
     }
 
     private void EndCurrentPlayerTurn()
