@@ -31,7 +31,7 @@
 
         <Menu Grid.Row="0" Grid.Column="0"
               FontSize="11pt">
-            <MenuItem Header="File">
+            <MenuItem Header="Game">
                 <MenuItem Header="Start New Game...">
                     <MenuItem Header="Light=Human Dark=Bot"
                               Click="LightHumanDarkBot_OnClick"/>
@@ -46,28 +46,33 @@
                               IsEnabled="False"/>
                 </MenuItem>
                 <Separator/>
+                <MenuItem Header="Save...">
+                    <MenuItem Header="Save Current Game to Disk"
+                              Click="WriteCurrentGameState_OnClick"/>
+                    <MenuItem Header="Save Move History to Disk"
+                              Click="WriteMoveHistory_OnClick"/>
+                </MenuItem>
+                <MenuItem Header="Load..."
+                          IsEnabled="False">
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Preferences">
+                    <MenuItem Header="Display rank and file label"
+                              IsCheckable="True"
+                              Checked="DisplayRankAndFileLabels_OnChecked"
+                              Unchecked="DisplayRankAndFileLabels_OnUnchecked"
+                              IsChecked="{Binding CurrentGame.DisplayRankFileLabel,
+                                              UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                    <MenuItem Header="Display valid moves"
+                              IsCheckable="True"
+                              Checked="DisplayValidMoves_OnChecked"
+                              Unchecked="DisplayValidMoves_OnUnchecked"
+                              IsChecked="{Binding CurrentGame.DisplayValidDestinations,
+                                              UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                </MenuItem>
+                <Separator/>
                 <MenuItem Header="Exit"
                           Click="Exit_OnClick"/>
-            </MenuItem>
-            <MenuItem Header="Preferences">
-                <MenuItem Header="Display rank and file label"
-                          IsCheckable="True"
-                          Checked="DisplayRankAndFileLabels_OnChecked"
-                          Unchecked="DisplayRankAndFileLabels_OnUnchecked"
-                          IsChecked="{Binding CurrentGame.DisplayRankFileLabel,
-                                              UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                <MenuItem Header="Display valid moves"
-                          IsCheckable="True"
-                          Checked="DisplayValidMoves_OnChecked"
-                          Unchecked="DisplayValidMoves_OnUnchecked"
-                          IsChecked="{Binding CurrentGame.DisplayValidDestinations,
-                                              UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-            </MenuItem>
-            <MenuItem Header="Utilities">
-                <MenuItem Header="Write Current GameState to Disk"
-                          Click="WriteCurrentGameState_OnClick"/>
-                <MenuItem Header="Write Move History to Disk"
-                          Click="WriteMoveHistory_OnClick"/>
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="Help"
