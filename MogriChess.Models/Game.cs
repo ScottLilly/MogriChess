@@ -13,9 +13,21 @@ public class Game : INotifyPropertyChanged
 {
     private Square _selectedSquare;
     private bool _displayValidDestinations = true;
+    private Enums.Color _currentPlayerColor = Enums.Color.Light;
 
-    public Enums.Color CurrentPlayerColor { get; private set; } =
-        Enums.Color.Light;
+    public Enums.Color CurrentPlayerColor
+    {
+        get => _currentPlayerColor;
+        private set
+        {
+            _currentPlayerColor = value;
+
+            if (Board.LegalMovesForPlayer(_currentPlayerColor).None())
+            {
+                HandleStalemate();
+            }
+        }
+    }
 
     public Board Board { get; }
     public ObservableCollection<Move> MoveHistory { get; } =
@@ -62,12 +74,6 @@ public class Game : INotifyPropertyChanged
 
             List<Move> legalMoves =
                 Board.LegalMovesForPieceAt(SelectedSquare.Rank, SelectedSquare.File);
-
-            if (legalMoves.None())
-            {
-                HandleStalemate();
-                return;
-            }
 
             legalMoves.ApplyToEach(lm => ValidDestinationsForSelectedPiece.Add(lm));
 
