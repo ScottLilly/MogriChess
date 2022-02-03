@@ -22,8 +22,10 @@ public class Game : INotifyPropertyChanged
         private set
         {
             _currentPlayerColor = value;
+            _legalMovesForCurrentPlayer =
+                Board.LegalMovesForPlayer(_currentPlayerColor);
 
-            if (Board.LegalMovesForPlayer(_currentPlayerColor).None())
+            if (_legalMovesForCurrentPlayer.None())
             {
                 HandleStalemate();
             }
