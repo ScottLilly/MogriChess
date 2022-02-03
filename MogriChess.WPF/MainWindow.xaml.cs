@@ -139,8 +139,8 @@ public partial class MainWindow : Window
         SaveFileDialog dialog =
             new SaveFileDialog
             {
+                Title = "Save Current Game",
                 Filter = "JSON data (*.json)|*.json"
-
             };
 
         if (dialog.ShowDialog() == true)
@@ -154,6 +154,7 @@ public partial class MainWindow : Window
         SaveFileDialog dialog =
             new SaveFileDialog
             {
+                Title = "Save Move History",
                 Filter = "JSON data (*.json)|*.json"
             };
 
