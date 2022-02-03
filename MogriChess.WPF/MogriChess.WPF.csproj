@@ -19,6 +19,7 @@
 	<PackageProjectUrl>https://mogrichess.com/</PackageProjectUrl>
 	<Copyright>Scott Lilly</Copyright>
 	<Description>MogriChess</Description>
+	<AssemblyName>MogriChess</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

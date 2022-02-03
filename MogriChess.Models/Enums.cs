@@ -4,6 +4,7 @@ public static class Enums
 {
     public enum Color
     {
+        NotSelected,
         Light,
         Dark
     }
