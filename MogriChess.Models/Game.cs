@@ -14,6 +14,7 @@ public class Game : INotifyPropertyChanged
     private Square _selectedSquare;
     private bool _displayValidDestinations = true;
     private Enums.Color _currentPlayerColor = Enums.Color.Light;
+    private IEnumerable<Move> _legalMovesForCurrentPlayer;
 
     public Enums.Color CurrentPlayerColor
     {
