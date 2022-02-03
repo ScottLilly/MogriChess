@@ -22,8 +22,8 @@ public class Game : INotifyPropertyChanged
         private set
         {
             _currentPlayerColor = value;
-            _legalMovesForCurrentPlayer =
-                Board.LegalMovesForPlayer(_currentPlayerColor);
+
+            CacheLegalMovesForCurrentPlayer();
 
             if (_legalMovesForCurrentPlayer.None())
             {
@@ -75,14 +75,14 @@ public class Game : INotifyPropertyChanged
                 return;
             }
 
-            List<Move> legalMoves =
-                Board.LegalMovesForPieceAt(SelectedSquare.Rank, SelectedSquare.File);
+            List<Move> legalMovesForSelectedPiece =
+                LegalMovesForSelectedPiece();
 
-            legalMoves.ApplyToEach(lm => ValidDestinationsForSelectedPiece.Add(lm));
+            legalMovesForSelectedPiece.ApplyToEach(lm => ValidDestinationsForSelectedPiece.Add(lm));
 
             if (DisplayValidDestinations)
             {
-                legalMoves.ApplyToEach(lm => lm.DestinationSquare.IsValidDestination = true);
+                legalMovesForSelectedPiece.ApplyToEach(lm => lm.DestinationSquare.IsValidDestination = true);
             }
         }
     }
@@ -110,8 +110,8 @@ public class Game : INotifyPropertyChanged
         }
 
         Board.ClearValidDestinations();
-
         MoveHistory.Clear();
+
         CurrentPlayerColor = Enums.Color.Light;
     }
 
@@ -185,6 +185,22 @@ public class Game : INotifyPropertyChanged
     #endregion
 
     #region Private methods
+
+    private void CacheLegalMovesForCurrentPlayer() =>
+        _legalMovesForCurrentPlayer =
+            Board.LegalMovesForPlayer(_currentPlayerColor);
+
+    private List<Move> LegalMovesForSelectedPiece()
+    {
+        if (_legalMovesForCurrentPlayer == null)
+        {
+            CacheLegalMovesForCurrentPlayer();
+        }
+
+        return _legalMovesForCurrentPlayer
+            .Where(m => m.OriginationSquare.SquareShorthand.Equals(SelectedSquare.SquareShorthand))
+            .ToList();
+    }
 
     private void MoveToSelectedSquare(Square square)
     {

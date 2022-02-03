@@ -28,7 +28,8 @@ public class MemoryBenchmarker
         _session.CurrentGame.SelectSquare(destinationSquare);
     }
 
-    [Benchmark]
+    // Throws an error when run
+    //[Benchmark]
     public void Benchmark_BotResponseMove()
     {
         _session.StartGame(Enums.PlayerType.Human, Enums.PlayerType.Bot);
