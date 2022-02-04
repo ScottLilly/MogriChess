@@ -41,8 +41,8 @@
                               Click="LightHumanDarkHuman_OnClick"/>
                     <MenuItem Header="Bot vs. Bot"
                               x:Name="BotVsBotMenuOption"
-                              Visibility="Collapsed"
-                              IsEnabled="False"/>
+                              Click="LightBotDarkBot_OnClick"
+                              Visibility="Collapsed"/>
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="Save...">
