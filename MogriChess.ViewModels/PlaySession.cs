@@ -37,6 +37,11 @@ public class PlaySession : INotifyPropertyChanged
 
         BoardFactory.PopulateBoardWithStartingPieces(CurrentGame.Board);
         CurrentGame.StartGame();
+
+        if (CurrentGame.LightPlayerBot != null)
+        {
+            MakeBotMove();
+        }
     }
 
     public string GetSerializedGameState()
@@ -57,6 +62,11 @@ public class PlaySession : INotifyPropertyChanged
             return;
         }
 
+        MakeBotMove();
+    }
+
+    private void MakeBotMove()
+    {
         if (CurrentGame.CurrentPlayerColor == Enums.Color.Dark &&
             CurrentGame.DarkPlayerBot != null)
         {
