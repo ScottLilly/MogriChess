@@ -36,7 +36,7 @@ public static class Enums
 
     public enum GameStatus
     {
-        NotReady,
+        Preparing,
         Playing,
         Stalemate,
         CheckmateByLight,

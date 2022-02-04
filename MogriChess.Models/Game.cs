@@ -15,6 +15,7 @@ public class Game : INotifyPropertyChanged
     private bool _displayValidDestinations = true;
     private Enums.Color _currentPlayerColor = Enums.Color.NotSelected;
     private IEnumerable<Move> _legalMovesForCurrentPlayer;
+    private Enums.GameStatus _status = Enums.GameStatus.Preparing;
 
     public Enums.Color CurrentPlayerColor
     {
@@ -23,12 +24,44 @@ public class Game : INotifyPropertyChanged
         {
             _currentPlayerColor = value;
 
+            if (_currentPlayerColor == Enums.Color.NotSelected)
+            {
+                return;
+            }
+
             CacheLegalMovesForCurrentPlayer();
 
             if (_legalMovesForCurrentPlayer.None())
             {
-                HandleStalemate();
+                Status = Enums.GameStatus.Stalemate;
             }
+        }
+    }
+
+    public Enums.GameStatus Status
+    {
+        get => _status;
+        private set
+        {
+            // If status changed to game-ending status, handle events and end game
+            if (_status != value &&
+                _status == Enums.GameStatus.Playing)
+            {
+                if (value == Enums.GameStatus.Stalemate)
+                {
+                    GameEnded?.Invoke(this, new GameEndedEventArgs(Enums.GameStatus.Stalemate));
+                }
+                else if (value == Enums.GameStatus.CheckmateByLight)
+                {
+                    GameEnded?.Invoke(this, new GameEndedEventArgs(Enums.GameStatus.CheckmateByLight));
+                }
+                else if (value == Enums.GameStatus.CheckmateByDark)
+                {
+                    GameEnded?.Invoke(this, new GameEndedEventArgs(Enums.GameStatus.CheckmateByDark));
+                }
+            }
+
+            _status = value;
         }
     }
 
@@ -103,6 +136,8 @@ public class Game : INotifyPropertyChanged
 
     public void StartGame()
     {
+        CurrentPlayerColor = Enums.Color.NotSelected;
+
         if (SelectedSquare != null)
         {
             SelectedSquare.IsSelected = false;
@@ -113,11 +148,11 @@ public class Game : INotifyPropertyChanged
         MoveHistory.Clear();
 
         CurrentPlayerColor = Enums.Color.Light;
+        Status = Enums.GameStatus.Playing;
     }
 
     public void SelectSquare(Square square)
     {
-        // No square is currently selected
         if (SelectedSquare == null)
         {
             // No piece is on square, so return
@@ -127,20 +162,17 @@ public class Game : INotifyPropertyChanged
             }
 
             SelectMoveOriginationSquare(square);
-
-            return;
         }
-
-        // If the player selected the currently-selected square, de-select it.
-        if (SelectedSquare == square)
+        else if (SelectedSquare == square)
         {
+            // The player selected the currently-selected square, de-select it.
             DeselectSelectedSquare();
-
-            return;
         }
-
-        // Move the piece to the second selected square, if valid
-        MoveToSelectedSquare(square);
+        else
+        {
+            // Move the piece to the second selected square, if valid
+            MoveToSelectedSquare(square);
+        }
     }
 
     private void SelectMoveOriginationSquare(Square square)
@@ -156,7 +188,7 @@ public class Game : INotifyPropertyChanged
 
     public async void MakeBotMove(BotPlayer botPlayer)
     {
-        if (MoveHistory.Last().PutsOpponentInCheckmate)
+        if (Status != Enums.GameStatus.Playing)
         {
             return;
         }
@@ -224,11 +256,6 @@ public class Game : INotifyPropertyChanged
         MoveHistory.Add(move);
 
         EndCurrentPlayerTurn();
-
-        if (move.PutsOpponentInCheckmate)
-        {
-            HandleCheckmate();
-        }
     }
 
     private void DetermineIfMovePutsOpponentInCheckOrCheckmate(Move move)
@@ -239,6 +266,13 @@ public class Game : INotifyPropertyChanged
             move.PutsOpponentInCheckmate =
                 Board.PlayerIsInCheckmate(move.MovingPieceColor.OppositeColor());
         }
+
+        if (move.PutsOpponentInCheckmate)
+        {
+            Status = move.MovingPieceColor == Enums.Color.Light
+                ? Enums.GameStatus.CheckmateByLight
+                : Enums.GameStatus.CheckmateByDark;
+        }
     }
 
     private void DeselectSelectedSquare()
@@ -246,15 +280,6 @@ public class Game : INotifyPropertyChanged
         SelectedSquare.IsSelected = false;
         SelectedSquare = null;
     }
-
-    private void HandleCheckmate() =>
-        GameEnded?.Invoke(this,
-            new GameEndedEventArgs(MoveHistory.Last().MovingPieceColor == Enums.Color.Light
-                ? Enums.GameStatus.CheckmateByLight
-                : Enums.GameStatus.CheckmateByDark));
-
-    private void HandleStalemate() =>
-        GameEnded?.Invoke(this, new GameEndedEventArgs(Enums.GameStatus.Stalemate));
 
     private void EndCurrentPlayerTurn()
     {

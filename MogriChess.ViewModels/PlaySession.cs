@@ -51,6 +51,12 @@ public class PlaySession : INotifyPropertyChanged
 
     private void MoveCompletedHandler(object sender, EventArgs e)
     {
+        if (CurrentGame.Status != Enums.GameStatus.Playing)
+        {
+            // Game has ended
+            return;
+        }
+
         if (CurrentGame.CurrentPlayerColor == Enums.Color.Dark &&
             CurrentGame.DarkPlayerBot != null)
         {
