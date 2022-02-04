@@ -49,6 +49,11 @@ public partial class MainWindow : Window
         StartGame(Enums.PlayerType.Human, Enums.PlayerType.Human);
     }
 
+    private void LightBotDarkBot_OnClick(object sender, RoutedEventArgs e)
+    {
+        StartGame(Enums.PlayerType.Bot, Enums.PlayerType.Bot);
+    }
+
     private void StartGame(Enums.PlayerType lightPlayer, Enums.PlayerType darkPlayer)
     {
         CurrentSession.CurrentGame.MoveHistory.CollectionChanged -= MoveHistoryChangedHandler;
