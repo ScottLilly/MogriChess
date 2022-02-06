@@ -28,7 +28,7 @@ namespace Test.MogriChess.ViewModels
 
         private static void AddPiece(Game game, string squareShorthand, Piece piece)
         {
-            game.Board.Squares.First(s => s.SquareShorthand.Equals(squareShorthand))
+            game.Board.Squares.First(s => s.SquareShorthand == squareShorthand)
                 .Piece = piece;
         }
     }

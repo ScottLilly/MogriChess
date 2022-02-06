@@ -20,12 +20,12 @@ public class TestGame
             
         // Check board squares
         Assert.Equal(64, game.Board.Squares.Count);
-        Assert.Equal(32, game.Board.Squares.Count(s => s.Color.Equals(Enums.Color.Light)));
-        Assert.Equal(32, game.Board.Squares.Count(s => s.Color.Equals(Enums.Color.Dark)));
-        Assert.True(game.Board.Squares.First(s => s.Rank.Equals(1) && s.File.Equals(1)).Color == Enums.Color.Dark);
-        Assert.True(game.Board.Squares.First(s => s.Rank.Equals(1) && s.File.Equals(2)).Color == Enums.Color.Light);
-        Assert.True(game.Board.Squares.First(s => s.Rank.Equals(8) && s.File.Equals(1)).Color == Enums.Color.Light);
-        Assert.True(game.Board.Squares.First(s => s.Rank.Equals(8) && s.File.Equals(2)).Color == Enums.Color.Dark);
+        Assert.Equal(32, game.Board.Squares.Count(s => s.Color == Enums.Color.Light));
+        Assert.Equal(32, game.Board.Squares.Count(s => s.Color == Enums.Color.Dark));
+        Assert.True(game.Board.Squares.First(s => s.Rank == 1 && s.File == 1).Color == Enums.Color.Dark);
+        Assert.True(game.Board.Squares.First(s => s.Rank == 1 && s.File == 2).Color == Enums.Color.Light);
+        Assert.True(game.Board.Squares.First(s => s.Rank == 8 && s.File == 1).Color == Enums.Color.Light);
+        Assert.True(game.Board.Squares.First(s => s.Rank == 8 && s.File == 2).Color == Enums.Color.Dark);
 
         // Check pieces
         Assert.Equal(16, game.Board.Squares.Count(s => s.Piece?.Color == Enums.Color.Light));

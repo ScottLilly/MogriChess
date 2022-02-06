@@ -29,9 +29,9 @@ public class Piece : INotifyPropertyChanged
     public MovementIndicator ForwardLeft { get; } =
         new MovementIndicator();
 
-    public bool IsKing => _pieceType.Equals(Enums.PieceType.King);
+    public bool IsKing => _pieceType == Enums.PieceType.King;
     public bool IsUnpromotedPawn =>
-        _pieceType.Equals(Enums.PieceType.Pawn) && !_isPromoted;
+        _pieceType == Enums.PieceType.Pawn && !_isPromoted;
 
     public string UiColor =>
         Color == Enums.Color.Light

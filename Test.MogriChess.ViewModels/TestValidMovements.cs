@@ -37,8 +37,8 @@ public class TestValidMovements
         var validDestinations = game.Board.LegalMovesForPieceAt(2, 1);
 
         Assert.Equal(2, validDestinations.Count);
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(1)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(2)));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 1));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 2));
     }
 
     [Fact]
@@ -51,9 +51,9 @@ public class TestValidMovements
         var validDestinations = game.Board.LegalMovesForPieceAt(2, 2);
 
         Assert.Equal(3, validDestinations.Count);
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(1)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(2)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(3)));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 1));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 2));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 3));
     }
 
     [Fact]
@@ -66,9 +66,9 @@ public class TestValidMovements
         var validDestinations = game.Board.LegalMovesForPieceAt(2, 3);
 
         Assert.Equal(3, validDestinations.Count);
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(2)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(3)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(4)));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 2));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 3));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 4));
     }
 
     [Fact]
@@ -81,9 +81,9 @@ public class TestValidMovements
         var validDestinations = game.Board.LegalMovesForPieceAt(2, 4);
 
         Assert.Equal(3, validDestinations.Count);
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(3)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(4)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(5)));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 3));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 4));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 5));
     }
 
     [Fact]
@@ -96,9 +96,9 @@ public class TestValidMovements
         var validDestinations = game.Board.LegalMovesForPieceAt(2, 5);
 
         Assert.Equal(3, validDestinations.Count);
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(4)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(5)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(6)));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 4));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 5));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 6));
     }
 
     [Fact]
@@ -111,9 +111,9 @@ public class TestValidMovements
         var validDestinations = game.Board.LegalMovesForPieceAt(2, 6);
 
         Assert.Equal(3, validDestinations.Count);
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(5)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(6)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(7)));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 5));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 6));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 7));
     }
 
     [Fact]
@@ -126,9 +126,9 @@ public class TestValidMovements
         var validDestinations = game.Board.LegalMovesForPieceAt(2, 7);
 
         Assert.Equal(3, validDestinations.Count);
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(6)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(7)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(8)));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 6));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 7));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 8));
     }
 
     [Fact]
@@ -141,8 +141,8 @@ public class TestValidMovements
         var validDestinations = game.Board.LegalMovesForPieceAt(2, 8);
 
         Assert.Equal(2, validDestinations.Count);
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(7)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(3) && d.DestinationFile.Equals(8)));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 7));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 8));
     }
 
     #endregion
@@ -159,8 +159,8 @@ public class TestValidMovements
         var validDestinations = game.Board.LegalMovesForPieceAt(7, 1);
 
         Assert.Equal(2, validDestinations.Count);
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(1)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(2)));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 1));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 2));
     }
 
     [Fact]
@@ -173,9 +173,9 @@ public class TestValidMovements
         var validDestinations = game.Board.LegalMovesForPieceAt(7, 2);
 
         Assert.Equal(3, validDestinations.Count);
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(1)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(2)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(3)));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 1));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 2));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 3));
     }
 
     [Fact]
@@ -188,9 +188,9 @@ public class TestValidMovements
         var validDestinations = game.Board.LegalMovesForPieceAt(7, 3);
 
         Assert.Equal(3, validDestinations.Count);
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(2)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(3)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(4)));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 2));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 3));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 4));
     }
 
     [Fact]
@@ -203,9 +203,9 @@ public class TestValidMovements
         var validDestinations = game.Board.LegalMovesForPieceAt(7, 4);
 
         Assert.Equal(3, validDestinations.Count);
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(3)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(4)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(5)));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 3));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 4));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 5));
     }
 
     [Fact]
@@ -218,9 +218,9 @@ public class TestValidMovements
         var validDestinations = game.Board.LegalMovesForPieceAt(7, 5);
 
         Assert.Equal(3, validDestinations.Count);
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(4)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(5)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(6)));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 4));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 5));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 6));
     }
 
     [Fact]
@@ -233,9 +233,9 @@ public class TestValidMovements
         var validDestinations = game.Board.LegalMovesForPieceAt(7, 6);
 
         Assert.Equal(3, validDestinations.Count);
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(5)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(6)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(7)));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 5));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 6));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 7));
     }
 
     [Fact]
@@ -248,9 +248,9 @@ public class TestValidMovements
         var validDestinations = game.Board.LegalMovesForPieceAt(7, 7);
 
         Assert.Equal(3, validDestinations.Count);
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(6)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(7)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(8)));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 6));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 7));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 8));
     }
 
     [Fact]
@@ -263,8 +263,8 @@ public class TestValidMovements
         var validDestinations = game.Board.LegalMovesForPieceAt(7, 8);
 
         Assert.Equal(2, validDestinations.Count);
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(7)));
-        Assert.True(validDestinations.Exists(d => d.DestinationRank.Equals(6) && d.DestinationFile.Equals(8)));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 7));
+        Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 8));
     }
 
     #endregion

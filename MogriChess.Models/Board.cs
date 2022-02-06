@@ -123,7 +123,7 @@ public class Board : INotifyPropertyChanged
     }
 
     private Square SquareAt(int rank, int file) =>
-        Squares.First(s => s.Rank.Equals(rank) && s.File.Equals(file));
+        Squares.First(s => s.Rank == rank && s.File == file);
 
     private IEnumerable<Move> PotentialMovesForPieceAt(Square square) =>
         PotentialMovesForPieceAt(square.Rank, square.File);
