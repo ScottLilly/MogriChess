@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using MogriChess.Models;
-using MogriChess.Services;
 using MogriChess.ViewModels;
 using Xunit;
 

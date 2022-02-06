@@ -182,7 +182,6 @@ public class TestCheckmateConditions
 
     private static void AddPiece(Game game, string squareShorthand, Piece piece)
     {
-        game.Board.Squares[squareShorthand]
-                .Piece = piece;
+        game.Board.Squares[squareShorthand].Piece = piece;
     }
 }
