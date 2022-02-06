@@ -230,7 +230,7 @@ public class Game : INotifyPropertyChanged
         }
 
         return _legalMovesForCurrentPlayer
-            .Where(m => m.OriginationSquare.SquareShorthand.Equals(SelectedSquare.SquareShorthand))
+            .Where(m => m.OriginationSquare.SquareShorthand == SelectedSquare.SquareShorthand)
             .ToList();
     }
 
