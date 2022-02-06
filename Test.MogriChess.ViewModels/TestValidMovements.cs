@@ -1,4 +1,5 @@
-﻿using MogriChess.Models;
+﻿using System.Linq;
+using MogriChess.Models;
 using MogriChess.Services;
 using MogriChess.ViewModels;
 using Xunit;
@@ -34,7 +35,7 @@ public class TestValidMovements
         session.StartGame();
         Game game = session.CurrentGame;
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(2, 1);
+        var validDestinations = game.Board.LegalMovesForPieceAt(2, 1).ToList();
 
         Assert.Equal(2, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 1));
@@ -48,7 +49,7 @@ public class TestValidMovements
         session.StartGame();
         Game game = session.CurrentGame;
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(2, 2);
+        var validDestinations = game.Board.LegalMovesForPieceAt(2, 2).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 1));
@@ -63,7 +64,7 @@ public class TestValidMovements
         session.StartGame();
         Game game = session.CurrentGame;
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(2, 3);
+        var validDestinations = game.Board.LegalMovesForPieceAt(2, 3).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 2));
@@ -78,7 +79,7 @@ public class TestValidMovements
         session.StartGame();
         Game game = session.CurrentGame;
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(2, 4);
+        var validDestinations = game.Board.LegalMovesForPieceAt(2, 4).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 3));
@@ -93,7 +94,7 @@ public class TestValidMovements
         session.StartGame();
         Game game = session.CurrentGame;
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(2, 5);
+        var validDestinations = game.Board.LegalMovesForPieceAt(2, 5).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 4));
@@ -108,7 +109,7 @@ public class TestValidMovements
         session.StartGame();
         Game game = session.CurrentGame;
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(2, 6);
+        var validDestinations = game.Board.LegalMovesForPieceAt(2, 6).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 5));
@@ -123,7 +124,7 @@ public class TestValidMovements
         session.StartGame();
         Game game = session.CurrentGame;
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(2, 7);
+        var validDestinations = game.Board.LegalMovesForPieceAt(2, 7).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 6));
@@ -138,7 +139,7 @@ public class TestValidMovements
         session.StartGame();
         Game game = session.CurrentGame;
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(2, 8);
+        var validDestinations = game.Board.LegalMovesForPieceAt(2, 8).ToList();
 
         Assert.Equal(2, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationRank == 3 && d.DestinationFile == 7));
@@ -156,7 +157,7 @@ public class TestValidMovements
         session.StartGame();
         Game game = session.CurrentGame;
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(7, 1);
+        var validDestinations = game.Board.LegalMovesForPieceAt(7, 1).ToList();
 
         Assert.Equal(2, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 1));
@@ -170,7 +171,7 @@ public class TestValidMovements
         session.StartGame();
         Game game = session.CurrentGame;
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(7, 2);
+        var validDestinations = game.Board.LegalMovesForPieceAt(7, 2).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 1));
@@ -185,7 +186,7 @@ public class TestValidMovements
         session.StartGame();
         Game game = session.CurrentGame;
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(7, 3);
+        var validDestinations = game.Board.LegalMovesForPieceAt(7, 3).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 2));
@@ -200,7 +201,7 @@ public class TestValidMovements
         session.StartGame();
         Game game = session.CurrentGame;
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(7, 4);
+        var validDestinations = game.Board.LegalMovesForPieceAt(7, 4).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 3));
@@ -215,7 +216,7 @@ public class TestValidMovements
         session.StartGame();
         Game game = session.CurrentGame;
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(7, 5);
+        var validDestinations = game.Board.LegalMovesForPieceAt(7, 5).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 4));
@@ -230,7 +231,7 @@ public class TestValidMovements
         session.StartGame();
         Game game = session.CurrentGame;
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(7, 6);
+        var validDestinations = game.Board.LegalMovesForPieceAt(7, 6).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 5));
@@ -245,7 +246,7 @@ public class TestValidMovements
         session.StartGame();
         Game game = session.CurrentGame;
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(7, 7);
+        var validDestinations = game.Board.LegalMovesForPieceAt(7, 7).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 6));
@@ -260,7 +261,7 @@ public class TestValidMovements
         session.StartGame();
         Game game = session.CurrentGame;
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(7, 8);
+        var validDestinations = game.Board.LegalMovesForPieceAt(7, 8).ToList();
 
         Assert.Equal(2, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationRank == 6 && d.DestinationFile == 7));

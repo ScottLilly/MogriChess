@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using MogriChess.Models;
-using MogriChess.Services;
+﻿using MogriChess.Models;
 using MogriChess.ViewModels;
 using Xunit;
 
@@ -18,7 +16,7 @@ public class TestPiecesAtStartup
     private const int FILE_H = 8;
 
     private static Piece GetPiece(Game game, int rank, int file) =>
-        game.Board.Squares.FirstOrDefault(s => s.Rank == rank && s.File == file)?.Piece;
+        game.Board.Squares[ModelFunctions.GetShorthand(rank, file)]?.Piece;
 
     #region Light - Major pieces
 

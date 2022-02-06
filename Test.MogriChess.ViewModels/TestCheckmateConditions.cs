@@ -27,9 +27,9 @@ public class TestCheckmateConditions
         foreach (MoveHistoryDTO move in moves)
         {
             Square originationSquare =
-                game.Board.Squares.First(s => s.SquareShorthand == move.OriginationSquare);
+                game.Board.Squares[move.OriginationSquare];
             Square destinationSquare =
-                game.Board.Squares.First(s => s.SquareShorthand == move.DestinationSquare);
+                game.Board.Squares[move.DestinationSquare];
 
             game.SelectSquare(originationSquare);
             game.SelectSquare(destinationSquare);
@@ -182,7 +182,7 @@ public class TestCheckmateConditions
 
     private static void AddPiece(Game game, string squareShorthand, Piece piece)
     {
-        game.Board.Squares.First(s => s.SquareShorthand == squareShorthand)
+        game.Board.Squares[squareShorthand]
                 .Piece = piece;
     }
 }
