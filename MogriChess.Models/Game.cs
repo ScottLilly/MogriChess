@@ -239,8 +239,7 @@ public class Game : INotifyPropertyChanged
         // Check that the destination square is a valid move
         Move move =
             ValidDestinationsForSelectedPiece.FirstOrDefault(d =>
-                d.DestinationRank == square.Rank &&
-                d.DestinationFile == square.File);
+                d.DestinationSquare.SquareShorthand == square.SquareShorthand);
 
         if (move == null)
         {

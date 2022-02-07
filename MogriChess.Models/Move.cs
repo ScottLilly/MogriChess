@@ -6,9 +6,6 @@ public class Move
     public Square OriginationSquare { get; }
     public Square DestinationSquare { get; }
 
-    public int DestinationRank => DestinationSquare.Rank;
-    public int DestinationFile => DestinationSquare.File;
-
     public bool PutsOpponentInCheckmate { get; set; }
     public bool PutsOpponentInCheck { get; set; }
     public bool IsCapturingMove { get; set; }
