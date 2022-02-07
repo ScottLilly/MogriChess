@@ -97,7 +97,7 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
 
-                <ItemsControl ItemsSource="{Binding CurrentGame.Board.Squares}">
+                <ItemsControl ItemsSource="{Binding CurrentGame.Board.Squares.Values}">
 
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>

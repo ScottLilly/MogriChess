@@ -22,9 +22,9 @@ public class MemoryBenchmarker
         PlaySession _session = new PlaySession();
 
         Square originationSquare =
-            _session.CurrentGame.Board.Squares.First(s => s.SquareShorthand == "h2");
+            _session.CurrentGame.Board.Squares["h2"];
         Square destinationSquare =
-            _session.CurrentGame.Board.Squares.First(s => s.SquareShorthand == "h3");
+            _session.CurrentGame.Board.Squares["h3"];
 
         _session.CurrentGame.SelectSquare(originationSquare);
         _session.CurrentGame.SelectSquare(destinationSquare);
@@ -38,9 +38,9 @@ public class MemoryBenchmarker
         _session.StartGame(Enums.PlayerType.Human, Enums.PlayerType.Bot);
 
         Square originationSquare =
-            _session.CurrentGame.Board.Squares.First(s => s.SquareShorthand == "h2");
+            _session.CurrentGame.Board.Squares["h2"];
         Square destinationSquare =
-            _session.CurrentGame.Board.Squares.First(s => s.SquareShorthand == "h3");
+            _session.CurrentGame.Board.Squares["h3"];
 
         _session.CurrentGame.SelectSquare(originationSquare);
         _session.CurrentGame.SelectSquare(destinationSquare);

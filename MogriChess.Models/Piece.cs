@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace MogriChess.Models;
 
@@ -12,24 +13,17 @@ public class Piece : INotifyPropertyChanged
 
     public Enums.Color Color { get; }
 
-    public MovementIndicator Forward { get; } =
-        new MovementIndicator();
-    public MovementIndicator ForwardRight { get; } =
-        new MovementIndicator();
-    public MovementIndicator Right { get; } =
-        new MovementIndicator();
-    public MovementIndicator BackRight { get; } =
-        new MovementIndicator();
-    public MovementIndicator Back { get; } =
-        new MovementIndicator();
-    public MovementIndicator BackLeft { get; } =
-        new MovementIndicator();
-    public MovementIndicator Left { get; } =
-        new MovementIndicator();
-    public MovementIndicator ForwardLeft { get; } =
-        new MovementIndicator();
+    public int Forward { get; private set; }
+    public int ForwardRight { get; private set; }
+    public int Right { get; private set; }
+    public int BackRight { get; private set; }
+    public int Back { get; private set; }
+    public int BackLeft { get; private set; }
+    public int Left { get; private set; }
+    public int ForwardLeft { get; private set; }
 
-    public bool IsKing => _pieceType == Enums.PieceType.King;
+    public bool IsKing =>
+        _pieceType == Enums.PieceType.King;
     public bool IsUnpromotedPawn =>
         _pieceType == Enums.PieceType.Pawn && !_isPromoted;
 
@@ -46,8 +40,7 @@ public class Piece : INotifyPropertyChanged
     public int PieceColorTransformAngle =>
         Color == Enums.Color.Light ? 0 : 180;
 
-    public Piece(ColorScheme colorScheme, Enums.Color color,
-        Enums.PieceType type,
+    public Piece(ColorScheme colorScheme, Enums.Color color, Enums.PieceType type,
         int squaresForward, int squaresForwardRight,
         int squaresRight, int squaresBackRight,
         int squaresBack, int squaresBackLeft,
@@ -72,24 +65,24 @@ public class Piece : INotifyPropertyChanged
             return;
         }
 
-        AddMovementAbilities(capturedPiece.Forward.Squares, capturedPiece.ForwardRight.Squares,
-            capturedPiece.Right.Squares, capturedPiece.BackRight.Squares,
-            capturedPiece.Back.Squares, capturedPiece.BackLeft.Squares,
-            capturedPiece.Left.Squares, capturedPiece.ForwardLeft.Squares);
+        AddMovementAbilities(capturedPiece.Forward, capturedPiece.ForwardRight,
+            capturedPiece.Right, capturedPiece.BackRight,
+            capturedPiece.Back, capturedPiece.BackLeft,
+            capturedPiece.Left, capturedPiece.ForwardLeft);
     }
 
     public int MaxMovementSquaresForDirection(Enums.Direction direction)
     {
         return direction switch
         {
-            Enums.Direction.Forward => Forward.Squares,
-            Enums.Direction.ForwardRight => ForwardRight.Squares,
-            Enums.Direction.Right => Right.Squares,
-            Enums.Direction.BackRight => BackRight.Squares,
-            Enums.Direction.Back => Back.Squares,
-            Enums.Direction.BackLeft => BackLeft.Squares,
-            Enums.Direction.Left => Left.Squares,
-            Enums.Direction.ForwardLeft => ForwardLeft.Squares,
+            Enums.Direction.Forward => Forward,
+            Enums.Direction.ForwardRight => ForwardRight,
+            Enums.Direction.Right => Right,
+            Enums.Direction.BackRight => BackRight,
+            Enums.Direction.Back => Back,
+            Enums.Direction.BackLeft => BackLeft,
+            Enums.Direction.Left => Left,
+            Enums.Direction.ForwardLeft => ForwardLeft,
             _ => throw new InvalidEnumArgumentException(
                 "Invalid enum passed to MaxMovementSquaresForDirection() function")
         };
@@ -130,10 +123,10 @@ public class Piece : INotifyPropertyChanged
     public Piece Clone()
     {
         return new Piece(_colorScheme, Color, _pieceType,
-            Forward.Squares, ForwardRight.Squares,
-            Right.Squares, BackRight.Squares,
-            Back.Squares, BackLeft.Squares,
-            Left.Squares, ForwardLeft.Squares);
+            Forward, ForwardRight,
+            Right, BackRight,
+            Back, BackLeft,
+            Left, ForwardLeft);
     }
 
     private void AddMovementAbilities(int squaresForward, int squaresForwardRight,
@@ -141,13 +134,13 @@ public class Piece : INotifyPropertyChanged
         int squaresBack, int squaresBackLeft,
         int squaresLeft, int squaresForwardLeft)
     {
-        Forward.MergeMovementAbility(squaresForward);
-        ForwardRight.MergeMovementAbility(squaresForwardRight);
-        Right.MergeMovementAbility(squaresRight);
-        BackRight.MergeMovementAbility(squaresBackRight);
-        Back.MergeMovementAbility(squaresBack);
-        BackLeft.MergeMovementAbility(squaresBackLeft);
-        Left.MergeMovementAbility(squaresLeft);
-        ForwardLeft.MergeMovementAbility(squaresForwardLeft);
+        Forward = Math.Max(Forward, squaresForward);
+        ForwardRight = Math.Max(ForwardRight, squaresForwardRight);
+        Right = Math.Max(Right, squaresRight);
+        BackRight = Math.Max(BackRight, squaresBackRight);
+        Back = Math.Max(Back, squaresBack);
+        BackLeft = Math.Max(BackLeft, squaresBackLeft);
+        Left = Math.Max(Left, squaresLeft);
+        ForwardLeft = Math.Max(ForwardLeft, squaresForwardLeft);
     }
 }

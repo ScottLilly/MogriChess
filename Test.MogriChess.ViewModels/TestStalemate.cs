@@ -19,7 +19,7 @@ namespace Test.MogriChess.ViewModels
             AddPiece(game, "b6", PieceFactory.GetRook(null, Enums.Color.Light));
             AddPiece(game, "c7", PieceFactory.GetRook(null, Enums.Color.Light));
 
-            Square square = game.Board.Squares.First(s => s.SquareShorthand == "a8");
+            Square square = game.Board.Squares["a8"];
             var moves =
                 game.Board.LegalMovesForPieceAt(square.Rank, square.File);
 
@@ -28,7 +28,7 @@ namespace Test.MogriChess.ViewModels
 
         private static void AddPiece(Game game, string squareShorthand, Piece piece)
         {
-            game.Board.Squares.First(s => s.SquareShorthand == squareShorthand)
+            game.Board.Squares[squareShorthand]
                 .Piece = piece;
         }
     }

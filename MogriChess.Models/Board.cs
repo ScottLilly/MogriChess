@@ -12,8 +12,8 @@ public class Board : INotifyPropertyChanged
     public ColorScheme BoardColorScheme { get; }
     public ColorScheme PieceColorScheme { get; }
 
-    public ObservableCollection<Square> Squares { get; } =
-        new ObservableCollection<Square>();
+    public ObservableDictionary<string, Square> Squares { get; } =
+        new ObservableDictionary<string, Square>();
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -29,18 +29,20 @@ public class Board : INotifyPropertyChanged
 
     public void PlaceStartingPieces(List<PiecePlacement> piecePlacements)
     {
-        Squares.ApplyToEach(s => s.Piece = null);
+        foreach (Square square in Squares.Values)
+        {
+            square.Piece = null;
+        }
 
         foreach (PiecePlacement placement in piecePlacements)
         {
-            PlacePieceOnSquare(placement.Piece, SquareAt(placement.Rank, placement.File));
+            PlacePieceOnSquare(placement.Piece, Squares[placement.Shorthand]);
         }
     }
 
-    public List<Move> LegalMovesForPieceAt(int rank, int file) =>
-        PotentialMovesForPieceAt(rank, file)
-            .Where(m => GetSimulatedMoveResult(m, () => KingCannotBeCaptured(m.MovingPieceColor)))
-            .ToList();
+    public IEnumerable<Move> LegalMovesForPieceAt(int rank, int file) =>
+        PotentialMovesForPieceAt(ModelFunctions.GetShorthand(rank, file))
+            .Where(m => GetSimulatedMoveResult(m, () => KingCannotBeCaptured(m.MovingPieceColor)));
 
     public bool KingCanBeCaptured(Enums.Color playerColor) =>
         SquaresWithPiecesOfColor(playerColor.OppositeColor())
@@ -57,10 +59,10 @@ public class Board : INotifyPropertyChanged
     #region Internal methods
 
     internal void ClearValidDestinations() =>
-        Squares.ApplyToEach(s => s.IsValidDestination = false);
+        Squares.Values.ApplyToEach(s => s.IsValidDestination = false);
 
     internal IEnumerable<Square> SquaresWithPiecesOfColor(Enums.Color color) =>
-        Squares.Where(s => s.Piece?.Color == color);
+        Squares.Values.Where(s => s.Piece?.Color == color);
 
     internal void MovePiece(Square originationSquare, Square destinationSquare)
     {
@@ -102,7 +104,9 @@ public class Board : INotifyPropertyChanged
         {
             for (int file = 1; file <= Constants.NumberOfFiles; file++)
             {
-                Squares.Add(new Square(rank, file, BoardColorScheme));
+                Square square = new Square(rank, file, BoardColorScheme);
+
+                Squares.Add(square.SquareShorthand, square);
             }
         }
     }
@@ -122,15 +126,12 @@ public class Board : INotifyPropertyChanged
         }
     }
 
-    private Square SquareAt(int rank, int file) =>
-        Squares.First(s => s.Rank == rank && s.File == file);
+    private List<Move> PotentialMovesForPieceAt(Square square) =>
+        PotentialMovesForPieceAt(square.SquareShorthand);
 
-    private IEnumerable<Move> PotentialMovesForPieceAt(Square square) =>
-        PotentialMovesForPieceAt(square.Rank, square.File);
-
-    private IEnumerable<Move> PotentialMovesForPieceAt(int rank, int file)
+    private List<Move> PotentialMovesForPieceAt(string squareShorthand)
     {
-        Square originationSquare = SquareAt(rank, file);
+        Square originationSquare = Squares[squareShorthand];
 
         List<Move> validMoves = new List<Move>();
 
@@ -151,7 +152,7 @@ public class Board : INotifyPropertyChanged
         return validMoves;
     }
 
-    private IEnumerable<Move> PotentialMovesInDirection(Square originationSquare,
+    private List<Move> PotentialMovesInDirection(Square originationSquare,
         Enums.Direction direction)
     {
         List<Move> potentialMoves = new List<Move>();
@@ -175,7 +176,8 @@ public class Board : INotifyPropertyChanged
                 break;
             }
 
-            Square destinationSquare = SquareAt(destinationRank, destinationFile);
+            var destSquareShorthand = ModelFunctions.GetShorthand(destinationRank, destinationFile);
+            Square destinationSquare = Squares[destSquareShorthand];
             Move potentialMove = new Move(originationSquare, destinationSquare);
 
             // Un-promoted pawn reached opponent's back rank, and needs to be promoted.

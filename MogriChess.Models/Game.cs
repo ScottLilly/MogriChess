@@ -109,7 +109,7 @@ public class Game : INotifyPropertyChanged
             }
 
             List<Move> legalMovesForSelectedPiece =
-                LegalMovesForSelectedPiece();
+                LegalMovesForSelectedPiece().ToList();
 
             legalMovesForSelectedPiece.ApplyToEach(lm => ValidDestinationsForSelectedPiece.Add(lm));
 
