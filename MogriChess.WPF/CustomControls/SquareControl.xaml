@@ -4,12 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:models="clr-namespace:MogriChess.Models;assembly=MogriChess.Models"
+             xmlns:customConverters="clr-namespace:MogriChess.WPF.CustomConverters"
              d:DataContext="{d:DesignInstance models:Square}"
              Background="Transparent"
              mc:Ignorable="d">
 
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="VisibleIfTrue"/>
+        <customConverters:DisplayFirstEllipseConverter x:Key="DisplayFirstEllipse"/>
+        <customConverters:DisplaySecondEllipseConverter x:Key="DisplaySecondEllipse"/>
+        <customConverters:DisplayRectangleConverter x:Key="DisplayRectangle"/>
     </UserControl.Resources>
 
     <Canvas Width="90" Height="90" RenderTransformOrigin="0.5, 0.5" >
@@ -38,20 +41,20 @@
             <Ellipse Canvas.Top="18"
                      Canvas.Left="40"
                      Width="10" Height="10"
-                     Visibility="{Binding Piece.Forward.DrawOneSquareIndicator, 
-                                          Converter={StaticResource VisibleIfTrue}}"
+                     Visibility="{Binding Piece.Forward, 
+                                          Converter={StaticResource DisplayFirstEllipse}}"
                      Fill="{Binding Piece.UiColor}"/>
             <Ellipse Canvas.Top="6"
                      Canvas.Left="40"
                      Width="10" Height="10"
-                     Visibility="{Binding Piece.Forward.DrawTwoSquaresIndicator,
-                                          Converter={StaticResource VisibleIfTrue}}"
+                     Visibility="{Binding Piece.Forward,
+                                          Converter={StaticResource DisplaySecondEllipse}}"
                      Fill="{Binding Piece.UiColor}"/>
             <Rectangle Canvas.Top="6"
                        Canvas.Left="41"
                        Width="8" Height="22"
-                       Visibility="{Binding Piece.Forward.DrawInfiniteSquaresIndicator,
-                                            Converter={StaticResource VisibleIfTrue}}"
+                       Visibility="{Binding Piece.Forward,
+                                            Converter={StaticResource DisplayRectangle}}"
                        Fill="{Binding Piece.UiColor}"/>
         </Canvas>
 
@@ -63,20 +66,20 @@
             <Ellipse Canvas.Top="18"
                      Canvas.Left="40"
                      Width="10" Height="10"
-                     Visibility="{Binding Piece.ForwardRight.DrawOneSquareIndicator,
-                                          Converter={StaticResource VisibleIfTrue}}"
+                     Visibility="{Binding Piece.ForwardRight,
+                                          Converter={StaticResource DisplayFirstEllipse}}"
                      Fill="{Binding Piece.UiColor}"/>
             <Ellipse Canvas.Top="6"
                      Canvas.Left="40"
                      Width="10" Height="10"
-                     Visibility="{Binding Piece.ForwardRight.DrawTwoSquaresIndicator,
-                                          Converter={StaticResource VisibleIfTrue}}"
+                     Visibility="{Binding Piece.ForwardRight,
+                                          Converter={StaticResource DisplaySecondEllipse}}"
                      Fill="{Binding Piece.UiColor}"/>
             <Rectangle Canvas.Top="6"
                        Canvas.Left="41"
                        Width="8" Height="22"
-                       Visibility="{Binding Piece.ForwardRight.DrawInfiniteSquaresIndicator,
-                                            Converter={StaticResource VisibleIfTrue}}"
+                       Visibility="{Binding Piece.ForwardRight,
+                                            Converter={StaticResource DisplayRectangle}}"
                        Fill="{Binding Piece.UiColor}"/>
         </Canvas>
 
@@ -88,20 +91,20 @@
             <Ellipse Canvas.Top="18"
                      Canvas.Left="40"
                      Width="10" Height="10"
-                     Visibility="{Binding Piece.Right.DrawOneSquareIndicator,
-                                          Converter={StaticResource VisibleIfTrue}}"
+                     Visibility="{Binding Piece.Right,
+                                          Converter={StaticResource DisplayFirstEllipse}}"
                      Fill="{Binding Piece.UiColor}"/>
             <Ellipse Canvas.Top="6"
                      Canvas.Left="40"
                      Width="10" Height="10"
-                     Visibility="{Binding Piece.Right.DrawTwoSquaresIndicator,
-                                          Converter={StaticResource VisibleIfTrue}}"
+                     Visibility="{Binding Piece.Right,
+                                          Converter={StaticResource DisplaySecondEllipse}}"
                      Fill="{Binding Piece.UiColor}"/>
             <Rectangle Canvas.Top="6"
                        Canvas.Left="41"
                        Width="8" Height="22"
-                       Visibility="{Binding Piece.Right.DrawInfiniteSquaresIndicator,
-                                            Converter={StaticResource VisibleIfTrue}}"
+                       Visibility="{Binding Piece.Right,
+                                            Converter={StaticResource DisplayRectangle}}"
                        Fill="{Binding Piece.UiColor}"/>
         </Canvas>
 
@@ -113,20 +116,20 @@
             <Ellipse Canvas.Top="18"
                      Canvas.Left="40"
                      Width="10" Height="10"
-                     Visibility="{Binding Piece.BackRight.DrawOneSquareIndicator,
-                                          Converter={StaticResource VisibleIfTrue}}"
+                     Visibility="{Binding Piece.BackRight,
+                                          Converter={StaticResource DisplayFirstEllipse}}"
                      Fill="{Binding Piece.UiColor}"/>
             <Ellipse Canvas.Top="6"
                      Canvas.Left="40"
                      Width="10" Height="10"
-                     Visibility="{Binding Piece.BackRight.DrawTwoSquaresIndicator,
-                                          Converter={StaticResource VisibleIfTrue}}"
+                     Visibility="{Binding Piece.BackRight,
+                                          Converter={StaticResource DisplaySecondEllipse}}"
                      Fill="{Binding Piece.UiColor}"/>
             <Rectangle Canvas.Top="6"
                        Canvas.Left="41"
                        Width="8" Height="22"
-                       Visibility="{Binding Piece.BackRight.DrawInfiniteSquaresIndicator,
-                                            Converter={StaticResource VisibleIfTrue}}"
+                       Visibility="{Binding Piece.BackRight,
+                                            Converter={StaticResource DisplayRectangle}}"
                        Fill="{Binding Piece.UiColor}"/>
         </Canvas>
 
@@ -138,20 +141,20 @@
             <Ellipse Canvas.Top="18"
                      Canvas.Left="40"
                      Width="10" Height="10"
-                     Visibility="{Binding Piece.Back.DrawOneSquareIndicator,
-                                          Converter={StaticResource VisibleIfTrue}}"
+                     Visibility="{Binding Piece.Back,
+                                          Converter={StaticResource DisplayFirstEllipse}}"
                      Fill="{Binding Piece.UiColor}"/>
             <Ellipse Canvas.Top="6"
                      Canvas.Left="40"
                      Width="10" Height="10"
-                     Visibility="{Binding Piece.Back.DrawTwoSquaresIndicator,
-                                          Converter={StaticResource VisibleIfTrue}}"
+                     Visibility="{Binding Piece.Back,
+                                          Converter={StaticResource DisplaySecondEllipse}}"
                      Fill="{Binding Piece.UiColor}"/>
             <Rectangle Canvas.Top="6"
                        Canvas.Left="41"
                        Width="8" Height="22"
-                       Visibility="{Binding Piece.Back.DrawInfiniteSquaresIndicator,
-                                            Converter={StaticResource VisibleIfTrue}}"
+                       Visibility="{Binding Piece.Back,
+                                            Converter={StaticResource DisplayRectangle}}"
                        Fill="{Binding Piece.UiColor}"/>
         </Canvas>
 
@@ -163,20 +166,20 @@
             <Ellipse Canvas.Top="18"
                      Canvas.Left="40"
                      Width="10" Height="10"
-                     Visibility="{Binding Piece.BackLeft.DrawOneSquareIndicator,
-                                          Converter={StaticResource VisibleIfTrue}}"
+                     Visibility="{Binding Piece.BackLeft,
+                                          Converter={StaticResource DisplayFirstEllipse}}"
                      Fill="{Binding Piece.UiColor}"/>
             <Ellipse Canvas.Top="6"
                      Canvas.Left="40"
                      Width="10" Height="10"
-                     Visibility="{Binding Piece.BackLeft.DrawTwoSquaresIndicator,
-                                          Converter={StaticResource VisibleIfTrue}}"
+                     Visibility="{Binding Piece.BackLeft,
+                                          Converter={StaticResource DisplaySecondEllipse}}"
                      Fill="{Binding Piece.UiColor}"/>
             <Rectangle Canvas.Top="6"
                        Canvas.Left="41"
                        Width="8" Height="22"
-                       Visibility="{Binding Piece.BackLeft.DrawInfiniteSquaresIndicator,
-                                            Converter={StaticResource VisibleIfTrue}}"
+                       Visibility="{Binding Piece.BackLeft,
+                                            Converter={StaticResource DisplayRectangle}}"
                        Fill="{Binding Piece.UiColor}"/>
         </Canvas>
 
@@ -188,20 +191,20 @@
             <Ellipse Canvas.Top="18"
                      Canvas.Left="40"
                      Width="10" Height="10"
-                     Visibility="{Binding Piece.Left.DrawOneSquareIndicator,
-                                          Converter={StaticResource VisibleIfTrue}}"
+                     Visibility="{Binding Piece.Left,
+                                          Converter={StaticResource DisplayFirstEllipse}}"
                      Fill="{Binding Piece.UiColor}"/>
             <Ellipse Canvas.Top="6"
                      Canvas.Left="40"
                      Width="10" Height="10"
-                     Visibility="{Binding Piece.Left.DrawTwoSquaresIndicator,
-                                          Converter={StaticResource VisibleIfTrue}}"
+                     Visibility="{Binding Piece.Left,
+                                          Converter={StaticResource DisplaySecondEllipse}}"
                      Fill="{Binding Piece.UiColor}"/>
             <Rectangle Canvas.Top="6"
                        Canvas.Left="41"
                        Width="8" Height="22"
-                       Visibility="{Binding Piece.Left.DrawInfiniteSquaresIndicator,
-                                            Converter={StaticResource VisibleIfTrue}}"
+                       Visibility="{Binding Piece.Left,
+                                            Converter={StaticResource DisplayRectangle}}"
                        Fill="{Binding Piece.UiColor}"/>
         </Canvas>
 
@@ -213,20 +216,20 @@
             <Ellipse Canvas.Top="18"
                      Canvas.Left="40"
                      Width="10" Height="10"
-                     Visibility="{Binding Piece.ForwardLeft.DrawOneSquareIndicator,
-                                          Converter={StaticResource VisibleIfTrue}}"
+                     Visibility="{Binding Piece.ForwardLeft,
+                                          Converter={StaticResource DisplayFirstEllipse}}"
                      Fill="{Binding Piece.UiColor}"/>
             <Ellipse Canvas.Top="6"
                      Canvas.Left="40"
                      Width="10" Height="10"
-                     Visibility="{Binding Piece.ForwardLeft.DrawTwoSquaresIndicator,
-                                          Converter={StaticResource VisibleIfTrue}}"
+                     Visibility="{Binding Piece.ForwardLeft,
+                                          Converter={StaticResource DisplaySecondEllipse}}"
                      Fill="{Binding Piece.UiColor}"/>
             <Rectangle Canvas.Top="6"
                        Canvas.Left="41"
                        Width="8" Height="22"
-                       Visibility="{Binding Piece.ForwardLeft.DrawInfiniteSquaresIndicator,
-                                            Converter={StaticResource VisibleIfTrue}}"
+                       Visibility="{Binding Piece.ForwardLeft,
+                                            Converter={StaticResource DisplayRectangle}}"
                        Fill="{Binding Piece.UiColor}"/>
         </Canvas>
 

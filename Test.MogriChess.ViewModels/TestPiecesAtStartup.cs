@@ -34,14 +34,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Light);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(Constants.UnlimitedMoves, piece.Forward.Squares);
-        Assert.Equal(0, piece.ForwardRight.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.Left.Squares);
-        Assert.Equal(0, piece.ForwardLeft.Squares);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Forward);
+        Assert.Equal(0, piece.ForwardRight);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Left);
+        Assert.Equal(0, piece.ForwardLeft);
     }
 
     [Fact]
@@ -58,14 +58,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Light);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(2, piece.Forward.Squares);
-        Assert.Equal(2, piece.ForwardRight.Squares);
-        Assert.Equal(2, piece.Right.Squares);
-        Assert.Equal(2, piece.BackRight.Squares);
-        Assert.Equal(2, piece.Back.Squares);
-        Assert.Equal(2, piece.BackLeft.Squares);
-        Assert.Equal(2, piece.Left.Squares);
-        Assert.Equal(2, piece.ForwardLeft.Squares);
+        Assert.Equal(2, piece.Forward);
+        Assert.Equal(2, piece.ForwardRight);
+        Assert.Equal(2, piece.Right);
+        Assert.Equal(2, piece.BackRight);
+        Assert.Equal(2, piece.Back);
+        Assert.Equal(2, piece.BackLeft);
+        Assert.Equal(2, piece.Left);
+        Assert.Equal(2, piece.ForwardLeft);
     }
 
     [Fact]
@@ -82,14 +82,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Light);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(0, piece.Forward.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardLeft.Squares);
+        Assert.Equal(0, piece.Forward);
+        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(Constants.UnlimitedMoves, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(Constants.UnlimitedMoves, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardLeft);
     }
 
     [Fact]
@@ -106,14 +106,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Light);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(Constants.UnlimitedMoves, piece.Forward.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardRight.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.Right.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.BackRight.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.Back.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.BackLeft.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.Left.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardLeft.Squares);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Forward);
+        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardRight);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Right);
+        Assert.Equal(Constants.UnlimitedMoves, piece.BackRight);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Back);
+        Assert.Equal(Constants.UnlimitedMoves, piece.BackLeft);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Left);
+        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardLeft);
     }
 
     [Fact]
@@ -130,14 +130,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Light);
         Assert.True(piece.IsKing);
 
-        Assert.Equal(1, piece.Forward.Squares);
-        Assert.Equal(1, piece.ForwardRight.Squares);
-        Assert.Equal(1, piece.Right.Squares);
-        Assert.Equal(1, piece.BackRight.Squares);
-        Assert.Equal(1, piece.Back.Squares);
-        Assert.Equal(1, piece.BackLeft.Squares);
-        Assert.Equal(1, piece.Left.Squares);
-        Assert.Equal(1, piece.ForwardLeft.Squares);
+        Assert.Equal(1, piece.Forward);
+        Assert.Equal(1, piece.ForwardRight);
+        Assert.Equal(1, piece.Right);
+        Assert.Equal(1, piece.BackRight);
+        Assert.Equal(1, piece.Back);
+        Assert.Equal(1, piece.BackLeft);
+        Assert.Equal(1, piece.Left);
+        Assert.Equal(1, piece.ForwardLeft);
     }
 
     [Fact]
@@ -154,14 +154,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Light);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(0, piece.Forward.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardLeft.Squares);
+        Assert.Equal(0, piece.Forward);
+        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(Constants.UnlimitedMoves, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(Constants.UnlimitedMoves, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardLeft);
     }
 
     [Fact]
@@ -178,14 +178,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Light);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(2, piece.Forward.Squares);
-        Assert.Equal(2, piece.ForwardRight.Squares);
-        Assert.Equal(2, piece.Right.Squares);
-        Assert.Equal(2, piece.BackRight.Squares);
-        Assert.Equal(2, piece.Back.Squares);
-        Assert.Equal(2, piece.BackLeft.Squares);
-        Assert.Equal(2, piece.Left.Squares);
-        Assert.Equal(2, piece.ForwardLeft.Squares);
+        Assert.Equal(2, piece.Forward);
+        Assert.Equal(2, piece.ForwardRight);
+        Assert.Equal(2, piece.Right);
+        Assert.Equal(2, piece.BackRight);
+        Assert.Equal(2, piece.Back);
+        Assert.Equal(2, piece.BackLeft);
+        Assert.Equal(2, piece.Left);
+        Assert.Equal(2, piece.ForwardLeft);
     }
 
     [Fact]
@@ -202,14 +202,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Light);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(Constants.UnlimitedMoves, piece.Forward.Squares);
-        Assert.Equal(0, piece.ForwardRight.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.Left.Squares);
-        Assert.Equal(0, piece.ForwardLeft.Squares);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Forward);
+        Assert.Equal(0, piece.ForwardRight);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Left);
+        Assert.Equal(0, piece.ForwardLeft);
     }
 
     #endregion
@@ -230,14 +230,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Light);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(1, piece.Forward.Squares);
-        Assert.Equal(1, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(1, piece.ForwardLeft.Squares);
+        Assert.Equal(1, piece.Forward);
+        Assert.Equal(1, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(1, piece.ForwardLeft);
     }
 
     [Fact]
@@ -254,14 +254,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Light);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(1, piece.Forward.Squares);
-        Assert.Equal(1, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(1, piece.ForwardLeft.Squares);
+        Assert.Equal(1, piece.Forward);
+        Assert.Equal(1, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(1, piece.ForwardLeft);
     }
 
     [Fact]
@@ -278,14 +278,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Light);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(1, piece.Forward.Squares);
-        Assert.Equal(1, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(1, piece.ForwardLeft.Squares);
+        Assert.Equal(1, piece.Forward);
+        Assert.Equal(1, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(1, piece.ForwardLeft);
     }
 
     [Fact]
@@ -302,14 +302,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Light);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(1, piece.Forward.Squares);
-        Assert.Equal(1, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(1, piece.ForwardLeft.Squares);
+        Assert.Equal(1, piece.Forward);
+        Assert.Equal(1, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(1, piece.ForwardLeft);
     }
 
     [Fact]
@@ -326,14 +326,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Light);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(1, piece.Forward.Squares);
-        Assert.Equal(1, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(1, piece.ForwardLeft.Squares);
+        Assert.Equal(1, piece.Forward);
+        Assert.Equal(1, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(1, piece.ForwardLeft);
     }
 
     [Fact]
@@ -350,14 +350,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Light);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(1, piece.Forward.Squares);
-        Assert.Equal(1, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(1, piece.ForwardLeft.Squares);
+        Assert.Equal(1, piece.Forward);
+        Assert.Equal(1, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(1, piece.ForwardLeft);
     }
 
     [Fact]
@@ -374,14 +374,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Light);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(1, piece.Forward.Squares);
-        Assert.Equal(1, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(1, piece.ForwardLeft.Squares);
+        Assert.Equal(1, piece.Forward);
+        Assert.Equal(1, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(1, piece.ForwardLeft);
     }
 
     [Fact]
@@ -398,14 +398,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Light);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(1, piece.Forward.Squares);
-        Assert.Equal(1, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(1, piece.ForwardLeft.Squares);
+        Assert.Equal(1, piece.Forward);
+        Assert.Equal(1, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(1, piece.ForwardLeft);
     }
 
     #endregion
@@ -498,14 +498,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Dark);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(1, piece.Forward.Squares);
-        Assert.Equal(1, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(1, piece.ForwardLeft.Squares);
+        Assert.Equal(1, piece.Forward);
+        Assert.Equal(1, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(1, piece.ForwardLeft);
     }
 
     [Fact]
@@ -522,14 +522,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Dark);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(1, piece.Forward.Squares);
-        Assert.Equal(1, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(1, piece.ForwardLeft.Squares);
+        Assert.Equal(1, piece.Forward);
+        Assert.Equal(1, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(1, piece.ForwardLeft);
     }
 
     [Fact]
@@ -546,14 +546,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Dark);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(1, piece.Forward.Squares);
-        Assert.Equal(1, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(1, piece.ForwardLeft.Squares);
+        Assert.Equal(1, piece.Forward);
+        Assert.Equal(1, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(1, piece.ForwardLeft);
     }
 
     [Fact]
@@ -570,14 +570,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Dark);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(1, piece.Forward.Squares);
-        Assert.Equal(1, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(1, piece.ForwardLeft.Squares);
+        Assert.Equal(1, piece.Forward);
+        Assert.Equal(1, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(1, piece.ForwardLeft);
     }
 
     [Fact]
@@ -594,14 +594,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Dark);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(1, piece.Forward.Squares);
-        Assert.Equal(1, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(1, piece.ForwardLeft.Squares);
+        Assert.Equal(1, piece.Forward);
+        Assert.Equal(1, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(1, piece.ForwardLeft);
     }
 
     [Fact]
@@ -618,14 +618,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Dark);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(1, piece.Forward.Squares);
-        Assert.Equal(1, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(1, piece.ForwardLeft.Squares);
+        Assert.Equal(1, piece.Forward);
+        Assert.Equal(1, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(1, piece.ForwardLeft);
     }
 
     [Fact]
@@ -642,14 +642,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Dark);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(1, piece.Forward.Squares);
-        Assert.Equal(1, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(1, piece.ForwardLeft.Squares);
+        Assert.Equal(1, piece.Forward);
+        Assert.Equal(1, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(1, piece.ForwardLeft);
     }
 
     [Fact]
@@ -666,14 +666,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Dark);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(1, piece.Forward.Squares);
-        Assert.Equal(1, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(1, piece.ForwardLeft.Squares);
+        Assert.Equal(1, piece.Forward);
+        Assert.Equal(1, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(1, piece.ForwardLeft);
     }
 
     #endregion
@@ -694,14 +694,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Dark);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(Constants.UnlimitedMoves, piece.Forward.Squares);
-        Assert.Equal(0, piece.ForwardRight.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.Left.Squares);
-        Assert.Equal(0, piece.ForwardLeft.Squares);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Forward);
+        Assert.Equal(0, piece.ForwardRight);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Left);
+        Assert.Equal(0, piece.ForwardLeft);
     }
 
     [Fact]
@@ -718,14 +718,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Dark);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(2, piece.Forward.Squares);
-        Assert.Equal(2, piece.ForwardRight.Squares);
-        Assert.Equal(2, piece.Right.Squares);
-        Assert.Equal(2, piece.BackRight.Squares);
-        Assert.Equal(2, piece.Back.Squares);
-        Assert.Equal(2, piece.BackLeft.Squares);
-        Assert.Equal(2, piece.Left.Squares);
-        Assert.Equal(2, piece.ForwardLeft.Squares);
+        Assert.Equal(2, piece.Forward);
+        Assert.Equal(2, piece.ForwardRight);
+        Assert.Equal(2, piece.Right);
+        Assert.Equal(2, piece.BackRight);
+        Assert.Equal(2, piece.Back);
+        Assert.Equal(2, piece.BackLeft);
+        Assert.Equal(2, piece.Left);
+        Assert.Equal(2, piece.ForwardLeft);
     }
 
     [Fact]
@@ -742,14 +742,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Dark);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(0, piece.Forward.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardLeft.Squares);
+        Assert.Equal(0, piece.Forward);
+        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(Constants.UnlimitedMoves, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(Constants.UnlimitedMoves, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardLeft);
     }
 
     [Fact]
@@ -766,14 +766,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Dark);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(Constants.UnlimitedMoves, piece.Forward.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardRight.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.Right.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.BackRight.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.Back.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.BackLeft.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.Left.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardLeft.Squares);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Forward);
+        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardRight);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Right);
+        Assert.Equal(Constants.UnlimitedMoves, piece.BackRight);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Back);
+        Assert.Equal(Constants.UnlimitedMoves, piece.BackLeft);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Left);
+        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardLeft);
     }
 
     [Fact]
@@ -790,14 +790,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Dark);
         Assert.True(piece.IsKing);
 
-        Assert.Equal(1, piece.Forward.Squares);
-        Assert.Equal(1, piece.ForwardRight.Squares);
-        Assert.Equal(1, piece.Right.Squares);
-        Assert.Equal(1, piece.BackRight.Squares);
-        Assert.Equal(1, piece.Back.Squares);
-        Assert.Equal(1, piece.BackLeft.Squares);
-        Assert.Equal(1, piece.Left.Squares);
-        Assert.Equal(1, piece.ForwardLeft.Squares);
+        Assert.Equal(1, piece.Forward);
+        Assert.Equal(1, piece.ForwardRight);
+        Assert.Equal(1, piece.Right);
+        Assert.Equal(1, piece.BackRight);
+        Assert.Equal(1, piece.Back);
+        Assert.Equal(1, piece.BackLeft);
+        Assert.Equal(1, piece.Left);
+        Assert.Equal(1, piece.ForwardLeft);
     }
 
     [Fact]
@@ -814,14 +814,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Dark);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(0, piece.Forward.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardRight.Squares);
-        Assert.Equal(0, piece.Right.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.BackRight.Squares);
-        Assert.Equal(0, piece.Back.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.BackLeft.Squares);
-        Assert.Equal(0, piece.Left.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardLeft.Squares);
+        Assert.Equal(0, piece.Forward);
+        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardRight);
+        Assert.Equal(0, piece.Right);
+        Assert.Equal(Constants.UnlimitedMoves, piece.BackRight);
+        Assert.Equal(0, piece.Back);
+        Assert.Equal(Constants.UnlimitedMoves, piece.BackLeft);
+        Assert.Equal(0, piece.Left);
+        Assert.Equal(Constants.UnlimitedMoves, piece.ForwardLeft);
     }
 
     [Fact]
@@ -838,14 +838,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Dark);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(2, piece.Forward.Squares);
-        Assert.Equal(2, piece.ForwardRight.Squares);
-        Assert.Equal(2, piece.Right.Squares);
-        Assert.Equal(2, piece.BackRight.Squares);
-        Assert.Equal(2, piece.Back.Squares);
-        Assert.Equal(2, piece.BackLeft.Squares);
-        Assert.Equal(2, piece.Left.Squares);
-        Assert.Equal(2, piece.ForwardLeft.Squares);
+        Assert.Equal(2, piece.Forward);
+        Assert.Equal(2, piece.ForwardRight);
+        Assert.Equal(2, piece.Right);
+        Assert.Equal(2, piece.BackRight);
+        Assert.Equal(2, piece.Back);
+        Assert.Equal(2, piece.BackLeft);
+        Assert.Equal(2, piece.Left);
+        Assert.Equal(2, piece.ForwardLeft);
     }
 
     [Fact]
@@ -862,14 +862,14 @@ public class TestPiecesAtStartup
         Assert.True(piece.Color == Enums.Color.Dark);
         Assert.False(piece.IsKing);
 
-        Assert.Equal(Constants.UnlimitedMoves, piece.Forward.Squares);
-        Assert.Equal(0, piece.ForwardRight.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.Right.Squares);
-        Assert.Equal(0, piece.BackRight.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.Back.Squares);
-        Assert.Equal(0, piece.BackLeft.Squares);
-        Assert.Equal(Constants.UnlimitedMoves, piece.Left.Squares);
-        Assert.Equal(0, piece.ForwardLeft.Squares);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Forward);
+        Assert.Equal(0, piece.ForwardRight);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Right);
+        Assert.Equal(0, piece.BackRight);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Back);
+        Assert.Equal(0, piece.BackLeft);
+        Assert.Equal(Constants.UnlimitedMoves, piece.Left);
+        Assert.Equal(0, piece.ForwardLeft);
     }
 
     #endregion

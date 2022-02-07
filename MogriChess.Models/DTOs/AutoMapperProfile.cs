@@ -11,7 +11,6 @@ public class AutoMapperProfile : Profile
         CreateMap<Piece, PieceDTO>()
             .ForMember(dest => dest.Color,
                 opt => opt.MapFrom(src => src.Color.ToString()));
-        CreateMap<MovementIndicator, MovementIndicatorDTO>();
         CreateMap<Game, GameStateDTO>()
             .ForMember(dest => dest.BoardColorScheme,
                 opt => opt.MapFrom(src => src.Board.BoardColorScheme))
