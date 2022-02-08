@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using MogriChess.Core;
+using System.Threading.Tasks;
 using MogriChess.Models;
 using MogriChess.Services;
 
@@ -33,14 +32,7 @@ public class PlaySession : INotifyPropertyChanged
         {
             _displayValidDestinations = value;
 
-            if (DisplayValidDestinations)
-            {
-                PopulateValidDestinations();
-            }
-            else
-            {
-                ClearValidDestinations();
-            }
+            SetValidDestinations();
         }
     }
 
@@ -92,7 +84,7 @@ public class PlaySession : INotifyPropertyChanged
         if (CurrentGame.SelectedSquare == null)
         {
             CurrentGame.SelectedSquare = square;
-            PopulateValidDestinations();
+            SetValidDestinations();
 
             return;
         }
@@ -128,7 +120,7 @@ public class PlaySession : INotifyPropertyChanged
 
     #region Private methods
 
-    private void PopulateValidDestinations()
+    private void SetValidDestinations()
     {
         ClearValidDestinations();
 
@@ -143,6 +135,27 @@ public class PlaySession : INotifyPropertyChanged
     {
         CurrentGame.ValidDestinationsForSelectedPiece.Clear();
         CurrentGame.Board.ClearValidDestinations();
+    }
+
+    private async void MakeBotMove(BotPlayer botPlayer)
+    {
+        if (CurrentGame.Status != Enums.GameStatus.Playing)
+        {
+            return;
+        }
+
+        Move bestMove = botPlayer.FindBestMove(CurrentGame.Board);
+
+        SelectSquare(bestMove.OriginationSquare);
+
+        // Only show best move for destination
+        ClearValidDestinations();
+        CurrentGame.ValidDestinationsForSelectedPiece.Add(bestMove);
+        bestMove.DestinationSquare.IsValidDestination = true;
+
+        await Task.Delay(750);
+
+        SelectSquare(bestMove.DestinationSquare);
     }
 
     private void MoveCompletedHandler(object sender, EventArgs e)
@@ -161,13 +174,13 @@ public class PlaySession : INotifyPropertyChanged
         if (CurrentGame.CurrentPlayerColor == Enums.Color.Dark &&
             CurrentGame.DarkPlayerBot != null)
         {
-            CurrentGame.MakeBotMove(CurrentGame.DarkPlayerBot);
+            MakeBotMove(CurrentGame.DarkPlayerBot);
         }
 
         if (CurrentGame.CurrentPlayerColor == Enums.Color.Light &&
             CurrentGame.LightPlayerBot != null)
         {
-            CurrentGame.MakeBotMove(CurrentGame.LightPlayerBot);
+            MakeBotMove(CurrentGame.LightPlayerBot);
         }
     }
 
