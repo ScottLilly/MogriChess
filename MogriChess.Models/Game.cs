@@ -11,7 +11,6 @@ namespace MogriChess.Models;
 
 public class Game : INotifyPropertyChanged
 {
-    private Square _selectedSquare;
     private bool _displayValidDestinations = true;
     private Enums.Color _currentPlayerColor = Enums.Color.NotSelected;
     private IEnumerable<Move> _legalMovesForCurrentPlayer;
@@ -92,35 +91,9 @@ public class Game : INotifyPropertyChanged
     public BotPlayer LightPlayerBot { get; set; }
     public BotPlayer DarkPlayerBot { get; set; }
 
-    private Square SelectedSquare
-    {
-        get => _selectedSquare;
-        set
-        {
-            _selectedSquare = value;
+    public Square SelectedSquare { get; set; }
 
-            ValidDestinationsForSelectedPiece.Clear();
-
-            Board.ClearValidDestinations();
-
-            if (SelectedSquare == null)
-            {
-                return;
-            }
-
-            List<Move> legalMovesForSelectedPiece =
-                LegalMovesForSelectedPiece().ToList();
-
-            legalMovesForSelectedPiece.ApplyToEach(lm => ValidDestinationsForSelectedPiece.Add(lm));
-
-            if (DisplayValidDestinations)
-            {
-                legalMovesForSelectedPiece.ApplyToEach(lm => lm.DestinationSquare.IsValidDestination = true);
-            }
-        }
-    }
-
-    private ObservableCollection<Move> ValidDestinationsForSelectedPiece { get; } =
+    public ObservableCollection<Move> ValidDestinationsForSelectedPiece { get; } =
         new ObservableCollection<Move>();
 
     public event EventHandler MoveCompleted;
@@ -222,7 +195,7 @@ public class Game : INotifyPropertyChanged
         _legalMovesForCurrentPlayer =
             Board.LegalMovesForPlayer(_currentPlayerColor);
 
-    private List<Move> LegalMovesForSelectedPiece()
+    public List<Move> LegalMovesForSelectedPiece()
     {
         if (_legalMovesForCurrentPlayer == null)
         {
@@ -234,7 +207,7 @@ public class Game : INotifyPropertyChanged
             .ToList();
     }
 
-    private void MoveToSelectedSquare(Square square)
+    public void MoveToSelectedSquare(Square square)
     {
         // Check that the destination square is a valid move
         Move move =
@@ -247,8 +220,6 @@ public class Game : INotifyPropertyChanged
         }
 
         Board.MovePiece(SelectedSquare, square);
-
-        DeselectSelectedSquare();
 
         DetermineIfMovePutsOpponentInCheckOrCheckmate(move);
 
@@ -278,10 +249,14 @@ public class Game : INotifyPropertyChanged
     {
         SelectedSquare.IsSelected = false;
         SelectedSquare = null;
+        ValidDestinationsForSelectedPiece.Clear();
+        Board.ClearValidDestinations();
     }
 
     private void EndCurrentPlayerTurn()
     {
+        DeselectSelectedSquare();
+
         CurrentPlayerColor = CurrentPlayerColor.OppositeColor();
         MoveCompleted?.Invoke(this, EventArgs.Empty);
     }

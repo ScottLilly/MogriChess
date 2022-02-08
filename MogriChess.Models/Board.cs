@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using MogriChess.Core;
@@ -58,7 +57,7 @@ public class Board : INotifyPropertyChanged
 
     #region Internal methods
 
-    internal void ClearValidDestinations() =>
+    public void ClearValidDestinations() =>
         Squares.Values.ApplyToEach(s => s.IsValidDestination = false);
 
     internal IEnumerable<Square> SquaresWithPiecesOfColor(Enums.Color color) =>

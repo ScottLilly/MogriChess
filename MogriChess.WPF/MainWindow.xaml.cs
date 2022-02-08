@@ -110,7 +110,7 @@ public partial class MainWindow : Window
 
         Square square = selectedSquare.DataContext as Square;
 
-        CurrentSession.CurrentGame.SelectSquare(square);
+        CurrentSession.SelectSquare(square);
     }
 
     private void MoveHistoryChangedHandler(object sender,
@@ -171,21 +171,21 @@ public partial class MainWindow : Window
 
     private void DisplayRankAndFileLabels_OnChecked(object sender, RoutedEventArgs e)
     {
-        CurrentSession.CurrentGame.DisplayRankFileLabel = true;
+        CurrentSession.DisplayRankFileLabels = true;
     }
 
     private void DisplayRankAndFileLabels_OnUnchecked(object sender, RoutedEventArgs e)
     {
-        CurrentSession.CurrentGame.DisplayRankFileLabel = false;
+        CurrentSession.DisplayRankFileLabels = false;
     }
 
     private void DisplayValidMoves_OnChecked(object sender, RoutedEventArgs e)
     {
-        CurrentSession.CurrentGame.DisplayValidDestinations = true;
+        CurrentSession.DisplayValidDestinations = true;
     }
 
     private void DisplayValidMoves_OnUnchecked(object sender, RoutedEventArgs e)
     {
-        CurrentSession.CurrentGame.DisplayValidDestinations = false;
+        CurrentSession.DisplayValidDestinations = false;
     }
 }
