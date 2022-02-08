@@ -31,8 +31,8 @@ public class TestCheckmateConditions
             Square destinationSquare =
                 game.Board.Squares[move.DestinationSquare];
 
-            game.SelectSquare(originationSquare);
-            game.SelectSquare(destinationSquare);
+            session.SelectSquare(originationSquare);
+            session.SelectSquare(destinationSquare);
         }
 
         Assert.False(game.MoveHistory.Last().PutsOpponentInCheckmate);
