@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
 using MogriChess.Core;
 using MogriChess.Models.CustomEventArgs;
 
@@ -107,76 +106,15 @@ public class Game : INotifyPropertyChanged
 
     public void StartGame()
     {
+        // Clear out game
         CurrentPlayerColor = Enums.Color.NotSelected;
-
         SelectedSquare = null;
         Board.ClearValidDestinations();
         MoveHistory.Clear();
 
+        // Start game
         CurrentPlayerColor = Enums.Color.Light;
         Status = Enums.GameStatus.Playing;
-    }
-
-    public void SelectSquare(Square square)
-    {
-        if (SelectedSquare == null)
-        {
-            // No piece is on square, so return
-            if (square.IsEmpty)
-            {
-                return;
-            }
-
-            SelectMoveOriginationSquare(square);
-        }
-        else if (SelectedSquare == square)
-        {
-            // The player selected the currently-selected square, de-select it.
-            DeselectSelectedSquare();
-        }
-        else
-        {
-            // Move the piece to the second selected square, if valid
-            MoveToSelectedSquare(square);
-        }
-    }
-
-    private void SelectMoveOriginationSquare(Square square)
-    {
-        // The square contains a piece of the current player's color.
-        // So, it's a valid selection.
-        if (square.Piece.Color == CurrentPlayerColor)
-        {
-            SelectedSquare = square;
-        }
-    }
-
-    public async void MakeBotMove(BotPlayer botPlayer)
-    {
-        if (Status != Enums.GameStatus.Playing)
-        {
-            return;
-        }
-
-        Move bestMove = botPlayer.FindBestMove(Board);
-
-        SelectSquare(bestMove.OriginationSquare);
-
-        ValidDestinationsForSelectedPiece.ApplyToEach(d =>
-            d.DestinationSquare.IsValidDestination = false);
-        ValidDestinationsForSelectedPiece.Clear();
-
-        ValidDestinationsForSelectedPiece.Add(bestMove);
-
-        if (DisplayValidDestinations)
-        {
-            ValidDestinationsForSelectedPiece.ApplyToEach(d =>
-                d.DestinationSquare.IsValidDestination = true);
-        }
-
-        await Task.Delay(750);
-
-        SelectSquare(bestMove.DestinationSquare);
     }
 
     #endregion
@@ -192,6 +130,12 @@ public class Game : INotifyPropertyChanged
         if (_legalMovesForCurrentPlayer == null)
         {
             CacheLegalMovesForCurrentPlayer();
+        }
+
+        if (SelectedSquare == null)
+        {
+            return new List<Move>();
+
         }
 
         return _legalMovesForCurrentPlayer
@@ -237,16 +181,12 @@ public class Game : INotifyPropertyChanged
         }
     }
 
-    private void DeselectSelectedSquare()
+    private void EndCurrentPlayerTurn()
     {
+        // Deselect square/piece that moved
         SelectedSquare = null;
         ValidDestinationsForSelectedPiece.Clear();
         Board.ClearValidDestinations();
-    }
-
-    private void EndCurrentPlayerTurn()
-    {
-        DeselectSelectedSquare();
 
         CurrentPlayerColor = CurrentPlayerColor.OppositeColor();
         MoveCompleted?.Invoke(this, EventArgs.Empty);
