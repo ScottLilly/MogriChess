@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using MogriChess.Core;
 using MogriChess.Models;
 using MogriChess.Services;
 
@@ -68,7 +71,45 @@ public class PlaySession : INotifyPropertyChanged
 
     public void SelectSquare(Square square)
     {
-        CurrentGame.SelectSquare(square);
+        // If square doesn't have a piece, return
+        // If piece is not current player's color, return
+        if (CurrentGame.SelectedSquare == null &&
+            (square.Piece == null ||
+             square.Piece.Color != CurrentGame.CurrentPlayerColor))
+        {
+            return;
+        }
+
+        // If SelectedSquare == null, select the square
+        if (CurrentGame.SelectedSquare == null)
+        {
+            CurrentGame.SelectedSquare = square;
+            CurrentGame.SelectedSquare.IsSelected = true;
+            SetValidDestinations();
+
+            return;
+        }
+
+        // If passed-in square is the SelectedSquare, unselect it
+        if (CurrentGame.SelectedSquare == square)
+        {
+            CurrentGame.SelectedSquare.IsSelected = false;
+            CurrentGame.SelectedSquare = null;
+
+            return;
+        }
+
+        // If SelectedSquare != null:
+        // If DestinationSquare is in ValidDestinations, perform move
+        // else, do nothing
+        Move destinationMove =
+            CurrentGame.ValidDestinationsForSelectedPiece.FirstOrDefault(m =>
+                m.DestinationSquare.SquareShorthand == square.SquareShorthand);
+
+        if (destinationMove != null)
+        {
+            CurrentGame.MoveToSelectedSquare(square);
+        }
     }
 
     public string GetSerializedGameState()
@@ -82,6 +123,28 @@ public class PlaySession : INotifyPropertyChanged
     }
 
     #region Private methods
+
+    private void SetValidDestinations()
+    {
+        ClearValidDestinations();
+
+        List<Move> legalMovesForSelectedPiece =
+            CurrentGame.LegalMovesForSelectedPiece().ToList();
+
+        legalMovesForSelectedPiece.ApplyToEach(lm =>
+            CurrentGame.ValidDestinationsForSelectedPiece.Add(lm));
+
+        if (DisplayValidDestinations)
+        {
+            legalMovesForSelectedPiece.ApplyToEach(lm => lm.DestinationSquare.IsValidDestination = true);
+        }
+    }
+
+    private void ClearValidDestinations()
+    {
+        CurrentGame.ValidDestinationsForSelectedPiece.Clear();
+        CurrentGame.Board.ClearValidDestinations();
+    }
 
     private void MoveCompletedHandler(object sender, EventArgs e)
     {
