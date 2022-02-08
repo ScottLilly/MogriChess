@@ -7,9 +7,31 @@ namespace MogriChess.ViewModels;
 
 public class PlaySession : INotifyPropertyChanged
 {
+    private bool _displayRankFileLabels;
+    private bool _displayValidDestinations;
     public event PropertyChangedEventHandler PropertyChanged;
 
     public Game CurrentGame { get; }
+
+    public bool DisplayRankFileLabels
+    {
+        get => _displayRankFileLabels;
+        set
+        {
+            _displayRankFileLabels = value;
+            CurrentGame.DisplayRankFileLabel = DisplayRankFileLabels;
+        }
+    }
+
+    public bool DisplayValidDestinations
+    {
+        get => _displayValidDestinations;
+        set
+        {
+            _displayValidDestinations = value;
+            CurrentGame.DisplayValidDestinations = DisplayValidDestinations;
+        }
+    }
 
     public PlaySession()
     {
@@ -44,6 +66,11 @@ public class PlaySession : INotifyPropertyChanged
         }
     }
 
+    public void SelectSquare(Square square)
+    {
+        CurrentGame.SelectSquare(square);
+    }
+
     public string GetSerializedGameState()
     {
         return BoardStateService.GetSerializedGameState(CurrentGame);
@@ -53,6 +80,8 @@ public class PlaySession : INotifyPropertyChanged
     {
         return BoardStateService.GetSerializedMoveHistory(CurrentGame);
     }
+
+    #region Private methods
 
     private void MoveCompletedHandler(object sender, EventArgs e)
     {
@@ -79,4 +108,6 @@ public class PlaySession : INotifyPropertyChanged
             CurrentGame.MakeBotMove(CurrentGame.LightPlayerBot);
         }
     }
+
+    #endregion
 }
