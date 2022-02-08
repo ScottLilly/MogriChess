@@ -84,8 +84,7 @@ public class PlaySession : INotifyPropertyChanged
         if (CurrentGame.SelectedSquare == null)
         {
             CurrentGame.SelectedSquare = square;
-            CurrentGame.SelectedSquare.IsSelected = true;
-            SetValidDestinations();
+            PopulateValidDestinations();
 
             return;
         }
@@ -93,20 +92,17 @@ public class PlaySession : INotifyPropertyChanged
         // If passed-in square is the SelectedSquare, unselect it
         if (CurrentGame.SelectedSquare == square)
         {
-            CurrentGame.SelectedSquare.IsSelected = false;
             CurrentGame.SelectedSquare = null;
+            ClearValidDestinations();
 
             return;
         }
 
         // If SelectedSquare != null:
         // If DestinationSquare is in ValidDestinations, perform move
-        // else, do nothing
-        Move destinationMove =
-            CurrentGame.ValidDestinationsForSelectedPiece.FirstOrDefault(m =>
-                m.DestinationSquare.SquareShorthand == square.SquareShorthand);
-
-        if (destinationMove != null)
+        // otherwise, do nothing
+        if (CurrentGame.ValidDestinationsForSelectedPiece.Any(m =>
+                m.DestinationSquare.SquareShorthand == square.SquareShorthand))
         {
             CurrentGame.MoveToSelectedSquare(square);
         }
@@ -124,19 +120,14 @@ public class PlaySession : INotifyPropertyChanged
 
     #region Private methods
 
-    private void SetValidDestinations()
+    private void PopulateValidDestinations()
     {
         ClearValidDestinations();
 
-        List<Move> legalMovesForSelectedPiece =
-            CurrentGame.LegalMovesForSelectedPiece().ToList();
-
-        legalMovesForSelectedPiece.ApplyToEach(lm =>
-            CurrentGame.ValidDestinationsForSelectedPiece.Add(lm));
-
-        if (DisplayValidDestinations)
+        foreach (Move move in CurrentGame.LegalMovesForSelectedPiece())
         {
-            legalMovesForSelectedPiece.ApplyToEach(lm => lm.DestinationSquare.IsValidDestination = true);
+            CurrentGame.ValidDestinationsForSelectedPiece.Add(move);
+            move.DestinationSquare.IsValidDestination = DisplayValidDestinations;
         }
     }
 

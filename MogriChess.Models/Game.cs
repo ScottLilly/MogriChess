@@ -15,6 +15,7 @@ public class Game : INotifyPropertyChanged
     private Enums.Color _currentPlayerColor = Enums.Color.NotSelected;
     private IEnumerable<Move> _legalMovesForCurrentPlayer;
     private Enums.GameStatus _status = Enums.GameStatus.Preparing;
+    private Square _selectedSquare;
 
     public Enums.Color CurrentPlayerColor
     {
@@ -91,7 +92,24 @@ public class Game : INotifyPropertyChanged
     public BotPlayer LightPlayerBot { get; set; }
     public BotPlayer DarkPlayerBot { get; set; }
 
-    public Square SelectedSquare { get; set; }
+    public Square SelectedSquare
+    {
+        get => _selectedSquare;
+        set
+        {
+            if (SelectedSquare != null)
+            {
+                SelectedSquare.IsSelected = false;
+            }
+
+            _selectedSquare = value;
+
+            if (SelectedSquare != null)
+            {
+                SelectedSquare.IsSelected = true;
+            }
+        }
+    }
 
     public ObservableCollection<Move> ValidDestinationsForSelectedPiece { get; } =
         new ObservableCollection<Move>();
@@ -111,12 +129,7 @@ public class Game : INotifyPropertyChanged
     {
         CurrentPlayerColor = Enums.Color.NotSelected;
 
-        if (SelectedSquare != null)
-        {
-            SelectedSquare.IsSelected = false;
-            SelectedSquare = null;
-        }
-
+        SelectedSquare = null;
         Board.ClearValidDestinations();
         MoveHistory.Clear();
 
@@ -155,7 +168,6 @@ public class Game : INotifyPropertyChanged
         if (square.Piece.Color == CurrentPlayerColor)
         {
             SelectedSquare = square;
-            SelectedSquare.IsSelected = true;
         }
     }
 
@@ -247,7 +259,6 @@ public class Game : INotifyPropertyChanged
 
     private void DeselectSelectedSquare()
     {
-        SelectedSquare.IsSelected = false;
         SelectedSquare = null;
         ValidDestinationsForSelectedPiece.Clear();
         Board.ClearValidDestinations();
