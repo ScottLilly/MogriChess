@@ -11,7 +11,6 @@ namespace MogriChess.Models;
 
 public class Game : INotifyPropertyChanged
 {
-    private bool _displayValidDestinations = true;
     private Enums.Color _currentPlayerColor = Enums.Color.NotSelected;
     private IEnumerable<Move> _legalMovesForCurrentPlayer;
     private Enums.GameStatus _status = Enums.GameStatus.Preparing;
@@ -69,26 +68,7 @@ public class Game : INotifyPropertyChanged
     public ObservableCollection<Move> MoveHistory { get; } =
         new ObservableCollection<Move>();
     public bool DisplayRankFileLabel { get; set; } = true;
-
-    public bool DisplayValidDestinations
-    {
-        get => _displayValidDestinations;
-        set
-        {
-            _displayValidDestinations = value;
-
-            if (_displayValidDestinations)
-            {
-                ValidDestinationsForSelectedPiece
-                    .ApplyToEach(d => d.DestinationSquare.IsValidDestination = true);
-            }
-            else
-            {
-                Board.ClearValidDestinations();
-            }
-        }
-    }
-
+    public bool DisplayValidDestinations { get; set; } = true;
     public BotPlayer LightPlayerBot { get; set; }
     public BotPlayer DarkPlayerBot { get; set; }
 

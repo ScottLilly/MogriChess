@@ -32,7 +32,15 @@ public class PlaySession : INotifyPropertyChanged
         set
         {
             _displayValidDestinations = value;
-            CurrentGame.DisplayValidDestinations = DisplayValidDestinations;
+
+            if (DisplayValidDestinations)
+            {
+                PopulateValidDestinations();
+            }
+            else
+            {
+                ClearValidDestinations();
+            }
         }
     }
 
