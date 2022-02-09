@@ -1,0 +1,846 @@
+{
+  "BoardColorScheme": {
+    "LightColor": "#DDDDDD",
+    "DarkColor": "#ADADAD"
+  },
+  "PieceColorScheme": {
+    "LightColor": "#FFFFFF",
+    "DarkColor": "#000000"
+  },
+  "CurrentPlayerColor": "Light",
+  "MoveHistory": [],
+  "Squares": [
+    {
+      "Rank": 1,
+      "File": 1,
+      "Piece": {
+        "Color": "Light",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": false
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 1,
+      "File": 2,
+      "Piece": {
+        "Color": "Light",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": false
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 1,
+      "File": 3,
+      "Piece": {
+        "Color": "Light",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": false
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 1,
+      "File": 4,
+      "Piece": {
+        "Color": "Light",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": false
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 1,
+      "File": 5,
+      "Piece": {
+        "Color": "Light",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": true,
+        "IsUnpromotedPawn": false
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 1,
+      "File": 6,
+      "Piece": {
+        "Color": "Light",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": false
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 1,
+      "File": 7,
+      "Piece": {
+        "Color": "Light",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": false
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 1,
+      "File": 8,
+      "Piece": {
+        "Color": "Light",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": false
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 2,
+      "File": 1,
+      "Piece": {
+        "Color": "Light",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": true
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 2,
+      "File": 2,
+      "Piece": {
+        "Color": "Light",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": true
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 2,
+      "File": 3,
+      "Piece": {
+        "Color": "Light",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": true
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 2,
+      "File": 4,
+      "Piece": {
+        "Color": "Light",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": true
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 2,
+      "File": 5,
+      "Piece": {
+        "Color": "Light",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": true
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 2,
+      "File": 6,
+      "Piece": {
+        "Color": "Light",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": true
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 2,
+      "File": 7,
+      "Piece": {
+        "Color": "Light",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": true
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 2,
+      "File": 8,
+      "Piece": {
+        "Color": "Light",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": true
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 3,
+      "File": 1,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 3,
+      "File": 2,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 3,
+      "File": 3,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 3,
+      "File": 4,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 3,
+      "File": 5,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 3,
+      "File": 6,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 3,
+      "File": 7,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 3,
+      "File": 8,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 4,
+      "File": 1,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 4,
+      "File": 2,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 4,
+      "File": 3,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 4,
+      "File": 4,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 4,
+      "File": 5,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 4,
+      "File": 6,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 4,
+      "File": 7,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 4,
+      "File": 8,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 5,
+      "File": 1,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 5,
+      "File": 2,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 5,
+      "File": 3,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 5,
+      "File": 4,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 5,
+      "File": 5,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 5,
+      "File": 6,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 5,
+      "File": 7,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 5,
+      "File": 8,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 6,
+      "File": 1,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 6,
+      "File": 2,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 6,
+      "File": 3,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 6,
+      "File": 4,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 6,
+      "File": 5,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 6,
+      "File": 6,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 6,
+      "File": 7,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 6,
+      "File": 8,
+      "Piece": null,
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 7,
+      "File": 1,
+      "Piece": {
+        "Color": "Dark",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": true
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 7,
+      "File": 2,
+      "Piece": {
+        "Color": "Dark",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": true
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 7,
+      "File": 3,
+      "Piece": {
+        "Color": "Dark",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": true
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 7,
+      "File": 4,
+      "Piece": {
+        "Color": "Dark",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": true
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 7,
+      "File": 5,
+      "Piece": {
+        "Color": "Dark",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": true
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 7,
+      "File": 6,
+      "Piece": {
+        "Color": "Dark",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": true
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 7,
+      "File": 7,
+      "Piece": {
+        "Color": "Dark",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": true
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 7,
+      "File": 8,
+      "Piece": {
+        "Color": "Dark",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": true
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 8,
+      "File": 1,
+      "Piece": {
+        "Color": "Dark",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": false
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 8,
+      "File": 2,
+      "Piece": {
+        "Color": "Dark",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": false
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 8,
+      "File": 3,
+      "Piece": {
+        "Color": "Dark",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": false
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 8,
+      "File": 4,
+      "Piece": {
+        "Color": "Dark",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": false
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 8,
+      "File": 5,
+      "Piece": {
+        "Color": "Dark",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": true,
+        "IsUnpromotedPawn": false
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 8,
+      "File": 6,
+      "Piece": {
+        "Color": "Dark",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": false
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 8,
+      "File": 7,
+      "Piece": {
+        "Color": "Dark",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": false
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    },
+    {
+      "Rank": 8,
+      "File": 8,
+      "Piece": {
+        "Color": "Dark",
+        "ForwardSquares": 0,
+        "ForwardRightSquares": 0,
+        "RightSquares": 0,
+        "BackRightSquares": 0,
+        "BackSquares": 0,
+        "BackLeftSquares": 0,
+        "LeftSquares": 0,
+        "ForwardLeftSquares": 0,
+        "IsKing": false,
+        "IsUnpromotedPawn": false
+      },
+      "IsSelected": false,
+      "IsValidDestination": false
+    }
+  ]
+}

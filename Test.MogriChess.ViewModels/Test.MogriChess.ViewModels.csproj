@@ -7,6 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="GameStateFiles\StartOfGame_GameState.json" />
+    <None Remove="GameStateFiles\StartOfGame_MoveHistory.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="GameStateFiles\StartOfGame_GameState.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GameStateFiles\StartOfGame_MoveHistory.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
