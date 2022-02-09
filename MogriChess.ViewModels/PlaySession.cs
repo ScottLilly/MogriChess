@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,6 +11,7 @@ public class PlaySession : INotifyPropertyChanged
 {
     private bool _displayRankFileLabels;
     private bool _displayValidDestinations;
+    
     public event PropertyChangedEventHandler PropertyChanged;
 
     public Game CurrentGame { get; }
@@ -39,8 +40,6 @@ public class PlaySession : INotifyPropertyChanged
     public PlaySession()
     {
         CurrentGame = GameFactory.GetNewGame();
-
-        CurrentGame.MoveCompleted += MoveCompletedHandler;
     }
 
     public void StartGame(Enums.PlayerType lightPlayer = Enums.PlayerType.Human,
@@ -61,7 +60,7 @@ public class PlaySession : INotifyPropertyChanged
                 : null;
 
         BoardFactory.PopulateBoardWithStartingPieces(CurrentGame.Board);
-        CurrentGame.StartGame();
+        BeginGame();
 
         if (CurrentGame.LightPlayerBot != null)
         {
@@ -104,7 +103,7 @@ public class PlaySession : INotifyPropertyChanged
         if (CurrentGame.ValidDestinationsForSelectedPiece.Any(m =>
                 m.DestinationSquare.SquareShorthand == square.SquareShorthand))
         {
-            CurrentGame.MoveToSelectedSquare(square);
+            MoveToSelectedSquare(square);
         }
     }
 
@@ -120,15 +119,101 @@ public class PlaySession : INotifyPropertyChanged
 
     #region Private methods
 
+    private void BeginGame()
+    {
+        // Clear out game
+        CurrentGame.CurrentPlayerColor = Enums.Color.NotSelected;
+        CurrentGame.SelectedSquare = null;
+        CurrentGame.Board.ClearValidDestinations();
+        CurrentGame.MoveHistory.Clear();
+
+        // Start game
+        CurrentGame.CurrentPlayerColor = Enums.Color.Light;
+        CurrentGame.Status = Enums.GameStatus.Playing;
+    }
+
+    private void MoveToSelectedSquare(Square square)
+    {
+        // Check that the destination square is a valid move
+        Move move =
+            CurrentGame.ValidDestinationsForSelectedPiece.FirstOrDefault(d =>
+                d.DestinationSquare.SquareShorthand == square.SquareShorthand);
+
+        if (move == null)
+        {
+            return;
+        }
+
+        CurrentGame.Board.MovePiece(CurrentGame.SelectedSquare, square);
+
+        DetermineIfMovePutsOpponentInCheckOrCheckmate(move);
+
+        CurrentGame.MoveHistory.Add(move);
+
+        EndCurrentPlayerTurn();
+    }
+
+    private void DetermineIfMovePutsOpponentInCheckOrCheckmate(Move move)
+    {
+        if (CurrentGame.Board.KingCanBeCaptured(move.MovingPieceColor.OppositeColor()))
+        {
+            move.PutsOpponentInCheck = true;
+            move.PutsOpponentInCheckmate =
+                CurrentGame.Board.PlayerIsInCheckmate(move.MovingPieceColor.OppositeColor());
+        }
+
+        if (move.PutsOpponentInCheckmate)
+        {
+            CurrentGame.Status = move.MovingPieceColor == Enums.Color.Light
+                ? Enums.GameStatus.CheckmateByLight
+                : Enums.GameStatus.CheckmateByDark;
+        }
+    }
+
+    private void EndCurrentPlayerTurn()
+    {
+        // Deselect square/piece that moved
+        CurrentGame.SelectedSquare = null;
+        CurrentGame.ValidDestinationsForSelectedPiece.Clear();
+        CurrentGame.Board.ClearValidDestinations();
+
+        CurrentGame.CurrentPlayerColor = CurrentGame.CurrentPlayerColor.OppositeColor();
+
+        if (CurrentGame.Status != Enums.GameStatus.Playing)
+        {
+            // Game has ended
+            return;
+        }
+
+        MakeBotMove();
+    }
+
     private void SetValidDestinations()
     {
         ClearValidDestinations();
 
-        foreach (Move move in CurrentGame.LegalMovesForSelectedPiece())
+        foreach (Move move in LegalMovesForSelectedPiece())
         {
             CurrentGame.ValidDestinationsForSelectedPiece.Add(move);
             move.DestinationSquare.IsValidDestination = DisplayValidDestinations;
         }
+    }
+
+    private List<Move> LegalMovesForSelectedPiece()
+    {
+        if (CurrentGame.LegalMovesForCurrentPlayer == null)
+        {
+            CurrentGame.CacheLegalMovesForCurrentPlayer();
+        }
+
+        if (CurrentGame.SelectedSquare == null)
+        {
+            return new List<Move>();
+        }
+
+        return CurrentGame.LegalMovesForCurrentPlayer
+            .Where(m => m.OriginationSquare.SquareShorthand == CurrentGame.SelectedSquare.SquareShorthand)
+            .ToList();
     }
 
     private void ClearValidDestinations()
@@ -156,17 +241,6 @@ public class PlaySession : INotifyPropertyChanged
         await Task.Delay(750);
 
         SelectSquare(bestMove.DestinationSquare);
-    }
-
-    private void MoveCompletedHandler(object sender, EventArgs e)
-    {
-        if (CurrentGame.Status != Enums.GameStatus.Playing)
-        {
-            // Game has ended
-            return;
-        }
-
-        MakeBotMove();
     }
 
     private void MakeBotMove()

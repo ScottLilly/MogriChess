@@ -63,7 +63,7 @@ public class Board : INotifyPropertyChanged
     internal IEnumerable<Square> SquaresWithPiecesOfColor(Enums.Color color) =>
         Squares.Values.Where(s => s.Piece?.Color == color);
 
-    internal void MovePiece(Square originationSquare, Square destinationSquare)
+    public void MovePiece(Square originationSquare, Square destinationSquare)
     {
         PlacePieceOnSquare(originationSquare.Piece, destinationSquare);
         originationSquare.Piece = null;
