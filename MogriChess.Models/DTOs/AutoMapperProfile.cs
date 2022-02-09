@@ -19,6 +19,6 @@ public class AutoMapperProfile : Profile
             .ForMember(dest => dest.CurrentPlayerColor,
                 opt => opt.MapFrom(src => src.CurrentPlayerColor.ToString()))
             .ForMember(dest => dest.Squares,
-                opt => opt.MapFrom(src => src.Board.Squares));
+                opt => opt.MapFrom(src => src.Board.Squares.Values));
     }
 }
