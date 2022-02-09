@@ -11,14 +11,14 @@ namespace MogriChess.Models;
 public class Game : INotifyPropertyChanged
 {
     private Enums.Color _currentPlayerColor = Enums.Color.NotSelected;
-    private IEnumerable<Move> _legalMovesForCurrentPlayer;
+    public IEnumerable<Move> LegalMovesForCurrentPlayer;
     private Enums.GameStatus _status = Enums.GameStatus.Preparing;
     private Square _selectedSquare;
 
     public Enums.Color CurrentPlayerColor
     {
         get => _currentPlayerColor;
-        private set
+        set
         {
             _currentPlayerColor = value;
 
@@ -29,7 +29,7 @@ public class Game : INotifyPropertyChanged
 
             CacheLegalMovesForCurrentPlayer();
 
-            if (_legalMovesForCurrentPlayer.None())
+            if (LegalMovesForCurrentPlayer.None())
             {
                 Status = Enums.GameStatus.Stalemate;
             }
@@ -39,7 +39,7 @@ public class Game : INotifyPropertyChanged
     public Enums.GameStatus Status
     {
         get => _status;
-        private set
+        set
         {
             // If status changed to game-ending status, handle events and end game
             if (_status != value &&
@@ -93,7 +93,6 @@ public class Game : INotifyPropertyChanged
     public ObservableCollection<Move> ValidDestinationsForSelectedPiece { get; } =
         new ObservableCollection<Move>();
 
-    public event EventHandler MoveCompleted;
     public event EventHandler<GameEndedEventArgs> GameEnded;
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -102,95 +101,7 @@ public class Game : INotifyPropertyChanged
         Board = board;
     }
 
-    #region Public methods
-
-    public void StartGame()
-    {
-        // Clear out game
-        CurrentPlayerColor = Enums.Color.NotSelected;
-        SelectedSquare = null;
-        Board.ClearValidDestinations();
-        MoveHistory.Clear();
-
-        // Start game
-        CurrentPlayerColor = Enums.Color.Light;
-        Status = Enums.GameStatus.Playing;
-    }
-
-    #endregion
-
-    #region Private methods
-
-    private void CacheLegalMovesForCurrentPlayer() =>
-        _legalMovesForCurrentPlayer =
+    public void CacheLegalMovesForCurrentPlayer() =>
+        LegalMovesForCurrentPlayer =
             Board.LegalMovesForPlayer(_currentPlayerColor);
-
-    public List<Move> LegalMovesForSelectedPiece()
-    {
-        if (_legalMovesForCurrentPlayer == null)
-        {
-            CacheLegalMovesForCurrentPlayer();
-        }
-
-        if (SelectedSquare == null)
-        {
-            return new List<Move>();
-
-        }
-
-        return _legalMovesForCurrentPlayer
-            .Where(m => m.OriginationSquare.SquareShorthand == SelectedSquare.SquareShorthand)
-            .ToList();
-    }
-
-    public void MoveToSelectedSquare(Square square)
-    {
-        // Check that the destination square is a valid move
-        Move move =
-            ValidDestinationsForSelectedPiece.FirstOrDefault(d =>
-                d.DestinationSquare.SquareShorthand == square.SquareShorthand);
-
-        if (move == null)
-        {
-            return;
-        }
-
-        Board.MovePiece(SelectedSquare, square);
-
-        DetermineIfMovePutsOpponentInCheckOrCheckmate(move);
-
-        MoveHistory.Add(move);
-
-        EndCurrentPlayerTurn();
-    }
-
-    private void DetermineIfMovePutsOpponentInCheckOrCheckmate(Move move)
-    {
-        if (Board.KingCanBeCaptured(move.MovingPieceColor.OppositeColor()))
-        {
-            move.PutsOpponentInCheck = true;
-            move.PutsOpponentInCheckmate =
-                Board.PlayerIsInCheckmate(move.MovingPieceColor.OppositeColor());
-        }
-
-        if (move.PutsOpponentInCheckmate)
-        {
-            Status = move.MovingPieceColor == Enums.Color.Light
-                ? Enums.GameStatus.CheckmateByLight
-                : Enums.GameStatus.CheckmateByDark;
-        }
-    }
-
-    private void EndCurrentPlayerTurn()
-    {
-        // Deselect square/piece that moved
-        SelectedSquare = null;
-        ValidDestinationsForSelectedPiece.Clear();
-        Board.ClearValidDestinations();
-
-        CurrentPlayerColor = CurrentPlayerColor.OppositeColor();
-        MoveCompleted?.Invoke(this, EventArgs.Empty);
-    }
-
-    #endregion
 }
