@@ -56,12 +56,12 @@ namespace MogriChess.Core
 
         public ObservableDictionary()
         {
-            _keyedEntryCollection = new KeyedDictionaryEntryCollection<TKey>();
+            KeyedEntryCollection = new KeyedDictionaryEntryCollection<TKey>();
         }
 
         public ObservableDictionary(IDictionary<TKey, TValue> dictionary)
         {
-            _keyedEntryCollection = new KeyedDictionaryEntryCollection<TKey>();
+            KeyedEntryCollection = new KeyedDictionaryEntryCollection<TKey>();
 
             foreach (KeyValuePair<TKey, TValue> entry in dictionary)
             {
@@ -71,13 +71,13 @@ namespace MogriChess.Core
 
         public ObservableDictionary(IEqualityComparer<TKey> comparer)
         {
-            _keyedEntryCollection = new KeyedDictionaryEntryCollection<TKey>(comparer);
+            KeyedEntryCollection = new KeyedDictionaryEntryCollection<TKey>(comparer);
         }
 
         public ObservableDictionary(IDictionary<TKey, TValue> dictionary,
             IEqualityComparer<TKey> comparer)
         {
-            _keyedEntryCollection = new KeyedDictionaryEntryCollection<TKey>(comparer);
+            KeyedEntryCollection = new KeyedDictionaryEntryCollection<TKey>(comparer);
 
             foreach (KeyValuePair<TKey, TValue> entry in dictionary)
             {
@@ -102,15 +102,15 @@ namespace MogriChess.Core
 
         #region public
 
-        public IEqualityComparer<TKey> Comparer => _keyedEntryCollection.Comparer;
+        public IEqualityComparer<TKey> Comparer => KeyedEntryCollection.Comparer;
 
-        public int Count => _keyedEntryCollection.Count;
+        public int Count => KeyedEntryCollection.Count;
 
         public Dictionary<TKey, TValue>.KeyCollection Keys => TrueDictionary.Keys;
 
         public TValue this[TKey key]
         {
-            get => (TValue)_keyedEntryCollection[key].Value;
+            get => (TValue)KeyedEntryCollection[key].Value;
             set => DoSetEntry(key, value);
         }
 
@@ -131,7 +131,7 @@ namespace MogriChess.Core
 
                 _dictionaryCache.Clear();
 
-                foreach (DictionaryEntry entry in _keyedEntryCollection)
+                foreach (DictionaryEntry entry in KeyedEntryCollection)
                 {
                     _dictionaryCache.Add((TKey)entry.Key, (TValue)entry.Value);
                 }
@@ -162,7 +162,7 @@ namespace MogriChess.Core
 
         public bool ContainsKey(TKey key)
         {
-            return _keyedEntryCollection.Contains(key);
+            return KeyedEntryCollection.Contains(key);
         }
 
         public bool ContainsValue(TValue value)
@@ -182,8 +182,8 @@ namespace MogriChess.Core
 
         public bool TryGetValue(TKey key, out TValue value)
         {
-            bool result = _keyedEntryCollection.Contains(key);
-            value = result ? (TValue)_keyedEntryCollection[key].Value : default(TValue);
+            bool result = KeyedEntryCollection.Contains(key);
+            value = result ? (TValue)KeyedEntryCollection[key].Value : default(TValue);
             return result;
         }
 
@@ -193,7 +193,7 @@ namespace MogriChess.Core
 
         protected virtual bool AddEntry(TKey key, TValue value)
         {
-            _keyedEntryCollection.Add(new DictionaryEntry(key, value));
+            KeyedEntryCollection.Add(new DictionaryEntry(key, value));
             return true;
         }
 
@@ -204,7 +204,7 @@ namespace MogriChess.Core
             if (result)
             {
                 // if so, clear the dictionary
-                _keyedEntryCollection.Clear();
+                KeyedEntryCollection.Clear();
             }
             return result;
         }
@@ -213,10 +213,10 @@ namespace MogriChess.Core
         {
             entry = new DictionaryEntry();
             int index = -1;
-            if (_keyedEntryCollection.Contains(key))
+            if (KeyedEntryCollection.Contains(key))
             {
-                entry = _keyedEntryCollection[key];
-                index = _keyedEntryCollection.IndexOf(entry);
+                entry = KeyedEntryCollection[key];
+                index = KeyedEntryCollection.IndexOf(entry);
             }
             return index;
         }
@@ -234,15 +234,15 @@ namespace MogriChess.Core
         protected virtual bool RemoveEntry(TKey key)
         {
             // remove the entry
-            return _keyedEntryCollection.Remove(key);
+            return KeyedEntryCollection.Remove(key);
         }
 
         protected virtual bool SetEntry(TKey key, TValue value)
         {
-            bool keyExists = _keyedEntryCollection.Contains(key);
+            bool keyExists = KeyedEntryCollection.Contains(key);
 
             // if identical key/value pair already exists, nothing to do
-            if (keyExists && value.Equals((TValue)_keyedEntryCollection[key].Value))
+            if (keyExists && value.Equals((TValue)KeyedEntryCollection[key].Value))
             {
                 return false;
             }
@@ -250,11 +250,11 @@ namespace MogriChess.Core
             // otherwise, remove the existing entry
             if (keyExists)
             {
-                _keyedEntryCollection.Remove(key);
+                KeyedEntryCollection.Remove(key);
             }
 
             // add the new entry
-            _keyedEntryCollection.Add(new DictionaryEntry(key, value));
+            KeyedEntryCollection.Add(new DictionaryEntry(key, value));
 
             return true;
         }
@@ -397,7 +397,7 @@ namespace MogriChess.Core
 
         bool IDictionary<TKey, TValue>.ContainsKey(TKey key)
         {
-            return _keyedEntryCollection.Contains(key);
+            return KeyedEntryCollection.Contains(key);
         }
 
         bool IDictionary<TKey, TValue>.TryGetValue(TKey key, out TValue value)
@@ -411,7 +411,7 @@ namespace MogriChess.Core
 
         TValue IDictionary<TKey, TValue>.this[TKey key]
         {
-            get => (TValue)_keyedEntryCollection[key].Value;
+            get => (TValue)KeyedEntryCollection[key].Value;
             set => DoSetEntry(key, value);
         }
 
@@ -431,7 +431,7 @@ namespace MogriChess.Core
 
         bool IDictionary.Contains(object key)
         {
-            return _keyedEntryCollection.Contains((TKey)key);
+            return KeyedEntryCollection.Contains((TKey)key);
         }
 
         IDictionaryEnumerator IDictionary.GetEnumerator()
@@ -445,7 +445,7 @@ namespace MogriChess.Core
 
         object IDictionary.this[object key]
         {
-            get => _keyedEntryCollection[(TKey)key].Value;
+            get => KeyedEntryCollection[(TKey)key].Value;
             set => DoSetEntry((TKey)key, (TValue)value);
         }
 
@@ -474,7 +474,7 @@ namespace MogriChess.Core
 
         bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> kvp)
         {
-            return _keyedEntryCollection.Contains(kvp.Key);
+            return KeyedEntryCollection.Contains(kvp.Key);
         }
 
         void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int index)
@@ -487,16 +487,16 @@ namespace MogriChess.Core
             {
                 throw new ArgumentOutOfRangeException("CopyTo() failed:  index parameter was outside the bounds of the supplied array");
             }
-            if ((array.Length - index) < _keyedEntryCollection.Count)
+            if ((array.Length - index) < KeyedEntryCollection.Count)
             {
                 throw new ArgumentException("CopyTo() failed:  supplied array was too small");
             }
 
-            foreach (DictionaryEntry entry in _keyedEntryCollection)
+            foreach (DictionaryEntry entry in KeyedEntryCollection)
                 array[index++] = new KeyValuePair<TKey, TValue>((TKey)entry.Key, (TValue)entry.Value);
         }
 
-        int ICollection<KeyValuePair<TKey, TValue>>.Count => _keyedEntryCollection.Count;
+        int ICollection<KeyValuePair<TKey, TValue>>.Count => KeyedEntryCollection.Count;
 
         bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly => false;
 
@@ -511,14 +511,14 @@ namespace MogriChess.Core
 
         void ICollection.CopyTo(Array array, int index)
         {
-            ((ICollection)_keyedEntryCollection).CopyTo(array, index);
+            ((ICollection)KeyedEntryCollection).CopyTo(array, index);
         }
 
-        int ICollection.Count => _keyedEntryCollection.Count;
+        int ICollection.Count => KeyedEntryCollection.Count;
 
-        bool ICollection.IsSynchronized => ((ICollection)_keyedEntryCollection).IsSynchronized;
+        bool ICollection.IsSynchronized => ((ICollection)KeyedEntryCollection).IsSynchronized;
 
-        object ICollection.SyncRoot => ((ICollection)_keyedEntryCollection).SyncRoot;
+        object ICollection.SyncRoot => ((ICollection)KeyedEntryCollection).SyncRoot;
 
         #endregion ICollection
 
@@ -550,7 +550,7 @@ namespace MogriChess.Core
             }
 
             Collection<DictionaryEntry> entries = new Collection<DictionaryEntry>();
-            foreach (DictionaryEntry entry in _keyedEntryCollection)
+            foreach (DictionaryEntry entry in KeyedEntryCollection)
                 entries.Add(entry);
             info.AddValue("entries", entries);
         }
@@ -685,9 +685,9 @@ namespace MogriChess.Core
             {
                 ValidateVersion();
                 _index++;
-                if (_index < _dictionary._keyedEntryCollection.Count)
+                if (_index < _dictionary.KeyedEntryCollection.Count)
                 {
-                    _current = new KeyValuePair<TKey, TValue>((TKey)_dictionary._keyedEntryCollection[_index].Key, (TValue)_dictionary._keyedEntryCollection[_index].Value);
+                    _current = new KeyValuePair<TKey, TValue>((TKey)_dictionary.KeyedEntryCollection[_index].Key, (TValue)_dictionary.KeyedEntryCollection[_index].Value);
                     return true;
                 }
                 _index = -2;
@@ -795,7 +795,7 @@ namespace MogriChess.Core
 
         #region fields
 
-        protected KeyedDictionaryEntryCollection<TKey> _keyedEntryCollection;
+        protected KeyedDictionaryEntryCollection<TKey> KeyedEntryCollection;
 
         private int _countCache = 0;
         private Dictionary<TKey, TValue> _dictionaryCache = new Dictionary<TKey, TValue>();
