@@ -114,14 +114,14 @@ public class Board : INotifyPropertyChanged
     {
         if (destinationSquare.Piece != null)
         {
-            piece.CapturePiece(destinationSquare.Piece);
+            piece = CapturePiece(piece, destinationSquare.Piece);
         }
 
         destinationSquare.Piece = piece;
 
         if (IsPawnPromotionMove(piece, destinationSquare))
         {
-            piece.Promote();
+            destinationSquare.Piece = Promote(piece);
         }
     }
 
@@ -159,9 +159,9 @@ public class Board : INotifyPropertyChanged
         Piece movingPiece = originationSquare.Piece;
 
         int maxMovementSquareForDirection =
-            movingPiece.MaxMovementSquaresForDirection(direction);
+            MaxMovementSquaresForDirection(movingPiece, direction);
         (int rankMultiplier, int fileMultiplier) =
-            movingPiece.MovementMultipliersForDirection(direction);
+            MovementMultipliersForDirection(movingPiece, direction);
 
         for (int i = 1; i <= maxMovementSquareForDirection; i++)
         {
@@ -213,6 +213,92 @@ public class Board : INotifyPropertyChanged
     {
         return GetSimulatedMoveResult(potentialMove,
             () => KingCannotBeCaptured(kingColor));
+    }
+
+    public static Piece CapturePiece(Piece movingPiece, Piece capturedPiece)
+    {
+        // Kings do not acquire the movement abilities of pieces they capture
+        if(movingPiece.IsKing)
+        {
+            return movingPiece;
+        }
+
+        return CombinePieceMovementAbilities(movingPiece, capturedPiece);
+    }
+
+    private static Piece CombinePieceMovementAbilities(Piece movingPiece, Piece capturedPiece)
+    {
+        return new Piece(movingPiece._colorScheme, movingPiece.Color, movingPiece._pieceType,
+            Math.Max(movingPiece.Forward, capturedPiece.Forward),
+            Math.Max(movingPiece.ForwardRight, capturedPiece.ForwardRight),
+            Math.Max(movingPiece.Right, capturedPiece.Right),
+            Math.Max(movingPiece.BackRight, capturedPiece.BackRight),
+            Math.Max(movingPiece.Back, capturedPiece.Back),
+            Math.Max(movingPiece.BackLeft, capturedPiece.BackLeft),
+            Math.Max(movingPiece.Left, capturedPiece.Left),
+            Math.Max(movingPiece.ForwardLeft, capturedPiece.ForwardLeft));
+    }
+
+    public int MaxMovementSquaresForDirection(Piece piece, Enums.Direction direction)
+    {
+        return direction switch
+        {
+            Enums.Direction.Forward => piece.Forward,
+            Enums.Direction.ForwardRight => piece.ForwardRight,
+            Enums.Direction.Right => piece.Right,
+            Enums.Direction.BackRight => piece.BackRight,
+            Enums.Direction.Back => piece.Back,
+            Enums.Direction.BackLeft => piece.BackLeft,
+            Enums.Direction.Left => piece.Left,
+            Enums.Direction.ForwardLeft => piece.ForwardLeft,
+            _ => throw new InvalidEnumArgumentException(
+                "Invalid enum passed to MaxMovementSquaresForDirection() function")
+        };
+    }
+
+    public (int rankMultiplier, int fileMultiplier) MovementMultipliersForDirection(Piece piece, Enums.Direction direction)
+    {
+        (int rm, int fm) multipliers = direction switch
+        {
+            Enums.Direction.Forward => (1, 0),
+            Enums.Direction.ForwardRight => (1, 1),
+            Enums.Direction.Right => (0, 1),
+            Enums.Direction.BackRight => (-1, 1),
+            Enums.Direction.Back => (-1, 0),
+            Enums.Direction.BackLeft => (-1, -1),
+            Enums.Direction.Left => (0, -1),
+            Enums.Direction.ForwardLeft => (1, -1),
+            _ => throw new InvalidEnumArgumentException(
+                "Invalid direction parameter sent to MovementMultipliersForDirection")
+        };
+
+        return piece.Color == Enums.Color.Light
+            ? multipliers
+            : (-multipliers.rm, -multipliers.fm);
+    }
+
+    public static Piece Promote(Piece pieceToPromote)
+    {
+        // Pawns that reach opponent's back rank gain ability to move one square in all directions
+        if (pieceToPromote.IsUnpromotedPawn)
+        {
+            Piece newPiece =
+                new Piece(pieceToPromote._colorScheme, pieceToPromote.Color, pieceToPromote._pieceType,
+                    Math.Max(pieceToPromote.Forward, 1),
+                    Math.Max(pieceToPromote.ForwardRight, 1),
+                    Math.Max(pieceToPromote.Right, 1),
+                    Math.Max(pieceToPromote.BackRight, 1),
+                    Math.Max(pieceToPromote.Back, 1),
+                    Math.Max(pieceToPromote.BackLeft, 1),
+                    Math.Max(pieceToPromote.Left, 1),
+                    Math.Max(pieceToPromote.ForwardLeft, 1));
+
+            newPiece._isPromoted = true;
+
+            return newPiece;
+        }
+
+        return pieceToPromote;
     }
 
     private static bool IsPawnPromotionMove(Piece movingPiece, Square destinationSquare) =>
