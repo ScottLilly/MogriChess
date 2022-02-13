@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using MogriChess.Core;
 using MogriChess.Models.CustomEventArgs;
 
@@ -98,6 +99,17 @@ public class Game : INotifyPropertyChanged
     public Game(Board board)
     {
         Board = board;
+    }
+
+    public bool PlayerIsInCheckmate(Enums.Color playerColor) =>
+        Board.SquaresWithPiecesOfColor(playerColor)
+            .All(square => Board.PotentialMovesForPieceAt(square)
+                .None(move => MoveGetsKingOutOfCheck(playerColor, move)));
+
+    private bool MoveGetsKingOutOfCheck(Enums.Color kingColor, Move potentialMove)
+    {
+        return Board.GetSimulatedMoveResult(potentialMove,
+            () => Board.KingCannotBeCaptured(kingColor));
     }
 
     public void CacheLegalMovesForCurrentPlayer() =>

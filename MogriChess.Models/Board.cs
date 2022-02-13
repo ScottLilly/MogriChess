@@ -26,48 +26,30 @@ public class Board : INotifyPropertyChanged
 
     #region Public methods
 
-    public void PlaceStartingPieces(List<PiecePlacement> piecePlacements)
-    {
-        foreach (Square square in Squares.Values)
-        {
-            square.Piece = null;
-        }
-
-        foreach (PiecePlacement placement in piecePlacements)
-        {
-            PlacePieceOnSquare(placement.Piece, Squares[placement.Shorthand]);
-        }
-    }
-
     public IEnumerable<Move> LegalMovesForPieceAt(int rank, int file) =>
         PotentialMovesForPieceAt(ModelFunctions.GetShorthand(rank, file))
             .Where(m => GetSimulatedMoveResult(m, () => KingCannotBeCaptured(m.MovingPieceColor)));
-
-    public bool KingCanBeCaptured(Enums.Color playerColor) =>
-        SquaresWithPiecesOfColor(playerColor.OppositeColor())
-            .Any(square => PotentialMovesForPieceAt(square)
-                .Any(m => m.PutsOpponentInCheck));
-
-    public bool PlayerIsInCheckmate(Enums.Color playerColor) =>
-        SquaresWithPiecesOfColor(playerColor)
-            .All(square => PotentialMovesForPieceAt(square)
-                .None(move => MoveGetsKingOutOfCheck(playerColor, move)));
-
-    #endregion
-
-    #region Internal methods
-
-    public void ClearValidDestinations() =>
-        Squares.Values.ApplyToEach(s => s.IsValidDestination = false);
-
-    internal IEnumerable<Square> SquaresWithPiecesOfColor(Enums.Color color) =>
-        Squares.Values.Where(s => s.Piece?.Color == color);
 
     public void MovePiece(Square originationSquare, Square destinationSquare)
     {
         PlacePieceOnSquare(originationSquare.Piece, destinationSquare);
         originationSquare.Piece = null;
     }
+
+    public bool KingCanBeCaptured(Enums.Color playerColor) =>
+        SquaresWithPiecesOfColor(playerColor.OppositeColor())
+            .Any(square => PotentialMovesForPieceAt(square)
+                .Any(m => m.PutsOpponentInCheck));
+
+    public void ClearValidDestinations() =>
+        Squares.Values.ApplyToEach(s => s.IsValidDestination = false);
+
+    #endregion
+
+    #region Internal methods
+
+    internal IEnumerable<Square> SquaresWithPiecesOfColor(Enums.Color color) =>
+        Squares.Values.Where(s => s.Piece?.Color == color);
 
     internal List<Move> LegalMovesForPlayer(Enums.Color playerColor) =>
         SquaresWithPiecesOfColor(playerColor)
@@ -77,8 +59,8 @@ public class Board : INotifyPropertyChanged
     internal T GetSimulatedMoveResult<T>(Move move, Func<T> func)
     {
         // Clone pieces pre-move
-        Piece originalMovingPiece = move.OriginationSquare.Piece.Clone();
-        Piece destinationPiece = move.DestinationSquare.Piece?.Clone();
+        Piece originalMovingPiece = ClonePiece(move.OriginationSquare.Piece);
+        Piece destinationPiece = ClonePiece(move.DestinationSquare.Piece);
 
         // Make simulated move
         MovePiece(move.OriginationSquare, move.DestinationSquare);
@@ -110,22 +92,36 @@ public class Board : INotifyPropertyChanged
         }
     }
 
-    private static void PlacePieceOnSquare(Piece piece, Square destinationSquare)
+    public void PlacePieceOnSquare(Piece piece, Square destinationSquare)
     {
         if (destinationSquare.Piece != null)
         {
-            piece.CapturePiece(destinationSquare.Piece);
+            piece = CapturePiece(piece, destinationSquare.Piece);
         }
 
         destinationSquare.Piece = piece;
 
         if (IsPawnPromotionMove(piece, destinationSquare))
         {
-            piece.Promote();
+            destinationSquare.Piece = Promote(piece);
         }
     }
 
-    private List<Move> PotentialMovesForPieceAt(Square square) =>
+    private Piece ClonePiece(Piece piece)
+    {
+        if (piece == null)
+        {
+            return null;
+        }
+
+        return new Piece(piece.ColorScheme, piece.Color, piece.PieceType,
+            piece.Forward, piece.ForwardRight,
+            piece.Right, piece.BackRight,
+            piece.Back, piece.BackLeft,
+            piece.Left, piece.ForwardLeft);
+    }
+
+    internal List<Move> PotentialMovesForPieceAt(Square square) =>
         PotentialMovesForPieceAt(square.SquareShorthand);
 
     private List<Move> PotentialMovesForPieceAt(string squareShorthand)
@@ -159,9 +155,9 @@ public class Board : INotifyPropertyChanged
         Piece movingPiece = originationSquare.Piece;
 
         int maxMovementSquareForDirection =
-            movingPiece.MaxMovementSquaresForDirection(direction);
+            MaxMovementSquaresForDirection(movingPiece, direction);
         (int rankMultiplier, int fileMultiplier) =
-            movingPiece.MovementMultipliersForDirection(direction);
+            MovementMultipliersForDirection(movingPiece, direction);
 
         for (int i = 1; i <= maxMovementSquareForDirection; i++)
         {
@@ -206,13 +202,93 @@ public class Board : INotifyPropertyChanged
         return potentialMoves;
     }
 
-    private bool KingCannotBeCaptured(Enums.Color playerColor) =>
+    internal bool KingCannotBeCaptured(Enums.Color playerColor) =>
         !KingCanBeCaptured(playerColor);
 
-    private bool MoveGetsKingOutOfCheck(Enums.Color kingColor, Move potentialMove)
+    private static Piece CapturePiece(Piece movingPiece, Piece capturedPiece)
     {
-        return GetSimulatedMoveResult(potentialMove,
-            () => KingCannotBeCaptured(kingColor));
+        // Kings do not acquire the movement abilities of pieces they capture
+        if(movingPiece.IsKing)
+        {
+            return movingPiece;
+        }
+
+        return CombinePieceMovementAbilities(movingPiece, capturedPiece);
+    }
+
+    private static Piece CombinePieceMovementAbilities(Piece movingPiece, Piece capturedPiece)
+    {
+        return new Piece(movingPiece.ColorScheme, movingPiece.Color, movingPiece.PieceType,
+            Math.Max(movingPiece.Forward, capturedPiece.Forward),
+            Math.Max(movingPiece.ForwardRight, capturedPiece.ForwardRight),
+            Math.Max(movingPiece.Right, capturedPiece.Right),
+            Math.Max(movingPiece.BackRight, capturedPiece.BackRight),
+            Math.Max(movingPiece.Back, capturedPiece.Back),
+            Math.Max(movingPiece.BackLeft, capturedPiece.BackLeft),
+            Math.Max(movingPiece.Left, capturedPiece.Left),
+            Math.Max(movingPiece.ForwardLeft, capturedPiece.ForwardLeft));
+    }
+
+    private int MaxMovementSquaresForDirection(Piece piece, Enums.Direction direction)
+    {
+        return direction switch
+        {
+            Enums.Direction.Forward => piece.Forward,
+            Enums.Direction.ForwardRight => piece.ForwardRight,
+            Enums.Direction.Right => piece.Right,
+            Enums.Direction.BackRight => piece.BackRight,
+            Enums.Direction.Back => piece.Back,
+            Enums.Direction.BackLeft => piece.BackLeft,
+            Enums.Direction.Left => piece.Left,
+            Enums.Direction.ForwardLeft => piece.ForwardLeft,
+            _ => throw new InvalidEnumArgumentException(
+                "Invalid enum passed to MaxMovementSquaresForDirection() function")
+        };
+    }
+
+    private (int rankMultiplier, int fileMultiplier) MovementMultipliersForDirection(Piece piece, Enums.Direction direction)
+    {
+        (int rm, int fm) multipliers = direction switch
+        {
+            Enums.Direction.Forward => (1, 0),
+            Enums.Direction.ForwardRight => (1, 1),
+            Enums.Direction.Right => (0, 1),
+            Enums.Direction.BackRight => (-1, 1),
+            Enums.Direction.Back => (-1, 0),
+            Enums.Direction.BackLeft => (-1, -1),
+            Enums.Direction.Left => (0, -1),
+            Enums.Direction.ForwardLeft => (1, -1),
+            _ => throw new InvalidEnumArgumentException(
+                "Invalid direction parameter sent to MovementMultipliersForDirection")
+        };
+
+        return piece.Color == Enums.Color.Light
+            ? multipliers
+            : (-multipliers.rm, -multipliers.fm);
+    }
+
+    private static Piece Promote(Piece pieceToPromote)
+    {
+        // Pawns that reach opponent's back rank gain ability to move one square in all directions
+        if (pieceToPromote.IsUnpromotedPawn)
+        {
+            Piece newPiece =
+                new Piece(pieceToPromote.ColorScheme, pieceToPromote.Color, pieceToPromote.PieceType,
+                    Math.Max(pieceToPromote.Forward, 1),
+                    Math.Max(pieceToPromote.ForwardRight, 1),
+                    Math.Max(pieceToPromote.Right, 1),
+                    Math.Max(pieceToPromote.BackRight, 1),
+                    Math.Max(pieceToPromote.Back, 1),
+                    Math.Max(pieceToPromote.BackLeft, 1),
+                    Math.Max(pieceToPromote.Left, 1),
+                    Math.Max(pieceToPromote.ForwardLeft, 1));
+
+            newPiece.IsPromoted = true;
+
+            return newPiece;
+        }
+
+        return pieceToPromote;
     }
 
     private static bool IsPawnPromotionMove(Piece movingPiece, Square destinationSquare) =>

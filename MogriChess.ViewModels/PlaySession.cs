@@ -159,7 +159,7 @@ public class PlaySession : INotifyPropertyChanged
         {
             move.PutsOpponentInCheck = true;
             move.PutsOpponentInCheckmate =
-                CurrentGame.Board.PlayerIsInCheckmate(move.MovingPieceColor.OppositeColor());
+                CurrentGame.PlayerIsInCheckmate(move.MovingPieceColor.OppositeColor());
         }
 
         if (move.PutsOpponentInCheckmate)
