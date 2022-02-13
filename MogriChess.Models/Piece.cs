@@ -5,9 +5,9 @@ namespace MogriChess.Models;
 
 public class Piece : INotifyPropertyChanged
 {
-    public ColorScheme _colorScheme;
-    public readonly Enums.PieceType _pieceType;
-    public bool _isPromoted;
+    public ColorScheme ColorScheme { get; }
+    public Enums.PieceType PieceType { get; }
+    public bool IsPromoted { get; set; }
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -23,19 +23,19 @@ public class Piece : INotifyPropertyChanged
     public int ForwardLeft { get; set; }
 
     public bool IsKing =>
-        _pieceType == Enums.PieceType.King;
+        PieceType == Enums.PieceType.King;
     public bool IsUnpromotedPawn =>
-        _pieceType == Enums.PieceType.Pawn && !_isPromoted;
+        PieceType == Enums.PieceType.Pawn && !IsPromoted;
 
     public string UiColor =>
         Color == Enums.Color.Light
-            ? _colorScheme.LightColor
-            : _colorScheme.DarkColor;
+            ? ColorScheme.LightColor
+            : ColorScheme.DarkColor;
     public string KingIndicatorUiColor =>
         IsKing
             ? Color == Enums.Color.Light
-                ? _colorScheme.DarkColor
-                : _colorScheme.LightColor
+                ? ColorScheme.DarkColor
+                : ColorScheme.LightColor
             : UiColor;
     public int PieceColorTransformAngle =>
         Color == Enums.Color.Light ? 0 : 180;
@@ -46,8 +46,8 @@ public class Piece : INotifyPropertyChanged
         int squaresBack, int squaresBackLeft,
         int squaresLeft, int squaresForwardLeft)
     {
-        _colorScheme = colorScheme;
-        _pieceType = type;
+        ColorScheme = colorScheme;
+        PieceType = type;
 
         Color = color;
 
@@ -59,14 +59,5 @@ public class Piece : INotifyPropertyChanged
         BackLeft = squaresBackLeft;
         Left = squaresLeft;
         ForwardLeft = squaresForwardLeft;
-    }
-
-    public Piece Clone()
-    {
-        return new Piece(_colorScheme, Color, _pieceType,
-            Forward, ForwardRight,
-            Right, BackRight,
-            Back, BackLeft,
-            Left, ForwardLeft);
     }
 }
