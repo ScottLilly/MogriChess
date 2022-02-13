@@ -66,7 +66,7 @@ public class TestCheckmateConditions
         AddPiece(game, "g6", PieceFactory.GetPawn(null, Enums.Color.Dark));
 
         Assert.True(game.Board.KingCanBeCaptured(Enums.Color.Dark));
-        Assert.False(game.Board.PlayerIsInCheckmate(Enums.Color.Dark));
+        Assert.False(game.PlayerIsInCheckmate(Enums.Color.Dark));
         Assert.False(game.Board.KingCanBeCaptured(Enums.Color.Light));
     }
 
@@ -112,7 +112,7 @@ public class TestCheckmateConditions
         AddPiece(game, "h7", PieceFactory.GetPawn(null, Enums.Color.Dark));
 
         Assert.True(game.Board.KingCanBeCaptured(Enums.Color.Dark));
-        Assert.False(game.Board.PlayerIsInCheckmate(Enums.Color.Dark));
+        Assert.False(game.PlayerIsInCheckmate(Enums.Color.Dark));
         Assert.False(game.Board.KingCanBeCaptured(Enums.Color.Light));
     }
 
@@ -140,7 +140,7 @@ public class TestCheckmateConditions
         AddPiece(game, "h8", PieceFactory.GetRook(null, Enums.Color.Dark));
 
         Assert.True(game.Board.KingCanBeCaptured(Enums.Color.Light));
-        Assert.False(game.Board.PlayerIsInCheckmate(Enums.Color.Light));
+        Assert.False(game.PlayerIsInCheckmate(Enums.Color.Light));
         Assert.False(game.Board.KingCanBeCaptured(Enums.Color.Dark));
     }
 
@@ -176,7 +176,7 @@ public class TestCheckmateConditions
         AddPiece(game, "e8", PieceFactory.GetQueen(null, Enums.Color.Dark));
 
         Assert.True(game.Board.KingCanBeCaptured(Enums.Color.Light));
-        Assert.False(game.Board.PlayerIsInCheckmate(Enums.Color.Light));
+        Assert.False(game.PlayerIsInCheckmate(Enums.Color.Light));
         Assert.False(game.Board.KingCanBeCaptured(Enums.Color.Dark));
     }
 

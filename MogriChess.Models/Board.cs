@@ -26,19 +26,6 @@ public class Board : INotifyPropertyChanged
 
     #region Public methods
 
-    public void PlaceStartingPieces(List<PiecePlacement> piecePlacements)
-    {
-        foreach (Square square in Squares.Values)
-        {
-            square.Piece = null;
-        }
-
-        foreach (PiecePlacement placement in piecePlacements)
-        {
-            PlacePieceOnSquare(placement.Piece, Squares[placement.Shorthand]);
-        }
-    }
-
     public IEnumerable<Move> LegalMovesForPieceAt(int rank, int file) =>
         PotentialMovesForPieceAt(ModelFunctions.GetShorthand(rank, file))
             .Where(m => GetSimulatedMoveResult(m, () => KingCannotBeCaptured(m.MovingPieceColor)));
@@ -53,11 +40,6 @@ public class Board : INotifyPropertyChanged
         SquaresWithPiecesOfColor(playerColor.OppositeColor())
             .Any(square => PotentialMovesForPieceAt(square)
                 .Any(m => m.PutsOpponentInCheck));
-
-    public bool PlayerIsInCheckmate(Enums.Color playerColor) =>
-        SquaresWithPiecesOfColor(playerColor)
-            .All(square => PotentialMovesForPieceAt(square)
-                .None(move => MoveGetsKingOutOfCheck(playerColor, move)));
 
     public void ClearValidDestinations() =>
         Squares.Values.ApplyToEach(s => s.IsValidDestination = false);
@@ -110,7 +92,7 @@ public class Board : INotifyPropertyChanged
         }
     }
 
-    private static void PlacePieceOnSquare(Piece piece, Square destinationSquare)
+    public void PlacePieceOnSquare(Piece piece, Square destinationSquare)
     {
         if (destinationSquare.Piece != null)
         {
@@ -139,7 +121,7 @@ public class Board : INotifyPropertyChanged
             piece.Left, piece.ForwardLeft);
     }
 
-    private List<Move> PotentialMovesForPieceAt(Square square) =>
+    internal List<Move> PotentialMovesForPieceAt(Square square) =>
         PotentialMovesForPieceAt(square.SquareShorthand);
 
     private List<Move> PotentialMovesForPieceAt(string squareShorthand)
@@ -220,14 +202,8 @@ public class Board : INotifyPropertyChanged
         return potentialMoves;
     }
 
-    private bool KingCannotBeCaptured(Enums.Color playerColor) =>
+    internal bool KingCannotBeCaptured(Enums.Color playerColor) =>
         !KingCanBeCaptured(playerColor);
-
-    private bool MoveGetsKingOutOfCheck(Enums.Color kingColor, Move potentialMove)
-    {
-        return GetSimulatedMoveResult(potentialMove,
-            () => KingCannotBeCaptured(kingColor));
-    }
 
     private static Piece CapturePiece(Piece movingPiece, Piece capturedPiece)
     {

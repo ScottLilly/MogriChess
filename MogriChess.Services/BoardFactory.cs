@@ -15,7 +15,23 @@ public static class BoardFactory
 
     public static void PopulateBoardWithStartingPieces(Board board)
     {
-        board.PlaceStartingPieces(GetStartingPiecePlacements(board.PieceColorScheme));
+        var startingPiecePlacements =
+            GetStartingPiecePlacements(board.PieceColorScheme);
+
+        PlaceStartingPieces(board, startingPiecePlacements);
+    }
+
+    private static void PlaceStartingPieces(Board board, List<PiecePlacement> piecePlacements)
+    {
+        foreach (Square square in board.Squares.Values)
+        {
+            square.Piece = null;
+        }
+
+        foreach (PiecePlacement placement in piecePlacements)
+        {
+            board.PlacePieceOnSquare(placement.Piece, board.Squares[placement.Shorthand]);
+        }
     }
 
     private static List<PiecePlacement> GetStartingPiecePlacements(ColorScheme pieceColorScheme)

@@ -1,17 +1,13 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace MogriChess.Models;
 
 public class Piece : INotifyPropertyChanged
 {
     public ColorScheme ColorScheme { get; }
+    public Enums.Color Color { get; }
     public Enums.PieceType PieceType { get; }
     public bool IsPromoted { get; set; }
-
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    public Enums.Color Color { get; }
 
     public int Forward { get; set; }
     public int ForwardRight { get; set; }
@@ -22,11 +18,12 @@ public class Piece : INotifyPropertyChanged
     public int Left { get; set; }
     public int ForwardLeft { get; set; }
 
+    public event PropertyChangedEventHandler PropertyChanged;
+
     public bool IsKing =>
         PieceType == Enums.PieceType.King;
     public bool IsUnpromotedPawn =>
         PieceType == Enums.PieceType.Pawn && !IsPromoted;
-
     public string UiColor =>
         Color == Enums.Color.Light
             ? ColorScheme.LightColor
@@ -44,12 +41,13 @@ public class Piece : INotifyPropertyChanged
         int squaresForward, int squaresForwardRight,
         int squaresRight, int squaresBackRight,
         int squaresBack, int squaresBackLeft,
-        int squaresLeft, int squaresForwardLeft)
+        int squaresLeft, int squaresForwardLeft,
+        bool isPromoted = false)
     {
         ColorScheme = colorScheme;
-        PieceType = type;
-
         Color = color;
+        PieceType = type;
+        IsPromoted = isPromoted;
 
         Forward = squaresForward;
         ForwardRight = squaresForwardRight;
