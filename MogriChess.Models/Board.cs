@@ -44,19 +44,15 @@ public class Board : INotifyPropertyChanged
     public void ClearValidDestinations() =>
         Squares.Values.ApplyToEach(s => s.IsValidDestination = false);
 
-    #endregion
-
-    #region Internal methods
-
-    internal IEnumerable<Square> SquaresWithPiecesOfColor(Enums.Color color) =>
+    public IEnumerable<Square> SquaresWithPiecesOfColor(Enums.Color color) =>
         Squares.Values.Where(s => s.Piece?.Color == color);
 
-    internal List<Move> LegalMovesForPlayer(Enums.Color playerColor) =>
+    public List<Move> LegalMovesForPlayer(Enums.Color playerColor) =>
         SquaresWithPiecesOfColor(playerColor)
             .SelectMany(square => LegalMovesForPieceAt(square.Rank, square.File))
             .ToList();
 
-    internal T GetSimulatedMoveResult<T>(Move move, Func<T> func)
+    public T GetSimulatedMoveResult<T>(Move move, Func<T> func)
     {
         // Clone pieces pre-move
         Piece originalMovingPiece = ClonePiece(move.OriginationSquare.Piece);
@@ -75,6 +71,27 @@ public class Board : INotifyPropertyChanged
         return result;
     }
 
+    public void PlacePieceOnSquare(Piece piece, Square destinationSquare)
+    {
+        if (destinationSquare.Piece != null)
+        {
+            piece = CapturePiece(piece, destinationSquare.Piece);
+        }
+
+        destinationSquare.Piece = piece;
+
+        if (IsPawnPromotionMove(piece, destinationSquare))
+        {
+            destinationSquare.Piece = Promote(piece);
+        }
+    }
+
+    public List<Move> PotentialMovesForPieceAt(Square square) =>
+        PotentialMovesForPieceAt(square.SquareShorthand);
+
+    public bool KingCannotBeCaptured(Enums.Color playerColor) =>
+        !KingCanBeCaptured(playerColor);
+
     #endregion
 
     #region Private methods
@@ -92,21 +109,6 @@ public class Board : INotifyPropertyChanged
         }
     }
 
-    public void PlacePieceOnSquare(Piece piece, Square destinationSquare)
-    {
-        if (destinationSquare.Piece != null)
-        {
-            piece = CapturePiece(piece, destinationSquare.Piece);
-        }
-
-        destinationSquare.Piece = piece;
-
-        if (IsPawnPromotionMove(piece, destinationSquare))
-        {
-            destinationSquare.Piece = Promote(piece);
-        }
-    }
-
     private Piece ClonePiece(Piece piece)
     {
         if (piece == null)
@@ -120,9 +122,6 @@ public class Board : INotifyPropertyChanged
             piece.Back, piece.BackLeft,
             piece.Left, piece.ForwardLeft);
     }
-
-    internal List<Move> PotentialMovesForPieceAt(Square square) =>
-        PotentialMovesForPieceAt(square.SquareShorthand);
 
     private List<Move> PotentialMovesForPieceAt(string squareShorthand)
     {
@@ -201,9 +200,6 @@ public class Board : INotifyPropertyChanged
 
         return potentialMoves;
     }
-
-    internal bool KingCannotBeCaptured(Enums.Color playerColor) =>
-        !KingCanBeCaptured(playerColor);
 
     private static Piece CapturePiece(Piece movingPiece, Piece capturedPiece)
     {

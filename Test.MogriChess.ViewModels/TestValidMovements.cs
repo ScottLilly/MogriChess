@@ -11,9 +11,8 @@ public class TestValidMovements
     public void Test_ValidMoveForRank_1()
     {
         // Light major pieces are blocked at game start
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
         Assert.Empty(game.Board.LegalMovesForPieceAt(1, 1));
         Assert.Empty(game.Board.LegalMovesForPieceAt(1, 2));
@@ -30,9 +29,8 @@ public class TestValidMovements
     [Fact]
     public void Test_ValidMovesForPiece_A2()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
         var validDestinations = game.Board.LegalMovesForPieceAt(2, 1).ToList();
 
@@ -44,9 +42,8 @@ public class TestValidMovements
     [Fact]
     public void Test_ValidMovesForPiece_B2()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
         var validDestinations = game.Board.LegalMovesForPieceAt(2, 2).ToList();
 
@@ -59,9 +56,8 @@ public class TestValidMovements
     [Fact]
     public void Test_ValidMovesForPiece_C2()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
         var validDestinations = game.Board.LegalMovesForPieceAt(2, 3).ToList();
 
@@ -74,9 +70,8 @@ public class TestValidMovements
     [Fact]
     public void Test_ValidMovesForPiece_D2()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
         var validDestinations = game.Board.LegalMovesForPieceAt(2, 4).ToList();
 
@@ -89,9 +84,8 @@ public class TestValidMovements
     [Fact]
     public void Test_ValidMovesForPiece_E2()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
         var validDestinations = game.Board.LegalMovesForPieceAt(2, 5).ToList();
 
@@ -104,9 +98,8 @@ public class TestValidMovements
     [Fact]
     public void Test_ValidMovesForPiece_F2()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
         var validDestinations = game.Board.LegalMovesForPieceAt(2, 6).ToList();
 
@@ -119,9 +112,8 @@ public class TestValidMovements
     [Fact]
     public void Test_ValidMovesForPiece_G2()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
         var validDestinations = game.Board.LegalMovesForPieceAt(2, 7).ToList();
 
@@ -134,9 +126,8 @@ public class TestValidMovements
     [Fact]
     public void Test_ValidMovesForPiece_H2()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
         var validDestinations = game.Board.LegalMovesForPieceAt(2, 8).ToList();
 
@@ -152,9 +143,8 @@ public class TestValidMovements
     [Fact]
     public void Test_ValidMovesForPiece_A7()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
         var validDestinations = game.Board.LegalMovesForPieceAt(7, 1).ToList();
 
@@ -166,9 +156,8 @@ public class TestValidMovements
     [Fact]
     public void Test_ValidMovesForPiece_B7()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
         var validDestinations = game.Board.LegalMovesForPieceAt(7, 2).ToList();
 
@@ -181,9 +170,8 @@ public class TestValidMovements
     [Fact]
     public void Test_ValidMovesForPiece_C7()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
         var validDestinations = game.Board.LegalMovesForPieceAt(7, 3).ToList();
 
@@ -196,9 +184,8 @@ public class TestValidMovements
     [Fact]
     public void Test_ValidMovesForPiece_D7()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
         var validDestinations = game.Board.LegalMovesForPieceAt(7, 4).ToList();
 
@@ -211,9 +198,8 @@ public class TestValidMovements
     [Fact]
     public void Test_ValidMovesForPiece_E7()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
         var validDestinations = game.Board.LegalMovesForPieceAt(7, 5).ToList();
 
@@ -226,9 +212,8 @@ public class TestValidMovements
     [Fact]
     public void Test_ValidMovesForPiece_F7()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
         var validDestinations = game.Board.LegalMovesForPieceAt(7, 6).ToList();
 
@@ -241,9 +226,8 @@ public class TestValidMovements
     [Fact]
     public void Test_ValidMovesForPiece_G7()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
         var validDestinations = game.Board.LegalMovesForPieceAt(7, 7).ToList();
 
@@ -256,9 +240,8 @@ public class TestValidMovements
     [Fact]
     public void Test_ValidMovesForPiece_H7()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
         var validDestinations = game.Board.LegalMovesForPieceAt(7, 8).ToList();
 
@@ -273,9 +256,8 @@ public class TestValidMovements
     public void Test_ValidMoveForRank_8()
     {
         // Dark major pieces are blocked at game start
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
         Assert.Empty(game.Board.LegalMovesForPieceAt(8, 1));
         Assert.Empty(game.Board.LegalMovesForPieceAt(8, 2));

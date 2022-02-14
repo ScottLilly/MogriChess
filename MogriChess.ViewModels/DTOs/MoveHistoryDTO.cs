@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace MogriChess.Models.DTOs;
+namespace MogriChess.ViewModels.DTOs;
 
 public class MoveHistoryDTO
 {

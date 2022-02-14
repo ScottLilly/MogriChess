@@ -10,18 +10,18 @@ public class MemoryBenchmarker
     [Benchmark]
     public void Benchmark_Instantiating()
     {
-        var session = new PlaySession();
+        var session = new Game();
     }
 
     [Benchmark]
     public void Benchmark_Move()
     {
-        PlaySession session = new PlaySession();
+        Game session = new Game();
 
         Square originationSquare =
-            session.CurrentGame.Board.Squares["h2"];
+            session.Board.Squares["h2"];
         Square destinationSquare =
-            session.CurrentGame.Board.Squares["h3"];
+            session.Board.Squares["h3"];
 
         session.SelectSquare(originationSquare);
         session.SelectSquare(destinationSquare);
@@ -30,14 +30,14 @@ public class MemoryBenchmarker
     [Benchmark]
     public void Benchmark_BotResponseMove()
     {
-        PlaySession session = new PlaySession();
+        Game session = new Game();
 
         session.StartGame(Enums.PlayerType.Human, Enums.PlayerType.Bot);
 
         Square originationSquare =
-            session.CurrentGame.Board.Squares["h2"];
+            session.Board.Squares["h2"];
         Square destinationSquare =
-            session.CurrentGame.Board.Squares["h3"];
+            session.Board.Squares["h3"];
 
         session.SelectSquare(originationSquare);
         session.SelectSquare(destinationSquare);
