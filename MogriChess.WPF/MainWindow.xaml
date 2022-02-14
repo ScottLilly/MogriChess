@@ -181,7 +181,7 @@
                                 <Canvas ZIndex="4"
                                         Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
                                                              AncestorType={x:Type Window}},
-                                                             Path=DataContext.DisplayRankFileLabel,
+                                                             Path=DataContext.DisplayRankFileLabels,
                                                              UpdateSourceTrigger=PropertyChanged,
                                                              Converter={StaticResource VisibleIfTrue}}">
                                     <Label Content="{Binding SquareShorthand}"/>
