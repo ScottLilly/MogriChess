@@ -7,29 +7,29 @@ namespace Test.MogriChess.ViewModels
 {
     public class TestStalemate
     {
-        [Fact]
-        public void Test_Stalemate_1()
-        {
-            Game game = new Game(new Board(null, null));
+        //[Fact]
+        //public void Test_Stalemate_1()
+        //{
+        //    Game game = new Game(new Board(null, null));
 
-            // Dark piece
-            AddPiece(game, "a8", PieceFactory.GetKing(null, Enums.Color.Dark));
+        //    // Dark piece
+        //    AddPiece(game, "a8", PieceFactory.GetKing(null, Enums.Color.Dark));
 
-            // Light pieces
-            AddPiece(game, "b6", PieceFactory.GetRook(null, Enums.Color.Light));
-            AddPiece(game, "c7", PieceFactory.GetRook(null, Enums.Color.Light));
+        //    // Light pieces
+        //    AddPiece(game, "b6", PieceFactory.GetRook(null, Enums.Color.Light));
+        //    AddPiece(game, "c7", PieceFactory.GetRook(null, Enums.Color.Light));
 
-            Square square = game.Board.Squares["a8"];
-            var moves =
-                game.Board.LegalMovesForPieceAt(square.Rank, square.File);
+        //    Square square = game.Board.Squares["a8"];
+        //    var moves =
+        //        game.Board.LegalMovesForPieceAt(square.Rank, square.File);
 
-            Assert.Empty(moves);
-        }
+        //    Assert.Empty(moves);
+        //}
 
-        private static void AddPiece(Game game, string squareShorthand, Piece piece)
-        {
-            game.Board.Squares[squareShorthand]
-                .Piece = piece;
-        }
+        //private static void AddPiece(Game game, string squareShorthand, Piece piece)
+        //{
+        //    game.Board.Squares[squareShorthand]
+        //        .Piece = piece;
+        //}
     }
 }

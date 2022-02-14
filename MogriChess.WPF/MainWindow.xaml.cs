@@ -17,7 +17,7 @@ public partial class MainWindow : Window
     private readonly IServiceProvider _serviceProvider;
     private bool _canPlay;
 
-    private PlaySession CurrentSession => DataContext as PlaySession;
+    private Game CurrentSession => DataContext as Game;
 
     public MainWindow(IServiceProvider serviceProvider)
     {
@@ -25,7 +25,7 @@ public partial class MainWindow : Window
 
         _serviceProvider = serviceProvider;
 
-        DataContext = new PlaySession();
+        DataContext = new Game();
 
         _canPlay = true;
 
@@ -56,13 +56,13 @@ public partial class MainWindow : Window
 
     private void StartGame(Enums.PlayerType lightPlayer, Enums.PlayerType darkPlayer)
     {
-        CurrentSession.CurrentGame.MoveHistory.CollectionChanged -= MoveHistoryChangedHandler;
-        CurrentSession.CurrentGame.GameEnded -= GameEndedHandler;
+        CurrentSession.MoveHistory.CollectionChanged -= MoveHistoryChangedHandler;
+        CurrentSession.GameEnded -= GameEndedHandler;
 
         CurrentSession.StartGame(lightPlayer, darkPlayer);
 
-        CurrentSession.CurrentGame.MoveHistory.CollectionChanged += MoveHistoryChangedHandler;
-        CurrentSession.CurrentGame.GameEnded += GameEndedHandler;
+        CurrentSession.MoveHistory.CollectionChanged += MoveHistoryChangedHandler;
+        CurrentSession.GameEnded += GameEndedHandler;
 
         _canPlay = true;
     }
@@ -117,7 +117,7 @@ public partial class MainWindow : Window
         System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
     {
         MoveHistoryDataGrid.UpdateLayout();
-        MoveHistoryDataGrid.ScrollIntoView(CurrentSession.CurrentGame.MoveHistory.Last());
+        MoveHistoryDataGrid.ScrollIntoView(CurrentSession.MoveHistory.Last());
     }
 
     private void Exit_OnClick(object sender, RoutedEventArgs e)

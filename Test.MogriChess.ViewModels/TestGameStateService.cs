@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using MogriChess.Models;
-using MogriChess.Models.DTOs;
-using MogriChess.Services;
 using MogriChess.ViewModels;
-using Test.MogriChess.ViewModels.Utilities;
+using MogriChess.ViewModels.DTOs;
 using Xunit;
 
 
@@ -13,15 +9,15 @@ namespace Test.MogriChess.ViewModels
 {
     public class TestGameStateService
     {
-        public void Test_GetSerializedGameState()
-        {
-            string json =
-                File.ReadAllText(".\\GameStateFiles\\StartOfGame_GameState.json");
+        //public void Test_GetSerializedGameState()
+        //{
+        //    string json =
+        //        File.ReadAllText(".\\GameStateFiles\\StartOfGame_GameState.json");
 
-            PlaySession session = new PlaySession();
-            session.StartGame(Enums.PlayerType.Human, Enums.PlayerType.Bot);
+        //    Game game = new Game();
+        //    game.StartGame(Enums.PlayerType.Human, Enums.PlayerType.Bot);
 
-            //Assert.Equal(json, session.GetSerializedGameState());
-        }
+        //    Assert.Equal(json, game.GetSerializedGameState());
+        //}
     }
 }

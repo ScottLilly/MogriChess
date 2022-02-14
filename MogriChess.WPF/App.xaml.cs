@@ -6,8 +6,8 @@ using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MogriChess.Core;
-using MogriChess.Models.DTOs;
-using MogriChess.Services;
+using MogriChess.ViewModels;
+using MogriChess.ViewModels.DTOs;
 using MogriChess.WPF.Windows;
 
 namespace MogriChess.WPF;

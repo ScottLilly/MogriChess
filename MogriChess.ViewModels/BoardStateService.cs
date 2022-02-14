@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using MogriChess.Models;
-using MogriChess.Models.DTOs;
+using MogriChess.ViewModels.DTOs;
 using Newtonsoft.Json;
 
-namespace MogriChess.Services;
+namespace MogriChess.ViewModels;
 
 public static class BoardStateService
 {

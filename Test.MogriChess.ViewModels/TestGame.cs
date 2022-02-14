@@ -10,14 +10,12 @@ public class TestGame
     [Fact]
     public void Test_InstantiateGame()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        Assert.NotNull(game);
         Assert.NotNull(game.Board);
         Assert.NotNull(game.Board.Squares);
-            
+
         // Check board squares
         Assert.Equal(64, game.Board.Squares.Count);
         Assert.Equal(32, game.Board.Squares.Values.Count(s => s.Color == Enums.Color.Light));

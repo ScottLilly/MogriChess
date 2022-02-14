@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
+using MogriChess.Models;
 
-namespace MogriChess.Models.DTOs;
+namespace MogriChess.ViewModels.DTOs;
 
 public class AutoMapperProfile : Profile
 {

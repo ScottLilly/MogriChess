@@ -6,7 +6,7 @@
         xmlns:viewModels="clr-namespace:MogriChess.ViewModels;assembly=MogriChess.ViewModels"
         xmlns:models="clr-namespace:MogriChess.Models;assembly=MogriChess.Models"
         xmlns:customControls="clr-namespace:MogriChess.WPF.CustomControls"
-        d:DataContext="{d:DesignInstance viewModels:PlaySession}"
+        d:DataContext="{d:DesignInstance viewModels:Game}"
         mc:Ignorable="d"
         Title="MogriChess" 
         WindowStartupLocation="CenterScreen"
@@ -60,13 +60,13 @@
                               IsCheckable="True"
                               Checked="DisplayRankAndFileLabels_OnChecked"
                               Unchecked="DisplayRankAndFileLabels_OnUnchecked"
-                              IsChecked="{Binding CurrentGame.DisplayRankFileLabel,
+                              IsChecked="{Binding DisplayRankFileLabels,
                                               UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     <MenuItem Header="Display valid moves"
                               IsCheckable="True"
                               Checked="DisplayValidMoves_OnChecked"
                               Unchecked="DisplayValidMoves_OnUnchecked"
-                              IsChecked="{Binding CurrentGame.DisplayValidDestinations,
+                              IsChecked="{Binding DisplayValidDestinations,
                                               UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                 </MenuItem>
                 <Separator/>
@@ -97,7 +97,7 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
 
-                <ItemsControl ItemsSource="{Binding CurrentGame.Board.Squares.Values}">
+                <ItemsControl ItemsSource="{Binding Board.Squares.Values}">
 
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -181,7 +181,7 @@
                                 <Canvas ZIndex="4"
                                         Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
                                                              AncestorType={x:Type Window}},
-                                                             Path=DataContext.CurrentGame.DisplayRankFileLabel,
+                                                             Path=DataContext.DisplayRankFileLabel,
                                                              UpdateSourceTrigger=PropertyChanged,
                                                              Converter={StaticResource VisibleIfTrue}}">
                                     <Label Content="{Binding SquareShorthand}"/>
@@ -212,7 +212,7 @@
                 <DataGrid Grid.Row="0" Grid.Column="0"
                           Grid.ColumnSpan="2"
                           x:Name="MoveHistoryDataGrid"
-                          ItemsSource="{Binding CurrentGame.MoveHistory}"
+                          ItemsSource="{Binding MoveHistory}"
                           CanUserAddRows="False"
                           CanUserDeleteRows="False"
                           CanUserReorderColumns="False"

@@ -15,19 +15,18 @@ public class TestPiecesAtStartup
     private const int FILE_G = 7;
     private const int FILE_H = 8;
 
-    private static Piece GetPiece(Game game, int rank, int file) =>
-        game.Board.Squares[ModelFunctions.GetShorthand(rank, file)]?.Piece;
+    private static Piece GetPiece(Board board, int rank, int file) =>
+        board.Squares[ModelFunctions.GetShorthand(rank, file)]?.Piece;
 
     #region Light - Major pieces
 
     [Fact]
     public void Test_ExpectedPiece_A1()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 1, FILE_A);
+        var piece = GetPiece(game.Board, 1, FILE_A);
 
         Assert.NotNull(piece);
 
@@ -47,11 +46,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_B1()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 1, FILE_B);
+        var piece = GetPiece(game.Board, 1, FILE_B);
 
         Assert.NotNull(piece);
 
@@ -71,11 +69,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_C1()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 1, FILE_C);
+        var piece = GetPiece(game.Board, 1, FILE_C);
 
         Assert.NotNull(piece);
 
@@ -95,11 +92,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_D1()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 1, FILE_D);
+        var piece = GetPiece(game.Board, 1, FILE_D);
 
         Assert.NotNull(piece);
 
@@ -119,11 +115,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_E1()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 1, FILE_E);
+        var piece = GetPiece(game.Board, 1, FILE_E);
 
         Assert.NotNull(piece);
 
@@ -143,11 +138,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_F1()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 1, FILE_F);
+        var piece = GetPiece(game.Board, 1, FILE_F);
 
         Assert.NotNull(piece);
 
@@ -167,11 +161,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_G1()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 1, FILE_G);
+        var piece = GetPiece(game.Board, 1, FILE_G);
 
         Assert.NotNull(piece);
 
@@ -191,11 +184,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_H1()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 1, FILE_H);
+        var piece = GetPiece(game.Board, 1, FILE_H);
 
         Assert.NotNull(piece);
 
@@ -219,11 +211,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_A2()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 2, FILE_A);
+        var piece = GetPiece(game.Board, 2, FILE_A);
 
         Assert.NotNull(piece);
 
@@ -243,11 +234,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_B2()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 2, FILE_B);
+        var piece = GetPiece(game.Board, 2, FILE_B);
 
         Assert.NotNull(piece);
 
@@ -267,11 +257,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_C2()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 2, FILE_C);
+        var piece = GetPiece(game.Board, 2, FILE_C);
 
         Assert.NotNull(piece);
 
@@ -291,11 +280,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_D2()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 2, FILE_D);
+        var piece = GetPiece(game.Board, 2, FILE_D);
 
         Assert.NotNull(piece);
 
@@ -315,11 +303,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_E2()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 2, FILE_E);
+        var piece = GetPiece(game.Board, 2, FILE_E);
 
         Assert.NotNull(piece);
 
@@ -339,11 +326,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_F2()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 2, FILE_F);
+        var piece = GetPiece(game.Board, 2, FILE_F);
 
         Assert.NotNull(piece);
 
@@ -363,11 +349,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_G2()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 2, FILE_G);
+        var piece = GetPiece(game.Board, 2, FILE_G);
 
         Assert.NotNull(piece);
 
@@ -387,11 +372,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_H2()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 2, FILE_H);
+        var piece = GetPiece(game.Board, 2, FILE_H);
 
         Assert.NotNull(piece);
 
@@ -415,69 +399,65 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPieces_Rank_3()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        Assert.Null(GetPiece(game, 3, FILE_A));
-        Assert.Null(GetPiece(game, 3, FILE_B));
-        Assert.Null(GetPiece(game, 3, FILE_C));
-        Assert.Null(GetPiece(game, 3, FILE_D));
-        Assert.Null(GetPiece(game, 3, FILE_E));
-        Assert.Null(GetPiece(game, 3, FILE_F));
-        Assert.Null(GetPiece(game, 3, FILE_G));
-        Assert.Null(GetPiece(game, 3, FILE_H));
+        Assert.Null(GetPiece(game.Board, 3, FILE_A));
+        Assert.Null(GetPiece(game.Board, 3, FILE_B));
+        Assert.Null(GetPiece(game.Board, 3, FILE_C));
+        Assert.Null(GetPiece(game.Board, 3, FILE_D));
+        Assert.Null(GetPiece(game.Board, 3, FILE_E));
+        Assert.Null(GetPiece(game.Board, 3, FILE_F));
+        Assert.Null(GetPiece(game.Board, 3, FILE_G));
+        Assert.Null(GetPiece(game.Board, 3, FILE_H));
     }
 
     [Fact]
     public void Test_ExpectedPieces_Rank_4()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        Assert.Null(GetPiece(game, 4, FILE_A));
-        Assert.Null(GetPiece(game, 4, FILE_B));
-        Assert.Null(GetPiece(game, 4, FILE_C));
-        Assert.Null(GetPiece(game, 4, FILE_D));
-        Assert.Null(GetPiece(game, 4, FILE_E));
-        Assert.Null(GetPiece(game, 4, FILE_F));
-        Assert.Null(GetPiece(game, 4, FILE_G));
-        Assert.Null(GetPiece(game, 4, FILE_H));
+        Assert.Null(GetPiece(game.Board, 4, FILE_A));
+        Assert.Null(GetPiece(game.Board, 4, FILE_B));
+        Assert.Null(GetPiece(game.Board, 4, FILE_C));
+        Assert.Null(GetPiece(game.Board, 4, FILE_D));
+        Assert.Null(GetPiece(game.Board, 4, FILE_E));
+        Assert.Null(GetPiece(game.Board, 4, FILE_F));
+        Assert.Null(GetPiece(game.Board, 4, FILE_G));
+        Assert.Null(GetPiece(game.Board, 4, FILE_H));
     }
 
     [Fact]
     public void Test_ExpectedPieces_Rank_5()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        Assert.Null(GetPiece(game, 5, FILE_A));
-        Assert.Null(GetPiece(game, 5, FILE_B));
-        Assert.Null(GetPiece(game, 5, FILE_C));
-        Assert.Null(GetPiece(game, 5, FILE_D));
-        Assert.Null(GetPiece(game, 5, FILE_E));
-        Assert.Null(GetPiece(game, 5, FILE_F));
-        Assert.Null(GetPiece(game, 5, FILE_G));
-        Assert.Null(GetPiece(game, 5, FILE_H));
+        Assert.Null(GetPiece(game.Board, 5, FILE_A));
+        Assert.Null(GetPiece(game.Board, 5, FILE_B));
+        Assert.Null(GetPiece(game.Board, 5, FILE_C));
+        Assert.Null(GetPiece(game.Board, 5, FILE_D));
+        Assert.Null(GetPiece(game.Board, 5, FILE_E));
+        Assert.Null(GetPiece(game.Board, 5, FILE_F));
+        Assert.Null(GetPiece(game.Board, 5, FILE_G));
+        Assert.Null(GetPiece(game.Board, 5, FILE_H));
     }
 
     [Fact]
     public void Test_ExpectedPieces_Rank_6()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        Assert.Null(GetPiece(game, 6, FILE_A));
-        Assert.Null(GetPiece(game, 6, FILE_B));
-        Assert.Null(GetPiece(game, 6, FILE_C));
-        Assert.Null(GetPiece(game, 6, FILE_D));
-        Assert.Null(GetPiece(game, 6, FILE_E));
-        Assert.Null(GetPiece(game, 6, FILE_F));
-        Assert.Null(GetPiece(game, 6, FILE_G));
-        Assert.Null(GetPiece(game, 6, FILE_H));
+        Assert.Null(GetPiece(game.Board, 6, FILE_A));
+        Assert.Null(GetPiece(game.Board, 6, FILE_B));
+        Assert.Null(GetPiece(game.Board, 6, FILE_C));
+        Assert.Null(GetPiece(game.Board, 6, FILE_D));
+        Assert.Null(GetPiece(game.Board, 6, FILE_E));
+        Assert.Null(GetPiece(game.Board, 6, FILE_F));
+        Assert.Null(GetPiece(game.Board, 6, FILE_G));
+        Assert.Null(GetPiece(game.Board, 6, FILE_H));
     }
 
     #endregion
@@ -487,11 +467,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_A7()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 7, FILE_A);
+        var piece = GetPiece(game.Board, 7, FILE_A);
 
         Assert.NotNull(piece);
 
@@ -511,11 +490,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_B7()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 7, FILE_B);
+        var piece = GetPiece(game.Board, 7, FILE_B);
 
         Assert.NotNull(piece);
 
@@ -535,11 +513,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_C7()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 7, FILE_C);
+        var piece = GetPiece(game.Board, 7, FILE_C);
 
         Assert.NotNull(piece);
 
@@ -559,11 +536,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_D7()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 7, FILE_D);
+        var piece = GetPiece(game.Board, 7, FILE_D);
 
         Assert.NotNull(piece);
 
@@ -583,11 +559,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_E7()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 7, FILE_E);
+        var piece = GetPiece(game.Board, 7, FILE_E);
 
         Assert.NotNull(piece);
 
@@ -607,11 +582,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_F7()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 7, FILE_F);
+        var piece = GetPiece(game.Board, 7, FILE_F);
 
         Assert.NotNull(piece);
 
@@ -631,11 +605,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_G7()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 7, FILE_G);
+        var piece = GetPiece(game.Board, 7, FILE_G);
 
         Assert.NotNull(piece);
 
@@ -655,11 +628,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_H7()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 7, FILE_H);
+        var piece = GetPiece(game.Board, 7, FILE_H);
 
         Assert.NotNull(piece);
 
@@ -683,11 +655,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_A8()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 8, FILE_A);
+        var piece = GetPiece(game.Board, 8, FILE_A);
 
         Assert.NotNull(piece);
 
@@ -707,11 +678,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_B8()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 8, FILE_B);
+        var piece = GetPiece(game.Board, 8, FILE_B);
 
         Assert.NotNull(piece);
 
@@ -731,11 +701,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_C8()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 8, FILE_C);
+        var piece = GetPiece(game.Board, 8, FILE_C);
 
         Assert.NotNull(piece);
 
@@ -755,11 +724,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_D8()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 8, FILE_D);
+        var piece = GetPiece(game.Board, 8, FILE_D);
 
         Assert.NotNull(piece);
 
@@ -779,11 +747,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_E8()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 8, FILE_E);
+        var piece = GetPiece(game.Board, 8, FILE_E);
 
         Assert.NotNull(piece);
 
@@ -803,11 +770,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_F8()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 8, FILE_F);
+        var piece = GetPiece(game.Board, 8, FILE_F);
 
         Assert.NotNull(piece);
 
@@ -827,11 +793,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_G8()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 8, FILE_G);
+        var piece = GetPiece(game.Board, 8, FILE_G);
 
         Assert.NotNull(piece);
 
@@ -851,11 +816,10 @@ public class TestPiecesAtStartup
     [Fact]
     public void Test_ExpectedPiece_H8()
     {
-        PlaySession session = new PlaySession();
-        session.StartGame();
-        Game game = session.CurrentGame;
+        Game game = new Game();
+        game.StartGame();
 
-        var piece = GetPiece(game, 8, FILE_H);
+        var piece = GetPiece(game.Board, 8, FILE_H);
 
         Assert.NotNull(piece);
 

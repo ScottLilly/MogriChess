@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using MogriChess.Models.DTOs;
+using MogriChess.ViewModels.DTOs;
 using Newtonsoft.Json;
 
 namespace Test.MogriChess.ViewModels.Utilities;
