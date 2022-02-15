@@ -100,8 +100,9 @@ public class Game : INotifyPropertyChanged
         }
     }
     public Board Board { get; }
-    public ObservableCollection<Move> MoveHistory { get; } =
-        new ObservableCollection<Move>();
+
+    public ObservableCollection<MoveStruct> MoveHistory { get; } =
+        new ObservableCollection<MoveStruct>();
 
     public event EventHandler<GameEndedEventArgs> GameEnded;
     public event PropertyChangedEventHandler PropertyChanged;
@@ -217,7 +218,12 @@ public class Game : INotifyPropertyChanged
 
         DetermineIfMovePutsOpponentInCheckOrCheckmate(move);
 
-        MoveHistory.Add(move);
+        MoveHistory.Add(new MoveStruct
+        {
+            MoveResult = move.MoveResult,
+            MoveShorthand = move.MoveShorthand,
+            MovingPieceColor = move.MovingPieceColor.ToString()
+        });
 
         EndCurrentPlayerTurn();
     }
