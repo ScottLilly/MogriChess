@@ -11,31 +11,31 @@ namespace Test.MogriChess.ViewModels;
 
 public class TestCheckmateConditions
 {
-    [Fact]
-    public void Test_IncorrectCheckmateReported_1()
-    {
-        // Test fix for a reported false checkmate
-        // https://github.com/ScottLilly/MogriChess/issues/3
+    //[Fact]
+    //public void Test_IncorrectCheckmateReported_1()
+    //{
+    //    // Test fix for a reported false checkmate
+    //    // https://github.com/ScottLilly/MogriChess/issues/3
 
-        Game game = new Game();
-        game.StartGame();
+    //    Game game = new Game();
+    //    game.StartGame();
 
-        List<MoveHistoryDTO> moves =
-            TestFileParser.GetMoveHistoryFromFile(".\\MoveHistories\\BadCheckmate_1_MoveHistory.json");
+    //    List<MoveHistoryDTO> moves =
+    //        TestFileParser.GetMoveHistoryFromFile(".\\MoveHistories\\BadCheckmate_1_MoveHistory.json");
 
-        foreach (MoveHistoryDTO move in moves)
-        {
-            Square originationSquare =
-                game.Board.Squares[move.OriginationSquare];
-            Square destinationSquare =
-                game.Board.Squares[move.DestinationSquare];
+    //    foreach (MoveHistoryDTO move in moves)
+    //    {
+    //        Square originationSquare =
+    //            game.Board.Squares[move.OriginationSquare];
+    //        Square destinationSquare =
+    //            game.Board.Squares[move.DestinationSquare];
 
-            game.SelectSquare(originationSquare);
-            game.SelectSquare(destinationSquare);
-        }
+    //        game.SelectSquare(originationSquare);
+    //        game.SelectSquare(destinationSquare);
+    //    }
 
-        Assert.False(game.MoveHistory.Last().PutsOpponentInCheckmate);
-    }
+    //    Assert.False(game.MoveHistory.Last().PutsOpponentInCheckmate);
+    //}
 
     //[Fact]
     //public void Test_IncorrectCheckmateReported_2()

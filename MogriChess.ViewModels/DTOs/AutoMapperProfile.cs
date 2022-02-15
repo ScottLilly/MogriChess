@@ -7,7 +7,7 @@ public class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<Move, MoveHistoryDTO>();
+        CreateMap<MoveStruct, MoveHistoryDTO>();
         CreateMap<Square, SquareDTO>();
         CreateMap<Piece, PieceDTO>()
             .ForMember(dest => dest.Color,
