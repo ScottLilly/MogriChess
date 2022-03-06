@@ -80,6 +80,9 @@ public partial class MainWindow : Window
             case Enums.GameStatus.Stalemate:
                 DisplayGameEndMessage("Stalemate - tie");
                 break;
+            case Enums.GameStatus.DrawNoCaptures:
+                DisplayGameEndMessage($"Draw ({Game.MAX_MOVES_WITHOUT_CAPTURE} moves without event) - tie");
+                break;
             default:
                 DisplayGameEndMessage("Unexpected game ending");
                 break;

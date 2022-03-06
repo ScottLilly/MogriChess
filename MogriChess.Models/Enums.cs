@@ -40,7 +40,8 @@ public static class Enums
         Playing,
         Stalemate,
         CheckmateByLight,
-        CheckmateByDark
+        CheckmateByDark,
+        DrawNoCaptures
     }
 
 }

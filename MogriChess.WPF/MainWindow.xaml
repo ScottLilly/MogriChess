@@ -233,7 +233,7 @@
                                             Binding="{Binding MoveShorthand}"/>
                         <DataGridTextColumn Header=""
                                             Width="*"
-                                            Binding="{Binding MoveResult}"/>
+                                            Binding="{Binding MoveResult, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                     </DataGrid.Columns>
 
                 </DataGrid>
