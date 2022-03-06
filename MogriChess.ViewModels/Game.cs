@@ -13,6 +13,8 @@ namespace MogriChess.ViewModels;
 
 public class Game : INotifyPropertyChanged
 {
+    public const int MAX_MOVES_WITHOUT_CAPTURE = 50;
+
     private bool _displayValidDestinations = true;
     private Enums.Color _currentPlayerColor = Enums.Color.NotSelected;
     private Enums.GameStatus _status = Enums.GameStatus.Preparing;
@@ -39,6 +41,10 @@ public class Game : INotifyPropertyChanged
                 else if (value == Enums.GameStatus.CheckmateByDark)
                 {
                     GameEnded?.Invoke(this, new GameEndedEventArgs(Enums.GameStatus.CheckmateByDark));
+                }
+                else if (value == Enums.GameStatus.DrawNoCaptures)
+                {
+                    GameEnded?.Invoke(this, new GameEndedEventArgs(Enums.GameStatus.DrawNoCaptures));
                 }
             }
 
@@ -218,12 +224,24 @@ public class Game : INotifyPropertyChanged
 
         DetermineIfMovePutsOpponentInCheckOrCheckmate(move);
 
+        if (string.IsNullOrWhiteSpace(move.MoveResult) &&
+            MoveHistory.Count >= (MAX_MOVES_WITHOUT_CAPTURE - 1) &&
+            MoveHistory.TakeLast(MAX_MOVES_WITHOUT_CAPTURE - 1).All(m => string.IsNullOrEmpty(m.MoveResult)))
+        {
+            move.IsDrawFromMaxMoves = true;
+        }
+
         MoveHistory.Add(new MoveStruct
         {
             MoveResult = move.MoveResult,
             MoveShorthand = move.MoveShorthand,
             MovingPieceColor = move.MovingPieceColor.ToString()
         });
+
+        if (move.IsDrawFromMaxMoves)
+        {
+            Status = Enums.GameStatus.DrawNoCaptures;
+        }
 
         EndCurrentPlayerTurn();
     }

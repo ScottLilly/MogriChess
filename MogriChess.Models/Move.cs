@@ -1,6 +1,8 @@
-﻿namespace MogriChess.Models;
+﻿using System.ComponentModel;
 
-public class Move
+namespace MogriChess.Models;
+
+public class Move : INotifyPropertyChanged
 {
     public Enums.Color MovingPieceColor { get; }
     public Square OriginationSquare { get; }
@@ -10,6 +12,7 @@ public class Move
     public bool PutsOpponentInCheck { get; set; }
     public bool IsCapturingMove { get; set; }
     public bool IsPromotingMove { get; set; }
+    public bool IsDrawFromMaxMoves { get; set; }
 
     public string MoveShorthand =>
         $"{OriginationSquare.SquareShorthand}:{DestinationSquare.SquareShorthand}";
@@ -17,8 +20,11 @@ public class Move
     public string MoveResult =>
         PutsOpponentInCheckmate ? "Checkmate" :
         PutsOpponentInCheck ? "Check" :
+        IsDrawFromMaxMoves ? "Draw" :
         IsCapturingMove ? "Capture" :
         IsPromotingMove ? "Promotion" : "";
+
+    public event PropertyChangedEventHandler PropertyChanged;
 
     public Move(Square originationSquare, Square destinationSquare)
     {
