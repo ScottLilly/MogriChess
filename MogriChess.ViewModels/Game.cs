@@ -238,12 +238,7 @@ public class Game : INotifyPropertyChanged
             MovingPieceColor = move.MovingPieceColor.ToString()
         });
 
-        if (move.IsDrawFromMaxMoves)
-        {
-            Status = Enums.GameStatus.DrawNoCaptures;
-        }
-
-        EndCurrentPlayerTurn();
+        EndCurrentPlayerTurn(move);
     }
 
     private void DetermineIfMovePutsOpponentInCheckOrCheckmate(Move move)
@@ -254,6 +249,14 @@ public class Game : INotifyPropertyChanged
             move.PutsOpponentInCheckmate =
                 PlayerIsInCheckmate(move.MovingPieceColor.OppositeColor());
         }
+    }
+
+    private void EndCurrentPlayerTurn(Move move)
+    {
+        // Deselect square/piece that moved
+        SelectedSquare = null;
+        ValidDestinationsForSelectedPiece.Clear();
+        Board.ClearValidDestinations();
 
         if (move.PutsOpponentInCheckmate)
         {
@@ -261,22 +264,18 @@ public class Game : INotifyPropertyChanged
                 ? Enums.GameStatus.CheckmateByLight
                 : Enums.GameStatus.CheckmateByDark;
         }
-    }
-
-    private void EndCurrentPlayerTurn()
-    {
-        // Deselect square/piece that moved
-        SelectedSquare = null;
-        ValidDestinationsForSelectedPiece.Clear();
-        Board.ClearValidDestinations();
-
-        CurrentPlayerColor = CurrentPlayerColor.OppositeColor();
+        else if (move.IsDrawFromMaxMoves)
+        {
+            Status = Enums.GameStatus.DrawNoCaptures;
+        }
 
         if (Status != Enums.GameStatus.Playing)
         {
             // Game has ended
             return;
         }
+
+        CurrentPlayerColor = CurrentPlayerColor.OppositeColor();
 
         MakeBotMove();
     }
