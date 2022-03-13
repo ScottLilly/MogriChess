@@ -149,7 +149,10 @@
                                         <Style>
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                                                    <Setter Property="Canvas.Background" Value="#0066DD"/>
+                                                    <Setter Property="Canvas.Background"
+                                                            Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}},
+                                                                            Path=DataContext.SelectedSquareColor,
+                                                                            UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding IsSelected}" Value="False">
                                                     <Setter Property="Canvas.Background" Value="Transparent"/>
@@ -167,7 +170,10 @@
                                         <Style>
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding IsValidDestination}" Value="True">
-                                                    <Setter Property="Canvas.Background" Value="#66DD33"/>
+                                                    <Setter Property="Canvas.Background"
+                                                            Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}},
+                                                                            Path=DataContext.ValidDestinationSquareColor,
+                                                                            UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding IsValidDestination}" Value="False">
                                                     <Setter Property="Canvas.Background" Value="Transparent"/>
@@ -179,8 +185,7 @@
 
                                 <!-- Square's rank and file shorthand label -->
                                 <Canvas ZIndex="4"
-                                        Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
-                                                             AncestorType={x:Type Window}},
+                                        Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor,                                                              AncestorType={x:Type Window}},
                                                              Path=DataContext.DisplayRankFileLabels,
                                                              UpdateSourceTrigger=PropertyChanged,
                                                              Converter={StaticResource VisibleIfTrue}}">

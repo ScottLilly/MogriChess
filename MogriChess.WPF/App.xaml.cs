@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MogriChess.Core;
+using MogriChess.Models;
 using MogriChess.ViewModels;
 using MogriChess.ViewModels.DTOs;
 using MogriChess.WPF.Windows;
@@ -45,6 +46,9 @@ public partial class App : Application
         services.AddSingleton(typeof(MainWindow));
         services.AddTransient(typeof(Help));
         services.AddTransient(typeof(About));
+
+        var gameConfig = Configuration.Get<GameConfig>();
+        services.AddSingleton(gameConfig);
     }
 
     private void App_OnDispatcherUnhandledException(object sender,

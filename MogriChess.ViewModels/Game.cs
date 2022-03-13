@@ -105,6 +105,8 @@ public class Game : INotifyPropertyChanged
             SetValidDestinations();
         }
     }
+    public string SelectedSquareColor { get; private set; }
+    public string ValidDestinationSquareColor { get; private set; }
     public Board Board { get; }
 
     public ObservableCollection<MoveStruct> MoveHistory { get; } =
@@ -113,9 +115,12 @@ public class Game : INotifyPropertyChanged
     public event EventHandler<GameEndedEventArgs> GameEnded;
     public event PropertyChangedEventHandler PropertyChanged;
 
-    public Game()
+    public Game(GameConfig gameConfig = null)
     {
-        Board = BoardFactory.GetNewGameBoard();
+        SelectedSquareColor = gameConfig?.SelectedSquareColor ?? "";
+        ValidDestinationSquareColor = gameConfig?.ValidDestinationSquareColor ?? "";
+
+        Board = BoardFactory.GetNewGameBoard(gameConfig);
     }
 
     public void StartGame(Enums.PlayerType lightPlayer = Enums.PlayerType.Human,
