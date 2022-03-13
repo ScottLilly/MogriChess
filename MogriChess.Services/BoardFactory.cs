@@ -5,10 +5,12 @@ namespace MogriChess.Services;
 
 public static class BoardFactory
 {
-    public static Board GetNewGameBoard()
+    public static Board GetNewGameBoard(GameConfig gameConfig)
     {
-        ColorScheme boardColorScheme = new ColorScheme("#DDDDDD", "#ADADAD");
-        ColorScheme piecesColorScheme = new ColorScheme("#FFFFFF", "#000000");
+        ColorScheme boardColorScheme =
+            gameConfig?.BoardColorScheme ?? new ColorScheme("#DDDDDD", "#ADADAD");
+        ColorScheme piecesColorScheme = 
+            gameConfig?.PieceColorScheme ?? new ColorScheme("#FFFFFF", "#000000");
 
         return new Board(boardColorScheme, piecesColorScheme);
     }

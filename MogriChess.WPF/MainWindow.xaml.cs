@@ -25,7 +25,9 @@ public partial class MainWindow : Window
 
         _serviceProvider = serviceProvider;
 
-        DataContext = new Game();
+        var gameConfig = _serviceProvider.GetRequiredService<GameConfig>();
+
+        DataContext = new Game(gameConfig);
 
         _canPlay = true;
 

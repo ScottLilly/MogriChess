@@ -2,8 +2,12 @@
 
 public class ColorScheme
 {
-    public string LightColor { get; }
-    public string DarkColor { get; }
+    public string LightColor { get; set; }
+    public string DarkColor { get; set; }
+
+    public ColorScheme()
+    {
+    }
 
     public ColorScheme(string lightColor, string darkColor)
     {
