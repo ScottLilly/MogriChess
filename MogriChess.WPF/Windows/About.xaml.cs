@@ -11,7 +11,7 @@ public partial class About : Window
         InitializeComponent();
 
         VersionNumber.Text =
-            $"Version: {FileVersionInfo.GetVersionInfo("MogriChess.WPF.exe").ProductVersion}";
+            $"Version: {FileVersionInfo.GetVersionInfo("MogriChess.exe").ProductVersion}";
     }
 
     private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
