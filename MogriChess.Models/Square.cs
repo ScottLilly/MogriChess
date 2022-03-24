@@ -5,7 +5,7 @@ namespace MogriChess.Models;
 
 public class Square : INotifyPropertyChanged
 {
-    private ColorScheme _colorScheme;
+    public ColorScheme ColorScheme { get; set; }
 
     private string FileAsLetter =>
         "abcdefgh".Substring(File - 1, 1);
@@ -23,8 +23,8 @@ public class Square : INotifyPropertyChanged
             : Enums.Color.Light;
     public string SquareColor =>
         Color == Enums.Color.Light
-            ? _colorScheme.LightColor
-            : _colorScheme.DarkColor;
+            ? ColorScheme.LightColor
+            : ColorScheme.DarkColor;
     public string SquareShorthand => $"{FileAsLetter}{Rank}";
     public int UiGridRow => Constants.NumberOfRanks - Rank;
     public int UiGridColumn => File - 1;
@@ -36,6 +36,6 @@ public class Square : INotifyPropertyChanged
         Rank = rank;
         File = file;
 
-        _colorScheme = colorScheme;
+        ColorScheme = colorScheme;
     }
 }

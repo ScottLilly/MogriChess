@@ -199,5 +199,10 @@ public partial class MainWindow : Window
         SelectBoardColor selectBoardColor = _serviceProvider.GetRequiredService<SelectBoardColor>();
         selectBoardColor.Owner = this;
         selectBoardColor.ShowDialog();
+
+        if (selectBoardColor.SelectedBoardColor != CurrentSession.Board.BoardColorScheme)
+        {
+            CurrentSession.Board.BoardColorScheme = selectBoardColor.SelectedBoardColor;
+        }
     }
 }

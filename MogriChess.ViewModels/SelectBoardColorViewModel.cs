@@ -15,16 +15,14 @@ public class SelectBoardColorViewModel : INotifyPropertyChanged
     public ObservableCollection<ColorScheme> ColorSchemes { get; } =
         new ObservableCollection<ColorScheme>();
 
-    public SelectBoardColorViewModel(string currentColorSchemeName)
+    public SelectBoardColorViewModel()
     {
         foreach (ColorScheme colorScheme in Constants.ColorSchemes)
         {
             ColorSchemes.Add(colorScheme);
         }
 
-        SelectedColorScheme = ColorSchemes.FirstOrDefault(c =>
-            c.Name.Equals(currentColorSchemeName, StringComparison.InvariantCultureIgnoreCase)) ??
-                                  ColorSchemes.First();
+        SelectedColorScheme = ColorSchemes.First();
         ;
     }
 }
