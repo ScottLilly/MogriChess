@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using MogriChess.Models;
 
 namespace MogriChess.Services;
@@ -8,9 +10,11 @@ public static class BoardFactory
     public static Board GetNewGameBoard(GameConfig gameConfig)
     {
         ColorScheme boardColorScheme =
-            gameConfig?.BoardColorScheme ?? new ColorScheme("#DDDDDD", "#ADADAD");
+            gameConfig?.BoardColorScheme ??
+            Constants.ColorSchemes.First(c =>
+                c.Name.Equals("Grey", StringComparison.InvariantCultureIgnoreCase));
         ColorScheme piecesColorScheme = 
-            gameConfig?.PieceColorScheme ?? new ColorScheme("#FFFFFF", "#000000");
+            gameConfig?.PieceColorScheme ?? new ColorScheme("", "#FFFFFF", "#000000");
 
         return new Board(boardColorScheme, piecesColorScheme);
     }
