@@ -56,18 +56,21 @@
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="Preferences">
-                    <MenuItem Header="Display rank and file label"
+                    <MenuItem Header="Display Rank and File Label"
                               IsCheckable="True"
                               Checked="DisplayRankAndFileLabels_OnChecked"
                               Unchecked="DisplayRankAndFileLabels_OnUnchecked"
                               IsChecked="{Binding DisplayRankFileLabels,
                                               UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                    <MenuItem Header="Display valid moves"
+                    <MenuItem Header="Display Valid Moves"
                               IsCheckable="True"
                               Checked="DisplayValidMoves_OnChecked"
                               Unchecked="DisplayValidMoves_OnUnchecked"
                               IsChecked="{Binding DisplayValidDestinations,
                                               UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                    <Separator/>
+                    <MenuItem Header="Select Board Color..."
+                              Click="SelectBoardColor_OnClick"/>
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="Exit"

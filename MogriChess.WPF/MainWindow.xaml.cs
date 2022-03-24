@@ -193,4 +193,16 @@ public partial class MainWindow : Window
     {
         CurrentSession.DisplayValidDestinations = false;
     }
+
+    private void SelectBoardColor_OnClick(object sender, RoutedEventArgs e)
+    {
+        SelectBoardColor selectBoardColor = _serviceProvider.GetRequiredService<SelectBoardColor>();
+        selectBoardColor.Owner = this;
+        selectBoardColor.ShowDialog();
+
+        if (selectBoardColor.SelectedBoardColor != CurrentSession.Board.BoardColorScheme)
+        {
+            CurrentSession.Board.BoardColorScheme = selectBoardColor.SelectedBoardColor;
+        }
+    }
 }

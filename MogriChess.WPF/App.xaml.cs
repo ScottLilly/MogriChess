@@ -46,6 +46,7 @@ public partial class App : Application
         services.AddSingleton(typeof(MainWindow));
         services.AddTransient(typeof(Help));
         services.AddTransient(typeof(About));
+        services.AddTransient(typeof(SelectBoardColor));
 
         var gameConfig = Configuration.Get<GameConfig>();
         services.AddSingleton(gameConfig);

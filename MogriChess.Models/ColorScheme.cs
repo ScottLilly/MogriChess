@@ -2,6 +2,7 @@
 
 public class ColorScheme
 {
+    public string Name { get; set; }
     public string LightColor { get; set; }
     public string DarkColor { get; set; }
 
@@ -9,8 +10,9 @@ public class ColorScheme
     {
     }
 
-    public ColorScheme(string lightColor, string darkColor)
+    public ColorScheme(string name, string lightColor, string darkColor)
     {
+        Name = name;
         LightColor = lightColor;
         DarkColor = darkColor;
     }
