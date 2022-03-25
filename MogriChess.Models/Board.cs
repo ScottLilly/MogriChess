@@ -8,21 +8,7 @@ namespace MogriChess.Models;
 
 public class Board : INotifyPropertyChanged
 {
-    private ColorScheme _boardColorScheme;
-
-    public ColorScheme BoardColorScheme
-    {
-        get => _boardColorScheme;
-        set
-        {
-            if(_boardColorScheme != value)
-            {
-                _boardColorScheme = value;
-                ChangeSquaresColorScheme(value);
-            }
-        }
-    }
-
+    public ColorScheme BoardColorScheme { get; set; }
     public ColorScheme PieceColorScheme { get; }
 
     public ObservableDictionary<string, Square> Squares { get; } =
@@ -116,20 +102,13 @@ public class Board : INotifyPropertyChanged
         {
             for (int file = 1; file <= Constants.NumberOfFiles; file++)
             {
-                Square square = new Square(rank, file, BoardColorScheme);
+                Square square = new Square(rank, file);
 
                 Squares.Add(square.SquareShorthand, square);
             }
         }
     }
 
-    private void ChangeSquaresColorScheme(ColorScheme colorScheme)
-    {
-        foreach (Square square in Squares.Values)
-        {
-            square.ColorScheme = colorScheme;
-        }
-    }
     private Piece ClonePiece(Piece piece)
     {
         if (piece == null)
