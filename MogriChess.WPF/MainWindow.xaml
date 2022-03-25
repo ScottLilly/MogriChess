@@ -140,9 +140,31 @@
 
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Canvas Background="{Binding SquareColor}"
-                                    ZIndex="1"
+                            <Canvas ZIndex="1"
                                     MouseLeftButtonUp="ClickedOnSquare_OnMouseLeftButtonUp">
+
+                                <!-- Set base square color -->
+                                <Canvas.Style>
+                                    <Style TargetType="{x:Type Canvas}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Color}" Value="Light">
+                                                <Setter Property="Background"
+                                                        Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}},
+                                                                        Path=DataContext.Board.BoardColorScheme.LightColor,
+                                                                        Mode=TwoWay,
+                                                                        UpdateSourceTrigger=PropertyChanged}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Color}" Value="Dark">
+                                                <Setter Property="Background"
+                                                        Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}},
+                                                                        Path=DataContext.Board.BoardColorScheme.DarkColor,
+                                                                        Mode=TwoWay,
+                                                                        UpdateSourceTrigger=PropertyChanged}"/>
+                                            </DataTrigger>
+
+                                        </Style.Triggers>
+                                    </Style>
+                                </Canvas.Style>
 
                                 <!-- Highlight square if it's the currently-selected square -->
                                 <Canvas Width="90" Height="90"
