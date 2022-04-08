@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MogriChess.Services", "Mogr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.MogriChess.ViewModels", "Test.MogriChess.ViewModels\Test.MogriChess.ViewModels.csproj", "{7215E222-F9E7-482F-AA07-2299C21ED431}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmark.MogriChess", "Benchmark.MogriChess\Benchmark.MogriChess.csproj", "{B8C8ED57-E0A8-44B8-ABE0-EFD49E94D807}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MogriChess.Core", "MogriChess.Core\MogriChess.Core.csproj", "{43B71D62-69CB-4D23-97E5-8498492A1CB9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5D5099C2-CF5C-4F29-A1E0-ECDCC22EFBA5}"
@@ -50,10 +48,6 @@ Global
 		{7215E222-F9E7-482F-AA07-2299C21ED431}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7215E222-F9E7-482F-AA07-2299C21ED431}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7215E222-F9E7-482F-AA07-2299C21ED431}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B8C8ED57-E0A8-44B8-ABE0-EFD49E94D807}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B8C8ED57-E0A8-44B8-ABE0-EFD49E94D807}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B8C8ED57-E0A8-44B8-ABE0-EFD49E94D807}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B8C8ED57-E0A8-44B8-ABE0-EFD49E94D807}.Release|Any CPU.Build.0 = Release|Any CPU
 		{43B71D62-69CB-4D23-97E5-8498492A1CB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{43B71D62-69CB-4D23-97E5-8498492A1CB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43B71D62-69CB-4D23-97E5-8498492A1CB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
