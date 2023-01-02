@@ -23,17 +23,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="MogriChessIcon.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="C:\Users\Scott\Desktop\MogriChessIcon.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
