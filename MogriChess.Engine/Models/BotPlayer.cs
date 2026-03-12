@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using MogriChess.Core;
+using MogriChess.Engine.Core;
 
-namespace MogriChess.Models;
+namespace MogriChess.Engine.Models;
 
 public class BotPlayer(Enums.Color botColor,
     PieceValueCalculator pieceValueCalculator)

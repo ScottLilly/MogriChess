@@ -1,4 +1,4 @@
-namespace MogriChess.Models;
+namespace MogriChess.Engine.Models;
 
 public readonly record struct MoveStruct(
     string MovingPieceColor,

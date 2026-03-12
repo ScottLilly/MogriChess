@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using MogriChess.ViewModels;
+using System.Windows;
+using MogriChess.Engine.ViewModels;
 
 namespace MogriChess.WPF.Windows;
 

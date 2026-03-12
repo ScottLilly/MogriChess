@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace MogriChess.Core;
+namespace MogriChess.Engine.Core;
 
 public static class RngCreator
 {

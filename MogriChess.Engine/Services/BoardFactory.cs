@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MogriChess.Models;
+using MogriChess.Engine.Models;
 
-namespace MogriChess.Services;
+namespace MogriChess.Engine.Services;
 
 public static class BoardFactory
 {

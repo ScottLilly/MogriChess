@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using MogriChess.Models;
+using MogriChess.Engine.Models;
 
-namespace MogriChess.ViewModels.DTOs;
+namespace MogriChess.Engine.ViewModels.DTOs;
 
 public class GameStateDTO
 {

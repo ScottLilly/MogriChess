@@ -1,8 +1,7 @@
-﻿using MogriChess.Models;
+﻿using MogriChess.Engine.Models;
+using Constants = MogriChess.Engine.Models.Constants;
 
-using Constants = MogriChess.Models.Constants;
-
-namespace MogriChess.Services;
+namespace MogriChess.Engine.Services;
 
 public static class PieceFactory
 {

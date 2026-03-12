@@ -1,6 +1,6 @@
 using System;
 
-namespace MogriChess.Models;
+namespace MogriChess.Engine.Models;
 
 public static class ModelFunctions
 {

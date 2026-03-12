@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MogriChess.Core;
+namespace MogriChess.Engine.Core;
 
 public static class ExtensionMethods
 {

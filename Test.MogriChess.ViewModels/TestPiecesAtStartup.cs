@@ -1,5 +1,5 @@
-﻿using MogriChess.Models;
-using MogriChess.ViewModels;
+﻿using MogriChess.Engine.Models;
+using MogriChess.Engine.ViewModels;
 using Xunit;
 
 namespace Test.MogriChess.ViewModels;

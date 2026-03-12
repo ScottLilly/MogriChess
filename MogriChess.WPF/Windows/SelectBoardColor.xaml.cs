@@ -1,6 +1,6 @@
 ﻿using System.Windows;
-using MogriChess.Models;
-using MogriChess.ViewModels;
+using MogriChess.Engine.Models;
+using MogriChess.Engine.ViewModels;
 
 namespace MogriChess.WPF.Windows
 {

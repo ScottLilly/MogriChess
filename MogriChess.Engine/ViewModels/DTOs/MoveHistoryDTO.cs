@@ -1,4 +1,4 @@
-﻿namespace MogriChess.ViewModels.DTOs;
+﻿namespace MogriChess.Engine.ViewModels.DTOs;
 
 public class MoveHistoryDTO
 {

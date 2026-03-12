@@ -1,6 +1,6 @@
-using MogriChess.Core;
+using MogriChess.Engine.Core;
 
-namespace MogriChess.Models;
+namespace MogriChess.Engine.Models;
 
 public class Move(Square originationSquare, Square destinationSquare) : ObservableObject
 {
