@@ -1,24 +1,75 @@
-﻿using System.ComponentModel;
+using MogriChess.Core;
 
 namespace MogriChess.Models;
 
-public class Piece : INotifyPropertyChanged
+public class Piece : ObservableObject
 {
     public ColorScheme ColorScheme { get; }
     public Enums.Color Color { get; }
     public Enums.PieceType PieceType { get; }
-    public bool IsPromoted { get; set; }
+    private bool _isPromoted;
 
-    public int Forward { get; set; }
-    public int ForwardRight { get; set; }
-    public int Right { get; set; }
-    public int BackRight { get; set; }
-    public int Back { get; set; }
-    public int BackLeft { get; set; }
-    public int Left { get; set; }
-    public int ForwardLeft { get; set; }
+    private int _forward;
+    private int _forwardRight;
+    private int _right;
+    private int _backRight;
+    private int _back;
+    private int _backLeft;
+    private int _left;
+    private int _forwardLeft;
 
-    public event PropertyChangedEventHandler PropertyChanged;
+    public bool IsPromoted
+    {
+        get => _isPromoted;
+        set
+        {
+            if (SetProperty(ref _isPromoted, value))
+            {
+                OnPropertyChanged(nameof(IsUnpromotedPawn));
+            }
+        }
+    }
+
+    public int Forward
+    {
+        get => _forward;
+        set => SetProperty(ref _forward, value);
+    }
+    public int ForwardRight
+    {
+        get => _forwardRight;
+        set => SetProperty(ref _forwardRight, value);
+    }
+    public int Right
+    {
+        get => _right;
+        set => SetProperty(ref _right, value);
+    }
+    public int BackRight
+    {
+        get => _backRight;
+        set => SetProperty(ref _backRight, value);
+    }
+    public int Back
+    {
+        get => _back;
+        set => SetProperty(ref _back, value);
+    }
+    public int BackLeft
+    {
+        get => _backLeft;
+        set => SetProperty(ref _backLeft, value);
+    }
+    public int Left
+    {
+        get => _left;
+        set => SetProperty(ref _left, value);
+    }
+    public int ForwardLeft
+    {
+        get => _forwardLeft;
+        set => SetProperty(ref _forwardLeft, value);
+    }
 
     public bool IsKing =>
         PieceType == Enums.PieceType.King;
@@ -47,15 +98,15 @@ public class Piece : INotifyPropertyChanged
         ColorScheme = colorScheme;
         Color = color;
         PieceType = type;
-        IsPromoted = isPromoted;
+        _isPromoted = isPromoted;
 
-        Forward = squaresForward;
-        ForwardRight = squaresForwardRight;
-        Right = squaresRight;
-        BackRight = squaresBackRight;
-        Back = squaresBack;
-        BackLeft = squaresBackLeft;
-        Left = squaresLeft;
-        ForwardLeft = squaresForwardLeft;
+        _forward = squaresForward;
+        _forwardRight = squaresForwardRight;
+        _right = squaresRight;
+        _backRight = squaresBackRight;
+        _back = squaresBack;
+        _backLeft = squaresBackLeft;
+        _left = squaresLeft;
+        _forwardLeft = squaresForwardLeft;
     }
 }

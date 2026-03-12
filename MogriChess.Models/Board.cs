@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -6,15 +6,19 @@ using MogriChess.Core;
 
 namespace MogriChess.Models;
 
-public class Board : INotifyPropertyChanged
+public class Board : ObservableObject
 {
-    public ColorScheme BoardColorScheme { get; set; }
+    private ColorScheme _boardColorScheme;
+
+    public ColorScheme BoardColorScheme
+    {
+        get => _boardColorScheme;
+        set => SetProperty(ref _boardColorScheme, value);
+    }
     public ColorScheme PieceColorScheme { get; }
 
     public ObservableDictionary<string, Square> Squares { get; } =
         new ObservableDictionary<string, Square>();
-
-    public event PropertyChangedEventHandler PropertyChanged;
 
     public Board(ColorScheme boardColorScheme, ColorScheme piecesColorScheme)
     {

@@ -1,15 +1,19 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.Collections.ObjectModel;
 using System.Linq;
+using MogriChess.Core;
 using MogriChess.Models;
 
 namespace MogriChess.ViewModels;
 
-public class SelectBoardColorViewModel : INotifyPropertyChanged
+public class SelectBoardColorViewModel : ObservableObject
 {
-    public ColorScheme SelectedColorScheme { get; set; }
+    private ColorScheme _selectedColorScheme;
 
-    public event PropertyChangedEventHandler PropertyChanged;
+    public ColorScheme SelectedColorScheme
+    {
+        get => _selectedColorScheme;
+        set => SetProperty(ref _selectedColorScheme, value);
+    }
 
     public ObservableCollection<ColorScheme> ColorSchemes { get; } =
         new ObservableCollection<ColorScheme>();

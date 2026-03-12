@@ -1,18 +1,42 @@
-﻿using System.ComponentModel;
 using MogriChess.Core;
 
 namespace MogriChess.Models;
 
-public class Square : INotifyPropertyChanged
+public class Square : ObservableObject
 {
     private string FileAsLetter =>
         "abcdefgh".Substring(File - 1, 1);
 
     public int Rank { get; }
     public int File { get; }
-    public Piece Piece { get; set; }
-    public bool IsSelected { get; set; }
-    public bool IsValidDestination { get; set; }
+
+    private Piece _piece;
+    private bool _isSelected;
+    private bool _isValidDestination;
+
+    public Piece Piece
+    {
+        get => _piece;
+        set
+        {
+            if (SetProperty(ref _piece, value))
+            {
+                OnPropertyChanged(nameof(IsEmpty));
+            }
+        }
+    }
+
+    public bool IsSelected
+    {
+        get => _isSelected;
+        set => SetProperty(ref _isSelected, value);
+    }
+
+    public bool IsValidDestination
+    {
+        get => _isValidDestination;
+        set => SetProperty(ref _isValidDestination, value);
+    }
 
     public bool IsEmpty => Piece == null;
     public Enums.Color Color =>
@@ -22,8 +46,6 @@ public class Square : INotifyPropertyChanged
     public string SquareShorthand => $"{FileAsLetter}{Rank}";
     public int UiGridRow => Constants.NumberOfRanks - Rank;
     public int UiGridColumn => File - 1;
-
-    public event PropertyChangedEventHandler PropertyChanged;
 
     public Square(int rank, int file)
     {

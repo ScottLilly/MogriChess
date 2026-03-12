@@ -1,18 +1,78 @@
-﻿using System.ComponentModel;
+using MogriChess.Core;
 
 namespace MogriChess.Models;
 
-public class Move : INotifyPropertyChanged
+public class Move : ObservableObject
 {
     public Enums.Color MovingPieceColor { get; }
     public Square OriginationSquare { get; }
     public Square DestinationSquare { get; }
 
-    public bool PutsOpponentInCheckmate { get; set; }
-    public bool PutsOpponentInCheck { get; set; }
-    public bool IsCapturingMove { get; set; }
-    public bool IsPromotingMove { get; set; }
-    public bool IsDrawFromMaxMoves { get; set; }
+    private bool _putsOpponentInCheckmate;
+    private bool _putsOpponentInCheck;
+    private bool _isCapturingMove;
+    private bool _isPromotingMove;
+    private bool _isDrawFromMaxMoves;
+
+    public bool PutsOpponentInCheckmate
+    {
+        get => _putsOpponentInCheckmate;
+        set
+        {
+            if (SetProperty(ref _putsOpponentInCheckmate, value))
+            {
+                OnPropertyChanged(nameof(MoveResult));
+            }
+        }
+    }
+
+    public bool PutsOpponentInCheck
+    {
+        get => _putsOpponentInCheck;
+        set
+        {
+            if (SetProperty(ref _putsOpponentInCheck, value))
+            {
+                OnPropertyChanged(nameof(MoveResult));
+            }
+        }
+    }
+
+    public bool IsCapturingMove
+    {
+        get => _isCapturingMove;
+        set
+        {
+            if (SetProperty(ref _isCapturingMove, value))
+            {
+                OnPropertyChanged(nameof(MoveResult));
+            }
+        }
+    }
+
+    public bool IsPromotingMove
+    {
+        get => _isPromotingMove;
+        set
+        {
+            if (SetProperty(ref _isPromotingMove, value))
+            {
+                OnPropertyChanged(nameof(MoveResult));
+            }
+        }
+    }
+
+    public bool IsDrawFromMaxMoves
+    {
+        get => _isDrawFromMaxMoves;
+        set
+        {
+            if (SetProperty(ref _isDrawFromMaxMoves, value))
+            {
+                OnPropertyChanged(nameof(MoveResult));
+            }
+        }
+    }
 
     public string MoveShorthand =>
         $"{OriginationSquare.SquareShorthand}:{DestinationSquare.SquareShorthand}";
@@ -23,8 +83,6 @@ public class Move : INotifyPropertyChanged
         IsDrawFromMaxMoves ? "Draw" :
         IsCapturingMove ? "Capture" :
         IsPromotingMove ? "Promotion" : "";
-
-    public event PropertyChangedEventHandler PropertyChanged;
 
     public Move(Square originationSquare, Square destinationSquare)
     {

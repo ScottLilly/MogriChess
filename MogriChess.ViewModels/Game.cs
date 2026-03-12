@@ -1,7 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using MogriChess.Core;
@@ -11,7 +10,7 @@ using MogriChess.Services;
 
 namespace MogriChess.ViewModels;
 
-public class Game : INotifyPropertyChanged
+public class Game : ObservableObject
 {
     public const int MAX_MOVES_WITHOUT_CAPTURE = 50;
 
@@ -79,7 +78,10 @@ public class Game : INotifyPropertyChanged
         get => _currentPlayerColor;
         set
         {
-            _currentPlayerColor = value;
+            if (!SetProperty(ref _currentPlayerColor, value))
+            {
+                return;
+            }
 
             if (_currentPlayerColor == Enums.Color.NotSelected)
             {
@@ -100,7 +102,10 @@ public class Game : INotifyPropertyChanged
         get => _displayValidDestinations;
         set
         {
-            _displayValidDestinations = value;
+            if (!SetProperty(ref _displayValidDestinations, value))
+            {
+                return;
+            }
 
             SetValidDestinations();
         }
@@ -113,7 +118,6 @@ public class Game : INotifyPropertyChanged
         new ObservableCollection<MoveStruct>();
 
     public event EventHandler<GameEndedEventArgs> GameEnded;
-    public event PropertyChangedEventHandler PropertyChanged;
 
     public Game(GameConfig gameConfig = null)
     {
