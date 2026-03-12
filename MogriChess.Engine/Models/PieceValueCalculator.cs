@@ -1,13 +1,8 @@
 ﻿namespace MogriChess.Models;
 
-public class PieceValueCalculator
+public class PieceValueCalculator(PieceValueCalculatorGenome genome)
 {
-    private readonly PieceValueCalculatorGenome _genome;
-
-    public PieceValueCalculator(PieceValueCalculatorGenome genome)
-    {
-        _genome = genome;
-    }
+    private readonly PieceValueCalculatorGenome _genome = genome;
 
     public int CalculatePieceValue(Piece piece)
     {

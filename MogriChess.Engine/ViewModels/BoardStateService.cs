@@ -1,0 +1,21 @@
+using System.Text.Json;
+using MogriChess.ViewModels.DTOs;
+
+namespace MogriChess.ViewModels;
+
+public static class BoardStateService
+{
+    private static readonly JsonSerializerOptions options = new() { WriteIndented = true };
+
+    public static string GetSerializedGameState(Game currentGame)
+    {
+        return JsonSerializer.Serialize(
+            Mapper.ToGameStateDto(currentGame), options);
+    }
+
+    public static string GetSerializedMoveHistory(Game currentGame)
+    {
+        return JsonSerializer.Serialize(
+            Mapper.ToMoveHistoryDtos(currentGame.MoveHistory), options);
+    }
+}

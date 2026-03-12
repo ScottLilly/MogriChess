@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -6,15 +6,19 @@ using MogriChess.Core;
 
 namespace MogriChess.Models;
 
-public class Board : INotifyPropertyChanged
+public class Board : ObservableObject
 {
-    public ColorScheme BoardColorScheme { get; set; }
+    private ColorScheme _boardColorScheme;
+
+    public ColorScheme BoardColorScheme
+    {
+        get => _boardColorScheme;
+        set => SetProperty(ref _boardColorScheme, value);
+    }
     public ColorScheme PieceColorScheme { get; }
 
     public ObservableDictionary<string, Square> Squares { get; } =
-        new ObservableDictionary<string, Square>();
-
-    public event PropertyChangedEventHandler PropertyChanged;
+        [];
 
     public Board(ColorScheme boardColorScheme, ColorScheme piecesColorScheme)
     {
@@ -27,8 +31,7 @@ public class Board : INotifyPropertyChanged
     #region Public methods
 
     public IEnumerable<Move> LegalMovesForPieceAt(int rank, int file) =>
-        PotentialMovesForPieceAt(ModelFunctions.GetShorthand(rank, file))
-            .Where(m => GetSimulatedMoveResult(m, () => KingCannotBeCaptured(m.MovingPieceColor)));
+        PotentialMovesForPieceAt(ModelFunctions.GetShorthand(rank, file));
 
     public void MovePiece(Square originationSquare, Square destinationSquare)
     {
@@ -48,9 +51,7 @@ public class Board : INotifyPropertyChanged
         Squares.Values.Where(s => s.Piece?.Color == color);
 
     public List<Move> LegalMovesForPlayer(Enums.Color playerColor) =>
-        SquaresWithPiecesOfColor(playerColor)
-            .SelectMany(square => LegalMovesForPieceAt(square.Rank, square.File))
-            .ToList();
+        GameEngine.GetLegalMovesForPlayer(this, playerColor).ToList();
 
     public T GetSimulatedMoveResult<T>(Move move, Func<T> func)
     {
@@ -127,7 +128,7 @@ public class Board : INotifyPropertyChanged
     {
         Square originationSquare = Squares[squareShorthand];
 
-        List<Move> validMoves = new List<Move>();
+        List<Move> validMoves = [];
 
         if (originationSquare.Piece == null)
         {
@@ -149,7 +150,7 @@ public class Board : INotifyPropertyChanged
     private List<Move> PotentialMovesInDirection(Square originationSquare,
         Enums.Direction direction)
     {
-        List<Move> potentialMoves = new List<Move>();
+        List<Move> potentialMoves = [];
 
         Piece movingPiece = originationSquare.Piece;
 

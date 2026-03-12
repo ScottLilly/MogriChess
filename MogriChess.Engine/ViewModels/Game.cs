@@ -1,7 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using MogriChess.Core;
@@ -11,7 +10,7 @@ using MogriChess.Services;
 
 namespace MogriChess.ViewModels;
 
-public class Game : INotifyPropertyChanged
+public class Game(GameConfig gameConfig = null) : ObservableObject
 {
     public const int MAX_MOVES_WITHOUT_CAPTURE = 50;
 
@@ -58,28 +57,24 @@ public class Game : INotifyPropertyChanged
         get => _selectedSquare;
         set
         {
-            if (SelectedSquare != null)
-            {
-                SelectedSquare.IsSelected = false;
-            }
+            SelectedSquare?.IsSelected = false;
 
             _selectedSquare = value;
 
-            if (SelectedSquare != null)
-            {
-                SelectedSquare.IsSelected = true;
-            }
+            SelectedSquare?.IsSelected = true;
         }
     }
-    private ObservableCollection<Move> ValidDestinationsForSelectedPiece { get; } =
-        new ObservableCollection<Move>();
+    private ObservableCollection<Move> ValidDestinationsForSelectedPiece { get; } = [];
 
     public Enums.Color CurrentPlayerColor
     {
         get => _currentPlayerColor;
         set
         {
-            _currentPlayerColor = value;
+            if (!SetProperty(ref _currentPlayerColor, value))
+            {
+                return;
+            }
 
             if (_currentPlayerColor == Enums.Color.NotSelected)
             {
@@ -100,28 +95,22 @@ public class Game : INotifyPropertyChanged
         get => _displayValidDestinations;
         set
         {
-            _displayValidDestinations = value;
+            if (!SetProperty(ref _displayValidDestinations, value))
+            {
+                return;
+            }
 
             SetValidDestinations();
         }
     }
-    public string SelectedSquareColor { get; private set; }
-    public string ValidDestinationSquareColor { get; private set; }
-    public Board Board { get; }
+    public string SelectedSquareColor { get; private set; } = gameConfig?.SelectedSquareColor ?? "";
+    public string ValidDestinationSquareColor { get; private set; } = gameConfig?.ValidDestinationSquareColor ?? "";
+    public Board Board { get; } = BoardFactory.GetNewGameBoard(gameConfig);
 
     public ObservableCollection<MoveStruct> MoveHistory { get; } =
-        new ObservableCollection<MoveStruct>();
+        [];
 
     public event EventHandler<GameEndedEventArgs> GameEnded;
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    public Game(GameConfig gameConfig = null)
-    {
-        SelectedSquareColor = gameConfig?.SelectedSquareColor ?? "";
-        ValidDestinationSquareColor = gameConfig?.ValidDestinationSquareColor ?? "";
-
-        Board = BoardFactory.GetNewGameBoard(gameConfig);
-    }
 
     public void StartGame(Enums.PlayerType lightPlayer = Enums.PlayerType.Human,
         Enums.PlayerType darkPlayer = Enums.PlayerType.Human)
@@ -225,23 +214,28 @@ public class Game : INotifyPropertyChanged
             return;
         }
 
+        bool wasPawnMove = SelectedSquare?.Piece?.PieceType == Enums.PieceType.Pawn;
+
         Board.MovePiece(SelectedSquare, square);
 
         DetermineIfMovePutsOpponentInCheckOrCheckmate(move);
 
-        if (string.IsNullOrWhiteSpace(move.MoveResult) &&
+        bool moveResetsDrawCounter = move.IsCapturingMove || wasPawnMove;
+
+        if (!moveResetsDrawCounter &&
             MoveHistory.Count >= (MAX_MOVES_WITHOUT_CAPTURE - 1) &&
-            MoveHistory.TakeLast(MAX_MOVES_WITHOUT_CAPTURE - 1).All(m => string.IsNullOrEmpty(m.MoveResult)))
+            MoveHistory.TakeLast(MAX_MOVES_WITHOUT_CAPTURE - 1)
+                .All(m => !m.IsCapture && !m.IsPawnMove))
         {
             move.IsDrawFromMaxMoves = true;
         }
 
-        MoveHistory.Add(new MoveStruct
-        {
-            MoveResult = move.MoveResult,
-            MoveShorthand = move.MoveShorthand,
-            MovingPieceColor = move.MovingPieceColor.ToString()
-        });
+        MoveHistory.Add(new MoveStruct(
+            move.MovingPieceColor.ToString(),
+            move.MoveShorthand,
+            move.MoveResult,
+            move.IsCapturingMove,
+            wasPawnMove));
 
         EndCurrentPlayerTurn(move);
     }
@@ -252,7 +246,7 @@ public class Game : INotifyPropertyChanged
         {
             move.PutsOpponentInCheck = true;
             move.PutsOpponentInCheckmate =
-                PlayerIsInCheckmate(move.MovingPieceColor.OppositeColor());
+                GameEngine.IsPlayerInCheckmate(Board, move.MovingPieceColor.OppositeColor());
         }
     }
 
@@ -305,7 +299,7 @@ public class Game : INotifyPropertyChanged
 
         if (SelectedSquare == null)
         {
-            return new List<Move>();
+            return [];
         }
 
         return _legalMovesForCurrentPlayer
@@ -319,20 +313,9 @@ public class Game : INotifyPropertyChanged
         Board.ClearValidDestinations();
     }
 
-    private bool PlayerIsInCheckmate(Enums.Color playerColor) =>
-        Board.SquaresWithPiecesOfColor(playerColor)
-            .All(square => Board.PotentialMovesForPieceAt(square)
-                .None(move => MoveGetsKingOutOfCheck(playerColor, move)));
-
-    private bool MoveGetsKingOutOfCheck(Enums.Color kingColor, Move potentialMove)
-    {
-        return Board.GetSimulatedMoveResult(potentialMove,
-            () => Board.KingCannotBeCaptured(kingColor));
-    }
-
     private void CacheLegalMovesForCurrentPlayer() =>
         _legalMovesForCurrentPlayer =
-            Board.LegalMovesForPlayer(_currentPlayerColor);
+            GameEngine.GetLegalMovesForPlayer(Board, _currentPlayerColor);
 
     private async void MakeBotMove(BotPlayer botPlayer)
     {

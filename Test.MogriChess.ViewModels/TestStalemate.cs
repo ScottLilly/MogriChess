@@ -1,9 +1,4 @@
-﻿using System.Linq;
-using MogriChess.Models;
-using MogriChess.Services;
-using Xunit;
-
-namespace Test.MogriChess.ViewModels
+﻿namespace Test.MogriChess.ViewModels
 {
     public class TestStalemate
     {

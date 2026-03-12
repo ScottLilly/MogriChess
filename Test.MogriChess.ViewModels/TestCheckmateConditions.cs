@@ -1,13 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using MogriChess.Models;
-using MogriChess.Services;
-using MogriChess.ViewModels;
-using MogriChess.ViewModels.DTOs;
-using Test.MogriChess.ViewModels.Utilities;
-using Xunit;
-
-namespace Test.MogriChess.ViewModels;
+﻿namespace Test.MogriChess.ViewModels;
 
 public class TestCheckmateConditions
 {

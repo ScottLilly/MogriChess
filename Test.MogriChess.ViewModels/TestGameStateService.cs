@@ -1,11 +1,4 @@
-﻿using System.IO;
-using MogriChess.Models;
-using MogriChess.ViewModels;
-using MogriChess.ViewModels.DTOs;
-using Xunit;
-
-
-namespace Test.MogriChess.ViewModels
+﻿namespace Test.MogriChess.ViewModels
 {
     public class TestGameStateService
     {
