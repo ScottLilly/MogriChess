@@ -256,7 +256,7 @@ public class Game : ObservableObject
         {
             move.PutsOpponentInCheck = true;
             move.PutsOpponentInCheckmate =
-                PlayerIsInCheckmate(move.MovingPieceColor.OppositeColor());
+                GameEngine.IsPlayerInCheckmate(Board, move.MovingPieceColor.OppositeColor());
         }
     }
 
@@ -323,20 +323,9 @@ public class Game : ObservableObject
         Board.ClearValidDestinations();
     }
 
-    private bool PlayerIsInCheckmate(Enums.Color playerColor) =>
-        Board.SquaresWithPiecesOfColor(playerColor)
-            .All(square => Board.PotentialMovesForPieceAt(square)
-                .None(move => MoveGetsKingOutOfCheck(playerColor, move)));
-
-    private bool MoveGetsKingOutOfCheck(Enums.Color kingColor, Move potentialMove)
-    {
-        return Board.GetSimulatedMoveResult(potentialMove,
-            () => Board.KingCannotBeCaptured(kingColor));
-    }
-
     private void CacheLegalMovesForCurrentPlayer() =>
         _legalMovesForCurrentPlayer =
-            Board.LegalMovesForPlayer(_currentPlayerColor);
+            GameEngine.GetLegalMovesForPlayer(Board, _currentPlayerColor);
 
     private async void MakeBotMove(BotPlayer botPlayer)
     {

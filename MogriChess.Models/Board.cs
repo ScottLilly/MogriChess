@@ -31,8 +31,7 @@ public class Board : ObservableObject
     #region Public methods
 
     public IEnumerable<Move> LegalMovesForPieceAt(int rank, int file) =>
-        PotentialMovesForPieceAt(ModelFunctions.GetShorthand(rank, file))
-            .Where(m => GetSimulatedMoveResult(m, () => KingCannotBeCaptured(m.MovingPieceColor)));
+        PotentialMovesForPieceAt(ModelFunctions.GetShorthand(rank, file));
 
     public void MovePiece(Square originationSquare, Square destinationSquare)
     {
@@ -52,9 +51,7 @@ public class Board : ObservableObject
         Squares.Values.Where(s => s.Piece?.Color == color);
 
     public List<Move> LegalMovesForPlayer(Enums.Color playerColor) =>
-        SquaresWithPiecesOfColor(playerColor)
-            .SelectMany(square => LegalMovesForPieceAt(square.Rank, square.File))
-            .ToList();
+        GameEngine.GetLegalMovesForPlayer(this, playerColor).ToList();
 
     public T GetSimulatedMoveResult<T>(Move move, Func<T> func)
     {
