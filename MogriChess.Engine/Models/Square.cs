@@ -4,8 +4,7 @@ namespace MogriChess.Engine.Models;
 
 public class Square(int rank, int file) : ObservableObject
 {
-    private string FileAsLetter =>
-        "abcdefgh".Substring(File - 1, 1);
+    private string FileAsLetter => "abcdefgh".Substring(File - 1, 1);
 
     public int Rank { get; } = rank;
     public int File { get; } = file;
@@ -39,10 +38,7 @@ public class Square(int rank, int file) : ObservableObject
     }
 
     public bool IsEmpty => Piece == null;
-    public Color Color =>
-        (Rank + File).IsEven()
-            ? Color.Dark
-            : Color.Light;
+    public Color Color => (Rank + File).IsEven() ? Color.Dark : Color.Light;
     public string SquareShorthand => $"{FileAsLetter}{Rank}";
     public int UiGridRow => Constants.NumberOfRanks - Rank;
     public int UiGridColumn => File - 1;

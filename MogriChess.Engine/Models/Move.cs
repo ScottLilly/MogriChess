@@ -3,18 +3,11 @@ namespace MogriChess.Engine.Models;
 /// <summary>
 /// Core representation of a move in the engine, independent of UI concerns.
 /// </summary>
-public class Move
+public class Move(Square originationSquare, Square destinationSquare)
 {
-    public Move(Square originationSquare, Square destinationSquare)
-    {
-        OriginationSquare = originationSquare;
-        DestinationSquare = destinationSquare;
-        MovingPieceColor = originationSquare.Piece.Color;
-    }
-
-    public Color MovingPieceColor { get; }
-    public Square OriginationSquare { get; }
-    public Square DestinationSquare { get; }
+    public Color MovingPieceColor { get; } = originationSquare.Piece.Color;
+    public Square OriginationSquare { get; } = originationSquare;
+    public Square DestinationSquare { get; } = destinationSquare;
 
     public bool PutsOpponentInCheckmate { get; set; }
     public bool PutsOpponentInCheck { get; set; }

@@ -129,4 +129,3 @@ public static class MoveGenerator
             : (-multipliers.rankMultiplier, -multipliers.fileMultiplier);
     }
 }
-

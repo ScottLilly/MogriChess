@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using MogriChess.Engine.Core;
 
@@ -138,8 +137,6 @@ public class Board : ObservableObject
             piece.Back, piece.BackLeft,
             piece.Left, piece.ForwardLeft);
     }
-
-    // Move generation is handled by MoveGenerator to keep Board focused on state management.
 
     private static Piece CapturePiece(Piece movingPiece, Piece capturedPiece)
     {
