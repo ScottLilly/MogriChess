@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2007, Dr. WPF
+/* Copyright (c) 2007, Dr. WPF
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -602,9 +602,10 @@ namespace MogriChess.Core
 
         #region protected classes
 
-        #region KeyedDictionaryEntryCollection<TKey>
+        #region KeyedDictionaryEntryCollection<TInternalKey>
 
-        protected class KeyedDictionaryEntryCollection<TKey> : KeyedCollection<TKey, DictionaryEntry>
+        #pragma warning disable CS0693
+        protected class KeyedDictionaryEntryCollection<TInternalKey> : KeyedCollection<TInternalKey, DictionaryEntry>
         {
             #region constructors
 
@@ -612,7 +613,7 @@ namespace MogriChess.Core
 
             public KeyedDictionaryEntryCollection() : base() { }
 
-            public KeyedDictionaryEntryCollection(IEqualityComparer<TKey> comparer) : base(comparer) { }
+            public KeyedDictionaryEntryCollection(IEqualityComparer<TInternalKey> comparer) : base(comparer) { }
 
             #endregion public
 
@@ -622,17 +623,18 @@ namespace MogriChess.Core
 
             #region protected
 
-            protected override TKey GetKeyForItem(DictionaryEntry entry)
+            protected override TInternalKey GetKeyForItem(DictionaryEntry entry)
             {
-                return (TKey)entry.Key;
+                return (TInternalKey)entry.Key;
             }
 
             #endregion protected
 
             #endregion methods
         }
+        #pragma warning restore CS0693
 
-        #endregion KeyedDictionaryEntryCollection<TKey>
+        #endregion KeyedDictionaryEntryCollection<TInternalKey>
 
         #endregion protected classes
 
@@ -641,6 +643,7 @@ namespace MogriChess.Core
         #region Enumerator
 
         [Serializable, StructLayout(LayoutKind.Sequential)]
+        #pragma warning disable CS0693
         public struct Enumerator<TKey, TValue> : IEnumerator<KeyValuePair<TKey, TValue>>, IDisposable, IDictionaryEnumerator, IEnumerator
         {
             #region constructors
@@ -788,6 +791,7 @@ namespace MogriChess.Core
 
             #endregion fields
         }
+        #pragma warning restore CS0693
 
         #endregion Enumerator
 

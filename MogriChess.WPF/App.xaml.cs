@@ -35,10 +35,10 @@ public partial class App : Application
 
     private void ConfigureServices(IServiceCollection services)
     {
-        services.AddSingleton(typeof(MainWindow));
-        services.AddTransient(typeof(Help));
-        services.AddTransient(typeof(About));
-        services.AddTransient(typeof(SelectBoardColor));
+        services.AddSingleton<MainWindow>();
+        services.AddTransient<Help>();
+        services.AddTransient<About>();
+        services.AddTransient<SelectBoardColor>();
 
         var gameConfig = Configuration.Get<GameConfig>();
         services.AddSingleton(gameConfig);
