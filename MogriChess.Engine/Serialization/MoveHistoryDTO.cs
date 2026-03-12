@@ -1,4 +1,4 @@
-﻿namespace MogriChess.Engine.DTOs;
+namespace MogriChess.Engine.Serialization;
 
 public class MoveHistoryDTO
 {

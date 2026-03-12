@@ -7,6 +7,7 @@ using MogriChess.Engine.Core;
 using MogriChess.Engine.CustomEventArgs;
 using MogriChess.Engine.Models;
 using MogriChess.Engine.Services;
+using MogriChess.Engine.Serialization;
 
 namespace MogriChess.Engine.ViewModels;
 
@@ -15,35 +16,35 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
     public const int MAX_MOVES_WITHOUT_CAPTURE = 50;
 
     private bool _displayValidDestinations = true;
-    private Enums.Color _currentPlayerColor = Enums.Color.NotSelected;
-    private Enums.GameStatus _status = Enums.GameStatus.Preparing;
+    private Color _currentPlayerColor = Color.NotSelected;
+    private GameStatus _status = GameStatus.Preparing;
     private Square _selectedSquare;
     private IEnumerable<Move> _legalMovesForCurrentPlayer;
 
-    private Enums.GameStatus Status
+    private GameStatus Status
     {
         get => _status;
         set
         {
             // If status changed to game-ending status, handle events and end game
             if (_status != value &&
-                _status == Enums.GameStatus.Playing)
+                _status == GameStatus.Playing)
             {
-                if (value == Enums.GameStatus.Stalemate)
+                if (value == GameStatus.Stalemate)
                 {
-                    GameEnded?.Invoke(this, new GameEndedEventArgs(Enums.GameStatus.Stalemate));
+                    GameEnded?.Invoke(this, new GameEndedEventArgs(GameStatus.Stalemate));
                 }
-                else if (value == Enums.GameStatus.CheckmateByLight)
+                else if (value == GameStatus.CheckmateByLight)
                 {
-                    GameEnded?.Invoke(this, new GameEndedEventArgs(Enums.GameStatus.CheckmateByLight));
+                    GameEnded?.Invoke(this, new GameEndedEventArgs(GameStatus.CheckmateByLight));
                 }
-                else if (value == Enums.GameStatus.CheckmateByDark)
+                else if (value == GameStatus.CheckmateByDark)
                 {
-                    GameEnded?.Invoke(this, new GameEndedEventArgs(Enums.GameStatus.CheckmateByDark));
+                    GameEnded?.Invoke(this, new GameEndedEventArgs(GameStatus.CheckmateByDark));
                 }
-                else if (value == Enums.GameStatus.DrawNoCaptures)
+                else if (value == GameStatus.DrawNoCaptures)
                 {
-                    GameEnded?.Invoke(this, new GameEndedEventArgs(Enums.GameStatus.DrawNoCaptures));
+                    GameEnded?.Invoke(this, new GameEndedEventArgs(GameStatus.DrawNoCaptures));
                 }
             }
 
@@ -64,9 +65,9 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
             SelectedSquare?.IsSelected = true;
         }
     }
-    private ObservableCollection<Move> ValidDestinationsForSelectedPiece { get; } = [];
+    private ObservableCollection<MoveViewModel> ValidDestinationsForSelectedPiece { get; } = [];
 
-    public Enums.Color CurrentPlayerColor
+    public Color CurrentPlayerColor
     {
         get => _currentPlayerColor;
         set
@@ -76,7 +77,7 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
                 return;
             }
 
-            if (_currentPlayerColor == Enums.Color.NotSelected)
+            if (_currentPlayerColor == Color.NotSelected)
             {
                 return;
             }
@@ -85,7 +86,7 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
 
             if (_legalMovesForCurrentPlayer.None())
             {
-                Status = Enums.GameStatus.Stalemate;
+                Status = GameStatus.Stalemate;
             }
         }
     }
@@ -112,19 +113,19 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
 
     public event EventHandler<GameEndedEventArgs> GameEnded;
 
-    public void StartGame(Enums.PlayerType lightPlayer = Enums.PlayerType.Human,
-        Enums.PlayerType darkPlayer = Enums.PlayerType.Human)
+    public void StartGame(PlayerType lightPlayer = PlayerType.Human,
+        PlayerType darkPlayer = PlayerType.Human)
     {
         LightPlayerBot =
-            lightPlayer == Enums.PlayerType.Bot
-                ? new BotPlayer(Enums.Color.Light,
+            lightPlayer == PlayerType.Bot
+                ? new BotPlayer(Color.Light,
                     new PieceValueCalculator(
                         new PieceValueCalculatorGenome(1,2,5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 999)))
                 : null;
 
         DarkPlayerBot =
-            darkPlayer == Enums.PlayerType.Bot
-                ? new BotPlayer(Enums.Color.Dark,
+            darkPlayer == PlayerType.Bot
+                ? new BotPlayer(Color.Dark,
                     new PieceValueCalculator(
                         new PieceValueCalculatorGenome(1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 999)))
                 : null;
@@ -192,29 +193,31 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
     private void BeginGame()
     {
         // Clear out game
-        CurrentPlayerColor = Enums.Color.NotSelected;
+        CurrentPlayerColor = Color.NotSelected;
         SelectedSquare = null;
         Board.ClearValidDestinations();
         MoveHistory.Clear();
 
         // Start game
-        CurrentPlayerColor = Enums.Color.Light;
-        Status = Enums.GameStatus.Playing;
+        CurrentPlayerColor = Color.Light;
+        Status = GameStatus.Playing;
     }
 
     private void MoveToSelectedSquare(Square square)
     {
         // Check that the destination square is a valid move
-        Move move =
+        MoveViewModel moveViewModel =
             ValidDestinationsForSelectedPiece.FirstOrDefault(d =>
                 d.DestinationSquare.SquareShorthand == square.SquareShorthand);
+
+        Move move = moveViewModel?.Move;
 
         if (move == null)
         {
             return;
         }
 
-        bool wasPawnMove = SelectedSquare?.Piece?.PieceType == Enums.PieceType.Pawn;
+        bool wasPawnMove = SelectedSquare?.Piece?.PieceType == PieceType.Pawn;
 
         Board.MovePiece(SelectedSquare, square);
 
@@ -242,7 +245,7 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
 
     private void DetermineIfMovePutsOpponentInCheckOrCheckmate(Move move)
     {
-        if (Board.KingCanBeCaptured(move.MovingPieceColor.OppositeColor()))
+        if (Board.IsKingInCheck(move.MovingPieceColor.OppositeColor()))
         {
             move.PutsOpponentInCheck = true;
             move.PutsOpponentInCheckmate =
@@ -259,16 +262,16 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
 
         if (move.PutsOpponentInCheckmate)
         {
-            Status = move.MovingPieceColor == Enums.Color.Light
-                ? Enums.GameStatus.CheckmateByLight
-                : Enums.GameStatus.CheckmateByDark;
+            Status = move.MovingPieceColor == Color.Light
+                ? GameStatus.CheckmateByLight
+                : GameStatus.CheckmateByDark;
         }
         else if (move.IsDrawFromMaxMoves)
         {
-            Status = Enums.GameStatus.DrawNoCaptures;
+            Status = GameStatus.DrawNoCaptures;
         }
 
-        if (Status != Enums.GameStatus.Playing)
+        if (Status != GameStatus.Playing)
         {
             // Game has ended
             return;
@@ -285,8 +288,9 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
 
         foreach (Move move in LegalMovesForSelectedPiece())
         {
-            ValidDestinationsForSelectedPiece.Add(move);
-            move.DestinationSquare.IsValidDestination = DisplayValidDestinations;
+            var moveViewModel = new MoveViewModel(move);
+            ValidDestinationsForSelectedPiece.Add(moveViewModel);
+            moveViewModel.DestinationSquare.IsValidDestination = DisplayValidDestinations;
         }
     }
 
@@ -319,7 +323,7 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
 
     private async void MakeBotMove(BotPlayer botPlayer)
     {
-        if (Status != Enums.GameStatus.Playing)
+        if (Status != GameStatus.Playing)
         {
             return;
         }
@@ -330,8 +334,9 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
 
         // Only show best move for destination
         ClearValidDestinations();
-        ValidDestinationsForSelectedPiece.Add(bestMove);
-        bestMove.DestinationSquare.IsValidDestination = true;
+        var bestMoveViewModel = new MoveViewModel(bestMove);
+        ValidDestinationsForSelectedPiece.Add(bestMoveViewModel);
+        bestMoveViewModel.DestinationSquare.IsValidDestination = true;
 
         await Task.Delay(750);
 
@@ -340,13 +345,13 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
 
     private void MakeBotMove()
     {
-        if (CurrentPlayerColor == Enums.Color.Dark &&
+        if (CurrentPlayerColor == Color.Dark &&
             DarkPlayerBot != null)
         {
             MakeBotMove(DarkPlayerBot);
         }
 
-        if (CurrentPlayerColor == Enums.Color.Light &&
+        if (CurrentPlayerColor == Color.Light &&
             LightPlayerBot != null)
         {
             MakeBotMove(LightPlayerBot);

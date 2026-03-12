@@ -1,6 +1,6 @@
 ﻿namespace MogriChess.Engine.Models;
 
-public record struct PieceValueCalculatorGenome
+public readonly record struct PieceValueCalculatorGenome
 {
     public int ForwardOne { get; }
     public int ForwardTwo { get; }

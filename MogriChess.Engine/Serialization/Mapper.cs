@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using MogriChess.Engine.DTOs;
 using MogriChess.Engine.Models;
 using MogriChess.Engine.ViewModels;
 
-namespace MogriChess.Engine.Services;
+namespace MogriChess.Engine.Serialization;
 
 public static class Mapper
 {
@@ -69,4 +68,3 @@ public static class Mapper
         };
     }
 }
-

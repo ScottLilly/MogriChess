@@ -20,8 +20,7 @@ public static class Constants
     public const string DefaultLightPieceColorHex = "#FFFFFF";
     public const string DefaultDarkPieceColorHex = "#000000";
 
-    public static List<ColorScheme> ColorSchemes { get; } =
-        [];
+    public static List<ColorScheme> ColorSchemes { get; } = [];
 
     static Constants()
     {

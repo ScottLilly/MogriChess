@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using MogriChess.Engine.ViewModels;
 using Xunit;
 
@@ -13,14 +13,14 @@ public class TestValidMovements
         Game game = new Game();
         game.StartGame();
 
-        Assert.Empty(game.Board.LegalMovesForPieceAt(1, 1));
-        Assert.Empty(game.Board.LegalMovesForPieceAt(1, 2));
-        Assert.Empty(game.Board.LegalMovesForPieceAt(1, 3));
-        Assert.Empty(game.Board.LegalMovesForPieceAt(1, 4));
-        Assert.Empty(game.Board.LegalMovesForPieceAt(1, 5));
-        Assert.Empty(game.Board.LegalMovesForPieceAt(1, 6));
-        Assert.Empty(game.Board.LegalMovesForPieceAt(1, 7));
-        Assert.Empty(game.Board.LegalMovesForPieceAt(1, 8));
+        Assert.Empty(game.Board.GeneratePseudoLegalMovesForPieceAt(1, 1));
+        Assert.Empty(game.Board.GeneratePseudoLegalMovesForPieceAt(1, 2));
+        Assert.Empty(game.Board.GeneratePseudoLegalMovesForPieceAt(1, 3));
+        Assert.Empty(game.Board.GeneratePseudoLegalMovesForPieceAt(1, 4));
+        Assert.Empty(game.Board.GeneratePseudoLegalMovesForPieceAt(1, 5));
+        Assert.Empty(game.Board.GeneratePseudoLegalMovesForPieceAt(1, 6));
+        Assert.Empty(game.Board.GeneratePseudoLegalMovesForPieceAt(1, 7));
+        Assert.Empty(game.Board.GeneratePseudoLegalMovesForPieceAt(1, 8));
     }
 
     #region Light pawns
@@ -31,7 +31,7 @@ public class TestValidMovements
         Game game = new Game();
         game.StartGame();
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(2, 1).ToList();
+        var validDestinations = game.Board.GeneratePseudoLegalMovesForPieceAt(2, 1).ToList();
 
         Assert.Equal(2, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationSquare.SquareShorthand == "a3"));
@@ -44,7 +44,7 @@ public class TestValidMovements
         Game game = new Game();
         game.StartGame();
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(2, 2).ToList();
+        var validDestinations = game.Board.GeneratePseudoLegalMovesForPieceAt(2, 2).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationSquare.SquareShorthand == "a3"));
@@ -58,7 +58,7 @@ public class TestValidMovements
         Game game = new Game();
         game.StartGame();
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(2, 3).ToList();
+        var validDestinations = game.Board.GeneratePseudoLegalMovesForPieceAt(2, 3).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationSquare.SquareShorthand == "b3"));
@@ -72,7 +72,7 @@ public class TestValidMovements
         Game game = new Game();
         game.StartGame();
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(2, 4).ToList();
+        var validDestinations = game.Board.GeneratePseudoLegalMovesForPieceAt(2, 4).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationSquare.SquareShorthand == "c3"));
@@ -86,7 +86,7 @@ public class TestValidMovements
         Game game = new Game();
         game.StartGame();
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(2, 5).ToList();
+        var validDestinations = game.Board.GeneratePseudoLegalMovesForPieceAt(2, 5).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationSquare.SquareShorthand == "d3"));
@@ -100,7 +100,7 @@ public class TestValidMovements
         Game game = new Game();
         game.StartGame();
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(2, 6).ToList();
+        var validDestinations = game.Board.GeneratePseudoLegalMovesForPieceAt(2, 6).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationSquare.SquareShorthand == "e3"));
@@ -114,7 +114,7 @@ public class TestValidMovements
         Game game = new Game();
         game.StartGame();
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(2, 7).ToList();
+        var validDestinations = game.Board.GeneratePseudoLegalMovesForPieceAt(2, 7).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationSquare.SquareShorthand == "f3"));
@@ -128,7 +128,7 @@ public class TestValidMovements
         Game game = new Game();
         game.StartGame();
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(2, 8).ToList();
+        var validDestinations = game.Board.GeneratePseudoLegalMovesForPieceAt(2, 8).ToList();
 
         Assert.Equal(2, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationSquare.SquareShorthand == "g3"));
@@ -145,7 +145,7 @@ public class TestValidMovements
         Game game = new Game();
         game.StartGame();
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(7, 1).ToList();
+        var validDestinations = game.Board.GeneratePseudoLegalMovesForPieceAt(7, 1).ToList();
 
         Assert.Equal(2, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationSquare.SquareShorthand == "a6"));
@@ -158,7 +158,7 @@ public class TestValidMovements
         Game game = new Game();
         game.StartGame();
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(7, 2).ToList();
+        var validDestinations = game.Board.GeneratePseudoLegalMovesForPieceAt(7, 2).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationSquare.SquareShorthand == "a6"));
@@ -172,7 +172,7 @@ public class TestValidMovements
         Game game = new Game();
         game.StartGame();
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(7, 3).ToList();
+        var validDestinations = game.Board.GeneratePseudoLegalMovesForPieceAt(7, 3).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationSquare.SquareShorthand == "b6"));
@@ -186,7 +186,7 @@ public class TestValidMovements
         Game game = new Game();
         game.StartGame();
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(7, 4).ToList();
+        var validDestinations = game.Board.GeneratePseudoLegalMovesForPieceAt(7, 4).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationSquare.SquareShorthand == "c6"));
@@ -200,7 +200,7 @@ public class TestValidMovements
         Game game = new Game();
         game.StartGame();
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(7, 5).ToList();
+        var validDestinations = game.Board.GeneratePseudoLegalMovesForPieceAt(7, 5).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationSquare.SquareShorthand == "d6"));
@@ -214,7 +214,7 @@ public class TestValidMovements
         Game game = new Game();
         game.StartGame();
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(7, 6).ToList();
+        var validDestinations = game.Board.GeneratePseudoLegalMovesForPieceAt(7, 6).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationSquare.SquareShorthand == "e6"));
@@ -228,7 +228,7 @@ public class TestValidMovements
         Game game = new Game();
         game.StartGame();
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(7, 7).ToList();
+        var validDestinations = game.Board.GeneratePseudoLegalMovesForPieceAt(7, 7).ToList();
 
         Assert.Equal(3, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationSquare.SquareShorthand == "f6"));
@@ -242,7 +242,7 @@ public class TestValidMovements
         Game game = new Game();
         game.StartGame();
 
-        var validDestinations = game.Board.LegalMovesForPieceAt(7, 8).ToList();
+        var validDestinations = game.Board.GeneratePseudoLegalMovesForPieceAt(7, 8).ToList();
 
         Assert.Equal(2, validDestinations.Count);
         Assert.True(validDestinations.Exists(d => d.DestinationSquare.SquareShorthand == "g6"));
@@ -258,13 +258,13 @@ public class TestValidMovements
         Game game = new Game();
         game.StartGame();
 
-        Assert.Empty(game.Board.LegalMovesForPieceAt(8, 1));
-        Assert.Empty(game.Board.LegalMovesForPieceAt(8, 2));
-        Assert.Empty(game.Board.LegalMovesForPieceAt(8, 3));
-        Assert.Empty(game.Board.LegalMovesForPieceAt(8, 4));
-        Assert.Empty(game.Board.LegalMovesForPieceAt(8, 5));
-        Assert.Empty(game.Board.LegalMovesForPieceAt(8, 6));
-        Assert.Empty(game.Board.LegalMovesForPieceAt(8, 7));
-        Assert.Empty(game.Board.LegalMovesForPieceAt(8, 8));
+        Assert.Empty(game.Board.GeneratePseudoLegalMovesForPieceAt(8, 1));
+        Assert.Empty(game.Board.GeneratePseudoLegalMovesForPieceAt(8, 2));
+        Assert.Empty(game.Board.GeneratePseudoLegalMovesForPieceAt(8, 3));
+        Assert.Empty(game.Board.GeneratePseudoLegalMovesForPieceAt(8, 4));
+        Assert.Empty(game.Board.GeneratePseudoLegalMovesForPieceAt(8, 5));
+        Assert.Empty(game.Board.GeneratePseudoLegalMovesForPieceAt(8, 6));
+        Assert.Empty(game.Board.GeneratePseudoLegalMovesForPieceAt(8, 7));
+        Assert.Empty(game.Board.GeneratePseudoLegalMovesForPieceAt(8, 8));
     }
 }
