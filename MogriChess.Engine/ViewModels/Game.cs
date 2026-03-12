@@ -65,7 +65,7 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
             SelectedSquare?.IsSelected = true;
         }
     }
-    private ObservableCollection<Move> ValidDestinationsForSelectedPiece { get; } = [];
+    private ObservableCollection<MoveViewModel> ValidDestinationsForSelectedPiece { get; } = [];
 
     public Color CurrentPlayerColor
     {
@@ -206,9 +206,11 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
     private void MoveToSelectedSquare(Square square)
     {
         // Check that the destination square is a valid move
-        Move move =
+        MoveViewModel moveViewModel =
             ValidDestinationsForSelectedPiece.FirstOrDefault(d =>
                 d.DestinationSquare.SquareShorthand == square.SquareShorthand);
+
+        Move move = moveViewModel?.Move;
 
         if (move == null)
         {
@@ -286,8 +288,9 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
 
         foreach (Move move in LegalMovesForSelectedPiece())
         {
-            ValidDestinationsForSelectedPiece.Add(move);
-            move.DestinationSquare.IsValidDestination = DisplayValidDestinations;
+            var moveViewModel = new MoveViewModel(move);
+            ValidDestinationsForSelectedPiece.Add(moveViewModel);
+            moveViewModel.DestinationSquare.IsValidDestination = DisplayValidDestinations;
         }
     }
 
@@ -331,8 +334,9 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
 
         // Only show best move for destination
         ClearValidDestinations();
-        ValidDestinationsForSelectedPiece.Add(bestMove);
-        bestMove.DestinationSquare.IsValidDestination = true;
+        var bestMoveViewModel = new MoveViewModel(bestMove);
+        ValidDestinationsForSelectedPiece.Add(bestMoveViewModel);
+        bestMoveViewModel.DestinationSquare.IsValidDestination = true;
 
         await Task.Delay(750);
 
