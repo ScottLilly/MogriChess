@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace MogriChess.Models;
 
@@ -14,12 +14,18 @@ public static class Constants
     public const int PawnRankLight = 2;
     public const int BackRankLight = 1;
 
+    public const string DefaultBoardColorSchemeName = "Grey";
+
+    public const string DefaultPieceColorSchemeName = "DefaultPieces";
+    public const string DefaultLightPieceColorHex = "#FFFFFF";
+    public const string DefaultDarkPieceColorHex = "#000000";
+
     public static List<ColorScheme> ColorSchemes { get; } =
         [];
 
     static Constants()
     {
-        ColorSchemes.Add(new ColorScheme("Grey", "#DDDDDD", "#ADADAD"));
+        ColorSchemes.Add(new ColorScheme(DefaultBoardColorSchemeName, "#DDDDDD", "#ADADAD"));
         ColorSchemes.Add(new ColorScheme("Blue", "#A2CEE5", "#809AAA"));
         ColorSchemes.Add(new ColorScheme("Brown", "#EDB67B", "#BE6837"));
         ColorSchemes.Add(new ColorScheme("Tan", "#EAC89A", "#B58863"));

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MogriChess.Models;
@@ -12,9 +12,12 @@ public static class BoardFactory
         ColorScheme boardColorScheme =
             gameConfig?.BoardColorScheme ??
             Constants.ColorSchemes.First(c =>
-                c.Name.Equals("Grey", StringComparison.InvariantCultureIgnoreCase));
-        ColorScheme piecesColorScheme = 
-            gameConfig?.PieceColorScheme ?? new ColorScheme("", "#FFFFFF", "#000000");
+                c.Name.Equals(Constants.DefaultBoardColorSchemeName, StringComparison.InvariantCultureIgnoreCase));
+        ColorScheme piecesColorScheme =
+            gameConfig?.PieceColorScheme ??
+            new ColorScheme(Constants.DefaultPieceColorSchemeName,
+                Constants.DefaultLightPieceColorHex,
+                Constants.DefaultDarkPieceColorHex);
 
         return new Board(boardColorScheme, piecesColorScheme);
     }

@@ -214,23 +214,28 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
             return;
         }
 
+        bool wasPawnMove = SelectedSquare?.Piece?.PieceType == Enums.PieceType.Pawn;
+
         Board.MovePiece(SelectedSquare, square);
 
         DetermineIfMovePutsOpponentInCheckOrCheckmate(move);
 
-        if (string.IsNullOrWhiteSpace(move.MoveResult) &&
+        bool moveResetsDrawCounter = move.IsCapturingMove || wasPawnMove;
+
+        if (!moveResetsDrawCounter &&
             MoveHistory.Count >= (MAX_MOVES_WITHOUT_CAPTURE - 1) &&
-            MoveHistory.TakeLast(MAX_MOVES_WITHOUT_CAPTURE - 1).All(m => string.IsNullOrEmpty(m.MoveResult)))
+            MoveHistory.TakeLast(MAX_MOVES_WITHOUT_CAPTURE - 1)
+                .All(m => !m.IsCapture && !m.IsPawnMove))
         {
             move.IsDrawFromMaxMoves = true;
         }
 
-        MoveHistory.Add(new MoveStruct
-        {
-            MoveResult = move.MoveResult,
-            MoveShorthand = move.MoveShorthand,
-            MovingPieceColor = move.MovingPieceColor.ToString()
-        });
+        MoveHistory.Add(new MoveStruct(
+            move.MovingPieceColor.ToString(),
+            move.MoveShorthand,
+            move.MoveResult,
+            move.IsCapturingMove,
+            wasPawnMove));
 
         EndCurrentPlayerTurn(move);
     }
