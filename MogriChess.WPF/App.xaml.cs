@@ -1,14 +1,12 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Threading;
-using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MogriChess.Core;
 using MogriChess.Models;
 using MogriChess.ViewModels;
-using MogriChess.ViewModels.DTOs;
 using MogriChess.WPF.Windows;
 
 namespace MogriChess.WPF;
@@ -38,9 +36,6 @@ public partial class App : Application
 
     private void ConfigureServices(IServiceCollection services)
     {
-        var serviceProvider = services.BuildServiceProvider();
-        BoardStateService.Configure(serviceProvider.GetService<IMapper>());
-
         services.AddSingleton(typeof(MainWindow));
         services.AddTransient(typeof(Help));
         services.AddTransient(typeof(About));
