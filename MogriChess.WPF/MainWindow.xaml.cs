@@ -6,8 +6,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
+using MogriChess.Engine.CustomEventArgs;
 using MogriChess.Engine.Models;
-using MogriChess.Engine.Models.CustomEventArgs;
 using MogriChess.Engine.ViewModels;
 using MogriChess.WPF.Windows;
 

@@ -4,8 +4,8 @@ using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MogriChess.Engine.Core;
 using MogriChess.Engine.Models;
+using MogriChess.Engine.Services;
 using MogriChess.WPF.Windows;
 
 namespace MogriChess.WPF;
