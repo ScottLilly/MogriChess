@@ -80,16 +80,4 @@ public class Piece(ColorScheme colorScheme, Enums.Color color, Enums.PieceType t
         PieceType == Enums.PieceType.King;
     public bool IsUnpromotedPawn =>
         PieceType == Enums.PieceType.Pawn && !IsPromoted;
-    public string UiColor =>
-        Color == Enums.Color.Light
-            ? ColorScheme.LightColor
-            : ColorScheme.DarkColor;
-    public string KingIndicatorUiColor =>
-        IsKing
-            ? Color == Enums.Color.Light
-                ? ColorScheme.DarkColor
-                : ColorScheme.LightColor
-            : UiColor;
-    public int PieceColorTransformAngle =>
-        Color == Enums.Color.Light ? 0 : 180;
 }
