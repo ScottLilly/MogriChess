@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MogriChess.Core;
 using MogriChess.Models;
-using MogriChess.ViewModels;
 using MogriChess.WPF.Windows;
 
 namespace MogriChess.WPF;

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using MogriChess.ViewModels.DTOs;
-using Newtonsoft.Json;
 
 namespace Test.MogriChess.ViewModels.Utilities;
 
@@ -11,6 +11,6 @@ internal static class TestFileParser
     {
         var jsonText = File.ReadAllText(filename);
 
-        return JsonConvert.DeserializeObject<List<MoveHistoryDTO>>(jsonText);
+        return JsonSerializer.Deserialize<List<MoveHistoryDTO>>(jsonText)!;
     }
 }
