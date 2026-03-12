@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace MogriChess.Models;
+namespace MogriChess.Engine.Models;
 
 public static class Constants
 {

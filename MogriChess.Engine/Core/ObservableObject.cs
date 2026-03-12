@@ -1,8 +1,7 @@
-using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MogriChess.Core;
+namespace MogriChess.Engine.Core;
 
 public abstract class ObservableObject : INotifyPropertyChanged
 {

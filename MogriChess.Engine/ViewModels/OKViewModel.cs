@@ -1,6 +1,6 @@
-using MogriChess.Core;
+using MogriChess.Engine.Core;
 
-namespace MogriChess.ViewModels;
+namespace MogriChess.Engine.ViewModels;
 
 public class OKViewModel(string title, string message) : ObservableObject
 {

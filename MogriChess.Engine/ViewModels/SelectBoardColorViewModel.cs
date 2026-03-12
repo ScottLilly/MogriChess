@@ -1,9 +1,9 @@
 using System.Collections.ObjectModel;
 using System.Linq;
-using MogriChess.Core;
-using MogriChess.Models;
+using MogriChess.Engine.Core;
+using MogriChess.Engine.Models;
 
-namespace MogriChess.ViewModels;
+namespace MogriChess.Engine.ViewModels;
 
 public class SelectBoardColorViewModel : ObservableObject
 {

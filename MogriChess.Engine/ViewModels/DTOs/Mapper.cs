@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using MogriChess.Models;
+using MogriChess.Engine.Models;
 
-namespace MogriChess.ViewModels.DTOs;
+namespace MogriChess.Engine.ViewModels.DTOs;
 
 public static class Mapper
 {

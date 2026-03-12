@@ -35,7 +35,7 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 
-namespace MogriChess.Core
+namespace MogriChess.Engine.Core
 {
     [Serializable]
     public class ObservableDictionary<TKey, TValue> :

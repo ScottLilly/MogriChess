@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using MogriChess.Core;
+using MogriChess.Engine.Core;
 
-namespace MogriChess.Models;
+namespace MogriChess.Engine.Models;
 
 public class Board : ObservableObject
 {

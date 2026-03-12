@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
-using MogriChess.Models;
+using MogriChess.Engine.Models;
 
 namespace MogriChess.WPF.CustomConverters;
 

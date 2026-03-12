@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace MogriChess.Core;
+namespace MogriChess.Engine.Core;
 
 public static class LoggingService
 {

@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using MogriChess.ViewModels;
+using MogriChess.Engine.ViewModels;
 using Xunit;
 
 namespace Test.MogriChess.ViewModels;

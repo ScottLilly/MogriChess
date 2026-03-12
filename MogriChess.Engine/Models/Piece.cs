@@ -1,6 +1,6 @@
-using MogriChess.Core;
+using MogriChess.Engine.Core;
 
-namespace MogriChess.Models;
+namespace MogriChess.Engine.Models;
 
 public class Piece(ColorScheme colorScheme, Enums.Color color, Enums.PieceType type,
     int squaresForward, int squaresForwardRight,

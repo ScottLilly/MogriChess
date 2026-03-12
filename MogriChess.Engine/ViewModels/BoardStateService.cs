@@ -1,7 +1,7 @@
 using System.Text.Json;
-using MogriChess.ViewModels.DTOs;
+using MogriChess.Engine.ViewModels.DTOs;
 
-namespace MogriChess.ViewModels;
+namespace MogriChess.Engine.ViewModels;
 
 public static class BoardStateService
 {

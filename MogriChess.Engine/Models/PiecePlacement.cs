@@ -1,4 +1,4 @@
-﻿namespace MogriChess.Models;
+﻿namespace MogriChess.Engine.Models;
 
 public class PiecePlacement(int rank, int file, Piece piece)
 {

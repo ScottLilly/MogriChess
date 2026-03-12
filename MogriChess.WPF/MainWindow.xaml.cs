@@ -6,8 +6,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
-using MogriChess.Models;
-using MogriChess.ViewModels;
+using MogriChess.Engine.Models;
+using MogriChess.Engine.Models.CustomEventArgs;
+using MogriChess.Engine.ViewModels;
 using MogriChess.WPF.Windows;
 
 namespace MogriChess.WPF;
@@ -69,7 +70,7 @@ public partial class MainWindow : Window
         _canPlay = true;
     }
 
-    private void GameEndedHandler(object sender, Models.CustomEventArgs.GameEndedEventArgs e)
+    private void GameEndedHandler(object sender, GameEndedEventArgs e)
     {
         switch (e.GameEndStatus)
         {

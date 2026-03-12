@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using MogriChess.Core;
-using MogriChess.Models;
-using MogriChess.Models.CustomEventArgs;
-using MogriChess.Services;
+using MogriChess.Engine.Core;
+using MogriChess.Engine.Models;
+using MogriChess.Engine.Models.CustomEventArgs;
+using MogriChess.Engine.Services;
 
-namespace MogriChess.ViewModels;
+namespace MogriChess.Engine.ViewModels;
 
 public class Game(GameConfig gameConfig = null) : ObservableObject
 {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using MogriChess.ViewModels.DTOs;
+using MogriChess.Engine.ViewModels.DTOs;
 
 namespace Test.MogriChess.ViewModels.Utilities;
 
