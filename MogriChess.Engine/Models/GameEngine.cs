@@ -11,26 +11,27 @@ namespace MogriChess.Engine.Models;
 public static class GameEngine
 {
     /// <summary>
-    /// Returns all legal moves for the specified player, taking into account
-    /// whether the king can be captured after each move.
+    /// Returns all legal moves for the specified player.
+    /// Legal moves are pseudo-legal moves that also ensure the moving side's king remains safe.
     /// </summary>
     public static IEnumerable<Move> GetLegalMovesForPlayer(Board board, Color playerColor) =>
         board.SquaresWithPiecesOfColor(playerColor)
-            .SelectMany(square => board.LegalMovesForPieceAt(square.Rank, square.File))
+            .SelectMany(square => board.GeneratePseudoLegalMovesForPieceAt(square.Rank, square.File))
             .Where(move =>
                 board.GetSimulatedMoveResult(move,
-                    () => board.KingCannotBeCaptured(move.MovingPieceColor)));
+                    () => board.IsKingSafe(move.MovingPieceColor)));
 
     /// <summary>
     /// Determines if the specified player is in checkmate.
+    /// A player is in checkmate if their king is in check and they have no legal moves.
     /// </summary>
     public static bool IsPlayerInCheckmate(Board board, Color playerColor) =>
         board.SquaresWithPiecesOfColor(playerColor)
-            .All(square => board.PotentialMovesForPieceAt(square)
+            .All(square => board.GeneratePseudoLegalMovesForPieceAt(square)
                 .None(move => MoveGetsKingOutOfCheck(board, playerColor, move)));
 
     private static bool MoveGetsKingOutOfCheck(Board board, Color kingColor, Move potentialMove) =>
         board.GetSimulatedMoveResult(potentialMove,
-            () => board.KingCannotBeCaptured(kingColor));
+            () => board.IsKingSafe(kingColor));
 }
 

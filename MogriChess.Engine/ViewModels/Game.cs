@@ -243,7 +243,7 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
 
     private void DetermineIfMovePutsOpponentInCheckOrCheckmate(Move move)
     {
-        if (Board.KingCanBeCaptured(move.MovingPieceColor.OppositeColor()))
+        if (Board.IsKingInCheck(move.MovingPieceColor.OppositeColor()))
         {
             move.PutsOpponentInCheck = true;
             move.PutsOpponentInCheckmate =

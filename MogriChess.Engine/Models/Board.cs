@@ -30,8 +30,12 @@ public class Board : ObservableObject
 
     #region Public methods
 
-    public IEnumerable<Move> LegalMovesForPieceAt(int rank, int file) =>
-        PotentialMovesForPieceAt(ModelFunctions.GetShorthand(rank, file));
+    /// <summary>
+    /// Generates all pseudo-legal moves for the piece at the specified rank/file.
+    /// Pseudo-legal moves respect piece movement and occupancy, but do not consider king safety.
+    /// </summary>
+    public IEnumerable<Move> GeneratePseudoLegalMovesForPieceAt(int rank, int file) =>
+        GeneratePseudoLegalMovesForPieceAt(ModelFunctions.GetShorthand(rank, file));
 
     public void MovePiece(Square originationSquare, Square destinationSquare)
     {
@@ -39,9 +43,9 @@ public class Board : ObservableObject
         originationSquare.Piece = null;
     }
 
-    public bool KingCanBeCaptured(Color playerColor) =>
+    public bool IsKingInCheck(Color playerColor) =>
         SquaresWithPiecesOfColor(playerColor.OppositeColor())
-            .Any(square => PotentialMovesForPieceAt(square)
+            .Any(square => GeneratePseudoLegalMovesForPieceAt(square)
                 .Any(m => m.PutsOpponentInCheck));
 
     public void ClearValidDestinations() =>
@@ -87,11 +91,15 @@ public class Board : ObservableObject
         }
     }
 
-    public List<Move> PotentialMovesForPieceAt(Square square) =>
-        PotentialMovesForPieceAt(square.SquareShorthand);
+    /// <summary>
+    /// Generates all pseudo-legal moves for the given square.
+    /// Pseudo-legal moves respect piece movement and occupancy, but do not consider king safety.
+    /// </summary>
+    public List<Move> GeneratePseudoLegalMovesForPieceAt(Square square) =>
+        GeneratePseudoLegalMovesForPieceAt(square.SquareShorthand);
 
-    public bool KingCannotBeCaptured(Color playerColor) =>
-        !KingCanBeCaptured(playerColor);
+    public bool IsKingSafe(Color playerColor) =>
+        !IsKingInCheck(playerColor);
 
     #endregion
 
@@ -124,7 +132,7 @@ public class Board : ObservableObject
             piece.Left, piece.ForwardLeft);
     }
 
-    private List<Move> PotentialMovesForPieceAt(string squareShorthand)
+    private List<Move> GeneratePseudoLegalMovesForPieceAt(string squareShorthand)
     {
         Square originationSquare = Squares[squareShorthand];
 
@@ -245,7 +253,7 @@ public class Board : ObservableObject
 
     private (int rankMultiplier, int fileMultiplier) MovementMultipliersForDirection(Piece piece, Direction direction)
     {
-        (int rm, int fm) multipliers = direction switch
+        (int rankMultiplier, int fileMultiplier) multipliers = direction switch
         {
             Direction.Forward => (1, 0),
             Direction.ForwardRight => (1, 1),
@@ -261,7 +269,7 @@ public class Board : ObservableObject
 
         return piece.Color == Color.Light
             ? multipliers
-            : (-multipliers.rm, -multipliers.fm);
+            : (-multipliers.rankMultiplier, -multipliers.fileMultiplier);
     }
 
     private static Piece Promote(Piece pieceToPromote)

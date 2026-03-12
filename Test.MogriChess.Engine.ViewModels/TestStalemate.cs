@@ -1,4 +1,4 @@
-﻿namespace Test.MogriChess.ViewModels
+namespace Test.MogriChess.ViewModels
 {
     public class TestStalemate
     {
@@ -16,7 +16,7 @@
 
         //    Square square = game.Board.Squares["a8"];
         //    var moves =
-        //        game.Board.LegalMovesForPieceAt(square.Rank, square.File);
+        //        game.Board.GeneratePseudoLegalMovesForPieceAt(square.Rank, square.File);
 
         //    Assert.Empty(moves);
         //}

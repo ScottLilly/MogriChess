@@ -1,4 +1,4 @@
-﻿namespace Test.MogriChess.ViewModels;
+namespace Test.MogriChess.ViewModels;
 
 public class TestCheckmateConditions
 {
@@ -55,9 +55,9 @@ public class TestCheckmateConditions
     //    AddPiece(game, "f4", PieceFactory.GetKing(null, Enums.Color.Dark));
     //    AddPiece(game, "g6", PieceFactory.GetPawn(null, Enums.Color.Dark));
 
-    //    Assert.True(game.Board.KingCanBeCaptured(Enums.Color.Dark));
+    //    Assert.True(game.Board.IsKingInCheck(Enums.Color.Dark));
     //    Assert.False(game.PlayerIsInCheckmate(Enums.Color.Dark));
-    //    Assert.False(game.Board.KingCanBeCaptured(Enums.Color.Light));
+    //    Assert.False(game.Board.IsKingInCheck(Enums.Color.Light));
     //}
 
     //[Fact]
@@ -101,9 +101,9 @@ public class TestCheckmateConditions
     //    AddPiece(game, "d7", PieceFactory.GetPawn(null, Enums.Color.Dark));
     //    AddPiece(game, "h7", PieceFactory.GetPawn(null, Enums.Color.Dark));
 
-    //    Assert.True(game.Board.KingCanBeCaptured(Enums.Color.Dark));
+    //    Assert.True(game.Board.IsKingInCheck(Enums.Color.Dark));
     //    Assert.False(game.PlayerIsInCheckmate(Enums.Color.Dark));
-    //    Assert.False(game.Board.KingCanBeCaptured(Enums.Color.Light));
+    //    Assert.False(game.Board.IsKingInCheck(Enums.Color.Light));
     //}
 
     //[Fact]
@@ -129,9 +129,9 @@ public class TestCheckmateConditions
     //    AddPiece(game, "g8", PieceFactory.GetKnight(null, Enums.Color.Dark));
     //    AddPiece(game, "h8", PieceFactory.GetRook(null, Enums.Color.Dark));
 
-    //    Assert.True(game.Board.KingCanBeCaptured(Enums.Color.Light));
+    //    Assert.True(game.Board.IsKingInCheck(Enums.Color.Light));
     //    Assert.False(game.PlayerIsInCheckmate(Enums.Color.Light));
-    //    Assert.False(game.Board.KingCanBeCaptured(Enums.Color.Dark));
+    //    Assert.False(game.Board.IsKingInCheck(Enums.Color.Dark));
     //}
 
     //[Fact]
@@ -165,9 +165,9 @@ public class TestCheckmateConditions
     //    AddPiece(game, "b8", PieceFactory.GetKing(null, Enums.Color.Dark));
     //    AddPiece(game, "e8", PieceFactory.GetQueen(null, Enums.Color.Dark));
 
-    //    Assert.True(game.Board.KingCanBeCaptured(Enums.Color.Light));
+    //    Assert.True(game.Board.IsKingInCheck(Enums.Color.Light));
     //    Assert.False(game.PlayerIsInCheckmate(Enums.Color.Light));
-    //    Assert.False(game.Board.KingCanBeCaptured(Enums.Color.Dark));
+    //    Assert.False(game.Board.IsKingInCheck(Enums.Color.Dark));
     //}
 
     //private static void AddPiece(Game game, string squareShorthand, Piece piece)
