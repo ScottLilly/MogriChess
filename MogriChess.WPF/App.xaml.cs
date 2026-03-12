@@ -38,8 +38,6 @@ public partial class App : Application
 
     private void ConfigureServices(IServiceCollection services)
     {
-        services.AddAutoMapper(typeof(AutoMapperProfile));
-
         var serviceProvider = services.BuildServiceProvider();
         BoardStateService.Configure(serviceProvider.GetService<IMapper>());
 
