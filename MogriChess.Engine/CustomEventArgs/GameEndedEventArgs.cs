@@ -1,6 +1,7 @@
-﻿using System;
+﻿using MogriChess.Engine.Models;
+using System;
 
-namespace MogriChess.Engine.Models.CustomEventArgs;
+namespace MogriChess.Engine.CustomEventArgs;
 
 public class GameEndedEventArgs(Enums.GameStatus endStatus) : EventArgs
 {

@@ -4,8 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using MogriChess.Engine.Core;
+using MogriChess.Engine.CustomEventArgs;
 using MogriChess.Engine.Models;
-using MogriChess.Engine.Models.CustomEventArgs;
 using MogriChess.Engine.Services;
 
 namespace MogriChess.Engine.ViewModels;

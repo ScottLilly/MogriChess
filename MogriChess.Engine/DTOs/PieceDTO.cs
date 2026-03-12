@@ -1,4 +1,4 @@
-﻿namespace MogriChess.Engine.ViewModels.DTOs
+﻿namespace MogriChess.Engine.DTOs
 {
     public class PieceDTO
     {
