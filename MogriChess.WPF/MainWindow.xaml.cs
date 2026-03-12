@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -39,25 +39,25 @@ public partial class MainWindow : Window
 
     private void LightHumanDarkBot_OnClick(object sender, RoutedEventArgs e)
     {
-        StartGame(Enums.PlayerType.Human, Enums.PlayerType.Bot);
+        StartGame(PlayerType.Human, PlayerType.Bot);
     }
 
     private void LightBotDarkHuman_OnClick(object sender, RoutedEventArgs e)
     {
-        StartGame(Enums.PlayerType.Bot, Enums.PlayerType.Human);
+        StartGame(PlayerType.Bot, PlayerType.Human);
     }
 
     private void LightHumanDarkHuman_OnClick(object sender, RoutedEventArgs e)
     {
-        StartGame(Enums.PlayerType.Human, Enums.PlayerType.Human);
+        StartGame(PlayerType.Human, PlayerType.Human);
     }
 
     private void LightBotDarkBot_OnClick(object sender, RoutedEventArgs e)
     {
-        StartGame(Enums.PlayerType.Bot, Enums.PlayerType.Bot);
+        StartGame(PlayerType.Bot, PlayerType.Bot);
     }
 
-    private void StartGame(Enums.PlayerType lightPlayer, Enums.PlayerType darkPlayer)
+    private void StartGame(PlayerType lightPlayer, PlayerType darkPlayer)
     {
         CurrentSession.MoveHistory.CollectionChanged -= MoveHistoryChangedHandler;
         CurrentSession.GameEnded -= GameEndedHandler;
@@ -74,16 +74,16 @@ public partial class MainWindow : Window
     {
         switch (e.GameEndStatus)
         {
-            case Enums.GameStatus.CheckmateByLight:
+            case GameStatus.CheckmateByLight:
                 DisplayGameEndMessage("Light player won");
                 break;
-            case Enums.GameStatus.CheckmateByDark:
+            case GameStatus.CheckmateByDark:
                 DisplayGameEndMessage("Dark player won");
                 break;
-            case Enums.GameStatus.Stalemate:
+            case GameStatus.Stalemate:
                 DisplayGameEndMessage("Stalemate - tie");
                 break;
-            case Enums.GameStatus.DrawNoCaptures:
+            case GameStatus.DrawNoCaptures:
                 DisplayGameEndMessage($"Draw ({Game.MAX_MOVES_WITHOUT_CAPTURE} moves without event) - tie");
                 break;
             default:

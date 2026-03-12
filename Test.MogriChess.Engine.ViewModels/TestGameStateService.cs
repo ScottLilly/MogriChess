@@ -1,4 +1,4 @@
-﻿namespace Test.MogriChess.ViewModels
+namespace Test.MogriChess.ViewModels
 {
     public class TestGameStateService
     {
@@ -8,7 +8,7 @@
         //        File.ReadAllText(".\\GameStateFiles\\StartOfGame_GameState.json");
 
         //    Game game = new Game();
-        //    game.StartGame(Enums.PlayerType.Human, Enums.PlayerType.Bot);
+        //    game.StartGame(PlayerType.Human, PlayerType.Bot);
 
         //    Assert.Equal(json, game.GetSerializedGameState());
         //}

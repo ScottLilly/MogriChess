@@ -19,7 +19,7 @@ internal class PieceUiColorConverter : IValueConverter
             return Brushes.Transparent;
         }
 
-        string colorHex = piece.Color == Enums.Color.Light
+        string colorHex = piece.Color == Engine.Models.Color.Light
             ? piece.ColorScheme.LightColor
             : piece.ColorScheme.DarkColor;
 
@@ -44,20 +44,20 @@ internal class PieceKingIndicatorColorConverter : IValueConverter
             return Brushes.Transparent;
         }
 
-        bool isKing = piece.PieceType == Enums.PieceType.King;
+        bool isKing = piece.PieceType == PieceType.King;
 
         string colorHex;
 
         if (isKing)
         {
             // Kings use the opposite color in the center
-            colorHex = piece.Color == Enums.Color.Light
+            colorHex = piece.Color == Engine.Models.Color.Light
                 ? piece.ColorScheme.DarkColor
                 : piece.ColorScheme.LightColor;
         }
         else
         {
-            colorHex = piece.Color == Enums.Color.Light
+            colorHex = piece.Color == Engine.Models.Color.Light
                 ? piece.ColorScheme.LightColor
                 : piece.ColorScheme.DarkColor;
         }
@@ -77,9 +77,9 @@ internal class PieceColorTransformAngleConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value is Enums.Color color)
+        if (value is Engine.Models.Color color)
         {
-            return color == Enums.Color.Light ? 0.0 : 180.0;
+            return color == Engine.Models.Color.Light ? 0.0 : 180.0;
         }
 
         return 0.0;

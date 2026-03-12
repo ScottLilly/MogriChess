@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using MogriChess.Engine.Models;
 
-namespace MogriChess.Engine.DTOs;
+namespace MogriChess.Engine.Serialization;
 
 public class GameStateDTO
 {
@@ -13,3 +13,4 @@ public class GameStateDTO
     public List<SquareDTO> Squares { get; set; } =
         [];
 }
+

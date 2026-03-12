@@ -1,4 +1,4 @@
-﻿namespace MogriChess.Engine.DTOs
+namespace MogriChess.Engine.Serialization
 {
     public class SquareDTO
     {
@@ -9,3 +9,4 @@
         public bool IsValidDestination { get; set; }
     }
 }
+

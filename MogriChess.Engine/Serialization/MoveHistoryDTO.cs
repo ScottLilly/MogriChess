@@ -1,4 +1,4 @@
-﻿namespace MogriChess.Engine.DTOs;
+namespace MogriChess.Engine.Serialization;
 
 public class MoveHistoryDTO
 {
@@ -6,3 +6,4 @@ public class MoveHistoryDTO
     public string MoveShorthand { get; set; }
     public string MoveResult { get; set; }
 }
+

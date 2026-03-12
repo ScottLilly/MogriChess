@@ -1,4 +1,4 @@
-﻿using MogriChess.Engine.Models;
+using MogriChess.Engine.Models;
 using MogriChess.Engine.ViewModels;
 using Xunit;
 
@@ -30,7 +30,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Light);
+        Assert.True(piece.Color == Color.Light);
         Assert.False(piece.IsKing);
 
         Assert.Equal(Constants.UnlimitedMoves, piece.Forward);
@@ -53,7 +53,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Light);
+        Assert.True(piece.Color == Color.Light);
         Assert.False(piece.IsKing);
 
         Assert.Equal(2, piece.Forward);
@@ -76,7 +76,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Light);
+        Assert.True(piece.Color == Color.Light);
         Assert.False(piece.IsKing);
 
         Assert.Equal(0, piece.Forward);
@@ -99,7 +99,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Light);
+        Assert.True(piece.Color == Color.Light);
         Assert.False(piece.IsKing);
 
         Assert.Equal(Constants.UnlimitedMoves, piece.Forward);
@@ -122,7 +122,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Light);
+        Assert.True(piece.Color == Color.Light);
         Assert.True(piece.IsKing);
 
         Assert.Equal(1, piece.Forward);
@@ -145,7 +145,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Light);
+        Assert.True(piece.Color == Color.Light);
         Assert.False(piece.IsKing);
 
         Assert.Equal(0, piece.Forward);
@@ -168,7 +168,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Light);
+        Assert.True(piece.Color == Color.Light);
         Assert.False(piece.IsKing);
 
         Assert.Equal(2, piece.Forward);
@@ -191,7 +191,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Light);
+        Assert.True(piece.Color == Color.Light);
         Assert.False(piece.IsKing);
 
         Assert.Equal(Constants.UnlimitedMoves, piece.Forward);
@@ -218,7 +218,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Light);
+        Assert.True(piece.Color == Color.Light);
         Assert.False(piece.IsKing);
 
         Assert.Equal(1, piece.Forward);
@@ -241,7 +241,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Light);
+        Assert.True(piece.Color == Color.Light);
         Assert.False(piece.IsKing);
 
         Assert.Equal(1, piece.Forward);
@@ -264,7 +264,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Light);
+        Assert.True(piece.Color == Color.Light);
         Assert.False(piece.IsKing);
 
         Assert.Equal(1, piece.Forward);
@@ -287,7 +287,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Light);
+        Assert.True(piece.Color == Color.Light);
         Assert.False(piece.IsKing);
 
         Assert.Equal(1, piece.Forward);
@@ -310,7 +310,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Light);
+        Assert.True(piece.Color == Color.Light);
         Assert.False(piece.IsKing);
 
         Assert.Equal(1, piece.Forward);
@@ -333,7 +333,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Light);
+        Assert.True(piece.Color == Color.Light);
         Assert.False(piece.IsKing);
 
         Assert.Equal(1, piece.Forward);
@@ -356,7 +356,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Light);
+        Assert.True(piece.Color == Color.Light);
         Assert.False(piece.IsKing);
 
         Assert.Equal(1, piece.Forward);
@@ -379,7 +379,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Light);
+        Assert.True(piece.Color == Color.Light);
         Assert.False(piece.IsKing);
 
         Assert.Equal(1, piece.Forward);
@@ -474,7 +474,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Dark);
+        Assert.True(piece.Color == Color.Dark);
         Assert.False(piece.IsKing);
 
         Assert.Equal(1, piece.Forward);
@@ -497,7 +497,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Dark);
+        Assert.True(piece.Color == Color.Dark);
         Assert.False(piece.IsKing);
 
         Assert.Equal(1, piece.Forward);
@@ -520,7 +520,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Dark);
+        Assert.True(piece.Color == Color.Dark);
         Assert.False(piece.IsKing);
 
         Assert.Equal(1, piece.Forward);
@@ -543,7 +543,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Dark);
+        Assert.True(piece.Color == Color.Dark);
         Assert.False(piece.IsKing);
 
         Assert.Equal(1, piece.Forward);
@@ -566,7 +566,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Dark);
+        Assert.True(piece.Color == Color.Dark);
         Assert.False(piece.IsKing);
 
         Assert.Equal(1, piece.Forward);
@@ -589,7 +589,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Dark);
+        Assert.True(piece.Color == Color.Dark);
         Assert.False(piece.IsKing);
 
         Assert.Equal(1, piece.Forward);
@@ -612,7 +612,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Dark);
+        Assert.True(piece.Color == Color.Dark);
         Assert.False(piece.IsKing);
 
         Assert.Equal(1, piece.Forward);
@@ -635,7 +635,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Dark);
+        Assert.True(piece.Color == Color.Dark);
         Assert.False(piece.IsKing);
 
         Assert.Equal(1, piece.Forward);
@@ -662,7 +662,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Dark);
+        Assert.True(piece.Color == Color.Dark);
         Assert.False(piece.IsKing);
 
         Assert.Equal(Constants.UnlimitedMoves, piece.Forward);
@@ -685,7 +685,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Dark);
+        Assert.True(piece.Color == Color.Dark);
         Assert.False(piece.IsKing);
 
         Assert.Equal(2, piece.Forward);
@@ -708,7 +708,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Dark);
+        Assert.True(piece.Color == Color.Dark);
         Assert.False(piece.IsKing);
 
         Assert.Equal(0, piece.Forward);
@@ -731,7 +731,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Dark);
+        Assert.True(piece.Color == Color.Dark);
         Assert.False(piece.IsKing);
 
         Assert.Equal(Constants.UnlimitedMoves, piece.Forward);
@@ -754,7 +754,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Dark);
+        Assert.True(piece.Color == Color.Dark);
         Assert.True(piece.IsKing);
 
         Assert.Equal(1, piece.Forward);
@@ -777,7 +777,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Dark);
+        Assert.True(piece.Color == Color.Dark);
         Assert.False(piece.IsKing);
 
         Assert.Equal(0, piece.Forward);
@@ -800,7 +800,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Dark);
+        Assert.True(piece.Color == Color.Dark);
         Assert.False(piece.IsKing);
 
         Assert.Equal(2, piece.Forward);
@@ -823,7 +823,7 @@ public class TestPiecesAtStartup
 
         Assert.NotNull(piece);
 
-        Assert.True(piece.Color == Enums.Color.Dark);
+        Assert.True(piece.Color == Color.Dark);
         Assert.False(piece.IsKing);
 
         Assert.Equal(Constants.UnlimitedMoves, piece.Forward);

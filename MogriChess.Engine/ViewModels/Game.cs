@@ -7,6 +7,7 @@ using MogriChess.Engine.Core;
 using MogriChess.Engine.CustomEventArgs;
 using MogriChess.Engine.Models;
 using MogriChess.Engine.Services;
+using MogriChess.Engine.Serialization;
 
 namespace MogriChess.Engine.ViewModels;
 
@@ -15,35 +16,35 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
     public const int MAX_MOVES_WITHOUT_CAPTURE = 50;
 
     private bool _displayValidDestinations = true;
-    private Enums.Color _currentPlayerColor = Enums.Color.NotSelected;
-    private Enums.GameStatus _status = Enums.GameStatus.Preparing;
+    private Color _currentPlayerColor = Color.NotSelected;
+    private GameStatus _status = GameStatus.Preparing;
     private Square _selectedSquare;
     private IEnumerable<Move> _legalMovesForCurrentPlayer;
 
-    private Enums.GameStatus Status
+    private GameStatus Status
     {
         get => _status;
         set
         {
             // If status changed to game-ending status, handle events and end game
             if (_status != value &&
-                _status == Enums.GameStatus.Playing)
+                _status == GameStatus.Playing)
             {
-                if (value == Enums.GameStatus.Stalemate)
+                if (value == GameStatus.Stalemate)
                 {
-                    GameEnded?.Invoke(this, new GameEndedEventArgs(Enums.GameStatus.Stalemate));
+                    GameEnded?.Invoke(this, new GameEndedEventArgs(GameStatus.Stalemate));
                 }
-                else if (value == Enums.GameStatus.CheckmateByLight)
+                else if (value == GameStatus.CheckmateByLight)
                 {
-                    GameEnded?.Invoke(this, new GameEndedEventArgs(Enums.GameStatus.CheckmateByLight));
+                    GameEnded?.Invoke(this, new GameEndedEventArgs(GameStatus.CheckmateByLight));
                 }
-                else if (value == Enums.GameStatus.CheckmateByDark)
+                else if (value == GameStatus.CheckmateByDark)
                 {
-                    GameEnded?.Invoke(this, new GameEndedEventArgs(Enums.GameStatus.CheckmateByDark));
+                    GameEnded?.Invoke(this, new GameEndedEventArgs(GameStatus.CheckmateByDark));
                 }
-                else if (value == Enums.GameStatus.DrawNoCaptures)
+                else if (value == GameStatus.DrawNoCaptures)
                 {
-                    GameEnded?.Invoke(this, new GameEndedEventArgs(Enums.GameStatus.DrawNoCaptures));
+                    GameEnded?.Invoke(this, new GameEndedEventArgs(GameStatus.DrawNoCaptures));
                 }
             }
 
@@ -66,7 +67,7 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
     }
     private ObservableCollection<Move> ValidDestinationsForSelectedPiece { get; } = [];
 
-    public Enums.Color CurrentPlayerColor
+    public Color CurrentPlayerColor
     {
         get => _currentPlayerColor;
         set
@@ -76,7 +77,7 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
                 return;
             }
 
-            if (_currentPlayerColor == Enums.Color.NotSelected)
+            if (_currentPlayerColor == Color.NotSelected)
             {
                 return;
             }
@@ -85,7 +86,7 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
 
             if (_legalMovesForCurrentPlayer.None())
             {
-                Status = Enums.GameStatus.Stalemate;
+                Status = GameStatus.Stalemate;
             }
         }
     }
@@ -112,19 +113,19 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
 
     public event EventHandler<GameEndedEventArgs> GameEnded;
 
-    public void StartGame(Enums.PlayerType lightPlayer = Enums.PlayerType.Human,
-        Enums.PlayerType darkPlayer = Enums.PlayerType.Human)
+    public void StartGame(PlayerType lightPlayer = PlayerType.Human,
+        PlayerType darkPlayer = PlayerType.Human)
     {
         LightPlayerBot =
-            lightPlayer == Enums.PlayerType.Bot
-                ? new BotPlayer(Enums.Color.Light,
+            lightPlayer == PlayerType.Bot
+                ? new BotPlayer(Color.Light,
                     new PieceValueCalculator(
                         new PieceValueCalculatorGenome(1,2,5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 999)))
                 : null;
 
         DarkPlayerBot =
-            darkPlayer == Enums.PlayerType.Bot
-                ? new BotPlayer(Enums.Color.Dark,
+            darkPlayer == PlayerType.Bot
+                ? new BotPlayer(Color.Dark,
                     new PieceValueCalculator(
                         new PieceValueCalculatorGenome(1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 999)))
                 : null;
@@ -192,14 +193,14 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
     private void BeginGame()
     {
         // Clear out game
-        CurrentPlayerColor = Enums.Color.NotSelected;
+        CurrentPlayerColor = Color.NotSelected;
         SelectedSquare = null;
         Board.ClearValidDestinations();
         MoveHistory.Clear();
 
         // Start game
-        CurrentPlayerColor = Enums.Color.Light;
-        Status = Enums.GameStatus.Playing;
+        CurrentPlayerColor = Color.Light;
+        Status = GameStatus.Playing;
     }
 
     private void MoveToSelectedSquare(Square square)
@@ -214,7 +215,7 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
             return;
         }
 
-        bool wasPawnMove = SelectedSquare?.Piece?.PieceType == Enums.PieceType.Pawn;
+        bool wasPawnMove = SelectedSquare?.Piece?.PieceType == PieceType.Pawn;
 
         Board.MovePiece(SelectedSquare, square);
 
@@ -259,16 +260,16 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
 
         if (move.PutsOpponentInCheckmate)
         {
-            Status = move.MovingPieceColor == Enums.Color.Light
-                ? Enums.GameStatus.CheckmateByLight
-                : Enums.GameStatus.CheckmateByDark;
+            Status = move.MovingPieceColor == Color.Light
+                ? GameStatus.CheckmateByLight
+                : GameStatus.CheckmateByDark;
         }
         else if (move.IsDrawFromMaxMoves)
         {
-            Status = Enums.GameStatus.DrawNoCaptures;
+            Status = GameStatus.DrawNoCaptures;
         }
 
-        if (Status != Enums.GameStatus.Playing)
+        if (Status != GameStatus.Playing)
         {
             // Game has ended
             return;
@@ -319,7 +320,7 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
 
     private async void MakeBotMove(BotPlayer botPlayer)
     {
-        if (Status != Enums.GameStatus.Playing)
+        if (Status != GameStatus.Playing)
         {
             return;
         }
@@ -340,13 +341,13 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
 
     private void MakeBotMove()
     {
-        if (CurrentPlayerColor == Enums.Color.Dark &&
+        if (CurrentPlayerColor == Color.Dark &&
             DarkPlayerBot != null)
         {
             MakeBotMove(DarkPlayerBot);
         }
 
-        if (CurrentPlayerColor == Enums.Color.Light &&
+        if (CurrentPlayerColor == Color.Light &&
             LightPlayerBot != null)
         {
             MakeBotMove(LightPlayerBot);

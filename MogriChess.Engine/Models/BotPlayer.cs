@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
 using MogriChess.Engine.Core;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MogriChess.Engine.Models;
 
-public class BotPlayer(Enums.Color botColor,
+public class BotPlayer(Color botColor,
     PieceValueCalculator pieceValueCalculator)
 {
-    private readonly Enums.Color _botColor = botColor;
+    private readonly Color _botColor = botColor;
     private readonly PieceValueCalculator _pieceValueCalculator = pieceValueCalculator;
 
     public Move FindBestMove(Board board)
@@ -49,7 +49,7 @@ public class BotPlayer(Enums.Color botColor,
             : legalMoves.RandomElement();
     }
 
-    private int PiecesValueFor(Board board, Enums.Color color) =>
+    private int PiecesValueFor(Board board, Color color) =>
         board.SquaresWithPiecesOfColor(color)
             .Sum(s => _pieceValueCalculator.CalculatePieceValue(s.Piece));
 

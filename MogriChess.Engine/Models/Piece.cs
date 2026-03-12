@@ -2,7 +2,7 @@ using MogriChess.Engine.Core;
 
 namespace MogriChess.Engine.Models;
 
-public class Piece(ColorScheme colorScheme, Enums.Color color, Enums.PieceType type,
+public class Piece(ColorScheme colorScheme, Color color, PieceType type,
     int squaresForward, int squaresForwardRight,
     int squaresRight, int squaresBackRight,
     int squaresBack, int squaresBackLeft,
@@ -10,8 +10,8 @@ public class Piece(ColorScheme colorScheme, Enums.Color color, Enums.PieceType t
     bool isPromoted = false) : ObservableObject
 {
     public ColorScheme ColorScheme { get; } = colorScheme;
-    public Enums.Color Color { get; } = color;
-    public Enums.PieceType PieceType { get; } = type;
+    public Color Color { get; } = color;
+    public PieceType PieceType { get; } = type;
     private bool _isPromoted = isPromoted;
 
     private int _forward = squaresForward;
@@ -77,7 +77,7 @@ public class Piece(ColorScheme colorScheme, Enums.Color color, Enums.PieceType t
     }
 
     public bool IsKing =>
-        PieceType == Enums.PieceType.King;
+        PieceType == PieceType.King;
     public bool IsUnpromotedPawn =>
-        PieceType == Enums.PieceType.Pawn && !IsPromoted;
+        PieceType == PieceType.Pawn && !IsPromoted;
 }

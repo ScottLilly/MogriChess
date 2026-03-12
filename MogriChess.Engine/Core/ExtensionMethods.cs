@@ -1,18 +1,18 @@
-﻿using MogriChess.Engine.Models;
-using MogriChess.Engine.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MogriChess.Engine.Models;
+using MogriChess.Engine.Services;
 
 namespace MogriChess.Engine.Core;
 
 public static class ExtensionMethods
 {
-    public static Enums.Color OppositeColor(this Enums.Color color)
+    public static Color OppositeColor(this Color color)
     {
-        return color == Enums.Color.Light
-            ? Enums.Color.Dark
-            : Enums.Color.Light;
+        return color == Color.Light
+            ? Color.Dark
+            : Color.Light;
     }
 
     public static T RandomElement<T>(this List<T> options)

@@ -4,7 +4,7 @@ namespace MogriChess.Engine.Models;
 
 public class Move(Square originationSquare, Square destinationSquare) : ObservableObject
 {
-    public Enums.Color MovingPieceColor { get; } = originationSquare.Piece.Color;
+    public Color MovingPieceColor { get; } = originationSquare.Piece.Color;
     public Square OriginationSquare { get; } = originationSquare;
     public Square DestinationSquare { get; } = destinationSquare;
 

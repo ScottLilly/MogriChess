@@ -39,10 +39,10 @@ public class Square(int rank, int file) : ObservableObject
     }
 
     public bool IsEmpty => Piece == null;
-    public Enums.Color Color =>
+    public Color Color =>
         (Rank + File).IsEven()
-            ? Enums.Color.Dark
-            : Enums.Color.Light;
+            ? Color.Dark
+            : Color.Light;
     public string SquareShorthand => $"{FileAsLetter}{Rank}";
     public int UiGridRow => Constants.NumberOfRanks - Rank;
     public int UiGridColumn => File - 1;

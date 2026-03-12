@@ -1,4 +1,4 @@
-﻿namespace MogriChess.Engine.DTOs
+namespace MogriChess.Engine.Serialization
 {
     public class PieceDTO
     {
@@ -17,3 +17,4 @@
         public bool IsUnpromotedPawn { get; set; }
     }
 }
+

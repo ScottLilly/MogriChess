@@ -39,7 +39,7 @@ public class Board : ObservableObject
         originationSquare.Piece = null;
     }
 
-    public bool KingCanBeCaptured(Enums.Color playerColor) =>
+    public bool KingCanBeCaptured(Color playerColor) =>
         SquaresWithPiecesOfColor(playerColor.OppositeColor())
             .Any(square => PotentialMovesForPieceAt(square)
                 .Any(m => m.PutsOpponentInCheck));
@@ -47,10 +47,10 @@ public class Board : ObservableObject
     public void ClearValidDestinations() =>
         Squares.Values.ApplyToEach(s => s.IsValidDestination = false);
 
-    public IEnumerable<Square> SquaresWithPiecesOfColor(Enums.Color color) =>
+    public IEnumerable<Square> SquaresWithPiecesOfColor(Color color) =>
         Squares.Values.Where(s => s.Piece?.Color == color);
 
-    public List<Move> LegalMovesForPlayer(Enums.Color playerColor) =>
+    public List<Move> LegalMovesForPlayer(Color playerColor) =>
         GameEngine.GetLegalMovesForPlayer(this, playerColor).ToList();
 
     public T GetSimulatedMoveResult<T>(Move move, Func<T> func)
@@ -90,7 +90,7 @@ public class Board : ObservableObject
     public List<Move> PotentialMovesForPieceAt(Square square) =>
         PotentialMovesForPieceAt(square.SquareShorthand);
 
-    public bool KingCannotBeCaptured(Enums.Color playerColor) =>
+    public bool KingCannotBeCaptured(Color playerColor) =>
         !KingCanBeCaptured(playerColor);
 
     #endregion
@@ -135,20 +135,20 @@ public class Board : ObservableObject
             return validMoves;
         }
 
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.Forward));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.ForwardRight));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.Right));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.BackRight));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.Back));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.BackLeft));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.Left));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Enums.Direction.ForwardLeft));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Direction.Forward));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Direction.ForwardRight));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Direction.Right));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Direction.BackRight));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Direction.Back));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Direction.BackLeft));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Direction.Left));
+        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Direction.ForwardLeft));
 
         return validMoves;
     }
 
     private List<Move> PotentialMovesInDirection(Square originationSquare,
-        Enums.Direction direction)
+        Direction direction)
     {
         List<Move> potentialMoves = [];
 
@@ -226,40 +226,40 @@ public class Board : ObservableObject
             Math.Max(movingPiece.ForwardLeft, capturedPiece.ForwardLeft));
     }
 
-    private int MaxMovementSquaresForDirection(Piece piece, Enums.Direction direction)
+    private int MaxMovementSquaresForDirection(Piece piece, Direction direction)
     {
         return direction switch
         {
-            Enums.Direction.Forward => piece.Forward,
-            Enums.Direction.ForwardRight => piece.ForwardRight,
-            Enums.Direction.Right => piece.Right,
-            Enums.Direction.BackRight => piece.BackRight,
-            Enums.Direction.Back => piece.Back,
-            Enums.Direction.BackLeft => piece.BackLeft,
-            Enums.Direction.Left => piece.Left,
-            Enums.Direction.ForwardLeft => piece.ForwardLeft,
+            Direction.Forward => piece.Forward,
+            Direction.ForwardRight => piece.ForwardRight,
+            Direction.Right => piece.Right,
+            Direction.BackRight => piece.BackRight,
+            Direction.Back => piece.Back,
+            Direction.BackLeft => piece.BackLeft,
+            Direction.Left => piece.Left,
+            Direction.ForwardLeft => piece.ForwardLeft,
             _ => throw new InvalidEnumArgumentException(
                 "Invalid enum passed to MaxMovementSquaresForDirection() function")
         };
     }
 
-    private (int rankMultiplier, int fileMultiplier) MovementMultipliersForDirection(Piece piece, Enums.Direction direction)
+    private (int rankMultiplier, int fileMultiplier) MovementMultipliersForDirection(Piece piece, Direction direction)
     {
         (int rm, int fm) multipliers = direction switch
         {
-            Enums.Direction.Forward => (1, 0),
-            Enums.Direction.ForwardRight => (1, 1),
-            Enums.Direction.Right => (0, 1),
-            Enums.Direction.BackRight => (-1, 1),
-            Enums.Direction.Back => (-1, 0),
-            Enums.Direction.BackLeft => (-1, -1),
-            Enums.Direction.Left => (0, -1),
-            Enums.Direction.ForwardLeft => (1, -1),
+            Direction.Forward => (1, 0),
+            Direction.ForwardRight => (1, 1),
+            Direction.Right => (0, 1),
+            Direction.BackRight => (-1, 1),
+            Direction.Back => (-1, 0),
+            Direction.BackLeft => (-1, -1),
+            Direction.Left => (0, -1),
+            Direction.ForwardLeft => (1, -1),
             _ => throw new InvalidEnumArgumentException(
                 "Invalid direction parameter sent to MovementMultipliersForDirection")
         };
 
-        return piece.Color == Enums.Color.Light
+        return piece.Color == Color.Light
             ? multipliers
             : (-multipliers.rm, -multipliers.fm);
     }
@@ -290,8 +290,8 @@ public class Board : ObservableObject
 
     private static bool IsPawnPromotionMove(Piece movingPiece, Square destinationSquare) =>
         movingPiece.IsUnpromotedPawn &&
-        ((movingPiece.Color == Enums.Color.Light && destinationSquare.Rank == Constants.BackRankDark) ||
-         (movingPiece.Color == Enums.Color.Dark && destinationSquare.Rank == Constants.BackRankLight));
+        ((movingPiece.Color == Color.Light && destinationSquare.Rank == Constants.BackRankDark) ||
+         (movingPiece.Color == Color.Dark && destinationSquare.Rank == Constants.BackRankLight));
 
     #endregion
 }
