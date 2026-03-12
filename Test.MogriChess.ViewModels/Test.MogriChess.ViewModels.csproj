@@ -38,8 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MogriChess.Models\MogriChess.Models.csproj" />
-    <ProjectReference Include="..\MogriChess.ViewModels\MogriChess.ViewModels.csproj" />
+    <ProjectReference Include="..\MogriChess.Engine\MogriChess.Engine.csproj" />
   </ItemGroup>
 
   <ItemGroup>
