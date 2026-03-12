@@ -35,7 +35,7 @@ public class Board : ObservableObject
     /// Pseudo-legal moves respect piece movement and occupancy, but do not consider king safety.
     /// </summary>
     public IEnumerable<Move> GeneratePseudoLegalMovesForPieceAt(int rank, int file) =>
-        GeneratePseudoLegalMovesForPieceAt(ModelFunctions.GetShorthand(rank, file));
+        MoveGenerator.GeneratePseudoLegalMovesForPieceAt(this, ModelFunctions.GetShorthand(rank, file));
 
     public void MovePiece(Square originationSquare, Square destinationSquare)
     {
@@ -45,7 +45,7 @@ public class Board : ObservableObject
 
     public bool IsKingInCheck(Color playerColor) =>
         SquaresWithPiecesOfColor(playerColor.OppositeColor())
-            .Any(square => GeneratePseudoLegalMovesForPieceAt(square)
+            .Any(square => MoveGenerator.GeneratePseudoLegalMovesForPieceAt(this, square)
                 .Any(m => m.PutsOpponentInCheck));
 
     public void ClearValidDestinations() =>
@@ -96,7 +96,7 @@ public class Board : ObservableObject
     /// Pseudo-legal moves respect piece movement and occupancy, but do not consider king safety.
     /// </summary>
     public List<Move> GeneratePseudoLegalMovesForPieceAt(Square square) =>
-        GeneratePseudoLegalMovesForPieceAt(square.SquareShorthand);
+        MoveGenerator.GeneratePseudoLegalMovesForPieceAt(this, square);
 
     public bool IsKingSafe(Color playerColor) =>
         !IsKingInCheck(playerColor);
@@ -132,83 +132,7 @@ public class Board : ObservableObject
             piece.Left, piece.ForwardLeft);
     }
 
-    private List<Move> GeneratePseudoLegalMovesForPieceAt(string squareShorthand)
-    {
-        Square originationSquare = Squares[squareShorthand];
-
-        List<Move> validMoves = [];
-
-        if (originationSquare.Piece == null)
-        {
-            return validMoves;
-        }
-
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Direction.Forward));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Direction.ForwardRight));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Direction.Right));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Direction.BackRight));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Direction.Back));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Direction.BackLeft));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Direction.Left));
-        validMoves.AddRange(PotentialMovesInDirection(originationSquare, Direction.ForwardLeft));
-
-        return validMoves;
-    }
-
-    private List<Move> PotentialMovesInDirection(Square originationSquare,
-        Direction direction)
-    {
-        List<Move> potentialMoves = [];
-
-        Piece movingPiece = originationSquare.Piece;
-
-        int maxMovementSquareForDirection =
-            MaxMovementSquaresForDirection(movingPiece, direction);
-        (int rankMultiplier, int fileMultiplier) =
-            MovementMultipliersForDirection(movingPiece, direction);
-
-        for (int i = 1; i <= maxMovementSquareForDirection; i++)
-        {
-            int destinationRank = originationSquare.Rank + (i * rankMultiplier);
-            int destinationFile = originationSquare.File + (i * fileMultiplier);
-
-            // Off board, stop checking
-            if (destinationRank is < 1 or > Constants.NumberOfRanks ||
-                destinationFile is < 1 or > Constants.NumberOfFiles)
-            {
-                break;
-            }
-
-            var destSquareShorthand = ModelFunctions.GetShorthand(destinationRank, destinationFile);
-            Square destinationSquare = Squares[destSquareShorthand];
-            Move potentialMove = new Move(originationSquare, destinationSquare);
-
-            // Un-promoted pawn reached opponent's back rank, and needs to be promoted.
-            potentialMove.IsPromotingMove =
-                IsPawnPromotionMove(movingPiece, destinationSquare);
-
-            if (destinationSquare.IsEmpty)
-            {
-                potentialMoves.Add(potentialMove);
-            }
-            else
-            {
-                if (destinationSquare.Piece.Color != movingPiece.Color)
-                {
-                    // Square is occupied by an opponent's piece
-                    potentialMove.IsCapturingMove = true;
-                    potentialMove.PutsOpponentInCheck =
-                        destinationSquare.Piece.IsKing;
-
-                    potentialMoves.Add(potentialMove);
-                }
-
-                break;
-            }
-        }
-
-        return potentialMoves;
-    }
+    // Move generation is handled by MoveGenerator to keep Board focused on state management.
 
     private static Piece CapturePiece(Piece movingPiece, Piece capturedPiece)
     {
@@ -232,44 +156,6 @@ public class Board : ObservableObject
             Math.Max(movingPiece.BackLeft, capturedPiece.BackLeft),
             Math.Max(movingPiece.Left, capturedPiece.Left),
             Math.Max(movingPiece.ForwardLeft, capturedPiece.ForwardLeft));
-    }
-
-    private int MaxMovementSquaresForDirection(Piece piece, Direction direction)
-    {
-        return direction switch
-        {
-            Direction.Forward => piece.Forward,
-            Direction.ForwardRight => piece.ForwardRight,
-            Direction.Right => piece.Right,
-            Direction.BackRight => piece.BackRight,
-            Direction.Back => piece.Back,
-            Direction.BackLeft => piece.BackLeft,
-            Direction.Left => piece.Left,
-            Direction.ForwardLeft => piece.ForwardLeft,
-            _ => throw new InvalidEnumArgumentException(
-                "Invalid enum passed to MaxMovementSquaresForDirection() function")
-        };
-    }
-
-    private (int rankMultiplier, int fileMultiplier) MovementMultipliersForDirection(Piece piece, Direction direction)
-    {
-        (int rankMultiplier, int fileMultiplier) multipliers = direction switch
-        {
-            Direction.Forward => (1, 0),
-            Direction.ForwardRight => (1, 1),
-            Direction.Right => (0, 1),
-            Direction.BackRight => (-1, 1),
-            Direction.Back => (-1, 0),
-            Direction.BackLeft => (-1, -1),
-            Direction.Left => (0, -1),
-            Direction.ForwardLeft => (1, -1),
-            _ => throw new InvalidEnumArgumentException(
-                "Invalid direction parameter sent to MovementMultipliersForDirection")
-        };
-
-        return piece.Color == Color.Light
-            ? multipliers
-            : (-multipliers.rankMultiplier, -multipliers.fileMultiplier);
     }
 
     private static Piece Promote(Piece pieceToPromote)
@@ -296,7 +182,7 @@ public class Board : ObservableObject
         return pieceToPromote;
     }
 
-    private static bool IsPawnPromotionMove(Piece movingPiece, Square destinationSquare) =>
+    internal static bool IsPawnPromotionMove(Piece movingPiece, Square destinationSquare) =>
         movingPiece.IsUnpromotedPawn &&
         ((movingPiece.Color == Color.Light && destinationSquare.Rank == Constants.BackRankDark) ||
          (movingPiece.Color == Color.Dark && destinationSquare.Rank == Constants.BackRankLight));
