@@ -16,7 +16,7 @@ public class SelectBoardColorViewModel : ObservableObject
     }
 
     public ObservableCollection<ColorScheme> ColorSchemes { get; } =
-        new ObservableCollection<ColorScheme>();
+        [];
 
     public SelectBoardColorViewModel()
     {

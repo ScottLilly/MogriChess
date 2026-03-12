@@ -2,13 +2,13 @@ using MogriChess.Core;
 
 namespace MogriChess.Models;
 
-public class Square : ObservableObject
+public class Square(int rank, int file) : ObservableObject
 {
     private string FileAsLetter =>
         "abcdefgh".Substring(File - 1, 1);
 
-    public int Rank { get; }
-    public int File { get; }
+    public int Rank { get; } = rank;
+    public int File { get; } = file;
 
     private Piece _piece;
     private bool _isSelected;
@@ -46,10 +46,4 @@ public class Square : ObservableObject
     public string SquareShorthand => $"{FileAsLetter}{Rank}";
     public int UiGridRow => Constants.NumberOfRanks - Rank;
     public int UiGridColumn => File - 1;
-
-    public Square(int rank, int file)
-    {
-        Rank = rank;
-        File = file;
-    }
 }

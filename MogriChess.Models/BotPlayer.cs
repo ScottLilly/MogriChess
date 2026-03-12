@@ -4,17 +4,11 @@ using MogriChess.Core;
 
 namespace MogriChess.Models;
 
-public class BotPlayer
+public class BotPlayer(Enums.Color botColor,
+    PieceValueCalculator pieceValueCalculator)
 {
-    private readonly Enums.Color _botColor;
-    private readonly PieceValueCalculator _pieceValueCalculator;
-
-    public BotPlayer(Enums.Color botColor,
-        PieceValueCalculator pieceValueCalculator)
-    {
-        _botColor = botColor;
-        _pieceValueCalculator = pieceValueCalculator;
-    }
+    private readonly Enums.Color _botColor = botColor;
+    private readonly PieceValueCalculator _pieceValueCalculator = pieceValueCalculator;
 
     public Move FindBestMove(Board board)
     {
@@ -27,7 +21,7 @@ public class BotPlayer
         }
 
         int currentBestMoveAdvantage = int.MinValue;
-        List<Move> bestMoves = new List<Move>();
+        List<Move> bestMoves = [];
 
         // Calculate piece values differences after each capturing move
         foreach (Move move in legalMoves.Where(m => m.IsCapturingMove))

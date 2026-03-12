@@ -2,14 +2,8 @@ using MogriChess.Core;
 
 namespace MogriChess.ViewModels;
 
-public class OKViewModel : ObservableObject
+public class OKViewModel(string title, string message) : ObservableObject
 {
-    public string Title { get; }
-    public string Message { get; }
-
-    public OKViewModel(string title, string message)
-    {
-        Title = title;
-        Message = message;
-    }
+    public string Title { get; } = title;
+    public string Message { get; } = message;
 }

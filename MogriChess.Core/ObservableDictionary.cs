@@ -549,9 +549,7 @@ namespace MogriChess.Core
                 throw new ArgumentNullException("info");
             }
 
-            Collection<DictionaryEntry> entries = new Collection<DictionaryEntry>();
-            foreach (DictionaryEntry entry in KeyedEntryCollection)
-                entries.Add(entry);
+            Collection<DictionaryEntry> entries = [.. KeyedEntryCollection];
             info.AddValue("entries", entries);
         }
 
@@ -802,7 +800,7 @@ namespace MogriChess.Core
         protected KeyedDictionaryEntryCollection<TKey> KeyedEntryCollection;
 
         private int _countCache = 0;
-        private Dictionary<TKey, TValue> _dictionaryCache = new Dictionary<TKey, TValue>();
+        private Dictionary<TKey, TValue> _dictionaryCache = [];
         private int _dictionaryCacheVersion = 0;
         private int _version = 0;
 

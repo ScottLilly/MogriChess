@@ -2,12 +2,7 @@
 
 namespace MogriChess.Models.CustomEventArgs;
 
-public class GameEndedEventArgs : EventArgs
+public class GameEndedEventArgs(Enums.GameStatus endStatus) : EventArgs
 {
-    public Enums.GameStatus GameEndStatus { get; }
-
-    public GameEndedEventArgs(Enums.GameStatus endStatus)
-    {
-        GameEndStatus = endStatus;
-    }
+    public Enums.GameStatus GameEndStatus { get; } = endStatus;
 }

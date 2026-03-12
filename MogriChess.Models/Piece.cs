@@ -2,21 +2,26 @@ using MogriChess.Core;
 
 namespace MogriChess.Models;
 
-public class Piece : ObservableObject
+public class Piece(ColorScheme colorScheme, Enums.Color color, Enums.PieceType type,
+    int squaresForward, int squaresForwardRight,
+    int squaresRight, int squaresBackRight,
+    int squaresBack, int squaresBackLeft,
+    int squaresLeft, int squaresForwardLeft,
+    bool isPromoted = false) : ObservableObject
 {
-    public ColorScheme ColorScheme { get; }
-    public Enums.Color Color { get; }
-    public Enums.PieceType PieceType { get; }
-    private bool _isPromoted;
+    public ColorScheme ColorScheme { get; } = colorScheme;
+    public Enums.Color Color { get; } = color;
+    public Enums.PieceType PieceType { get; } = type;
+    private bool _isPromoted = isPromoted;
 
-    private int _forward;
-    private int _forwardRight;
-    private int _right;
-    private int _backRight;
-    private int _back;
-    private int _backLeft;
-    private int _left;
-    private int _forwardLeft;
+    private int _forward = squaresForward;
+    private int _forwardRight = squaresForwardRight;
+    private int _right = squaresRight;
+    private int _backRight = squaresBackRight;
+    private int _back = squaresBack;
+    private int _backLeft = squaresBackLeft;
+    private int _left = squaresLeft;
+    private int _forwardLeft = squaresForwardLeft;
 
     public bool IsPromoted
     {
@@ -87,26 +92,4 @@ public class Piece : ObservableObject
             : UiColor;
     public int PieceColorTransformAngle =>
         Color == Enums.Color.Light ? 0 : 180;
-
-    public Piece(ColorScheme colorScheme, Enums.Color color, Enums.PieceType type,
-        int squaresForward, int squaresForwardRight,
-        int squaresRight, int squaresBackRight,
-        int squaresBack, int squaresBackLeft,
-        int squaresLeft, int squaresForwardLeft,
-        bool isPromoted = false)
-    {
-        ColorScheme = colorScheme;
-        Color = color;
-        PieceType = type;
-        _isPromoted = isPromoted;
-
-        _forward = squaresForward;
-        _forwardRight = squaresForwardRight;
-        _right = squaresRight;
-        _backRight = squaresBackRight;
-        _back = squaresBack;
-        _backLeft = squaresBackLeft;
-        _left = squaresLeft;
-        _forwardLeft = squaresForwardLeft;
-    }
 }

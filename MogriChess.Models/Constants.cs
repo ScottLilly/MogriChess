@@ -15,7 +15,7 @@ public static class Constants
     public const int BackRankLight = 1;
 
     public static List<ColorScheme> ColorSchemes { get; } =
-        new List<ColorScheme>();
+        [];
 
     static Constants()
     {

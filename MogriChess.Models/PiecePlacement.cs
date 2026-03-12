@@ -1,13 +1,7 @@
 ﻿namespace MogriChess.Models;
 
-public class PiecePlacement
+public class PiecePlacement(int rank, int file, Piece piece)
 {
-    public Piece Piece { get; }
-    public string Shorthand { get; }
-
-    public PiecePlacement(int rank, int file, Piece piece)
-    {
-        Piece = piece;
-        Shorthand = ModelFunctions.GetShorthand(rank, file);
-    }
+    public Piece Piece { get; } = piece;
+    public string Shorthand { get; } = ModelFunctions.GetShorthand(rank, file);
 }

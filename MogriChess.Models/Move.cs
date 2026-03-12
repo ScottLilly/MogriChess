@@ -2,11 +2,11 @@ using MogriChess.Core;
 
 namespace MogriChess.Models;
 
-public class Move : ObservableObject
+public class Move(Square originationSquare, Square destinationSquare) : ObservableObject
 {
-    public Enums.Color MovingPieceColor { get; }
-    public Square OriginationSquare { get; }
-    public Square DestinationSquare { get; }
+    public Enums.Color MovingPieceColor { get; } = originationSquare.Piece.Color;
+    public Square OriginationSquare { get; } = originationSquare;
+    public Square DestinationSquare { get; } = destinationSquare;
 
     private bool _putsOpponentInCheckmate;
     private bool _putsOpponentInCheck;
@@ -83,11 +83,4 @@ public class Move : ObservableObject
         IsDrawFromMaxMoves ? "Draw" :
         IsCapturingMove ? "Capture" :
         IsPromotingMove ? "Promotion" : "";
-
-    public Move(Square originationSquare, Square destinationSquare)
-    {
-        MovingPieceColor = originationSquare.Piece.Color;
-        OriginationSquare = originationSquare;
-        DestinationSquare = destinationSquare;
-    }
 }

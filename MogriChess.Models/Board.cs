@@ -18,7 +18,7 @@ public class Board : ObservableObject
     public ColorScheme PieceColorScheme { get; }
 
     public ObservableDictionary<string, Square> Squares { get; } =
-        new ObservableDictionary<string, Square>();
+        [];
 
     public Board(ColorScheme boardColorScheme, ColorScheme piecesColorScheme)
     {
@@ -128,7 +128,7 @@ public class Board : ObservableObject
     {
         Square originationSquare = Squares[squareShorthand];
 
-        List<Move> validMoves = new List<Move>();
+        List<Move> validMoves = [];
 
         if (originationSquare.Piece == null)
         {
@@ -150,7 +150,7 @@ public class Board : ObservableObject
     private List<Move> PotentialMovesInDirection(Square originationSquare,
         Enums.Direction direction)
     {
-        List<Move> potentialMoves = new List<Move>();
+        List<Move> potentialMoves = [];
 
         Piece movingPiece = originationSquare.Piece;
 

@@ -10,7 +10,7 @@ using MogriChess.Services;
 
 namespace MogriChess.ViewModels;
 
-public class Game : ObservableObject
+public class Game(GameConfig gameConfig = null) : ObservableObject
 {
     public const int MAX_MOVES_WITHOUT_CAPTURE = 50;
 
@@ -57,21 +57,14 @@ public class Game : ObservableObject
         get => _selectedSquare;
         set
         {
-            if (SelectedSquare != null)
-            {
-                SelectedSquare.IsSelected = false;
-            }
+            SelectedSquare?.IsSelected = false;
 
             _selectedSquare = value;
 
-            if (SelectedSquare != null)
-            {
-                SelectedSquare.IsSelected = true;
-            }
+            SelectedSquare?.IsSelected = true;
         }
     }
-    private ObservableCollection<Move> ValidDestinationsForSelectedPiece { get; } =
-        new ObservableCollection<Move>();
+    private ObservableCollection<Move> ValidDestinationsForSelectedPiece { get; } = [];
 
     public Enums.Color CurrentPlayerColor
     {
@@ -110,22 +103,14 @@ public class Game : ObservableObject
             SetValidDestinations();
         }
     }
-    public string SelectedSquareColor { get; private set; }
-    public string ValidDestinationSquareColor { get; private set; }
-    public Board Board { get; }
+    public string SelectedSquareColor { get; private set; } = gameConfig?.SelectedSquareColor ?? "";
+    public string ValidDestinationSquareColor { get; private set; } = gameConfig?.ValidDestinationSquareColor ?? "";
+    public Board Board { get; } = BoardFactory.GetNewGameBoard(gameConfig);
 
     public ObservableCollection<MoveStruct> MoveHistory { get; } =
-        new ObservableCollection<MoveStruct>();
+        [];
 
     public event EventHandler<GameEndedEventArgs> GameEnded;
-
-    public Game(GameConfig gameConfig = null)
-    {
-        SelectedSquareColor = gameConfig?.SelectedSquareColor ?? "";
-        ValidDestinationSquareColor = gameConfig?.ValidDestinationSquareColor ?? "";
-
-        Board = BoardFactory.GetNewGameBoard(gameConfig);
-    }
 
     public void StartGame(Enums.PlayerType lightPlayer = Enums.PlayerType.Human,
         Enums.PlayerType darkPlayer = Enums.PlayerType.Human)
@@ -309,7 +294,7 @@ public class Game : ObservableObject
 
         if (SelectedSquare == null)
         {
-            return new List<Move>();
+            return [];
         }
 
         return _legalMovesForCurrentPlayer
