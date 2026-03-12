@@ -9,14 +9,11 @@ public static class BoardStateService
 
     public static string GetSerializedGameState(Game currentGame)
     {
-        return JsonSerializer.Serialize(
-            Mapper.ToGameStateDto(currentGame), options);
+        return JsonSerializer.Serialize(Mapper.ToGameStateDto(currentGame), options);
     }
 
     public static string GetSerializedMoveHistory(Game currentGame)
     {
-        return JsonSerializer.Serialize(
-            Mapper.ToMoveHistoryDtos(currentGame.MoveHistory), options);
+        return JsonSerializer.Serialize(Mapper.ToMoveHistoryDtos(currentGame.MoveHistory), options);
     }
 }
-

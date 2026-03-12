@@ -3,31 +3,30 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace MogriChess.WPF.CustomConverters
+namespace MogriChess.WPF.CustomConverters;
+
+internal class DisplaySecondEllipseConverter : IValueConverter
 {
-    internal class DisplaySecondEllipseConverter : IValueConverter
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        if (value == null)
         {
-            if (value == null)
-            {
-                return Visibility.Collapsed;
-            }
-
-            if (int.TryParse(value.ToString(), out int movementSquares))
-            {
-                if (movementSquares == 2)
-                {
-                    return Visibility.Visible;
-                }
-            }
-
             return Visibility.Collapsed;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        if (int.TryParse(value.ToString(), out int movementSquares))
         {
-            return null;
+            if (movementSquares == 2)
+            {
+                return Visibility.Visible;
+            }
         }
+
+        return Visibility.Collapsed;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return null;
     }
 }

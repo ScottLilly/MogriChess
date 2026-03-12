@@ -2,23 +2,22 @@
 using MogriChess.Engine.Models;
 using MogriChess.Engine.ViewModels;
 
-namespace MogriChess.WPF.Windows
+namespace MogriChess.WPF.Windows;
+
+public partial class SelectBoardColor : Window
 {
-    public partial class SelectBoardColor : Window
+    public ColorScheme SelectedBoardColor =>
+        (DataContext as SelectBoardColorViewModel).SelectedColorScheme;
+
+    public SelectBoardColor()
     {
-        public ColorScheme SelectedBoardColor =>
-            (DataContext as SelectBoardColorViewModel).SelectedColorScheme;
+        InitializeComponent();
 
-        public SelectBoardColor()
-        {
-            InitializeComponent();
+        DataContext = new SelectBoardColorViewModel();
+    }
 
-            DataContext = new SelectBoardColorViewModel();
-        }
-
-        private void OK_OnClick(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+    private void OK_OnClick(object sender, RoutedEventArgs e)
+    {
+        Close();
     }
 }

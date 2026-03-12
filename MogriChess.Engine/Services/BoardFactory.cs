@@ -13,6 +13,7 @@ public static class BoardFactory
             gameConfig?.BoardColorScheme ??
             Constants.ColorSchemes.First(c =>
                 c.Name.Equals(Constants.DefaultBoardColorSchemeName, StringComparison.InvariantCultureIgnoreCase));
+
         ColorScheme piecesColorScheme =
             gameConfig?.PieceColorScheme ??
             new ColorScheme(Constants.DefaultPieceColorSchemeName,
