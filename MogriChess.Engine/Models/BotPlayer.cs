@@ -24,8 +24,13 @@ public class BotPlayer(Color botColor,
         List<Move> bestMoves = [];
 
         // Calculate piece values differences after each capturing move
-        foreach (Move move in legalMoves.Where(m => m.IsCapturingMove))
+        foreach (Move move in legalMoves)
         {
+            if (!move.IsCapturingMove)
+            {
+                continue;
+            }
+
             int postMoveAdvantage =
                 board.GetSimulatedMoveResult(move, () => Advantage(board));
 

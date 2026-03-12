@@ -61,8 +61,7 @@ public static class MoveGenerator
                 break;
             }
 
-            var destSquareShorthand = ModelFunctions.GetShorthand(destinationRank, destinationFile);
-            Square destinationSquare = board.Squares[destSquareShorthand];
+            Square destinationSquare = board.GetSquareAt(destinationRank, destinationFile);
             Move potentialMove = new(originationSquare, destinationSquare);
 
             // Un-promoted pawn reached opponent's back rank, and needs to be promoted.

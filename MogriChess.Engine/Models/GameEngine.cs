@@ -14,12 +14,24 @@ public static class GameEngine
     /// Returns all legal moves for the specified player.
     /// Legal moves are pseudo-legal moves that also ensure the moving side's king remains safe.
     /// </summary>
-    public static IEnumerable<Move> GetLegalMovesForPlayer(Board board, Color playerColor) =>
-        board.SquaresWithPiecesOfColor(playerColor)
-            .SelectMany(square => board.GeneratePseudoLegalMovesForPieceAt(square.Rank, square.File))
-            .Where(move =>
-                board.GetSimulatedMoveResult(move,
-                    () => board.IsKingSafe(move.MovingPieceColor)));
+    public static IEnumerable<Move> GetLegalMovesForPlayer(Board board, Color playerColor)
+    {
+        List<Move> legalMoves = [];
+
+        foreach (Square square in board.SquaresWithPiecesOfColor(playerColor))
+        {
+            foreach (Move move in board.GeneratePseudoLegalMovesForPieceAt(square))
+            {
+                if (board.GetSimulatedMoveResult(move,
+                        () => board.IsKingSafe(move.MovingPieceColor)))
+                {
+                    legalMoves.Add(move);
+                }
+            }
+        }
+
+        return legalMoves;
+    }
 
     /// <summary>
     /// Determines if the specified player is in checkmate.

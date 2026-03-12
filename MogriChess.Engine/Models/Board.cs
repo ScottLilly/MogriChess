@@ -8,6 +8,9 @@ namespace MogriChess.Engine.Models;
 
 public class Board : ObservableObject
 {
+    private readonly Square[,] _squaresByPosition =
+        new Square[Constants.NumberOfRanks, Constants.NumberOfFiles];
+
     private ColorScheme _boardColorScheme;
 
     public ColorScheme BoardColorScheme
@@ -35,7 +38,7 @@ public class Board : ObservableObject
     /// Pseudo-legal moves respect piece movement and occupancy, but do not consider king safety.
     /// </summary>
     public IEnumerable<Move> GeneratePseudoLegalMovesForPieceAt(int rank, int file) =>
-        MoveGenerator.GeneratePseudoLegalMovesForPieceAt(this, ModelFunctions.GetShorthand(rank, file));
+        MoveGenerator.GeneratePseudoLegalMovesForPieceAt(this, GetSquareAt(rank, file));
 
     public void MovePiece(Square originationSquare, Square destinationSquare)
     {
@@ -114,9 +117,13 @@ public class Board : ObservableObject
                 Square square = new Square(rank, file);
 
                 Squares.Add(square.SquareShorthand, square);
+                _squaresByPosition[rank - 1, file - 1] = square;
             }
         }
     }
+
+    internal Square GetSquareAt(int rank, int file) =>
+        _squaresByPosition[rank - 1, file - 1];
 
     private Piece ClonePiece(Piece piece)
     {
