@@ -61,9 +61,9 @@ public class Board : ObservableObject
 
     public T GetSimulatedMoveResult<T>(Move move, Func<T> func)
     {
-        // Clone pieces pre-move
-        Piece originalMovingPiece = ClonePiece(move.OriginationSquare.Piece);
-        Piece destinationPiece = ClonePiece(move.DestinationSquare.Piece);
+        // Store references to original pieces on the affected squares
+        Piece originalMovingPiece = move.OriginationSquare.Piece;
+        Piece originalDestinationPiece = move.DestinationSquare.Piece;
 
         // Make simulated move
         MovePiece(move.OriginationSquare, move.DestinationSquare);
@@ -73,7 +73,7 @@ public class Board : ObservableObject
 
         // Revert simulated move
         move.OriginationSquare.Piece = originalMovingPiece;
-        move.DestinationSquare.Piece = destinationPiece;
+        move.DestinationSquare.Piece = originalDestinationPiece;
 
         return result;
     }
@@ -123,20 +123,6 @@ public class Board : ObservableObject
 
     internal Square GetSquareAt(int rank, int file) =>
         _squaresByPosition[rank - 1, file - 1];
-
-    private Piece ClonePiece(Piece piece)
-    {
-        if (piece == null)
-        {
-            return null;
-        }
-
-        return new Piece(piece.ColorScheme, piece.Color, piece.PieceType,
-            piece.Forward, piece.ForwardRight,
-            piece.Right, piece.BackRight,
-            piece.Back, piece.BackLeft,
-            piece.Left, piece.ForwardLeft);
-    }
 
     private static Piece CapturePiece(Piece movingPiece, Piece capturedPiece)
     {
