@@ -1,8 +1,5 @@
 namespace MogriChess.Engine.Models;
 
-/// <summary>
-/// Centralized piece weighting values for engine evaluations and bot move scoring.
-/// </summary>
 public static class Weighting
 {
     // Forward
@@ -57,4 +54,8 @@ public static class Weighting
 
     public const int CaptureMoveBonus = 10;
     public const int PromotionMoveBonus = 50;
+
+    // Search configuration
+    public const int SearchDepth = 2;
+    public const int RootMoveBeamWidth = 12;
 }

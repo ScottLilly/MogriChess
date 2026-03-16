@@ -31,35 +31,45 @@ public class BotPlayer(Color botColor,
             }
         }
 
-        // 2. Otherwise, evaluate all legal moves using a heuristic that considers:
-        //    - material advantage (piece values, including captured powers)
-        //    - mobility (how many squares our pieces can move to vs opponent)
-        //    - king safety / putting the opponent in check
-        int currentBestScore = int.MinValue;
+        // 2. Order moves by a cheap 1‑ply evaluation and keep the top N for deeper search.
+        var orderedMovesWithScores =
+            legalMoves
+                .Select(m => new
+                {
+                    Move = m,
+                    Score = board.GetSimulatedMoveResult(m, () => EvaluateBoard(board))
+                })
+                .OrderByDescending(x => x.Score)
+                .ToList();
+
+        int beamWidth = Weighting.RootMoveBeamWidth;
+        var candidateMoves =
+            orderedMovesWithScores
+                .Take(beamWidth)
+                .Select(x => x.Move)
+                .ToList();
+
+        // 3. Run a shallow minimax with alpha-beta pruning over the candidate moves.
+        int bestScore = int.MinValue;
         List<Move> bestMoves = [];
 
-        foreach (Move move in legalMoves)
+        foreach (Move move in candidateMoves)
         {
-            int score = board.GetSimulatedMoveResult(move, () => EvaluateBoard(board));
+            int score = board.GetSimulatedMoveResult(move,
+                () => Minimax(board,
+                    depth: Weighting.SearchDepth - 1,
+                    alpha: int.MinValue + 1,
+                    beta: int.MaxValue,
+                    isMaximizingPlayer: false,
+                    sideToMove: _botColor.OppositeColor()));
 
-            // Small tie-breakers to favor forcing moves.
-            if (move.IsCapturingMove)
+            if (score > bestScore)
             {
-                score += Weighting.CaptureMoveBonus;
-            }
-
-            if (move.IsPromotingMove)
-            {
-                score += Weighting.PromotionMoveBonus;
-            }
-
-            if (score > currentBestScore)
-            {
-                currentBestScore = score;
+                bestScore = score;
                 bestMoves.Clear();
                 bestMoves.Add(move);
             }
-            else if (score == currentBestScore)
+            else if (score == bestScore)
             {
                 bestMoves.Add(move);
             }
@@ -81,6 +91,77 @@ public class BotPlayer(Color botColor,
     private int Mobility(Board board, Color color) =>
         board.SquaresWithPiecesOfColor(color)
             .Sum(s => board.GeneratePseudoLegalMovesForPieceAt(s).Count);
+
+    private int Minimax(Board board,
+        int depth,
+        int alpha,
+        int beta,
+        bool isMaximizingPlayer,
+        Color sideToMove)
+    {
+        if (depth == 0)
+        {
+            return EvaluateBoard(board);
+        }
+
+        List<Move> legalMoves = board.LegalMovesForPlayer(sideToMove);
+
+        if (legalMoves.None())
+        {
+            return EvaluateBoard(board);
+        }
+
+        if (isMaximizingPlayer)
+        {
+            int value = int.MinValue + 1;
+
+            foreach (Move move in legalMoves)
+            {
+                int childScore = board.GetSimulatedMoveResult(move,
+                    () => Minimax(board,
+                        depth - 1,
+                        alpha,
+                        beta,
+                        isMaximizingPlayer: false,
+                        sideToMove: sideToMove.OppositeColor()));
+
+                value = System.Math.Max(value, childScore);
+                alpha = System.Math.Max(alpha, value);
+
+                if (alpha >= beta)
+                {
+                    break;
+                }
+            }
+
+            return value;
+        }
+        else
+        {
+            int value = int.MaxValue;
+
+            foreach (Move move in legalMoves)
+            {
+                int childScore = board.GetSimulatedMoveResult(move,
+                    () => Minimax(board,
+                        depth - 1,
+                        alpha,
+                        beta,
+                        isMaximizingPlayer: true,
+                        sideToMove: sideToMove.OppositeColor()));
+
+                value = System.Math.Min(value, childScore);
+                beta = System.Math.Min(beta, value);
+
+                if (beta <= alpha)
+                {
+                    break;
+                }
+            }
+
+            return value;
+        }
+    }
 
     private int EvaluateBoard(Board board)
     {
