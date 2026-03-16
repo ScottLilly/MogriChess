@@ -6,42 +6,42 @@ public class PieceValueCalculator
     {
         if (piece.IsKing)
         {
-            return Constants.PieceValue_King;
+            return Weighting.PieceValue_King;
         }
 
         return
             CalcForDirection(piece.Forward,
-                Constants.PieceValue_ForwardOne,
-                Constants.PieceValue_ForwardTwo,
-                Constants.PieceValue_ForwardInfinite) +
+                Weighting.PieceValue_ForwardOne,
+                Weighting.PieceValue_ForwardTwo,
+                Weighting.PieceValue_ForwardInfinite) +
             CalcForDirection(piece.ForwardRight,
-                Constants.PieceValue_ForwardRightOne,
-                Constants.PieceValue_ForwardRightTwo,
-                Constants.PieceValue_ForwardRightInfinite) +
+                Weighting.PieceValue_ForwardRightOne,
+                Weighting.PieceValue_ForwardRightTwo,
+                Weighting.PieceValue_ForwardRightInfinite) +
             CalcForDirection(piece.Right,
-                Constants.PieceValue_RightOne,
-                Constants.PieceValue_RightTwo,
-                Constants.PieceValue_RightInfinite) +
+                Weighting.PieceValue_RightOne,
+                Weighting.PieceValue_RightTwo,
+                Weighting.PieceValue_RightInfinite) +
             CalcForDirection(piece.BackRight,
-                Constants.PieceValue_BackRightOne,
-                Constants.PieceValue_BackRightTwo,
-                Constants.PieceValue_BackRightInfinite) +
+                Weighting.PieceValue_BackRightOne,
+                Weighting.PieceValue_BackRightTwo,
+                Weighting.PieceValue_BackRightInfinite) +
             CalcForDirection(piece.Back,
-                Constants.PieceValue_BackOne,
-                Constants.PieceValue_BackTwo,
-                Constants.PieceValue_BackInfinite) +
+                Weighting.PieceValue_BackOne,
+                Weighting.PieceValue_BackTwo,
+                Weighting.PieceValue_BackInfinite) +
             CalcForDirection(piece.BackLeft,
-                Constants.PieceValue_BackLeftOne,
-                Constants.PieceValue_BackLeftTwo,
-                Constants.PieceValue_BackLeftInfinite) +
+                Weighting.PieceValue_BackLeftOne,
+                Weighting.PieceValue_BackLeftTwo,
+                Weighting.PieceValue_BackLeftInfinite) +
             CalcForDirection(piece.Left,
-                Constants.PieceValue_LeftOne,
-                Constants.PieceValue_LeftTwo,
-                Constants.PieceValue_LeftInfinite) +
+                Weighting.PieceValue_LeftOne,
+                Weighting.PieceValue_LeftTwo,
+                Weighting.PieceValue_LeftInfinite) +
             CalcForDirection(piece.ForwardLeft,
-                Constants.PieceValue_ForwardLeftOne,
-                Constants.PieceValue_ForwardLeftTwo,
-                Constants.PieceValue_ForwardLeftInfinite);
+                Weighting.PieceValue_ForwardLeftOne,
+                Weighting.PieceValue_ForwardLeftTwo,
+                Weighting.PieceValue_ForwardLeftInfinite);
     }
 
     private static int CalcForDirection(int squares, int valueOne, int valueTwo, int valueInfinite)

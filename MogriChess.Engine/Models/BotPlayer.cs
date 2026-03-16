@@ -14,41 +14,57 @@ public class BotPlayer(Color botColor,
     {
         List<Move> legalMoves = board.LegalMovesForPlayer(_botColor);
 
-        // If bot can put opponent in checkmate, do that
-        if (legalMoves.Any(m => m.PutsOpponentInCheckmate))
+        if (legalMoves.None())
         {
-            return legalMoves.First(m => m.PutsOpponentInCheckmate);
+            return null;
         }
 
-        int currentBestMoveAdvantage = int.MinValue;
-        List<Move> bestMoves = [];
-
-        // Calculate piece values differences after each capturing move
+        // 1. If any move immediately checkmates the opponent, prefer it.
         foreach (Move move in legalMoves)
         {
-            if (!move.IsCapturingMove)
+            bool isCheckmateMove = board.GetSimulatedMoveResult(move,
+                () => GameEngine.IsPlayerInCheckmate(board, _botColor.OppositeColor()));
+
+            if (isCheckmateMove)
             {
-                continue;
+                return move;
+            }
+        }
+
+        // 2. Otherwise, evaluate all legal moves using a heuristic that considers:
+        //    - material advantage (piece values, including captured powers)
+        //    - mobility (how many squares our pieces can move to vs opponent)
+        //    - king safety / putting the opponent in check
+        int currentBestScore = int.MinValue;
+        List<Move> bestMoves = [];
+
+        foreach (Move move in legalMoves)
+        {
+            int score = board.GetSimulatedMoveResult(move, () => EvaluateBoard(board));
+
+            // Small tie-breakers to favor forcing moves.
+            if (move.IsCapturingMove)
+            {
+                score += Weighting.CaptureMoveBonus;
             }
 
-            int postMoveAdvantage =
-                board.GetSimulatedMoveResult(move, () => Advantage(board));
-
-            // If this move is the best move (or tied with the best)
-            // Add it to the "bestMoves" list.
-            if (postMoveAdvantage > currentBestMoveAdvantage)
+            if (move.IsPromotingMove)
             {
-                currentBestMoveAdvantage = postMoveAdvantage;
+                score += Weighting.PromotionMoveBonus;
+            }
+
+            if (score > currentBestScore)
+            {
+                currentBestScore = score;
                 bestMoves.Clear();
                 bestMoves.Add(move);
             }
-            else if (postMoveAdvantage == currentBestMoveAdvantage)
+            else if (score == currentBestScore)
             {
                 bestMoves.Add(move);
             }
         }
 
-        // Select highest point improvement
         return bestMoves.Any()
             ? bestMoves.RandomElement()
             : legalMoves.RandomElement();
@@ -61,4 +77,31 @@ public class BotPlayer(Color botColor,
     private int Advantage(Board board) =>
         PiecesValueFor(board, _botColor) -
         PiecesValueFor(board, _botColor.OppositeColor());
+
+    private int Mobility(Board board, Color color) =>
+        board.SquaresWithPiecesOfColor(color)
+            .Sum(s => board.GeneratePseudoLegalMovesForPieceAt(s).Count);
+
+    private int EvaluateBoard(Board board)
+    {
+        int material = Advantage(board);
+
+        int myMobility = Mobility(board, _botColor);
+        int opponentMobility = Mobility(board, _botColor.OppositeColor());
+        int mobilityScore = myMobility - opponentMobility;
+
+        int kingSafetyScore = 0;
+        if (!board.IsKingSafe(_botColor))
+        {
+            kingSafetyScore -= Weighting.KingInCheckPenalty;
+        }
+
+        if (!board.IsKingSafe(_botColor.OppositeColor()))
+        {
+            kingSafetyScore += Weighting.OpponentKingInCheckBonus;
+        }
+
+        // Weight material highest, then mobility, then king (already high magnitude).
+        return (material * Weighting.MaterialWeight) + (mobilityScore * Weighting.MobilityWeight) + kingSafetyScore;
+    }
 }

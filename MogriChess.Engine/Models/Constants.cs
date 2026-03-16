@@ -9,51 +9,6 @@ public static class Constants
 
     public const int UnlimitedMoves = 99;
 
-    // Piece value weights (hard-coded)
-
-    // Forward
-    public const int PieceValue_ForwardOne = 10;
-    public const int PieceValue_ForwardTwo = 15;
-    public const int PieceValue_ForwardInfinite = 30;
-
-    // Forward-right
-    public const int PieceValue_ForwardRightOne = 12;
-    public const int PieceValue_ForwardRightTwo = 18;
-    public const int PieceValue_ForwardRightInfinite = 32;
-
-    // Right
-    public const int PieceValue_RightOne = 10;
-    public const int PieceValue_RightTwo = 15;
-    public const int PieceValue_RightInfinite = 30;
-
-    // Back-right
-    public const int PieceValue_BackRightOne = 12;
-    public const int PieceValue_BackRightTwo = 18;
-    public const int PieceValue_BackRightInfinite = 32;
-
-    // Back
-    public const int PieceValue_BackOne = 8;
-    public const int PieceValue_BackTwo = 12;
-    public const int PieceValue_BackInfinite = 25;
-
-    // Back-left
-    public const int PieceValue_BackLeftOne = 12;
-    public const int PieceValue_BackLeftTwo = 18;
-    public const int PieceValue_BackLeftInfinite = 32;
-
-    // Left
-    public const int PieceValue_LeftOne = 10;
-    public const int PieceValue_LeftTwo = 15;
-    public const int PieceValue_LeftInfinite = 30;
-
-    // Forward-left
-    public const int PieceValue_ForwardLeftOne = 12;
-    public const int PieceValue_ForwardLeftTwo = 18;
-    public const int PieceValue_ForwardLeftInfinite = 32;
-
-    // King base value
-    public const int PieceValue_King = 10000;
-
     public const int BackRankDark = 8;
     public const int PawnRankDark = 7;
     public const int PawnRankLight = 2;
