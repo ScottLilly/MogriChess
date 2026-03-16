@@ -119,15 +119,13 @@ public class Game(GameConfig gameConfig = null) : ObservableObject
         LightPlayerBot =
             lightPlayer == PlayerType.Bot
                 ? new BotPlayer(Color.Light,
-                    new PieceValueCalculator(
-                        new PieceValueCalculatorGenome(1,2,5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 999)))
+                    new PieceValueCalculator())
                 : null;
 
         DarkPlayerBot =
             darkPlayer == PlayerType.Bot
                 ? new BotPlayer(Color.Dark,
-                    new PieceValueCalculator(
-                        new PieceValueCalculatorGenome(1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 1, 2, 5, 999)))
+                    new PieceValueCalculator())
                 : null;
 
         BoardFactory.PopulateBoardWithStartingPieces(Board);
