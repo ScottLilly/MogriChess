@@ -1,0 +1,49 @@
+# Builds and tests the solution on a clean machine, which is the thing a local build cannot
+# prove: that nothing depends on something only this working copy has.
+#
+# Runs on every push to master and on pull requests against it, so the build status is always
+# current. Also available from the Actions tab for a run on a clean machine without pushing
+# anything.
+#
+# windows-latest rather than ubuntu-latest because the solution has a Windows-only project, and
+# a -windows target framework will not build anywhere else.
+
+name: Build and Test
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+# Stated explicitly so this workflow stays read-only regardless of the repo's default token
+# permissions. It only needs to check out, build, and test.
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore
+
+      # Runs every test project in the solution. On a solution that has none, this is a no-op
+      # that still confirms the solution loads, and adding a test project later needs nothing
+      # here as long as it is in the solution.
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
